@@ -1,7 +1,7 @@
 # Base on the PM0214 STM32 document
 
 brand: stm32
-family: f4
+family: l4
 
 peripherals:
   mpu:

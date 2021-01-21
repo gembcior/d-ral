@@ -24,9 +24,11 @@ execute_process(
   COMMAND ${DRAL_PYTHON} ${DRAL_GENERATOR} -b ${DRAL_BRAND} -f ${DRAL_FAMILY} -c ${DRAL_CHIP}
 )
 
-add_library(dral INTERFACE)
+set(DRAL_LIB_NAME dral_${DRAL_BRAND}_${DRAL_FAMILY}_${DRAL_CHIP}
 
-target_include_directories(dral
+add_library(${DRAL_LIB_NAME} INTERFACE)
+
+target_include_directories(${DRAL_LIB_NAME}
   INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/dral
+    ${CMAKE_CURRENT_SOURCE_DIR}/${DRAL_LIB_NAME}
 )

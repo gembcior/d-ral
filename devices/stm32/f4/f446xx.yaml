@@ -1,8 +1,8 @@
-# Base on the RM0383 STM32 document
+# Base on the RM0390 STM32 document
 
 #include "common.yaml"
 
-chip: f411xe
+chip: f446xx
 
 peripherals:
   flash:
