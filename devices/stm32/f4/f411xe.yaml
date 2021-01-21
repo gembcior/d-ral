@@ -1,0 +1,36 @@
+#include "common.yaml"
+
+chip: f411xe
+
+peripherals:
+  flash:
+    address: 0x40023C00
+    registers:
+      acr:
+        offset: 0x00
+        policy: rw
+        fields:
+          latency:
+            position: 0
+            mask:     0xF
+            policy:   rw
+          prften:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          icen:
+            position: 9
+            mask:     0x1
+            policy:   rw
+          dcen:
+            position: 10
+            mask:     0x1
+            policy:   rw
+          icrst:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          dcrst:
+            position: 12
+            mask:     0x1
+            policy:   rw
