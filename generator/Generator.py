@@ -27,7 +27,7 @@ def main():
     args = parser.parse_args()
 
     generator_path = os.path.dirname(os.path.realpath(__file__))
-    reg_file = os.path.join(generator_path, "..", "regs", args.brand, args.family, "%s.yaml" % args.chip)
+    reg_file = os.path.join(generator_path, "..", "devices", args.brand, args.family, "%s.yaml" % args.chip)
     peripherals = register_parser.RegisterFileParser().parse(reg_file)
     Generator(peripherals).generate()
 

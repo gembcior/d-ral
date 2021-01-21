@@ -20,15 +20,13 @@ if (NOT DRAL_GENERATOR)
   set(DRAL_GENERATOR ${CMAKE_CURRENT_SOURCE_DIR}/generator/Generator.py)
 endif()
 
+execute_process(
+  COMMAND ${DRAL_PYTHON} ${DRAL_GENERATOR} -b ${DRAL_BRAND} -f ${DRAL_FAMILY} -c ${DRAL_CHIP}
+)
+
 add_library(dral INTERFACE)
 
 target_include_directories(dral
   INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/dral
-)
-
-add_custom_command(dral
-  PRE_BUILD
-  COMMAND ${DRAL_PYTHON} ${DRAL_GENERATOR} -b ${DRAL_BRAND} -f ${DRAL_FAMILY} -c ${DRAL_CHIP}
-  COMMENT "Generating DRAL - Device Register Access Layer files"
 )
