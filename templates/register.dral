@@ -1,0 +1,8 @@
+template <uint32_t address, RegisterPolicy regPolicy>
+class [dral]register.name[#dral]Reg: public RegisterModel<address, regPolicy>
+{
+public:
+[dral]register.fields[#dral]
+};
+
+using [dral]register.name[#dral] = [dral]register.name[#dral]Reg<BaseAddress + [dral]register.offset[#dral], RegisterPolicy::[dral]register.policy[#dral]>;

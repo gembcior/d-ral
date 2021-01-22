@@ -1,11 +1,9 @@
-#ifndef REGISTER_MODEL_H
-#define REGISTER_MODEL_H
+#ifndef DRAL_REGISTER_MODEL_H
+#define DRAL_REGISTER_MODEL_H
 
 #include <cstdint>
 
-// TODO Add support for byte access and halfword access
-// TODO Add support for other register policy
-namespace stm32::regs {
+namespace dral::[dral]brand[#dral]::[dral]family[#dral]::[dral]chip[#dral] {
 
 enum class RegisterPolicy {
   ReadOnly,
@@ -164,4 +162,4 @@ public:
 
 } // namespace
 
-#endif /* REGISTER_MODEL_H */
+#endif /* DRAL_REGISTER_MODEL_H */

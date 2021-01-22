@@ -1,0 +1,1 @@
+using [dral]field.name[#dral] = FieldModel<address, [dral]field.position[#dral], [dral]field.mask[#dral], regPolicy, FieldPolicy::[dral]field.policy[#dral]>;

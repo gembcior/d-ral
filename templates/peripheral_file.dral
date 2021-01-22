@@ -1,0 +1,13 @@
+#ifndef [dral]peripheral.include_guard[#dral]
+#define [dral]peripheral.include_guard[#dral]
+
+#include "[dral]brand[#dral]/[dral]family[#dral]/[dral]chip[#dral]/register_model.h"
+
+namespace dral::[dral]brand[#dral]::[dral]family[#dral]::[dral]chip[#dral]::[dral]peripheral.name[#dral] {
+
+constexpr uint32_t BaseAddress = [dral]peripheral.address[#dral];
+
+[dral]peripheral.registers[#dral]
+}
+
+#endif /* [dral]peripheral.include_guard[#dral] */
