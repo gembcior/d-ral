@@ -17,6 +17,26 @@ class Generator:
         os.makedirs(directory_path, exist_ok=True)
         return directory_path
 
+    def _get_register_policy(self, pattern):
+        policy = "ERROR"
+        if pattern.lower() == "r":
+            policy = "ReadOnly"
+        elif pattern.lower() == "w":
+            policy = "WriteOnly"
+        elif pattern.lower() == "rw":
+            policy = "ReadWrite"
+        elif pattern.lower() == "rc_w1":
+            policy = "ReadWrite"
+        elif pattern.lower() == "rc_w0":
+            policy = "ReadWrite"
+        elif pattern.lower() == "rs":
+            policy = "ReadWrite"
+        elif pattern.lower() == "rt_w":
+            policy = "ReadWrite"
+        elif pattern.lower() == "t":
+            policy = "WriteOnly"
+        return policy
+
     def _get_pattern_substitution(self, pattern, data=None):
         substitution = "ERROR"
         pattern = pattern.split(".")
@@ -41,7 +61,7 @@ class Generator:
             elif pattern[1] == "offset":
                 substitution = "0x%04X" % data.offset
             elif pattern[1] == "policy":
-                substitution = data.policy
+                substitution = self._get_register_policy(data.policy)
             elif pattern[1] == "fields":
                 substitution = "".join(self._get_fields_content(data.fields))
                 substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
@@ -51,7 +71,7 @@ class Generator:
             elif pattern[1] == "position":
                 substitution = "%2d" % data.position
             elif pattern[1] == "policy":
-                substitution = data.policy
+                substitution = self._get_register_policy(data.policy)
             elif pattern[1] == "mask":
                 substitution = "0x%08X" % data.mask
         return substitution
