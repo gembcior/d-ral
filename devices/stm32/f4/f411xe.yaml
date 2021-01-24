@@ -6,6 +6,7 @@ chip: f411xe
 
 peripherals:
   flash:
+    type: normal
     address: 0x40023C00
     registers:
       acr:
@@ -34,5 +35,1713 @@ peripherals:
             policy:   rw
           dcrst:
             position: 12
+            mask:     0x1
+            policy:   rw
+
+  pwr:
+    type: normal
+    address: 0x40007000
+    registers:
+      cr:
+        offset: 0x00
+        policy: rw
+        fields:
+          lpds:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pdds:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          cwuf:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          csbf:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          pvde:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          pls:
+            position: 5
+            mask:     0x7
+            policy:   rw
+          dbp:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          fpds:
+            position: 9
+            mask:     0x1
+            policy:   rw
+          lplvds:
+            position: 10
+            mask:     0x1
+            policy:   rw
+          mrlvds:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          adcdc1:
+            position: 13
+            mask:     0x1
+            policy:   rw
+          vos:
+            position: 14
+            mask:     0x3
+            policy:   rw
+          fmssr:
+            position: 20
+            mask:     0x1
+            policy:   rw
+          fissr:
+            position: 21
+            mask:     0x1
+            policy:   rw
+      csr:
+        offset: 0x04
+        policy: rw
+        fields:
+          wuf:
+            position: 0
+            mask:     0x1
+            policy:   r
+          sbf:
+            position: 1
+            mask:     0x1
+            policy:   r
+          pvdo:
+            position: 2
+            mask:     0x1
+            policy:   r
+          brr:
+            position: 3
+            mask:     0x1
+            policy:   r
+          ewup:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          bre:
+            position: 9
+            mask:     0x1
+            policy:   rw
+          vosrdy:
+            position: 14
+            mask:     0x1
+            policy:   r
+
+  rcc:
+    type: normal
+    address: 0x40023800
+    registers:
+      cr:
+        offset: 0x00
+        policy: rw
+        fields:
+          hsion:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          hsirdy:
+            position: 1
+            mask:     0x1
+            policy:   r
+          hsitrim:
+            position: 3
+            mask:     0x1F
+            policy:   rw
+          hsical:
+            position: 8
+            mask:     0xFF
+            policy:   r
+          hseon:
+            position: 16
+            mask:     0x1
+            policy:   rw
+          hserdy:
+            position: 17
+            mask:     0x1
+            policy:   r
+          hsebyp:
+            position: 18
+            mask:     0x1
+            policy:   rw
+          csson:
+            position: 19
+            mask:     0x1
+            policy:   rw
+          pllon:
+            position: 24
+            mask:     0x1
+            policy:   rw
+          pllrdy:
+            position: 25
+            mask:     0x1
+            policy:   r
+          plli2son:
+            position: 26
+            mask:     0x1
+            policy:   rw
+          plli2srdy:
+            position: 27
+            mask:     0x1
+            policy:   r
+      pllcfgr:
+        offset: 0x04
+        policy: rw
+        fields:
+          pllm:
+            position: 0
+            mask:     0x3F
+            policy:   rw
+          plln:
+            position: 6
+            mask:     0x1FF
+            policy:   rw
+          pllp:
+            position: 16
+            mask:     0x3
+            policy:   rw
+          pllsrc:
+            position: 22
+            mask:     0x1
+            policy:   rw
+          pllq:
+            position: 24
+            mask:     0xF
+            policy:   rw
+      cfgr:
+        offset: 0x08
+        policy: rw
+        fields:
+          sw:
+            position: 0
+            mask:     0x3
+            policy:   rw
+          sws:
+            position: 2
+            mask:     0x3
+            policy:   r
+          hpre:
+            position: 4
+            mask:     0xF
+            policy:   rw
+          ppre1:
+            position: 10
+            mask:     0x7
+            policy:   rw
+          ppre2:
+            position: 13
+            mask:     0x7
+            policy:   rw
+          rtcpre:
+            position: 16
+            mask:     0x1F
+            policy:   rw
+          mco1:
+            position: 21
+            mask:     0x3
+            policy:   rw
+          i2ssrc:
+            position: 23
+            mask:     0x1
+            policy:   rw
+          mco1pre:
+            position: 24
+            mask:     0x7
+            policy:   rw
+          mco2pre:
+            position: 27
+            mask:     0x7
+            policy:   rw
+          mco2:
+            position: 30
+            mask:     0x3
+            policy:   rw
+      cir:
+        offset: 0x0C
+        policy: rw
+        fields:
+          lsirdyf:
+            position: 0
+            mask:     0x1
+            policy:   r
+          lserdyf:
+            position: 1
+            mask:     0x1
+            policy:   r
+          hsirdyf:
+            position: 2
+            mask:     0x1
+            policy:   r
+          hserdyf:
+            position: 3
+            mask:     0x1
+            policy:   r
+          pllrdyf:
+            position: 4
+            mask:     0x1
+            policy:   r
+          plli2srdyf:
+            position: 5
+            mask:     0x1
+            policy:   r
+          cssf:
+            position: 7
+            mask:     0x1
+            policy:   r
+          lsirdyie:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          lserdyie:
+            position: 9
+            mask:     0x1
+            policy:   rw
+          hsirdyie:
+            position: 10
+            mask:     0x1
+            policy:   rw
+          hserdyie:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          pllrdyie:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          plli2srdyie:
+            position: 13
+            mask:     0x1
+            policy:   rw
+          lsirdyc:
+            position: 16
+            mask:     0x1
+            policy:   w
+          lserdyc:
+            position: 17
+            mask:     0x1
+            policy:   w
+          hsirdyc:
+            position: 18
+            mask:     0x1
+            policy:   w
+          hserdyc:
+            position: 19
+            mask:     0x1
+            policy:   w
+          pllrdyc:
+            position: 20
+            mask:     0x1
+            policy:   w
+          plli2srdyc:
+            position: 21
+            mask:     0x1
+            policy:   w
+          cssc:
+            position: 23
+            mask:     0x1
+            policy:   w
+      ahb1rstr:
+        offset: 0x010
+        policy: rw
+        fields:
+          gpioarst:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          gpiobrst:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          gpiocrst:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          gpiodrst:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          gpioerst:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          gpiohrst:
+            position: 7
+            mask:     0x1
+            policy:   rw
+          crcrst:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          dma1rst:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          dma2rst:
+            position: 22
+            mask:     0x1
+            policy:   rw
+      ahb2rstr:
+        offset: 0x014
+        policy: rw
+        fields:
+          otgfsrst:
+            position: 7
+            mask:     0x1
+            policy:   rw
+      apb1rstr:
+        offset: 0x20
+        policy: rw
+        fields:
+          tim2rst:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          tim3rst:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          tim4rst:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          tim5rst:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          wwdgrst:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi2rst:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          spi3rst:
+            position: 15
+            mask:     0x1
+            policy:   rw
+          usart2rst:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          i2c1rst:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          i2c2rst:
+            position: 22
+            mask:     0x1
+            policy:   rw
+          i2c3rst:
+            position: 23
+            mask:     0x1
+            policy:   rw
+          pwrrst:
+            position: 28
+            mask:     0x1
+            policy:   rw
+      apb2rstr:
+        offset: 0x24
+        policy: rw
+        fields:
+          tim1rst:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          usart1rst:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          usart6rst:
+            position: 5
+            mask:     0x1
+            policy:   rw
+          adcrst:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          sdiorst:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi1rst:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          spi4rst:
+            position: 13
+            mask:     0x1
+            policy:   rw
+          syscfgrst:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          tim9rst:
+            position: 16
+            mask:     0x1
+            policy:   rw
+          tim10rst:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          tim11rst:
+            position: 18
+            mask:     0x1
+            policy:   rw
+          spi5rst:
+            position: 20
+            mask:     0x1
+            policy:   rw
+      ahb1enr:
+        offset: 0x30
+        policy: rw
+        fields:
+          gpioaen:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          gpioben:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          gpiocen:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          gpioden:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          gpioeen:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          gpiohen:
+            position: 7
+            mask:     0x1
+            policy:   rw
+          crcen:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          dma1en:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          dma2en:
+            position: 22
+            mask:     0x1
+            policy:   rw
+      ahb2enr:
+        offset: 0x34
+        policy: rw
+        fields:
+          otgfsen:
+            position: 7
+            mask:     0x1
+            policy:   rw
+      apb1enr:
+        offset: 0x40
+        policy: rw
+        fields:
+          tim2en:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          tim3en:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          tim4en:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          tim5en:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          wwdgen:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi2en:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          spi3en:
+            position: 15
+            mask:     0x1
+            policy:   rw
+          usart2en:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          i2c1en:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          i2c2en:
+            position: 22
+            mask:     0x1
+            policy:   rw
+          i2c3en:
+            position: 23
+            mask:     0x1
+            policy:   rw
+          pwren:
+            position: 28
+            mask:     0x1
+            policy:   rw
+      apb2enr:
+        offset: 0x44
+        policy: rw
+        fields:
+          tim1en:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          usart1en:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          usart6en:
+            position: 5
+            mask:     0x1
+            policy:   rw
+          adc1en:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          sdioen:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi1en:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          spi4en:
+            position: 13
+            mask:     0x1
+            policy:   rw
+          syscfgen:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          tim9en:
+            position: 16
+            mask:     0x1
+            policy:   rw
+          tim10en:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          tim11en:
+            position: 18
+            mask:     0x1
+            policy:   rw
+          spi5en:
+            position: 20
+            mask:     0x1
+            policy:   rw
+      ahb1lpenr:
+        offset: 0x50
+        policy: rw
+        fields:
+          gpioalpen:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          gpioblpen:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          gpioclpen:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          gpiodlpen:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          gpioelpen:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          gpiohlpen:
+            position: 7
+            mask:     0x1
+            policy:   rw
+          crclpen:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          flitflpen:
+            position: 15
+            mask:     0x1
+            policy:   rw
+          sram1lpen:
+            position: 16
+            mask:     0x1
+            policy:   rw
+          dma1lpen:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          dma2lpen:
+            position: 22
+            mask:     0x1
+            policy:   rw
+      ahb2lpenr:
+        offset: 0x54
+        policy: rw
+        fields:
+          otgfslpen:
+            position: 7
+            mask:     0x1
+            policy:   rw
+      apb1lpenr:
+        offset: 0x60
+        policy: rw
+        fields:
+          tim2lpen:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          tim3lpen:
+            position: 1
+            mask:     0x1
+            policy:   rw
+          tim4lpen:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          tim5lpen:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          wwdglpen:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi2lpen:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          spi3lpen:
+            position: 15
+            mask:     0x1
+            policy:   rw
+          usart2lpen:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          i2c1lpen:
+            position: 21
+            mask:     0x1
+            policy:   rw
+          i2c2lpen:
+            position: 22
+            mask:     0x1
+            policy:   rw
+          i2c3lpen:
+            position: 23
+            mask:     0x1
+            policy:   rw
+          pwrlpen:
+            position: 28
+            mask:     0x1
+            policy:   rw
+      apb2lpenr:
+        offset: 0x64
+        policy: rw
+        fields:
+          tim1lpen:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          usart1lpen:
+            position: 4
+            mask:     0x1
+            policy:   rw
+          usart6lpen:
+            position: 5
+            mask:     0x1
+            policy:   rw
+          adc1lpen:
+            position: 8
+            mask:     0x1
+            policy:   rw
+          sdiolpen:
+            position: 11
+            mask:     0x1
+            policy:   rw
+          spi1lpen:
+            position: 12
+            mask:     0x1
+            policy:   rw
+          spi4lpen:
+            position: 13
+            mask:     0x1
+            policy:   rw
+          syscfglpen:
+            position: 14
+            mask:     0x1
+            policy:   rw
+          tim9lpen:
+            position: 16
+            mask:     0x1
+            policy:   rw
+          tim10lpen:
+            position: 17
+            mask:     0x1
+            policy:   rw
+          tim11lpen:
+            position: 18
+            mask:     0x1
+            policy:   rw
+          spi5lpen:
+            position: 20
+            mask:     0x1
+            policy:   rw
+      bdcr:
+        offset: 0x70
+        policy: rw
+        fields:
+          lseon:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lserdy:
+            position: 1
+            mask:     0x1
+            policy:   r
+          lsebyp:
+            position: 2
+            mask:     0x1
+            policy:   rw
+          lsemod:
+            position: 3
+            mask:     0x1
+            policy:   rw
+          rtcsel:
+            position: 8
+            mask:     0x3
+            policy:   rw
+          rtcen:
+            position: 15
+            mask:     0x1
+            policy:   rw
+          bdrst:
+            position: 16
+            mask:     0x1
+            policy:   rw
+      csr:
+        offset: 0x74
+        policy: rw
+        fields:
+          lsion:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lsirdy:
+            position: 1
+            mask:     0x1
+            policy:   r
+          rmvf:
+            position: 24
+            mask:     0x1
+            policy:   rt_w
+          borrstf:
+            position: 25
+            mask:     0x1
+            policy:   r
+          pinrstf:
+            position: 26
+            mask:     0x1
+            policy:   r
+          porrstf:
+            position: 27
+            mask:     0x1
+            policy:   r
+          sftrstf:
+            position: 28
+            mask:     0x1
+            policy:   r
+          iwdgrstf:
+            position: 29
+            mask:     0x1
+            policy:   r
+          wwdgrstf:
+            position: 30
+            mask:     0x1
+            policy:   r
+          lpwrrstf:
+            position: 31
+            mask:     0x1
+            policy:   r
+      sscgr:
+        offset: 0x80
+        policy: rw
+        fields:
+          modper:
+            position: 0
+            mask:     0x1FFF
+            policy:   rw
+          incstep:
+            position: 13
+            mask:     0x7FFF
+            policy:   rw
+          spreadsel:
+            position: 30
+            mask:     0x1
+            policy:   rw
+          sscgen:
+            position: 31
+            mask:     0x1
+            policy:   rw
+      plli2scfgr:
+        offset: 0x84
+        policy: rw
+        fields:
+          plli2sm:
+            position: 0
+            mask:     0x3F
+            policy:   rw
+          plli2sn:
+            position: 6
+            mask:     0x1FF
+            policy:   rw
+          plli2sr:
+            position: 28
+            mask:     0x7
+            policy:   rw
+      dckcfgr:
+        offset: 0x8C
+        policy: rw
+        fields:
+          timpre:
+            position: 24
+            mask:     0x1
+            policy:   rw
+
+  syscfg:
+    type: normal
+    address: 0x40013800
+    registers:
+      memrmp:
+        offset: 0x00
+        policy: rw
+        fields:
+          memmode:
+            position: 0
+            mask:     0x3
+            policy:   rw
+      pmc:
+        offset: 0x04
+        policy: rw
+        fields:
+          adc1d2:
+            position: 16
+            mask:     0x1
+            policy:   rw
+      exticr1:
+        offset: 0x08
+        policy: rw
+        fields:
+          exti0:
+            position: 0
+            mask:     0xF
+            policy:   rw
+          exti1:
+            position: 4
+            mask:     0xF
+            policy:   rw
+          exti2:
+            position: 8
+            mask:     0xF
+            policy:   rw
+          exti3:
+            position: 12
+            mask:     0xF
+            policy:   rw
+      exticr2:
+        offset: 0x0C
+        policy: rw
+        fields:
+          exti4:
+            position: 0
+            mask:     0xF
+            policy:   rw
+          exti5:
+            position: 4
+            mask:     0xF
+            policy:   rw
+          exti6:
+            position: 8
+            mask:     0xF
+            policy:   rw
+          exti7:
+            position: 12
+            mask:     0xF
+            policy:   rw
+      exticr3:
+        offset: 0x10
+        policy: rw
+        fields:
+          exti8:
+            position: 0
+            mask:     0xF
+            policy:   rw
+          exti9:
+            position: 4
+            mask:     0xF
+            policy:   rw
+          exti10:
+            position: 8
+            mask:     0xF
+            policy:   rw
+          exti11:
+            position: 12
+            mask:     0xF
+            policy:   rw
+      exticr4:
+        offset: 0x14
+        policy: rw
+        fields:
+          exti12:
+            position: 0
+            mask:     0xF
+            policy:   rw
+          exti13:
+            position: 4
+            mask:     0xF
+            policy:   rw
+          exti14:
+            position: 8
+            mask:     0xF
+            policy:   rw
+          exti15:
+            position: 12
+            mask:     0xF
+            policy:   rw
+      cmpcr:
+        offset: 0x20
+        policy: rw
+        fields:
+          cmppd:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ready:
+            position: 8
+            mask:     0x1
+            policy:   r
+
+  gpio:
+    type: collection
+    collection:
+      a:
+        address: 0x40020000
+      b:
+        address: 0x40020400
+      c:
+        address: 0x40020800
+      d:
+        address: 0x40020C00
+      e:
+        address: 0x40021000
+      h:
+        address: 0x40021C00
+    registers:
+      moder:
+        offset: 0x0
+        policy: rw
+        fields:
+          moder0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          moder15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      otyper:
+        offset: 0x0
+        policy: rw
+        fields:
+          ot0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ot15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      ospeedr:
+        offset: 0x0
+        policy: rw
+        fields:
+          ospeed0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          ospeed15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      pupdr:
+        offset: 0x0
+        policy: rw
+        fields:
+          pupd0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          pupd15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      idr:
+        offset: 0x0
+        policy: rw
+        fields:
+          id0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          id15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      odr:
+        offset: 0x0
+        policy: rw
+        fields:
+          od0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          od15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      bsrr:
+        offset: 0x0
+        policy: rw
+        fields:
+          bs0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          bs15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          br15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      lckr:
+        offset: 0x0
+        policy: rw
+        fields:
+          lck0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lck15:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          lckk:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      afrl:
+        offset: 0x0
+        policy: rw
+        fields:
+          afsel0:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel1:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel2:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel3:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel4:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel5:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel6:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel7:
+            position: 0
+            mask:     0x1
+            policy:   rw
+      afrh:
+        offset: 0x0
+        policy: rw
+        fields:
+          afsel8:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel9:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel10:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel11:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel12:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel13:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel14:
+            position: 0
+            mask:     0x1
+            policy:   rw
+          afsel15:
+            position: 0
             mask:     0x1
             policy:   rw

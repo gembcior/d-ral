@@ -1,3 +1,4 @@
+import Device as device
 import Peripheral as peripheral
 import Register as register
 import Field as field
@@ -13,13 +14,13 @@ class DeviceFileParser:
     def _get_device_data(self, device_file, device_data):
         with open(device_file, "r") as yaml_file:
             yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-            device_data["peripherals"].update(yaml_data["peripherals"])
+            device_data.peripherals.update(yaml_data["peripherals"])
             if "brand" in yaml_data:
-                device_data["brand"] = yaml_data["brand"]
+                device_data.brand = yaml_data["brand"]
             if "family" in yaml_data:
-                device_data["family"] = yaml_data["family"]
+                device_data.family = yaml_data["family"]
             if "chip" in yaml_data:
-                device_data["chip"] = yaml_data["chip"]
+                device_data.chip = yaml_data["chip"]
 
         include_file_list = []
         with open(device_file, "r") as yaml_file:
@@ -34,11 +35,23 @@ class DeviceFileParser:
     def _parse_peripherals(self, peripherals):
         peripherals_list = []
         for item in peripherals:
-            new_peripheral = peripheral.Peripheral()
-            new_peripheral.name = item
-            new_peripheral.address = int(peripherals[item]["address"])
-            new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
-            peripherals_list.append(new_peripheral)
+            peripheral_type = peripherals[item]["type"]
+            if peripheral_type == "collection":
+                collection = peripherals[item]["collection"]
+                for element in collection:
+                    new_peripheral = peripheral.PeripheralCollection()
+                    new_peripheral.name = "%s%s" % (item, element)
+                    new_peripheral.type = peripheral_type
+                    new_peripheral.address = collection[element]["address"]
+                    new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
+                    peripherals_list.append(new_peripheral)
+            else:
+                new_peripheral = peripheral.Peripheral()
+                new_peripheral.name = item
+                new_peripheral.type = peripheral_type
+                new_peripheral.address = int(peripherals[item]["address"])
+                new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
+                peripherals_list.append(new_peripheral)
         return peripherals_list
 
     def _parse_registers(self, registers):
@@ -75,8 +88,8 @@ class DeviceFileParser:
         return fields_list
 
     def parse(self, device_file):
-        device_data = {"peripherals": {}, "brand": None, "family": None, "chip": None}
+        device_data = device.Device()
         self._get_device_data(device_file, device_data)
-        device_data["peripherals"] = self._parse_peripherals(device_data["peripherals"])
+        device_data.peripherals = self._parse_peripherals(device_data.peripherals)
         return device_data
 

@@ -108,7 +108,7 @@ class Generator:
     def _get_peripheral_file_content(self, peripheral):
         content = []
         generator_path = os.path.dirname(os.path.realpath(__file__))
-        peripheral_file_template = os.path.join(generator_path, "..", "templates", "peripheral_file.dral")
+        peripheral_file_template = os.path.join(generator_path, "..", "templates", "peripheral_normal.dral")
         dral_pattern = re.compile('\[dral\](.*?)\[#dral\]')
         with open(peripheral_file_template,"r") as template:
             for line in template.readlines():
@@ -144,12 +144,13 @@ class Generator:
             new_file.writelines(content)
 
     def generate(self, device_data):
-        self._brand = device_data["brand"]
-        self._family = device_data["family"]
-        self._chip = device_data["chip"]
-        self._peripherals = device_data["peripherals"]
+        self._brand = device_data.brand
+        self._family = device_data.family
+        self._chip = device_data.chip
+        self._peripherals = device_data.peripherals
         directory = self._create_directory(self._brand, self._family, self._chip)
         for peripheral in self._peripherals:
+            print(type(peripheral))
             self._generate_peripheral_file(directory, peripheral)
         self._generate_reg_model_file(directory)
 
