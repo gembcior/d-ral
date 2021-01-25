@@ -1,4 +1,9 @@
-class Field:
+from Object import Object
+import os
+import re
+
+
+class Field(Object):
     def __init__(self):
         self._name = None
         self._position = None
@@ -37,8 +42,31 @@ class Field:
     def mask(self, value):
         self._mask = value
 
-    @property
-    def info(self):
-        info = ""
-        info += "name: %10s | position: %4d | mask: 0x%08X | policy: %4s\n" % (self._name, self._position, self._mask, self._policy)
-        return info
+    def _get_pattern_substitution(self, pattern):
+        substitution = "ERROR"
+        pattern = pattern.split(".")
+        if pattern[0] == "field":
+            if pattern[1] == "name":
+                substitution = "%-12s" % self._name
+            elif pattern[1] == "position":
+                substitution = "%2d" % self._position
+            elif pattern[1] == "policy":
+                substitution = self._get_policy(self._policy)
+            elif pattern[1] == "mask":
+                substitution = "0x%08X" % self._mask
+        if len(pattern) > 2:
+            substitution = self._apply_modifier(substitution, pattern[2])
+        return substitution
+
+    def generate(self):
+        content = []
+        generator_path = os.path.dirname(os.path.realpath(__file__))
+        field_template = os.path.join(generator_path, "..", "templates", "field.dral")
+        dral_pattern = re.compile('\[dral\](.*?)\[#dral\]')
+        with open(field_template,"r") as template:
+            for line in template.readlines():
+                for pattern in re.findall(dral_pattern, line):
+                    substitution = self._get_pattern_substitution(pattern)
+                    line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line)
+                content.append(line)
+        return content

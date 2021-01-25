@@ -1,4 +1,9 @@
-class Device:
+from Object import Object
+import os
+import re
+
+
+class Device(Object):
     def __init__(self):
         self._brand = None
         self._family = None
@@ -36,3 +41,5 @@ class Device:
     @peripherals.setter
     def peripherals(self, value):
         self._peripherals = value
+
+    def generate(self):

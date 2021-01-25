@@ -1,4 +1,9 @@
-class Peripheral:
+from Object import Object
+import os
+import re
+
+
+class Peripheral(Object):
     def __init__(self):
         self._name = None
         self._type = None
@@ -37,18 +42,6 @@ class Peripheral:
     def registers(self, value):
         self._registers = value
 
-    @property
-    def info(self):
-        info = ""
-        info += "----PERIPHERAL--------------------------------------------------------------\n"
-        info += "%s | type: %s |  address: 0x%08X\n" % (self._name, self._type, self._address)
-        if self._registers is not None:
-            for reg in self._registers:
-                info += "    ----REGISTER------------------------------------------------------------\n"
-                info += ('    '.join(("\n" + reg.info).splitlines(True))).lstrip("\n")
-                info += "\n"
-        return info
-
     def _get_pattern_substitution(self, pattern):
         substitution = "ERROR"
         pattern = pattern.split(".")
@@ -58,8 +51,14 @@ class Peripheral:
             elif pattern[1] == "address":
                 substitution = "0x%08X" % self._address
             elif pattern[1] == "registers":
+                content = []
                 for reg in self._registers:
-                    substitution = "".join(reg.generate())
+                    content.append("".join(reg.generate()))
+                    content.append("\n")
+                substitution = "".join(content)
+        if len(pattern) > 2:
+            substitution = self._apply_modifier(substitution, pattern[2])
+        return substitution
 
     def generate(self):
         content = []
@@ -69,7 +68,7 @@ class Peripheral:
         with open(peripheral_file_template,"r") as template:
             for line in template.readlines():
                 for pattern in re.findall(dral_pattern, line):
-                    substitution = self._get_pattern_substitution(pattern, peripheral)
+                    substitution = self._get_pattern_substitution(pattern)
                     line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line)
                 content.append(line)
         return content

@@ -1,4 +1,9 @@
-class Register:
+from Object import Object
+import os
+import re
+
+
+class Register(Object):
     def __init__(self):
         self._name = None
         self._offset = None
@@ -37,14 +42,35 @@ class Register:
     def fields(self, value):
         self._fields = value
 
-    @property
-    def info(self):
-        info = ""
-        info += "%s | offset: 0x%04X | policy: %4s\n" % (self._name, self._offset, self._policy)
-        info += "    ----FIELDS----------------------------------------------------------\n"
+    def _get_pattern_substitution(self, pattern):
+        substitution = "ERROR"
+        pattern = pattern.split(".")
+        if pattern[0] == "register":
+            if pattern[1] == "name":
+                substitution = self._name
+            elif pattern[1] == "offset":
+                substitution = "0x%04X" % self._offset
+            elif pattern[1] == "policy":
+                substitution = self._get_policy(self._policy)
+            elif pattern[1] == "fields":
+                content = []
+                for field in self._fields:
+                    content.append("".join(field.generate()))
+                substitution = "".join(content)
+                substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
+        if len(pattern) > 2:
+            substitution = self._apply_modifier(substitution, pattern[2])
+        return substitution
 
-        if self._fields is not None:
-            for field in self._fields:
-                info += ('    '.join(("\n" + field.info).splitlines(True))).lstrip("\n")
-        return info
-
+    def generate(self):
+        content = []
+        generator_path = os.path.dirname(os.path.realpath(__file__))
+        register_template = os.path.join(generator_path, "..", "templates", "register.dral")
+        dral_pattern = re.compile('\[dral\](.*?)\[#dral\]')
+        with open(register_template,"r") as template:
+            for line in template.readlines():
+                for pattern in re.findall(dral_pattern, line):
+                    substitution = self._get_pattern_substitution(pattern)
+                    line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line)
+                content.append(line)
+        return content
