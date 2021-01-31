@@ -7,7 +7,7 @@ class Register(Object):
         self._offset = None
         self._policy = None
         self._fields = None
-        self._template = "register/normal.dral"
+        self._template = "register/normal/declaration.dral"
 
     @property
     def name(self):
@@ -60,3 +60,32 @@ class Register(Object):
             if len(pattern) > 2:
                 substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
+
+    def get_declaration_string(self):
+        return self._generate("register/normal/declaration.dral")
+
+    def get_instance_string(self):
+        return self._generate("register/normal/instance.dral")
+
+    def get_string(self):
+        content = self.get_declaration_string()
+        content += self.get_instance_string()
+        return content
+
+
+class CollectionRegister(Register):
+    def __init__(self):
+        super().__init__()
+        self._template = "register/collection/declaration.dral"
+
+    def get_declaration_string(self):
+        return self._generate("register/collection/declaration.dral")
+
+    def get_instance_string(self):
+        return self._generate("register/collection/instance.dral")
+
+    def get_string(self):
+        content = self.get_declaration_string()
+        content += self.get_instance_string()
+        return content
+

@@ -2,8 +2,10 @@ from Device import Device
 from Peripheral import Peripheral
 from Peripheral import PeripheralCollection
 from Register import Register
+from Register import CollectionRegister
 from Field import Field
 from RegisterModel import RegisterModel
+from CollectionItem import CollectionItem
 import yaml
 import os
 import re
@@ -49,12 +51,13 @@ class DeviceFileParser:
             if peripheral_type == "collection":
                 collection = peripherals[item]["collection"]
                 for element in collection:
-                    new_peripheral = PeripheralCollection()
-                    new_peripheral.name = "%s%s" % (item, element)
-                    new_peripheral.type = peripheral_type
-                    new_peripheral.address = collection[element]["address"]
-                    new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
-                    peripherals_list.append(new_peripheral)
+                    pass
+                new_peripheral = PeripheralCollection()
+                new_peripheral.name = item
+                new_peripheral.type = peripheral_type
+                new_peripheral.registers = self._parse_collection_registers(peripherals[item]["registers"])
+                new_peripheral.collection = self._parse_collection(item, peripherals[item]["collection"])
+                peripherals_list.append(new_peripheral)
             else:
                 new_peripheral = Peripheral()
                 new_peripheral.name = item
@@ -63,6 +66,16 @@ class DeviceFileParser:
                 new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
                 peripherals_list.append(new_peripheral)
         return peripherals_list
+
+    def _parse_collection(self, parent, collection):
+        collection_list = []
+        for item in collection:
+            new_collection = CollectionItem()
+            new_collection.parent = parent
+            new_collection.name = item
+            new_collection.address = int(collection[item]["address"])
+            collection_list.append(new_collection)
+        return collection_list
 
     def _parse_registers(self, registers):
         registers_list = []
@@ -79,6 +92,28 @@ class DeviceFileParser:
                     registers_list.append(new_register)
             else:
                 new_register = Register()
+                new_register.name = item
+                new_register.offset = int(registers[item]["offset"])
+                new_register.policy = registers[item]["policy"]
+                new_register.fields = self._parse_fields(registers[item]["fields"])
+                registers_list.append(new_register)
+        return registers_list
+
+    def _parse_collection_registers(self, registers):
+        registers_list = []
+        for item in registers:
+            if "range" in registers[item]:
+                start = int(registers[item]["range"]["start"])
+                end = int(registers[item]["range"]["end"])
+                for num in range(start, end + 1):
+                    new_register = CollectionRegister()
+                    new_register.name = "%s%d" % (item, num)
+                    new_register.offset = int(registers[item]["offset"] + (0x04 * num))
+                    new_register.policy = registers[item]["policy"]
+                    new_register.fields = self._parse_fields(registers[item]["fields"])
+                    registers_list.append(new_register)
+            else:
+                new_register = CollectionRegister()
                 new_register.name = item
                 new_register.offset = int(registers[item]["offset"])
                 new_register.policy = registers[item]["policy"]

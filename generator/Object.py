@@ -36,9 +36,9 @@ class Object:
     def _get_pattern_substitution(self, pattern):
         return None
 
-    def get_string(self):
+    def _generate(self, template):
         content = []
-        template_file = os.path.join(TEMPLATES_PATH, self._template)
+        template_file = os.path.join(TEMPLATES_PATH, template)
         dral_pattern = re.compile('\[dral\](.*?)\[#dral\]', flags=(re.MULTILINE | re.DOTALL))
         with open(template_file,"r") as template:
             for line in template.readlines():
@@ -48,4 +48,8 @@ class Object:
                         line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
                 content.append(line)
         return "".join(content)
+
+    def get_string(self):
+        content = self._generate(self._template)
+        return content
 
