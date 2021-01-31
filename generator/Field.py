@@ -1,6 +1,4 @@
 from Object import Object
-import os
-import re
 
 
 class Field(Object):
@@ -9,6 +7,7 @@ class Field(Object):
         self._position = None
         self._mask = None
         self._policy = None
+        self._template = "field/normal.dral"
 
     @property
     def name(self):
@@ -43,7 +42,7 @@ class Field(Object):
         self._mask = value
 
     def _get_pattern_substitution(self, pattern):
-        substitution = "ERROR"
+        substitution = None
         pattern = pattern.split(".")
         if pattern[0] == "field":
             if pattern[1] == "name":
@@ -54,19 +53,7 @@ class Field(Object):
                 substitution = self._get_policy(self._policy)
             elif pattern[1] == "mask":
                 substitution = "0x%08X" % self._mask
-        if len(pattern) > 2:
-            substitution = self._apply_modifier(substitution, pattern[2])
+            if len(pattern) > 2:
+                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 
-    def generate(self):
-        content = []
-        generator_path = os.path.dirname(os.path.realpath(__file__))
-        field_template = os.path.join(generator_path, "..", "templates", "field.dral")
-        dral_pattern = re.compile('\[dral\](.*?)\[#dral\]')
-        with open(field_template,"r") as template:
-            for line in template.readlines():
-                for pattern in re.findall(dral_pattern, line):
-                    substitution = self._get_pattern_substitution(pattern)
-                    line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line)
-                content.append(line)
-        return content

@@ -1,6 +1,4 @@
 from Object import Object
-import os
-import re
 
 
 class Register(Object):
@@ -9,6 +7,7 @@ class Register(Object):
         self._offset = None
         self._policy = None
         self._fields = None
+        self._template = "register/normal.dral"
 
     @property
     def name(self):
@@ -43,7 +42,7 @@ class Register(Object):
         self._fields = value
 
     def _get_pattern_substitution(self, pattern):
-        substitution = "ERROR"
+        substitution = None
         pattern = pattern.split(".")
         if pattern[0] == "register":
             if pattern[1] == "name":
@@ -55,22 +54,9 @@ class Register(Object):
             elif pattern[1] == "fields":
                 content = []
                 for field in self._fields:
-                    content.append("".join(field.generate()))
+                    content.append(field.get_string())
                 substitution = "".join(content)
                 substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
-        if len(pattern) > 2:
-            substitution = self._apply_modifier(substitution, pattern[2])
+            if len(pattern) > 2:
+                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
-
-    def generate(self):
-        content = []
-        generator_path = os.path.dirname(os.path.realpath(__file__))
-        register_template = os.path.join(generator_path, "..", "templates", "register.dral")
-        dral_pattern = re.compile('\[dral\](.*?)\[#dral\]')
-        with open(register_template,"r") as template:
-            for line in template.readlines():
-                for pattern in re.findall(dral_pattern, line):
-                    substitution = self._get_pattern_substitution(pattern)
-                    line = re.sub("\[dral\]%s\[#dral\]" % pattern, substitution, line)
-                content.append(line)
-        return content

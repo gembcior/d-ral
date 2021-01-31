@@ -1,9 +1,9 @@
-#ifndef DRAL_REGISTER_MODEL_H
-#define DRAL_REGISTER_MODEL_H
+#ifndef DRAL_[dral]device.model.uppercase[#dral]_H
+#define DRAL_[dral]device.model.uppercase[#dral]_H
 
 #include <cstdint>
 
-namespace dral::[dral]brand[#dral]::[dral]family[#dral]::[dral]chip[#dral] {
+namespace dral::[dral]device.brand[#dral]::[dral]device.family[#dral]::[dral]device.chip[#dral] {
 
 enum class RegisterPolicy {
   ReadOnly,
@@ -162,4 +162,4 @@ public:
 
 } // namespace
 
-#endif /* DRAL_REGISTER_MODEL_H */
+#endif /* DRAL_[dral]device.model.uppercase[#dral]_H */

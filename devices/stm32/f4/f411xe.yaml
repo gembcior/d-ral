@@ -3,6 +3,7 @@
 #include "common.yaml"
 
 chip: f411xe
+model: default
 
 peripherals:
   flash:

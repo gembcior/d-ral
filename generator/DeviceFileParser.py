@@ -1,7 +1,9 @@
-import Device as device
-import Peripheral as peripheral
-import Register as register
-import Field as field
+from Device import Device
+from Peripheral import Peripheral
+from Peripheral import PeripheralCollection
+from Register import Register
+from Field import Field
+from RegisterModel import RegisterModel
 import yaml
 import os
 import re
@@ -21,6 +23,14 @@ class DeviceFileParser:
                 device_data.family = yaml_data["family"]
             if "chip" in yaml_data:
                 device_data.chip = yaml_data["chip"]
+            if "model" in yaml_data:
+                new_model = RegisterModel()
+                new_model.name = yaml_data["model"] + "_model"
+                device_data.model = new_model
+            else:
+                new_model = RegisterModel()
+                new_model.name = "default_model"
+                device_data.model = new_model
 
         include_file_list = []
         with open(device_file, "r") as yaml_file:
@@ -39,14 +49,14 @@ class DeviceFileParser:
             if peripheral_type == "collection":
                 collection = peripherals[item]["collection"]
                 for element in collection:
-                    new_peripheral = peripheral.PeripheralCollection()
+                    new_peripheral = PeripheralCollection()
                     new_peripheral.name = "%s%s" % (item, element)
                     new_peripheral.type = peripheral_type
                     new_peripheral.address = collection[element]["address"]
                     new_peripheral.registers = self._parse_registers(peripherals[item]["registers"])
                     peripherals_list.append(new_peripheral)
             else:
-                new_peripheral = peripheral.Peripheral()
+                new_peripheral = Peripheral()
                 new_peripheral.name = item
                 new_peripheral.type = peripheral_type
                 new_peripheral.address = int(peripherals[item]["address"])
@@ -61,14 +71,14 @@ class DeviceFileParser:
                 start = int(registers[item]["range"]["start"])
                 end = int(registers[item]["range"]["end"])
                 for num in range(start, end + 1):
-                    new_register = register.Register()
+                    new_register = Register()
                     new_register.name = "%s%d" % (item, num)
                     new_register.offset = int(registers[item]["offset"] + (0x04 * num))
                     new_register.policy = registers[item]["policy"]
                     new_register.fields = self._parse_fields(registers[item]["fields"])
                     registers_list.append(new_register)
             else:
-                new_register = register.Register()
+                new_register = Register()
                 new_register.name = item
                 new_register.offset = int(registers[item]["offset"])
                 new_register.policy = registers[item]["policy"]
@@ -79,7 +89,7 @@ class DeviceFileParser:
     def _parse_fields(self, fields):
         fields_list = []
         for item in fields:
-            new_field = field.Field()
+            new_field = Field()
             new_field.name = item
             new_field.position = int(fields[item]["position"])
             new_field.mask = fields[item]["mask"]
@@ -88,7 +98,7 @@ class DeviceFileParser:
         return fields_list
 
     def parse(self, device_file):
-        device_data = device.Device()
+        device_data = Device()
         self._get_device_data(device_file, device_data)
         device_data.peripherals = self._parse_peripherals(device_data.peripherals)
         return device_data
