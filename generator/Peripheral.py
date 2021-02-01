@@ -1,8 +1,9 @@
-from Object import Object
+from DeviceItem import DeviceItem
 
 
-class Peripheral(Object):
+class Peripheral(DeviceItem):
     def __init__(self):
+        super().__init__()
         self._name = None
         self._type = None
         self._address = None
@@ -41,9 +42,8 @@ class Peripheral(Object):
     def registers(self, value):
         self._registers = value
 
-    def _get_pattern_substitution(self, pattern):
+    def _get_substitution(self, pattern):
         substitution = None
-        pattern = pattern.split(".")
         if pattern[0] == "peripheral":
             if pattern[1] == "name":
                 substitution = self._name
@@ -55,8 +55,6 @@ class Peripheral(Object):
                     content.append(reg.get_string())
                     content.append("\n")
                 substitution = "".join(content)
-            if len(pattern) > 2:
-                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 
 
@@ -74,9 +72,8 @@ class PeripheralCollection(Peripheral):
     def collection(self, value):
         self._collection = value
 
-    def _get_pattern_substitution(self, pattern):
+    def _get_substitution(self, pattern):
         substitution = None
-        pattern = pattern.split(".")
         if pattern[0] == "peripheral":
             if pattern[1] == "name":
                 substitution = self._name
@@ -100,7 +97,5 @@ class PeripheralCollection(Peripheral):
                 for item in self._collection:
                     content.append(item.get_string())
                 substitution = "".join(content)
-            if len(pattern) > 2:
-                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 

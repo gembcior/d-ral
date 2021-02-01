@@ -1,10 +1,11 @@
-from Object import Object
+from DeviceItem import DeviceItem
 import os
 import re
 
 
-class Device(Object):
+class Device(DeviceItem):
     def __init__(self):
+        super().__init__()
         self._brand = None
         self._family = None
         self._chip = None
@@ -51,9 +52,8 @@ class Device(Object):
     def peripherals(self, value):
         self._peripherals = value
 
-    def _get_pattern_substitution(self, pattern):
+    def _get_substitution(self, pattern):
         substitution = None
-        pattern = pattern.split(".")
         if pattern[0] == "device":
             if pattern[1] == "brand":
                 substitution = self._brand
@@ -63,8 +63,6 @@ class Device(Object):
                 substitution = self._chip
             elif pattern[1] == "model":
                 substitution = self._model.name
-            if len(pattern) > 2:
-                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 
     def _get_component_content(self, component):

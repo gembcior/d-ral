@@ -1,5 +1,5 @@
-#ifndef DRAL_[dral]device.brand.uppercase[#dral]_[dral]device.family.uppercase[#dral]_[dral]device.chip.uppercase[#dral]_[dral]peripheral.name.uppercase[#dral]
-#define DRAL_[dral]device.brand.uppercase[#dral]_[dral]device.family.uppercase[#dral]_[dral]device.chip.uppercase[#dral]_[dral]peripheral.name.uppercase[#dral]
+#ifndef DRAL_[dral]device.brand%uppercase[#dral]_[dral]device.family%uppercase[#dral]_[dral]device.chip%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H
+#define DRAL_[dral]device.brand%uppercase[#dral]_[dral]device.family%uppercase[#dral]_[dral]device.chip%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H
 
 #include "[dral]device.brand[#dral]/[dral]device.family[#dral]/[dral]device.chip[#dral]/[dral]device.model[#dral].h"
 
@@ -10,4 +10,4 @@ constexpr uint32_t BaseAddress = [dral]peripheral.address[#dral];
 [dral]peripheral.registers[#dral]
 }
 
-#endif /* DRAL_[dral]device.brand.uppercase[#dral]_[dral]device.family.uppercase[#dral]_[dral]device.chip.uppercase[#dral]_[dral]peripheral.name.uppercase[#dral] */
+#endif /* DRAL_[dral]device.brand%uppercase[#dral]_[dral]device.family%uppercase[#dral]_[dral]device.chip%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H */

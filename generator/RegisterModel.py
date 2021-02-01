@@ -1,8 +1,9 @@
-from Object import Object
+from DeviceItem import DeviceItem
 
 
-class RegisterModel(Object):
+class RegisterModel(DeviceItem):
     def __init__(self):
+        super().__init__()
         self._name = None
         self._template = "model/default.dral"
 

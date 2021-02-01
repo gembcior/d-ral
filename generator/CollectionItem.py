@@ -1,8 +1,9 @@
-from Object import Object
+from DeviceItem import DeviceItem
 
 
-class CollectionItem(Object):
+class CollectionItem(DeviceItem):
     def __init__(self):
+        super().__init__()
         self._parent = None
         self._name = None
         self._address = None
@@ -32,9 +33,8 @@ class CollectionItem(Object):
     def address(self, value):
         self._address = value
 
-    def _get_pattern_substitution(self, pattern):
+    def _get_substitution(self, pattern):
         substitution = None
-        pattern = pattern.split(".")
         if pattern[0] == "collection":
             if pattern[1] == "name":
                 substitution = self._name
@@ -42,7 +42,5 @@ class CollectionItem(Object):
                 substitution = self._parent
             elif pattern[1] == "address":
                 substitution = "0x%08X" % self._address
-            if len(pattern) > 2:
-                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 

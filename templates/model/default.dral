@@ -1,5 +1,5 @@
-#ifndef DRAL_[dral]device.model.uppercase[#dral]_H
-#define DRAL_[dral]device.model.uppercase[#dral]_H
+#ifndef DRAL_[dral]device.model%uppercase[#dral]_H
+#define DRAL_[dral]device.model%uppercase[#dral]_H
 
 #include <cstdint>
 
@@ -162,4 +162,4 @@ public:
 
 } // namespace
 
-#endif /* DRAL_[dral]device.model.uppercase[#dral]_H */
+#endif /* DRAL_[dral]device.model%uppercase[#dral]_H */

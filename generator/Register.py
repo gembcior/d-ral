@@ -1,13 +1,15 @@
-from Object import Object
+from DeviceItem import DeviceItem
 
 
-class Register(Object):
+class Register(DeviceItem):
     def __init__(self):
+        super().__init__()
         self._name = None
         self._offset = None
         self._policy = None
         self._fields = None
-        self._template = "register/normal/declaration.dral"
+        self._declaration_template = "register/normal/declaration.dral"
+        self._instance_template = "register/normal/instance.dral"
 
     @property
     def name(self):
@@ -41,9 +43,8 @@ class Register(Object):
     def fields(self, value):
         self._fields = value
 
-    def _get_pattern_substitution(self, pattern):
+    def _get_substitution(self, pattern):
         substitution = None
-        pattern = pattern.split(".")
         if pattern[0] == "register":
             if pattern[1] == "name":
                 substitution = self._name
@@ -57,15 +58,17 @@ class Register(Object):
                     content.append(field.get_string())
                 substitution = "".join(content)
                 substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
-            if len(pattern) > 2:
-                substitution = self._apply_modifier(substitution, pattern[2])
         return substitution
 
     def get_declaration_string(self):
-        return self._generate("register/normal/declaration.dral")
+        content = self._generate_from_template(self._declaration_template)
+        content = self._generate_from_string(content)
+        return content
 
     def get_instance_string(self):
-        return self._generate("register/normal/instance.dral")
+        content = self._generate_from_template(self._instance_template)
+        content = self._generate_from_string(content)
+        return content
 
     def get_string(self):
         content = self.get_declaration_string()
@@ -76,16 +79,5 @@ class Register(Object):
 class CollectionRegister(Register):
     def __init__(self):
         super().__init__()
-        self._template = "register/collection/declaration.dral"
-
-    def get_declaration_string(self):
-        return self._generate("register/collection/declaration.dral")
-
-    def get_instance_string(self):
-        return self._generate("register/collection/instance.dral")
-
-    def get_string(self):
-        content = self.get_declaration_string()
-        content += self.get_instance_string()
-        return content
-
+        self._declaration_template = "register/collection/declaration.dral"
+        self._instance_template = "register/collection/instance.dral"
