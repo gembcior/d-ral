@@ -56,7 +56,7 @@ class DeviceFileParser:
                 new_peripheral.name = item
                 new_peripheral.type = peripheral_type
                 new_peripheral.registers = self._parse_collection_registers(peripherals[item]["registers"])
-                new_peripheral.collection = self._parse_collection(item, peripherals[item]["collection"])
+                new_peripheral.collection = self._parse_collection(peripherals[item]["collection"])
                 peripherals_list.append(new_peripheral)
             else:
                 new_peripheral = Peripheral()
@@ -67,11 +67,10 @@ class DeviceFileParser:
                 peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _parse_collection(self, parent, collection):
+    def _parse_collection(self, collection):
         collection_list = []
         for item in collection:
             new_collection = CollectionItem()
-            new_collection.parent = parent
             new_collection.name = item
             new_collection.address = int(collection[item]["address"])
             collection_list.append(new_collection)

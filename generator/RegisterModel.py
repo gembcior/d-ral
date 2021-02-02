@@ -1,7 +1,7 @@
-from DeviceItem import DeviceItem
+from DralObject import DralObject
 
 
-class RegisterModel(DeviceItem):
+class RegisterModel(DralObject):
     def __init__(self):
         super().__init__()
         self._name = None

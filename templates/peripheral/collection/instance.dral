@@ -1,1 +1,1 @@
-using [dral]collection.name[#dral] = [dral]collection.parent[#dral]Regs<[dral]collection.address[#dral]>;
+using [dral]collection.name[#dral] = [dral]peripheral.name[#dral]Regs<[dral]collection.address[#dral]>;

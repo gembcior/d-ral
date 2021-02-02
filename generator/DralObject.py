@@ -2,7 +2,7 @@ from Constant import TEMPLATES_PATH
 import os
 import re
 
-class DeviceItem:
+class DralObject:
     def __init__(self):
         self._template = None
         self._dral_prefix = "\[dral\]"

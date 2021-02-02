@@ -1,7 +1,6 @@
 from Constant import DEVICES_PATH
 from Constant import GENERATOR_PATH
 from DeviceFileParser import DeviceFileParser
-from Device import Device
 import argparse
 import os
 
@@ -18,14 +17,15 @@ class Generator:
         os.makedirs(directory_path, exist_ok=True)
         return directory_path
 
+    def _create_file(self, file, directory, content):
+        file_path = os.path.join(directory, "%s.h" % file)
+        with open(file_path, "w") as new_file:
+            new_file.writelines(content)
+
     def generate(self, device):
         directory = self._create_directory(device.brand, device.family, device.chip)
-        files_to_create = device.generate()
-        for item in files_to_create:
-            file_path = os.path.join(directory, "%s.h" % item["name"])
-            with open(file_path, "w") as new_file:
-                new_file.writelines(item["content"])
-
+        for item in device.generate():
+            self._create_file(item["name"], directory, item["content"])
 
 
 def main():
