@@ -54,4 +54,3 @@ class Field(DralObject):
             elif pattern[1] == "mask":
                 substitution = "0x%08X" % self._mask
         return substitution
-

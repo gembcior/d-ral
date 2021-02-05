@@ -63,4 +63,3 @@ class CollectionInstance(DralObject):
             elif pattern[1] == "address":
                 substitution = "0x%08X" % self._address
         return substitution
-

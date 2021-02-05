@@ -75,4 +75,3 @@ class Device(DralObject):
         content += self._get_component_content(self._peripherals)
         content += self._get_component_content([self._model])
         return content
-

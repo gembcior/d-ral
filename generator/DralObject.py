@@ -1,12 +1,12 @@
-from Constant import TEMPLATES_PATH
 import os
 import re
+from Constant import TEMPLATES_PATH
 
 class DralObject:
     def __init__(self):
         self._template = None
-        self._dral_prefix = "\[dral\]"
-        self._dral_sufix = "\[#dral\]"
+        self._dral_prefix = r"\[dral\]"
+        self._dral_sufix = r"\[#dral\]"
         self._dral_pattern = re.compile(self._dral_prefix + "(.*?)" + self._dral_sufix, flags=(re.MULTILINE | re.DOTALL))
 
     def _get_policy(self, pattern):
@@ -35,7 +35,7 @@ class DralObject:
         elif modifier == "lowercase":
             string = string.lower()
         elif modifier == "capitalize":
-            string == string.capitalize()
+            string = string.capitalize()
         return string
 
     def _get_substitution(self, pattern):
@@ -59,7 +59,7 @@ class DralObject:
             for pattern in re.findall(self._dral_pattern, line):
                 substitution = self._get_pattern_substitution(pattern)
                 if substitution is not None:
-                    pattern = "%s%s%s" % (self._dral_prefix, pattern ,self._dral_sufix)
+                    pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
                     line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
             content.append(line)
         return "".join(content)
@@ -67,12 +67,12 @@ class DralObject:
     def _generate_from_template(self, template):
         content = []
         template_file = os.path.join(TEMPLATES_PATH, template)
-        with open(template_file,"r") as template:
+        with open(template_file, "r") as template:
             for line in template.readlines():
                 for pattern in re.findall(self._dral_pattern, line):
                     substitution = self._get_pattern_substitution(pattern)
                     if substitution is not None:
-                        pattern = "%s%s%s" % (self._dral_prefix, pattern ,self._dral_sufix)
+                        pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
                         line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
                 content.append(line)
         return "".join(content)
@@ -81,4 +81,3 @@ class DralObject:
         content = self._generate_from_template(self._template)
         content = self._generate_from_string(content)
         return content
-

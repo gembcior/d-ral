@@ -72,4 +72,3 @@ class Peripheral(DralObject):
                 else:
                     substitution = self._get_registers_content()
         return substitution
-

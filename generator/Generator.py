@@ -1,8 +1,8 @@
+import argparse
+import os
 from Constant import DEVICES_PATH
 from Constant import GENERATOR_PATH
 from DeviceFileParser import DeviceFileParser
-import argparse
-import os
 
 
 class Generator:
@@ -46,4 +46,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

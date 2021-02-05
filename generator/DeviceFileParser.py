@@ -1,3 +1,6 @@
+import yaml
+import os
+import re
 from Device import Device
 from Peripheral import Peripheral
 from Collection import Collection, CollectionInstance
@@ -5,9 +8,6 @@ from Register import Register
 from Register import CollectionRegister
 from Field import Field
 from RegisterModel import RegisterModel
-import yaml
-import os
-import re
 
 
 class DeviceFileParser:
@@ -49,8 +49,6 @@ class DeviceFileParser:
             peripheral_type = peripherals[item]["type"]
             if peripheral_type == "collection":
                 collection = peripherals[item]["collection"]
-                for element in collection:
-                    pass
                 new_peripheral = Collection()
                 new_peripheral.name = item
                 new_peripheral.type = peripheral_type
