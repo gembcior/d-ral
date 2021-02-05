@@ -14,7 +14,7 @@ public:
 [dral]peripheral.registers.instance[#dral]
 };
 
-[dral]peripheral.collection[#dral]
+[dral]collection.instances[#dral]
 
 }
 

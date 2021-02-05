@@ -43,6 +43,12 @@ class Register(DralObject):
     def fields(self, value):
         self._fields = value
 
+    def _get_fields_content(self):
+        content = []
+        for field in self._fields:
+            content.append(field.get_string())
+        return "".join(content)
+
     def _get_substitution(self, pattern):
         substitution = None
         if pattern[0] == "register":
@@ -53,10 +59,7 @@ class Register(DralObject):
             elif pattern[1] == "policy":
                 substitution = self._get_policy(self._policy)
             elif pattern[1] == "fields":
-                content = []
-                for field in self._fields:
-                    content.append(field.get_string())
-                substitution = "".join(content)
+                substitution = self._get_fields_content()
                 substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
         return substitution
 

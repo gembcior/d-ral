@@ -1,11 +1,10 @@
 from Device import Device
 from Peripheral import Peripheral
-from Peripheral import PeripheralCollection
+from Collection import Collection, CollectionInstance
 from Register import Register
 from Register import CollectionRegister
 from Field import Field
 from RegisterModel import RegisterModel
-from CollectionItem import CollectionItem
 import yaml
 import os
 import re
@@ -52,11 +51,11 @@ class DeviceFileParser:
                 collection = peripherals[item]["collection"]
                 for element in collection:
                     pass
-                new_peripheral = PeripheralCollection()
+                new_peripheral = Collection()
                 new_peripheral.name = item
                 new_peripheral.type = peripheral_type
                 new_peripheral.registers = self._parse_collection_registers(peripherals[item]["registers"])
-                new_peripheral.collection = self._parse_collection(peripherals[item]["collection"])
+                new_peripheral.instances = self._parse_collection(peripherals[item]["collection"])
                 peripherals_list.append(new_peripheral)
             else:
                 new_peripheral = Peripheral()
@@ -70,7 +69,7 @@ class DeviceFileParser:
     def _parse_collection(self, collection):
         collection_list = []
         for item in collection:
-            new_collection = CollectionItem()
+            new_collection = CollectionInstance()
             new_collection.name = item
             new_collection.address = int(collection[item]["address"])
             collection_list.append(new_collection)

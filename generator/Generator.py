@@ -7,10 +7,7 @@ import os
 
 class Generator:
     def __init__(self):
-        self._brand = None
-        self._family = None
-        self._chip = None
-        self._peripherals = None
+        pass
 
     def _create_directory(self, brand, family, chip):
         directory_path = os.path.join(GENERATOR_PATH, "..", "dral_%s_%s_%s" % (brand, family, chip), brand, family, chip)

@@ -42,35 +42,18 @@ class Peripheral(DralObject):
     def registers(self, value):
         self._registers = value
 
-    def _get_substitution(self, pattern):
-        substitution = None
-        if pattern[0] == "peripheral":
-            if pattern[1] == "name":
-                substitution = self._name
-            elif pattern[1] == "address":
-                substitution = "0x%08X" % self._address
-            elif pattern[1] == "registers":
-                content = []
-                for reg in self._registers:
-                    content.append(reg.get_string())
-                    content.append("\n")
-                substitution = "".join(content)
-        return substitution
-
-
-class PeripheralCollection(Peripheral):
-    def __init__(self):
-        super().__init__()
-        self._collection = None
-        self._template = "peripheral/collection/file.dral"
-
-    @property
-    def collection(self):
-        return self._collection
-
-    @collection.setter
-    def collection(self, value):
-        self._collection = value
+    def _get_registers_content(self, kind=None):
+        content = []
+        for reg in self._registers:
+            if kind == "declaration":
+                content.append(reg.get_declaration_string())
+                content.append("\n")
+            elif kind == "instance":
+                content.append(reg.get_instance_string())
+            else:
+                content.append(reg.get_string())
+                content.append("\n")
+        return "".join(content)
 
     def _get_substitution(self, pattern):
         substitution = None
@@ -80,22 +63,13 @@ class PeripheralCollection(Peripheral):
             elif pattern[1] == "address":
                 substitution = "0x%08X" % self._address
             elif pattern[1] == "registers":
-                if pattern[2] == "declaration":
-                    content = []
-                    for reg in self._registers:
-                        content.append(reg.get_declaration_string())
-                        content.append("\n")
-                    substitution = "".join(content)
-                elif pattern[2] == "instance":
-                    content = []
-                    for reg in self._registers:
-                        content.append(reg.get_instance_string())
-                    substitution = "".join(content)
-                    substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
-            elif pattern[1] == "collection":
-                content = []
-                for item in self._collection:
-                    content.append(item.get_string())
-                substitution = "".join(content)
+                if len(pattern) > 2:
+                    if pattern[2] == "declaration":
+                        substitution = self._get_registers_content(pattern[2])
+                    elif pattern[2] == "instance":
+                        substitution = self._get_registers_content(pattern[2])
+                        substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
+                else:
+                    substitution = self._get_registers_content()
         return substitution
 
