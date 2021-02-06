@@ -1750,11 +1750,11 @@ peripherals:
   usart:
     type: collection
     collection:
-      N1:
+      1:
         address: 0x40011000
-      N2:
+      2:
         address: 0x40004400
-      N6:
+      6:
         address: 0x40011400
     registers:
       sr:

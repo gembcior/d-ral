@@ -8,7 +8,7 @@ class Device(DralObject):
         self._family = None
         self._chip = None
         self._model = None
-        self._peripherals = {}
+        self._peripherals = []
 
     @property
     def brand(self):

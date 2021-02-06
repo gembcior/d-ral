@@ -45,7 +45,7 @@ class CollectionInstance(DralObject):
 
     @name.setter
     def name(self, value):
-        self._name = value.strip()
+        self._name = str(value)
 
     @property
     def address(self):

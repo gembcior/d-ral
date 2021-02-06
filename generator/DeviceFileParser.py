@@ -12,36 +12,46 @@ from RegisterModel import RegisterModel
 
 class DeviceFileParser:
     def __init__(self):
-        pass
+        self._device = None
 
-    def _get_device_data(self, device_file, device_data):
+    def _parse_device_file(self, device_file):
         with open(device_file, "r") as yaml_file:
             yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-            device_data.peripherals.update(yaml_data["peripherals"])
-            if "brand" in yaml_data:
-                device_data.brand = yaml_data["brand"]
-            if "family" in yaml_data:
-                device_data.family = yaml_data["family"]
-            if "chip" in yaml_data:
-                device_data.chip = yaml_data["chip"]
-            if "model" in yaml_data:
-                new_model = RegisterModel()
-                new_model.name = yaml_data["model"] + "_model"
-                device_data.model = new_model
-            else:
-                new_model = RegisterModel()
-                new_model.name = "default_model"
-                device_data.model = new_model
+        self._parse_yaml_data(yaml_data)
+        include_file_list = self._parse_include_files(device_file)
+        for include_file in include_file_list:
+            self._parse_device_file(include_file)
 
+    def _parse_include_files(self, device_file):
         include_file_list = []
         with open(device_file, "r") as yaml_file:
             include_file_pattern = re.compile('"(.*?)"')
             for line in yaml_file.readlines():
                 if line.startswith("#include"):
                     include_file_list.append(os.path.join(os.path.dirname(device_file), re.findall(include_file_pattern, line)[0]))
+        return include_file_list
 
-        for include_file in include_file_list:
-            self._get_device_data(include_file, device_data)
+    def _parse_yaml_data(self, data):
+        if "peripherals" in data:
+            self._device.peripherals += self._parse_peripherals(data["peripherals"])
+
+        if "brand" in data:
+            self._device.brand = data["brand"]
+
+        if "family" in data:
+            self._device.family = data["family"]
+
+        if "chip" in data:
+            self._device.chip = data["chip"]
+
+        if "model" in data:
+            new_model = RegisterModel()
+            new_model.name = data["model"] + "_model"
+            self._device.model = new_model
+        else:
+            new_model = RegisterModel()
+            new_model.name = "default_model"
+            self._device.model = new_model
 
     def _parse_peripherals(self, peripherals):
         peripherals_list = []
@@ -129,8 +139,7 @@ class DeviceFileParser:
         return fields_list
 
     def parse(self, device_file):
-        device_data = Device()
-        self._get_device_data(device_file, device_data)
-        device_data.peripherals = self._parse_peripherals(device_data.peripherals)
-        return device_data
+        self._device = Device()
+        self._parse_device_file(device_file)
+        return self._device
 
