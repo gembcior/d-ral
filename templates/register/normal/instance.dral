@@ -1,1 +1,0 @@
-using [dral]register.name[#dral] = [dral]register.name[#dral]Reg<BaseAddress + [dral]register.offset[#dral], RegisterPolicy::[dral]register.policy[#dral]>;
