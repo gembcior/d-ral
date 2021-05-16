@@ -1,4 +1,5 @@
 from rich.traceback import install as traceback
+from rich.console import Console
 from rich import print
 from .generator import Generator
 import importlib.resources as resources
@@ -6,7 +7,6 @@ import argparse
 import sys
 import re
 import os
-
 
 
 def get_svd_file(brand, chip):
@@ -40,9 +40,6 @@ def main():
 
     parser.add_argument("output", help="Path where files will be generated.")
 
-    parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", required=False,
-                        help="Increase output print verbosity")
-
     args = parser.parse_args()
 
     pattern = [
@@ -63,8 +60,12 @@ def main():
         parser.print_help()
         sys.exit()
 
-    generator = Generator(svd_path)
-    generator.generate(os.path.abspath(args.output))
+    console = Console()
+    info = "[bold green]Generating D-Ral files..."
+    with console.status(info) as status:
+        generator = Generator(svd_path)
+        generator.generate(os.path.abspath(args.output))
+    console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
 if __name__ == "__main__":
     main()

@@ -1,13 +1,18 @@
 #ifndef DRAL_[dral]device.name%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H
 #define DRAL_[dral]device.name%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H
 
-#include "[dral]device.model[#dral].h"
+#include "register_model.h"
 
-namespace dral::[dral]device.name%lowercase[#dral]::[dral]peripheral.name%lowercase[#dral] {
+namespace dral::[dral]device.name%lowercase[#dral] {
 
-constexpr uint32_t BaseAddress = [dral]peripheral.address[#dral];
+class [dral]peripheral.name%lowercase[#dral]
+{
+public:
+  static constexpr uint32_t BaseAddress = [dral]peripheral.address[#dral];
 
 [dral]peripheral.registers[#dral]
+};
+
 }
 
 #endif /* DRAL_[dral]device.name%uppercase[#dral]_[dral]peripheral.name%uppercase[#dral]_H */

@@ -32,7 +32,7 @@ class DralObject(ABC):
         content = []
         for item in self._children:
             content.append(item.parse())
-        return "".join(content)
+        return content
 
     def _get_pattern_substitution(self, pattern):
         modifier = pattern.split("%")
@@ -48,26 +48,34 @@ class DralObject(ABC):
 
     def _parse_string(self, string):
         content = []
-        for line in string.splitlines(True):
+        for line in string:
             for pattern in re.findall(self._dral_pattern, line):
+                leading_spaces = len(line) - len(line.lstrip(" "))
+                leading_spaces = " " * leading_spaces
                 substitution = self._get_pattern_substitution(pattern)
                 if substitution is not None:
                     pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
+                    if type(substitution) is list:
+                        substitution = (leading_spaces.join(substitution)).lstrip("\n")
                     line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
             content.append(line)
-        return "".join(content)
+        return content
 
     def _parse_template(self, template):
         content = []
         with open(template, "r") as f:
             for line in f.readlines():
                 for pattern in re.findall(self._dral_pattern, line):
+                    leading_spaces = len(line) - len(line.lstrip(" "))
+                    leading_spaces = " " * leading_spaces
                     substitution = self._get_pattern_substitution(pattern)
                     if substitution is not None:
                         pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
+                        if type(substitution) is list:
+                            substitution = (leading_spaces.join(substitution)).lstrip("\n")
                         line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
                 content.append(line)
-        return "".join(content)
+        return content
 
     def _get_string(self):
         content = self._parse_template(self._template)
@@ -112,7 +120,7 @@ class DralDevice(DralObject):
 
         content = []
         for child in self._children:
-            string = self._parse_string(child.parse())
+            string = self._parse_string(child.parse().splitlines(True))
             content.append({"name": child.name, "content": "".join(string)})
         return content
 
@@ -131,14 +139,14 @@ class DralPeripheral(DralObject):
                 substitution = "0x%08X" % self._root["baseAddress"]
             elif pattern[1] == "registers":
                 substitution = self._get_children_content()
-                substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
         return substitution
 
     def parse(self):
         for item in self._root["registers"]["register"]:
             register = DralRegister(item)
             self._add_children(register)
-        return self._get_string()
+        content = "".join(self._get_string())
+        return content
 
 
 class DralRegister(DralObject):
@@ -155,14 +163,14 @@ class DralRegister(DralObject):
                 substitution = "0x%04X" % self._root["addressOffset"]
             elif pattern[1] == "fields":
                 substitution = self._get_children_content()
-                substitution = ("  ".join(("\n" + substitution).splitlines(True))).lstrip("\n")
         return substitution
 
     def parse(self):
         for item in self._root["fields"]:
             field = DralField(item)
             self._add_children(field)
-        return self._get_string()
+        content = "".join(self._get_string())
+        return content
 
 
 class DralField(DralObject):
@@ -182,4 +190,5 @@ class DralField(DralObject):
         return substitution
 
     def parse(self):
-        return self._get_string()
+        content = "".join(self._get_string())
+        return content

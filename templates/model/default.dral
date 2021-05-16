@@ -1,5 +1,5 @@
-#ifndef DRAL_DEFAULT_MODEL_H
-#define DRAL_DEFAULT_MODEL_H
+#ifndef DRAL_REGISTER_MODEL_H
+#define DRAL_REGISTER_MODEL_H
 
 #include <cstdint>
 
@@ -42,4 +42,4 @@ public:
 
 } // namespace
 
-#endif /* DRAL_DEFAULT_MODEL_H */
+#endif /* DRAL_REGISTER_MODEL_H */
