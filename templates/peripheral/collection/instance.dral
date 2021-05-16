@@ -1,1 +1,0 @@
-using [dral]peripheral.name[#dral][dral]collection.name%uppercase[#dral] = [dral]peripheral.name[#dral]Regs<[dral]collection.address[#dral]>;

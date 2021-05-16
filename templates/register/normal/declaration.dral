@@ -1,7 +1,0 @@
-template <uint32_t address, RegisterPolicy regPolicy>
-class [dral]register.name[#dral]Reg: public RegisterModel<address, regPolicy>
-{
-public:
-[dral]register.fields[#dral]
-};
-
