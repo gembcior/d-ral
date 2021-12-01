@@ -23,8 +23,44 @@ public:
 };
 
 
-template <uint32_t address, uint32_t offset, uint32_t mask>
+template <uint32_t address, uint32_t bankOffset>
+class RegisterBankModel
+{
+public:
+  static uint32_t read(uint32_t bank)
+  {
+    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    return *reg;
+  }
+
+  static void write(uint32_t bank, uint32_t value)
+  {
+    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    *reg = value;
+  }
+};
+
+
+template <uint32_t address, uint32_t offset, uint32_t mask, uint32_t bankOffset = 0>
 class FieldModel
+{
+public:
+  static void write(uint32_t bank, uint32_t value)
+  {
+    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    *reg = (*reg & ~(mask << offset)) | ((value & mask) << offset);
+  }
+
+  static uint32_t read(uint32_t bank)
+  {
+    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    return (*reg >> offset) & mask;
+  }
+};
+
+
+template <uint32_t address, uint32_t offset, uint32_t mask>
+class FieldModel<address, offset, mask, 0>
 {
 public:
   static void write(uint32_t value)

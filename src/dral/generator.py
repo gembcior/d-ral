@@ -42,4 +42,3 @@ class Generator:
             self._create_file("%s.h" % item["name"].lower(), directory, item["content"])
         self._create_register_model_file(directory)
         self._create_cmake_file(os.path.join(output, "dral"))
-

@@ -141,9 +141,75 @@ class DralPeripheral(DralObject):
                 substitution = self._get_children_content()
         return substitution
 
+
+    # TODO refactor register banks support
+    def _find_register_banks(self, registers):
+        def compare(item1, item2):
+            diff = [i for i in item1 + item2 if i not in item1 or i not in item2]
+            return len(diff) == 0
+        banks = []
+        registers_copy = registers.copy()
+        for reg in registers:
+            same = []
+            for item in registers_copy:
+                if compare(reg["fields"], item["fields"]):
+                    same.append(item)
+            if len(same) > 1:
+                banks.append(same)
+                for item in same:
+                    registers_copy.remove(item)
+        return banks
+
+    def _get_register_banks_offsets(self, registers):
+        offsets = []
+        for item in registers:
+            offsets.append(item["addressOffset"])
+        return offsets
+
+    def _get_bank_offset(self, offsets):
+        diff = [offsets[i+1] - offsets[i] for i in range(len(offsets) - 1)]
+        if len(set(diff)) == 1:
+            return diff[0]
+        else:
+            # TODO implement better error handling
+            print("ERROR: Register banks offset differ")
+
+    def _get_first_bank_offset(self, offsets):
+        return min(offsets)
+
+    def _merge_register_banks(self, registers):
+        register_banks = []
+        for bank in registers:
+            offsets = self._get_register_banks_offsets(bank)
+            first_offset = self._get_first_bank_offset(offsets)
+            bank_offset = self._get_bank_offset(offsets)
+            bank_name_pattern = re.compile(r"[\d]")
+            reg = {
+                'name': re.sub(bank_name_pattern, "x", bank[0]["name"]),
+                'displayName': re.sub(bank_name_pattern, "x", bank[0]["displayName"]),
+                'description': bank[0]["description"],
+                'addressOffset': first_offset,
+                'size': bank[0]["size"],
+                'resetValue': bank[0]["resetValue"],
+                'fields': bank[0]["fields"],
+                'bankOffset': bank_offset
+            }
+            register_banks.append(reg)
+        return register_banks
+
+    def _get_register_banks(self, registers):
+        register_banks = []
+        banks = self._find_register_banks(registers)
+        if banks:
+            register_banks = self._merge_register_banks(banks)
+        return register_banks
+
     def parse(self):
         for item in self._root["registers"]["register"]:
             register = DralRegister(item)
+            self._add_children(register)
+        for item in self._get_register_banks(self._root["registers"]["register"]):
+            register = DralRegisterBank(item)
             self._add_children(register)
         content = "".join(self._get_string())
         return content
@@ -171,6 +237,19 @@ class DralRegister(DralObject):
             self._add_children(field)
         content = "".join(self._get_string())
         return content
+
+
+class DralRegisterBank(DralRegister):
+    def __init__(self, root):
+        super().__init__(root)
+        self._template = self._get_template("register", "bank.dral")
+
+    def _get_substitution(self, pattern):
+        substitution = super()._get_substitution(pattern)
+        if pattern[0] == "register":
+            if pattern[1] == "bankOffset":
+                substitution = "0x%04X" % self._root["bankOffset"]
+        return substitution
 
 
 class DralField(DralObject):
