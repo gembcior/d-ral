@@ -2,6 +2,7 @@ from rich.traceback import install as traceback
 from rich.console import Console
 from rich import print
 from .generator import Generator
+from pathlib import Path
 import importlib.resources as resources
 import argparse
 import sys
@@ -11,7 +12,7 @@ import os
 
 def get_svd_file(brand, chip):
     with resources.path("dral.devices.%s" % brand, "%s.svd" % chip) as svd:
-        return svd
+        return Path(svd)
 
 
 def main():
@@ -40,6 +41,12 @@ def main():
 
     parser.add_argument("output", help="Path where files will be generated.")
 
+    parser.add_argument("-t", "--template", default="default",
+                        help="Specify template used to generate files.")
+
+    parser.add_argument("-e", "--exclude", action="extend", nargs="+", type=str,
+                        help="Exclude items from generation.")
+
     args = parser.parse_args()
 
     pattern = [
@@ -48,7 +55,7 @@ def main():
         re.compile("^([a-zA-Z0-9]+\.?){2}[a-zA-Z0-9]+$"),
     ]
     if re.search(pattern[0], args.svd) is not None:
-        svd_path = os.path.abspath(args.svd)
+        svd_path = Path(args.svd).expanduser().resolve()
     elif re.search(pattern[1], args.svd) is not None:
         svd = args.svd.split(".")
         svd_path = get_svd_file(svd[0], svd[1])
@@ -60,11 +67,13 @@ def main():
         parser.print_help()
         sys.exit()
 
+    exclude = args.exclude if args.exclude else []
+    output = Path(args.output).expanduser().resolve()
     console = Console()
     info = "[bold green]Generating D-Ral files..."
     with console.status(info) as status:
         generator = Generator(svd_path)
-        generator.generate(os.path.abspath(args.output))
+        generator.generate(output, template=args.template, exclude=exclude)
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
 if __name__ == "__main__":
