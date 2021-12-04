@@ -1,12 +1,11 @@
 from .objects import DralDevice
 from pathlib import Path
 import importlib.resources as resources
-import svd2py
 
 
 class Generator:
-    def __init__(self, svd_file):
-        self._svd_file = svd_file
+    def __init__(self, adapter):
+        self._adapter = adapter
 
     def _get_template(self, namespace, name):
         with resources.path("dral.templates.%s" % namespace, name) as template:
@@ -33,9 +32,8 @@ class Generator:
             self._create_file("CMakeLists.txt", directory, f.read())
 
     def generate(self, output, template="default", exclude=[]):
-        svd = svd2py.SvdParser(self._svd_file)
-        svd = svd.convert()
-        device = DralDevice(svd["device"], template=template, exclude=exclude)
+        data = self._adapter.convert()
+        device = DralDevice(data["device"], template=template, exclude=exclude)
         objects = device.parse()
         directory = self._create_output_directory(output)
         for item in objects:

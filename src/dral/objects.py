@@ -114,6 +114,8 @@ class DralDevice(DralObject):
         if pattern[0] == "device":
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
         return substitution
 
     def parse(self):
@@ -141,7 +143,9 @@ class DralPeripheral(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "address":
-                substitution = "0x%08X" % self._root["baseAddress"]
+                substitution = "0x%08X" % self._root["address"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
             elif pattern[1] == "registers":
                 substitution = self._get_children_content()
         return substitution
@@ -168,7 +172,7 @@ class DralPeripheral(DralObject):
     def _get_register_banks_offsets(self, registers):
         offsets = []
         for item in registers:
-            offsets.append(item["addressOffset"])
+            offsets.append(item["offset"])
         return offsets
 
     def _get_bank_offset(self, offsets):
@@ -191,9 +195,8 @@ class DralPeripheral(DralObject):
             bank_name_pattern = re.compile(r"[\d]")
             reg = {
                 'name': re.sub(bank_name_pattern, "x", bank[0]["name"]),
-                'displayName': re.sub(bank_name_pattern, "x", bank[0]["displayName"]),
                 'description': bank[0]["description"],
-                'addressOffset': first_offset,
+                'offset': first_offset,
                 'size': bank[0]["size"],
                 'resetValue': bank[0]["resetValue"],
                 'fields': bank[0]["fields"],
@@ -211,11 +214,11 @@ class DralPeripheral(DralObject):
 
     def parse(self):
         if "registers" not in self._exclude:
-            for item in self._root["registers"]["register"]:
+            for item in self._root["registers"]:
                 register = DralRegister(item, template=self._template, exclude=self._exclude)
                 self._add_children(register)
         if "banks" not in self._exclude:
-            for item in self._get_register_banks(self._root["registers"]["register"]):
+            for item in self._get_register_banks(self._root["registers"]):
                 register = DralRegisterBank(item, template=self._template, exclude=self._exclude)
                 self._add_children(register)
         content = "".join(self._get_string())
@@ -234,15 +237,17 @@ class DralRegister(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "offset":
-                substitution = "0x%04X" % self._root["addressOffset"]
-            elif pattern[1] == "fields":
-                substitution = self._get_children_content()
+                substitution = "0x%04X" % self._root["offset"]
+            elif pattern[1] == "size":
+                substitution = "%d" % self._root["size"]
             elif pattern[1] == "description":
                 substitution = "%s" % self._root["description"]
             elif pattern[1] == "access":
                 substitution = "%s" % self._root["access"]
             elif pattern[1] == "resetValue":
                 substitution = "0x%08X" % self._root["resetValue"]
+            elif pattern[1] == "fields":
+                substitution = self._get_children_content()
         return substitution
 
     def parse(self):
@@ -256,7 +261,7 @@ class DralRegister(DralObject):
 
 class DralRegisterBank(DralRegister):
     def __init__(self, root, template="default", exclude=[]):
-        super().__init__(root, exclude)
+        super().__init__(root, template=template, exclude=exclude)
         self._template = template
         self._template_file = self._get_template(template, "bank.dral")
 
@@ -279,11 +284,11 @@ class DralField(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "position":
-                substitution = "%2d" % self._root["bitOffset"]
+                substitution = "%2d" % self._root["position"]
             elif pattern[1] == "mask":
-                substitution = "0x%08X" % ((1 << self._root["bitWidth"]) - 1)
+                substitution = "0x%08X" % self._root["mask"]
             elif pattern[1] == "width":
-                substitution = "%d" % self._root["bitWidth"]
+                substitution = "%d" % self._root["width"]
             elif pattern[1] == "description":
                 substitution = "%s" % self._root["description"]
         return substitution

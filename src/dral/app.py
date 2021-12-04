@@ -2,6 +2,7 @@ from rich.traceback import install as traceback
 from rich.console import Console
 from rich import print
 from .generator import Generator
+from .adapter.svd import SvdAdapter
 from pathlib import Path
 import importlib.resources as resources
 import argparse
@@ -70,9 +71,10 @@ def main():
     exclude = args.exclude if args.exclude else []
     output = Path(args.output).expanduser().resolve()
     console = Console()
+    adapter = SvdAdapter(svd_path)
+    generator = Generator(adapter)
     info = "[bold green]Generating D-Ral files..."
     with console.status(info) as status:
-        generator = Generator(svd_path)
         generator.generate(output, template=args.template, exclude=exclude)
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
