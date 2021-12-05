@@ -19,7 +19,7 @@ def main():
     traceback()
     console = Console()
 
-    description = "D-RAL - Device Register Abstraction Layer"
+    description = "D-RAL - Device Register Access Layer"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
 
     arg_help = (
