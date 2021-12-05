@@ -1,6 +1,5 @@
 from rich.traceback import install as traceback
 from rich.console import Console
-from rich import print
 from .generator import Generator
 from .adapter.svd import SvdAdapter
 from pathlib import Path
@@ -18,6 +17,7 @@ def get_svd_file(brand, chip):
 
 def main():
     traceback()
+    console = Console()
 
     description = "D-RAL - Device Register Abstraction Layer"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
@@ -64,19 +64,22 @@ def main():
         svd = args.svd.split(".")
         svd_path = get_svd_file("%s.%s" % (svd[0], svd[1]), svd[2])
     else:
-        print("ERROR: Invalid svd argument format!\n")
+        console.print("ERROR: Invalid svd argument format!\n")
         parser.print_help()
         sys.exit()
 
     exclude = args.exclude if args.exclude else []
     output = Path(args.output).expanduser().resolve()
-    console = Console()
     adapter = SvdAdapter(svd_path)
-    generator = Generator(adapter)
+    template = args.template
+    generator = Generator(adapter, template=template)
+
     info = "[bold green]Generating D-Ral files..."
     with console.status(info) as status:
-        generator.generate(output, template=args.template, exclude=exclude)
+        generator.generate(output, exclude=exclude)
+
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
+
 
 if __name__ == "__main__":
     main()
