@@ -1,23 +1,22 @@
 from abc import ABC, abstractmethod
-import importlib.resources as resources
+from rich.console import Console
 import re
+import sys
 
 
 class DralObject(ABC):
-    def __init__(self, root):
+    def __init__(self, root, utils, exclude=[]):
         super().__init__()
         self._root = root
+        self._exclude = exclude
+        self._utils = utils
         self._children = []
         self._dral_prefix = r"\[dral\]"
         self._dral_sufix = r"\[#dral\]"
         self._dral_pattern = re.compile(self._dral_prefix + "(.*?)" + self._dral_sufix, flags=(re.MULTILINE | re.DOTALL))
-        self._template = None
+        self._template_file = None
         self._name = None
         self.name = self._root["name"]
-
-    def _get_template(self, namespace, name):
-        with resources.path("dral.templates.%s" % namespace, name) as template:
-            return template
 
     def _apply_modifier(self, string, modifier):
         if modifier == "uppercase":
@@ -78,7 +77,7 @@ class DralObject(ABC):
         return content
 
     def _get_string(self):
-        content = self._parse_template(self._template)
+        content = self._parse_template(self._template_file)
         content = self._parse_string(content)
         return content
 
@@ -103,20 +102,23 @@ class DralObject(ABC):
 
 
 class DralDevice(DralObject):
-    def __init__(self, root):
-        super().__init__(root)
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude)
 
     def _get_substitution(self, pattern):
         substitution = None
         if pattern[0] == "device":
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
         return substitution
 
     def parse(self):
-        for item in self._root["peripherals"]:
-            peripheral = DralPeripheral(item)
-            self._add_children(peripheral)
+        if "peripherals" not in self._exclude:
+            for item in self._root["peripherals"]:
+                peripheral = DralPeripheral(item, utils=self._utils, exclude=self._exclude)
+                self._add_children(peripheral)
 
         content = []
         for child in self._children:
@@ -126,9 +128,9 @@ class DralDevice(DralObject):
 
 
 class DralPeripheral(DralObject):
-    def __init__(self, root):
-        super().__init__(root)
-        self._template = self._get_template("peripheral", "default.dral")
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude)
+        self._template_file = self._utils.get_template("peripheral.dral")
 
     def _get_substitution(self, pattern):
         substitution = None
@@ -136,7 +138,9 @@ class DralPeripheral(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "address":
-                substitution = "0x%08X" % self._root["baseAddress"]
+                substitution = "0x%08X" % self._root["address"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
             elif pattern[1] == "registers":
                 substitution = self._get_children_content()
         return substitution
@@ -163,32 +167,25 @@ class DralPeripheral(DralObject):
     def _get_register_banks_offsets(self, registers):
         offsets = []
         for item in registers:
-            offsets.append(item["addressOffset"])
-        return offsets
-
-    def _get_bank_offset(self, offsets):
+            offsets.append(item["offset"])
         diff = [offsets[i+1] - offsets[i] for i in range(len(offsets) - 1)]
-        if len(set(diff)) == 1:
-            return diff[0]
-        else:
-            # TODO implement better error handling
-            print("ERROR: Register banks offset differ")
-
-    def _get_first_bank_offset(self, offsets):
-        return min(offsets)
+        if len(set(diff)) != 1:
+            console = Console()
+            console.print(f"ERROR: Register banks offset not consistent: {offsets}")
+            console.print("Register dump:")
+            console.print(registers)
+            sys.exit()
+        return min(offsets), diff[0]
 
     def _merge_register_banks(self, registers):
         register_banks = []
         for bank in registers:
-            offsets = self._get_register_banks_offsets(bank)
-            first_offset = self._get_first_bank_offset(offsets)
-            bank_offset = self._get_bank_offset(offsets)
+            first_offset, bank_offset = self._get_register_banks_offsets(bank)
             bank_name_pattern = re.compile(r"[\d]")
             reg = {
                 'name': re.sub(bank_name_pattern, "x", bank[0]["name"]),
-                'displayName': re.sub(bank_name_pattern, "x", bank[0]["displayName"]),
                 'description': bank[0]["description"],
-                'addressOffset': first_offset,
+                'offset': first_offset,
                 'size': bank[0]["size"],
                 'resetValue': bank[0]["resetValue"],
                 'fields': bank[0]["fields"],
@@ -205,20 +202,22 @@ class DralPeripheral(DralObject):
         return register_banks
 
     def parse(self):
-        for item in self._root["registers"]["register"]:
-            register = DralRegister(item)
-            self._add_children(register)
-        for item in self._get_register_banks(self._root["registers"]["register"]):
-            register = DralRegisterBank(item)
-            self._add_children(register)
+        if "registers" not in self._exclude:
+            for item in self._root["registers"]:
+                register = DralRegister(item, utils=self._utils, exclude=self._exclude)
+                self._add_children(register)
+        if "banks" not in self._exclude:
+            for item in self._get_register_banks(self._root["registers"]):
+                register = DralRegisterBank(item, utils=self._utils, exclude=self._exclude)
+                self._add_children(register)
         content = "".join(self._get_string())
         return content
 
 
 class DralRegister(DralObject):
-    def __init__(self, root):
-        super().__init__(root)
-        self._template = self._get_template("register", "default.dral")
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude)
+        self._template_file = self._utils.get_template("register.dral")
 
     def _get_substitution(self, pattern):
         substitution = None
@@ -226,23 +225,32 @@ class DralRegister(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "offset":
-                substitution = "0x%04X" % self._root["addressOffset"]
+                substitution = "0x%04X" % self._root["offset"]
+            elif pattern[1] == "size":
+                substitution = "%d" % self._root["size"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
+            elif pattern[1] == "access":
+                substitution = "%s" % self._root["access"]
+            elif pattern[1] == "resetValue":
+                substitution = "0x%08X" % self._root["resetValue"]
             elif pattern[1] == "fields":
                 substitution = self._get_children_content()
         return substitution
 
     def parse(self):
-        for item in self._root["fields"]:
-            field = DralField(item)
-            self._add_children(field)
+        if "fields" not in self._exclude:
+            for item in self._root["fields"]:
+                field = DralField(item, utils=self._utils, exclude=self._exclude)
+                self._add_children(field)
         content = "".join(self._get_string())
         return content
 
 
 class DralRegisterBank(DralRegister):
-    def __init__(self, root):
-        super().__init__(root)
-        self._template = self._get_template("register", "bank.dral")
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude=exclude)
+        self._template_file = self._utils.get_template("bank.dral")
 
     def _get_substitution(self, pattern):
         substitution = super()._get_substitution(pattern)
@@ -253,9 +261,9 @@ class DralRegisterBank(DralRegister):
 
 
 class DralField(DralObject):
-    def __init__(self, root):
-        super().__init__(root)
-        self._template = self._get_template("field", "default.dral")
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude)
+        self._template_file = self._utils.get_template("field.dral")
 
     def _get_substitution(self, pattern):
         substitution = None
@@ -263,9 +271,13 @@ class DralField(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "position":
-                substitution = "%2d" % self._root["bitOffset"]
+                substitution = "%2d" % self._root["position"]
             elif pattern[1] == "mask":
-                substitution = "0x%08X" % ((1 << self._root["bitWidth"]) - 1)
+                substitution = "0x%08X" % self._root["mask"]
+            elif pattern[1] == "width":
+                substitution = "%d" % self._root["width"]
+            elif pattern[1] == "description":
+                substitution = "%s" % self._root["description"]
         return substitution
 
     def parse(self):
