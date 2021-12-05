@@ -5163,8 +5163,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>EPNUM</name>
-              <description>Endpoint number</description>
+              <name>CHNUM</name>
+              <description>Channel number</description>
               <bitOffset>0</bitOffset>
               <bitWidth>4</bitWidth>
             </field>
@@ -5184,12 +5184,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>PKTSTS</name>
               <description>Packet status</description>
               <bitOffset>17</bitOffset>
-              <bitWidth>4</bitWidth>
-            </field>
-            <field>
-              <name>FRMNUM</name>
-              <description>Frame number</description>
-              <bitOffset>21</bitOffset>
               <bitWidth>4</bitWidth>
             </field>
           </fields>
@@ -5330,6 +5324,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>SOFOUTEN</name>
               <description>SOF output enable</description>
               <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NOVBUSSENS</name>
+              <description>VBUS sensing disable option</description>
+              <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
           </fields>

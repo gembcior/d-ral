@@ -259,6 +259,14 @@ class DralRegisterBank(DralRegister):
                 substitution = "0x%04X" % self._root["bankOffset"]
         return substitution
 
+    def parse(self):
+        if "fields" not in self._exclude:
+            for item in self._root["fields"]:
+                field = DralBankField(item, utils=self._utils, exclude=self._exclude)
+                self._add_children(field)
+        content = "".join(self._get_string())
+        return content
+
 
 class DralField(DralObject):
     def __init__(self, root, utils, exclude=[]):
@@ -283,3 +291,9 @@ class DralField(DralObject):
     def parse(self):
         content = "".join(self._get_string())
         return content
+
+
+class DralBankField(DralField):
+    def __init__(self, root, utils, exclude=[]):
+        super().__init__(root, utils, exclude)
+        self._template_file = self._utils.get_template("bank_field.dral")
