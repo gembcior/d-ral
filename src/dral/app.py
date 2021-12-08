@@ -74,9 +74,9 @@ def main():
     template = args.template
     generator = Generator(adapter, template=template)
 
-    info = "[bold green]Generating D-Ral files..."
-    with console.status(info) as status:
-        generator.generate(output, exclude=exclude)
+    #info = "[bold green]Generating D-Ral files..."
+    #with console.status(info) as status:
+    generator.generate(output, exclude=exclude)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 

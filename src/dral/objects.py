@@ -148,15 +148,49 @@ class DralPeripheral(DralObject):
 
     # TODO refactor register banks support
     def _find_register_banks(self, registers):
+        def get_symmetric_difference(str1, str2):
+            from difflib import Differ
+            differ = Differ()
+            output = []
+            for item in list(differ.compare(str1, str2)):
+                if "+" in item:
+                    output.append(item.replace("+", "").strip())
+                elif "-" in item:
+                    output.append(item.replace("-", "").strip())
+            return output
+
+        def is_list_of_digits(digits):
+            for item in digits:
+                if not item.isdigit():
+                    return False
+            return True
+
         def compare(item1, item2):
-            diff = [i for i in item1 + item2 if i not in item1 or i not in item2]
-            return len(diff) == 0
+            fields1 = item1["fields"]
+            fields2 = item2["fields"]
+            diff = [i for i in fields1 + fields2 if i not in fields1 or i not in fields2]
+            if len(diff) == 0:
+                if item1["name"] != item2["name"]:
+                    diff = get_symmetric_difference(item1["name"], item2["name"])
+                    if is_list_of_digits(diff):
+                        return True
+                    else:
+                        # TODO what to do here?
+                        console = Console()
+                        console.print(f"Peripheral: {self._root['name']}")
+                        console.print(f"{item1['name']} <> {item2['name']}")
+                        console.print(diff)
+                        return True
+                else:
+                    return True
+            return False
+
         banks = []
         registers_copy = registers.copy()
         for reg in registers:
             same = []
             for item in registers_copy:
-                if compare(reg["fields"], item["fields"]):
+                if compare(reg, item):
                     same.append(item)
             if len(same) > 1:
                 banks.append(same)
@@ -171,8 +205,8 @@ class DralPeripheral(DralObject):
         diff = [offsets[i+1] - offsets[i] for i in range(len(offsets) - 1)]
         if len(set(diff)) != 1:
             console = Console()
-            console.print(f"ERROR: Register banks offset not consistent: {offsets}")
-            console.print("Register dump:")
+            console.print(f"[red]ERROR: Register banks offset not consistent: {offsets}")
+            console.print("Registers dump:")
             console.print(registers)
             sys.exit()
         return min(offsets), diff[0]
