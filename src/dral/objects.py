@@ -165,6 +165,18 @@ class DralPeripheral(DralObject):
                     return False
             return True
 
+        def only_one_pos(s1, s2):
+            ok = False
+            if len(s1) != len(s2):
+                return False
+            for c1, c2 in zip(s1, s2):
+                if c1 != c2:
+                    if ok:
+                        return False
+                    else:
+                        ok = True
+            return ok
+
         def compare(item1, item2):
             fields1 = item1["fields"]
             fields2 = item2["fields"]
@@ -175,12 +187,10 @@ class DralPeripheral(DralObject):
                     if is_list_of_digits(diff):
                         return True
                     else:
-                        # TODO what to do here?
-                        console = Console()
-                        console.print(f"Peripheral: {self._root['name']}")
-                        console.print(f"{item1['name']} <> {item2['name']}")
-                        console.print(diff)
-                        return True
+                        # TODO
+                        if only_one_pos(item1['name'], item2['name']):
+                            return True
+                        return False
                 else:
                     return True
             return False
@@ -211,13 +221,28 @@ class DralPeripheral(DralObject):
             sys.exit()
         return min(offsets), diff[0]
 
+    def _get_register_bank_name(self, bank):
+        from difflib import SequenceMatcher
+        differ = SequenceMatcher(None, bank[0]["name"], bank[1]["name"])
+        replace = differ.get_opcodes()[1]
+        if replace[0] != "replace":
+            console = Console()
+            console.print(f"[red]ERROR: Wrong register bank name {bank[0]['name']}")
+            sys.exit()
+        position = replace[1]
+        name = bank[0]["name"]
+        name = name[:position] + "x" + name[position+1:]
+        return name
+        bank_name_pattern = re.compile(r"[\d]")
+        return re.sub(bank_name_pattern, "x", bank[0]["name"])
+
     def _merge_register_banks(self, registers):
         register_banks = []
         for bank in registers:
             first_offset, bank_offset = self._get_register_banks_offsets(bank)
-            bank_name_pattern = re.compile(r"[\d]")
+            name = self._get_register_bank_name(bank)
             reg = {
-                'name': re.sub(bank_name_pattern, "x", bank[0]["name"]),
+                'name': name,
                 'description': bank[0]["description"],
                 'offset': first_offset,
                 'size': bank[0]["size"],
