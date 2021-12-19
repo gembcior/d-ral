@@ -148,15 +148,59 @@ class DralPeripheral(DralObject):
 
     # TODO refactor register banks support
     def _find_register_banks(self, registers):
+        def get_symmetric_difference(str1, str2):
+            from difflib import Differ
+            differ = Differ()
+            output = []
+            for item in list(differ.compare(str1, str2)):
+                if "+" in item:
+                    output.append(item.replace("+", "").strip())
+                elif "-" in item:
+                    output.append(item.replace("-", "").strip())
+            return output
+
+        def is_list_of_digits(digits):
+            for item in digits:
+                if not item.isdigit():
+                    return False
+            return True
+
+        def only_one_pos(s1, s2):
+            ok = False
+            if len(s1) != len(s2):
+                return False
+            for c1, c2 in zip(s1, s2):
+                if c1 != c2:
+                    if ok:
+                        return False
+                    else:
+                        ok = True
+            return ok
+
         def compare(item1, item2):
-            diff = [i for i in item1 + item2 if i not in item1 or i not in item2]
-            return len(diff) == 0
+            fields1 = item1["fields"]
+            fields2 = item2["fields"]
+            diff = [i for i in fields1 + fields2 if i not in fields1 or i not in fields2]
+            if len(diff) == 0:
+                if item1["name"] != item2["name"]:
+                    diff = get_symmetric_difference(item1["name"], item2["name"])
+                    if is_list_of_digits(diff):
+                        return True
+                    else:
+                        # TODO
+                        if only_one_pos(item1['name'], item2['name']):
+                            return True
+                        return False
+                else:
+                    return True
+            return False
+
         banks = []
         registers_copy = registers.copy()
         for reg in registers:
             same = []
             for item in registers_copy:
-                if compare(reg["fields"], item["fields"]):
+                if compare(reg, item):
                     same.append(item)
             if len(same) > 1:
                 banks.append(same)
@@ -171,19 +215,34 @@ class DralPeripheral(DralObject):
         diff = [offsets[i+1] - offsets[i] for i in range(len(offsets) - 1)]
         if len(set(diff)) != 1:
             console = Console()
-            console.print(f"ERROR: Register banks offset not consistent: {offsets}")
-            console.print("Register dump:")
+            console.print(f"[red]ERROR: Register banks offset not consistent: {offsets}")
+            console.print("Registers dump:")
             console.print(registers)
             sys.exit()
         return min(offsets), diff[0]
+
+    def _get_register_bank_name(self, bank):
+        from difflib import SequenceMatcher
+        differ = SequenceMatcher(None, bank[0]["name"], bank[1]["name"])
+        replace = differ.get_opcodes()[1]
+        if replace[0] != "replace":
+            console = Console()
+            console.print(f"[red]ERROR: Wrong register bank name {bank[0]['name']}")
+            sys.exit()
+        position = replace[1]
+        name = bank[0]["name"]
+        name = name[:position] + "x" + name[position+1:]
+        return name
+        bank_name_pattern = re.compile(r"[\d]")
+        return re.sub(bank_name_pattern, "x", bank[0]["name"])
 
     def _merge_register_banks(self, registers):
         register_banks = []
         for bank in registers:
             first_offset, bank_offset = self._get_register_banks_offsets(bank)
-            bank_name_pattern = re.compile(r"[\d]")
+            name = self._get_register_bank_name(bank)
             reg = {
-                'name': re.sub(bank_name_pattern, "x", bank[0]["name"]),
+                'name': name,
                 'description': bank[0]["description"],
                 'offset': first_offset,
                 'size': bank[0]["size"],
@@ -279,7 +338,7 @@ class DralField(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "position":
-                substitution = "%2d" % self._root["position"]
+                substitution = "%d" % self._root["position"]
             elif pattern[1] == "mask":
                 substitution = "0x%08X" % self._root["mask"]
             elif pattern[1] == "width":

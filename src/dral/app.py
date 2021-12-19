@@ -2,6 +2,8 @@ from rich.traceback import install as traceback
 from rich.console import Console
 from .generator import Generator
 from .adapter.svd import SvdAdapter
+from .format import SingleFileFormat
+from .format import CMakeLibFormat
 from pathlib import Path
 import importlib.resources as resources
 import argparse
@@ -48,6 +50,9 @@ def main():
     parser.add_argument("-e", "--exclude", action="extend", nargs="+", type=str,
                         help="Exclude items from generation.")
 
+    parser.add_argument("-f", "--format", default="cmake",
+                        help="Output format.")
+
     args = parser.parse_args()
 
     pattern = [
@@ -75,8 +80,15 @@ def main():
     generator = Generator(adapter, template=template)
 
     info = "[bold green]Generating D-Ral files..."
-    with console.status(info) as status:
-        generator.generate(output, exclude=exclude)
+    with console.status(info):
+        objects = generator.generate(exclude=exclude)
+        if args.format == "cmake":
+            output_format = CMakeLibFormat(output, "dral")
+        elif args.format == "single":
+            output_format = SingleFileFormat(output, "dral.h")
+        else:
+            output_format = CMakeLibFormat(output, "dral")
+        output_format.make(objects)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
