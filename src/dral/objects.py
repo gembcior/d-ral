@@ -338,7 +338,7 @@ class DralField(DralObject):
             if pattern[1] == "name":
                 substitution = "%s" % self._root["name"]
             elif pattern[1] == "position":
-                substitution = "%2d" % self._root["position"]
+                substitution = "%d" % self._root["position"]
             elif pattern[1] == "mask":
                 substitution = "0x%08X" % self._root["mask"]
             elif pattern[1] == "width":
