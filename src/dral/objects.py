@@ -55,7 +55,7 @@ class DralObject(ABC):
                 if substitution is not None:
                     pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
                     if type(substitution) is list:
-                        substitution = (leading_spaces.join(substitution)).lstrip("\n")
+                        substitution = (leading_spaces.join(substitution)).strip("\n")
                     line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
             content.append(line)
         return content
@@ -71,7 +71,7 @@ class DralObject(ABC):
                     if substitution is not None:
                         pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
                         if type(substitution) is list:
-                            substitution = (leading_spaces.join(substitution)).lstrip("\n")
+                            substitution = (leading_spaces.join(substitution)).strip("\n")
                         line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
                 content.append(line)
         return content
