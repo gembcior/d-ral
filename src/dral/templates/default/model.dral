@@ -86,6 +86,11 @@ public:
   {
     reg &= ~mask;
   }
+
+  static uint32_t getFromRegValue(uint32_t regValue)
+  {
+    return (regValue >> position) & mask;
+  }
 };
 
 
@@ -109,7 +114,6 @@ public:
     return (*reg >> position) & mask;
   }
 
-
   static uint32_t set(uint32_t value)
   {
     return (value & mask) << position;
@@ -128,6 +132,11 @@ public:
   static void clear(uint32_t& reg)
   {
     reg &= ~mask;
+  }
+
+  static uint32_t getFromRegValue(uint32_t regValue)
+  {
+    return (regValue >> position) & mask;
   }
 };
 

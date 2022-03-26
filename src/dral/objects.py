@@ -225,16 +225,22 @@ class DralPeripheral(DralObject):
         from difflib import SequenceMatcher
         differ = SequenceMatcher(None, bank[0]["name"], bank[1]["name"])
         replace = differ.get_opcodes()[1]
-        if replace[0] != "replace":
-            console = Console()
-            console.print(f"[red]ERROR: Wrong register bank name {bank[0]['name']}")
-            sys.exit()
-        position = replace[1]
-        name = bank[0]["name"]
-        name = name[:position] + "x" + name[position+1:]
-        return name
-        bank_name_pattern = re.compile(r"[\d]")
-        return re.sub(bank_name_pattern, "x", bank[0]["name"])
+        if replace[0] == "replace":
+            position = replace[1]
+            name = bank[0]["name"]
+            name = name[:position] + "x" + name[position+1:]
+            return name
+        elif replace[0] == "equal":
+            name = bank[0]["name"]
+            if (len(name) - 1) == len(name[replace[1]:replace[2]]):
+                if replace[1] > 0:
+                    name = "x" + name[replace[1]:replace[2]]
+                else:
+                    name = name[replace[1]:replace[2]] + "x"
+                return name
+        console = Console()
+        console.print(f"[red]ERROR: Wrong register bank name {bank[0]['name']}")
+        sys.exit()
 
     def _merge_register_banks(self, registers):
         register_banks = []
