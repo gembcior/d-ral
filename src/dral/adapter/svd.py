@@ -1,6 +1,8 @@
 from .base import BaseAdapter
 import svd2py
 
+from rich import print
+
 
 class SvdAdapter(BaseAdapter):
     def __init__(self, svd_file):
@@ -36,15 +38,16 @@ class SvdAdapter(BaseAdapter):
                     "fields": []
                 }
                 fields_list = []
-                for field in register["fields"]:
-                    new_field = {
-                        "name": field["name"],
-                        "description": field["description"],
-                        "position": field["bitOffset"],
-                        "mask": ((1 << field["bitWidth"]) - 1),
-                        "width": field["bitWidth"]
-                    }
-                    fields_list.append(new_field)
+                if "fields" in register:
+                    for field in register["fields"]:
+                        new_field = {
+                            "name": field["name"],
+                            "description": field["description"],
+                            "position": field["bitOffset"],
+                            "mask": ((1 << field["bitWidth"]) - 1),
+                            "width": field["bitWidth"]
+                        }
+                        fields_list.append(new_field)
                 new_register["fields"] = fields_list
                 registers_list.append(new_register)
             new_peripheral["registers"] = registers_list

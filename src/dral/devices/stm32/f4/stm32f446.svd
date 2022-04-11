@@ -3,18 +3,17 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
 xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
   <name>STM32F446</name>
-  <version>1.1</version>
+  <version>1.6</version>
   <description>STM32F446</description>
-  <!-- details about the cpu embedded in the device -->
   <cpu>
     <name>CM4</name>
-    <revision>r1p0</revision>
+    <revision>r0p1</revision>
     <endian>little</endian>
-    <mpuPresent>false</mpuPresent>
-    <fpuPresent>false</fpuPresent>
-    <nvicPrioBits>3</nvicPrioBits>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>true</fpuPresent>
+    <nvicPrioBits>4</nvicPrioBits>
     <vendorSystickConfig>false</vendorSystickConfig>
-  </cpu>  
+  </cpu>
   <!--Bus Interface Properties-->
   <!--Cortex-M4 is byte addressable-->
   <addressUnitBits>8</addressUnitBits>
@@ -35,11 +34,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>DCMI</name>
-        <description>DCMI global interrupt</description>
-        <value>78</value>
-      </interrupt>
       <interrupt>
         <name>DCMI</name>
         <description>DCMI global interrupt</description>
@@ -540,11 +534,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>FMC</name>
-        <description>FMC global interrupt</description>
-        <value>48</value>
-      </interrupt>
       <interrupt>
         <name>FMC</name>
         <description>FMC global interrupt</description>
@@ -2601,24 +2590,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>56</value>
       </interrupt>
       <interrupt>
-        <name>DMA2_Stream0</name>
-        <description>DMA2 Stream0 global interrupt</description>
-        <value>56</value>
-      </interrupt>
-      <interrupt>
         <name>DMA2_Stream1</name>
         <description>DMA2 Stream1 global interrupt</description>
         <value>57</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_Stream1</name>
-        <description>DMA2 Stream1 global interrupt</description>
-        <value>57</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_Stream2</name>
-        <description>DMA2 Stream2 global interrupt</description>
-        <value>58</value>
       </interrupt>
       <interrupt>
         <name>DMA2_Stream2</name>
@@ -2631,16 +2605,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>59</value>
       </interrupt>
       <interrupt>
-        <name>DMA2_Stream3</name>
-        <description>DMA2 Stream3 global interrupt</description>
-        <value>59</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_Stream4</name>
-        <description>DMA2 Stream4 global interrupt</description>
-        <value>60</value>
-      </interrupt>
-      <interrupt>
         <name>DMA2_Stream4</name>
         <description>DMA2 Stream4 global interrupt</description>
         <value>60</value>
@@ -2651,24 +2615,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>68</value>
       </interrupt>
       <interrupt>
-        <name>DMA2_Stream5</name>
-        <description>DMA2 Stream5 global interrupt</description>
-        <value>68</value>
-      </interrupt>
-      <interrupt>
         <name>DMA2_Stream6</name>
         <description>DMA2 Stream6 global interrupt</description>
         <value>69</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_Stream6</name>
-        <description>DMA2 Stream6 global interrupt</description>
-        <value>69</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_Stream7</name>
-        <description>DMA2 Stream7 global interrupt</description>
-        <value>70</value>
       </interrupt>
       <interrupt>
         <name>DMA2_Stream7</name>
@@ -3561,12 +3510,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>CT</name>
               <description>Current target (only in double buffer
               mode)</description>
@@ -3813,12 +3756,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               configuration</description>
               <bitOffset>21</bitOffset>
               <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CT</name>
@@ -4069,12 +4006,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>CT</name>
               <description>Current target (only in double buffer
               mode)</description>
@@ -4321,12 +4252,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               configuration</description>
               <bitOffset>21</bitOffset>
               <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CT</name>
@@ -4577,12 +4502,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>CT</name>
               <description>Current target (only in double buffer
               mode)</description>
@@ -4829,12 +4748,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               configuration</description>
               <bitOffset>21</bitOffset>
               <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>CT</name>
@@ -5085,12 +4998,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ACK</name>
-              <description>ACK</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>CT</name>
               <description>Current target (only in double buffer
               mode)</description>
@@ -5319,24 +5226,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>11</value>
       </interrupt>
       <interrupt>
-        <name>DMA1_Stream0</name>
-        <description>DMA1 Stream0 global interrupt</description>
-        <value>11</value>
-      </interrupt>
-      <interrupt>
         <name>DMA1_Stream1</name>
         <description>DMA1 Stream1 global interrupt</description>
         <value>12</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_Stream1</name>
-        <description>DMA1 Stream1 global interrupt</description>
-        <value>12</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_Stream2</name>
-        <description>DMA1 Stream2 global interrupt</description>
-        <value>13</value>
       </interrupt>
       <interrupt>
         <name>DMA1_Stream2</name>
@@ -5349,16 +5241,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>14</value>
       </interrupt>
       <interrupt>
-        <name>DMA1_Stream3</name>
-        <description>DMA1 Stream3 global interrupt</description>
-        <value>14</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_Stream4</name>
-        <description>DMA1 Stream4 global interrupt</description>
-        <value>15</value>
-      </interrupt>
-      <interrupt>
         <name>DMA1_Stream4</name>
         <description>DMA1 Stream4 global interrupt</description>
         <value>15</value>
@@ -5369,24 +5251,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <value>16</value>
       </interrupt>
       <interrupt>
-        <name>DMA1_Stream5</name>
-        <description>DMA1 Stream5 global interrupt</description>
-        <value>16</value>
-      </interrupt>
-      <interrupt>
         <name>DMA1_Stream6</name>
         <description>DMA1 Stream6 global interrupt</description>
         <value>17</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_Stream6</name>
-        <description>DMA1 Stream6 global interrupt</description>
-        <value>17</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_Stream7</name>
-        <description>DMA1 Stream7 global interrupt</description>
-        <value>47</value>
       </interrupt>
       <interrupt>
         <name>DMA1_Stream7</name>
@@ -5404,11 +5271,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>RCC</name>
-        <description>RCC global interrupt</description>
-        <value>5</value>
-      </interrupt>
       <interrupt>
         <name>RCC</name>
         <description>RCC global interrupt</description>
@@ -11786,11 +11648,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>SPI1 global interrupt</description>
         <value>35</value>
       </interrupt>
-      <interrupt>
-        <name>SPI1</name>
-        <description>SPI1 global interrupt</description>
-        <value>35</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
@@ -12188,11 +12045,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>SPI2 global interrupt</description>
         <value>36</value>
       </interrupt>
-      <interrupt>
-        <name>SPI2</name>
-        <description>SPI2 global interrupt</description>
-        <value>36</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="SPI1">
       <name>SPI3</name>
@@ -12202,20 +12054,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>SPI3 global interrupt</description>
         <value>51</value>
       </interrupt>
-      <interrupt>
-        <name>SPI3</name>
-        <description>SPI3 global interrupt</description>
-        <value>51</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="SPI1">
       <name>SPI4</name>
       <baseAddress>0x40013400</baseAddress>
-      <interrupt>
-        <name>SPI4</name>
-        <description>SPI 4 global interrupt</description>
-        <value>84</value>
-      </interrupt>
       <interrupt>
         <name>SPI4</name>
         <description>SPI 4 global interrupt</description>
@@ -12232,16 +12074,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x51</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC1 global interrupt</description>
-        <value>18</value>
-      </interrupt>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC1 global interrupt</description>
-        <value>18</value>
-      </interrupt>
       <registers>
         <register>
           <name>SR</name>
@@ -12925,30 +12757,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="ADC1">
       <name>ADC2</name>
       <baseAddress>0x40012100</baseAddress>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC2 global interrupts</description>
-        <value>18</value>
-      </interrupt>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC2 global interrupts</description>
-        <value>18</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="ADC1">
       <name>ADC3</name>
       <baseAddress>0x40012200</baseAddress>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC3 global interrupts</description>
-        <value>18</value>
-      </interrupt>
-      <interrupt>
-        <name>ADC</name>
-        <description>ADC3 global interrupts</description>
-        <value>18</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>USART6</name>
@@ -12961,11 +12773,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>USART6</name>
-        <description>USART6 global interrupt</description>
-        <value>71</value>
-      </interrupt>
       <interrupt>
         <name>USART6</name>
         <description>USART6 global interrupt</description>
@@ -13380,11 +13187,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>USART1 global interrupt</description>
         <value>37</value>
       </interrupt>
-      <interrupt>
-        <name>USART1</name>
-        <description>USART1 global interrupt</description>
-        <value>37</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="USART6">
       <name>USART2</name>
@@ -13394,20 +13196,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>USART2 global interrupt</description>
         <value>38</value>
       </interrupt>
-      <interrupt>
-        <name>USART2</name>
-        <description>USART2 global interrupt</description>
-        <value>38</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="USART6">
       <name>USART3</name>
       <baseAddress>0x40004800</baseAddress>
-      <interrupt>
-        <name>USART3</name>
-        <description>USART3 global interrupt</description>
-        <value>39</value>
-      </interrupt>
       <interrupt>
         <name>USART3</name>
         <description>USART3 global interrupt</description>
@@ -13424,16 +13216,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>UART7</name>
-        <description>UART 7 global interrupt</description>
-        <value>82</value>
-      </interrupt>
-      <interrupt>
-        <name>UART7</name>
-        <description>UART 7 global interrupt</description>
-        <value>82</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -13833,6 +13615,649 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       </registers>
     </peripheral>
     <peripheral>
+      <name>FMPI2C</name>
+      <description>Fast-mode Plus Inter-integrated circuit
+      interface</description>
+      <groupName>I2C</groupName>
+      <baseAddress>0x40006000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>CR1</name>
+          <displayName>CR1</displayName>
+          <description>Control register 1</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>PECEN</name>
+              <description>PEC enable</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ALERTEN</name>
+              <description>SMBus alert enable</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBDEN</name>
+              <description>SMBus Device Default address
+              enable</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBHEN</name>
+              <description>SMBus Host address enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>GCEN</name>
+              <description>General call enable</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NOSTRETCH</name>
+              <description>Clock stretching disable</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SBC</name>
+              <description>Slave byte control</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXDMAEN</name>
+              <description>DMA reception requests
+              enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXDMAEN</name>
+              <description>DMA transmission requests
+              enable</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ANFOFF</name>
+              <description>Analog noise filter OFF</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DNF</name>
+              <description>Digital noise filter</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>ERRIE</name>
+              <description>Error interrupts enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TCIE</name>
+              <description>Transfer Complete interrupt
+              enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOPIE</name>
+              <description>STOP detection Interrupt
+              enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NACKIE</name>
+              <description>Not acknowledge received Interrupt
+              enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADDRIE</name>
+              <description>Address match Interrupt enable (slave
+              only)</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXIE</name>
+              <description>RX Interrupt enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXIE</name>
+              <description>TX Interrupt enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PE</name>
+              <description>Peripheral enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CR2</name>
+          <displayName>CR2</displayName>
+          <description>Control register 1</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>SADD0</name>
+              <description>Slave address bit 0 (master
+              mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SADD7_1</name>
+              <description>Slave address bit 7:1 (master
+              mode)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>SADD9_8</name>
+              <description>Slave address bit 9:8 (master
+              mode)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>RD_WRN</name>
+              <description>Transfer direction (master
+              mode)</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADD10</name>
+              <description>10-bit addressing mode (master
+              mode)</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>HEAD10R</name>
+              <description>10-bit address header only read
+              direction (master receiver mode)</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>START</name>
+              <description>Start generation</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOP</name>
+              <description>Stop generation (master
+              mode)</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NACK</name>
+              <description>NACK generation (slave
+              mode)</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NBYTES</name>
+              <description>Number of bytes</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>RELOAD</name>
+              <description>NBYTES reload mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AUTOEND</name>
+              <description>Automatic end mode (master
+              mode)</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PECBYTE</name>
+              <description>Packet error checking byte</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OAR1</name>
+          <displayName>OAR1</displayName>
+          <description>Own address 1 register</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>OA1_0</name>
+              <description>Interface address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OA1_7_1</name>
+              <description>Interface address</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>OA1_9_8</name>
+              <description>Interface address</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>OA1MODE</name>
+              <description>Own Address 1 10-bit mode</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OA1EN</name>
+              <description>Own Address 1 enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OAR2</name>
+          <displayName>OAR2</displayName>
+          <description>Own address 2 register</description>
+          <addressOffset>0xC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>OA2</name>
+              <description>Interface address</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>OA2MSK</name>
+              <description>Own Address 2 masks</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>OA2EN</name>
+              <description>Own Address 2 enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TIMINGR</name>
+          <displayName>TIMINGR</displayName>
+          <description>Timing register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>SCLL</name>
+              <description>SCL low period (master
+              mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SCLH</name>
+              <description>SCL high period (master
+              mode)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SDADEL</name>
+              <description>Data hold time</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>SCLDEL</name>
+              <description>Data setup time</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>PRESC</name>
+              <description>Timing prescaler</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TIMEOUTR</name>
+          <displayName>TIMEOUTR</displayName>
+          <description>Timeout register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>TIMEOUTA</name>
+              <description>Bus Timeout A</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>TIDLE</name>
+              <description>Idle clock timeout
+              detection</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TIMOUTEN</name>
+              <description>Clock timeout enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TIMEOUTB</name>
+              <description>Bus timeout B</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>TEXTEN</name>
+              <description>Extended clock timeout
+              enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ISR</name>
+          <displayName>ISR</displayName>
+          <description>Interrupt and status register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>TXE</name>
+              <description>Transmit data register empty
+              (transmitters)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXIS</name>
+              <description>Transmit interrupt status
+              (transmitters)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXNE</name>
+              <description>Receive data register not empty
+              (receivers)</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADDR</name>
+              <description>Address matched (slave
+              mode)</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NACKF</name>
+              <description>Not Acknowledge received
+              flag</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOPF</name>
+              <description>Stop detection flag</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC</name>
+              <description>Transfer Complete (master
+              mode)</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TCR</name>
+              <description>Transfer Complete Reload</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BERR</name>
+              <description>Bus error</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ARLO</name>
+              <description>Arbitration lost</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVR</name>
+              <description>Overrun/Underrun (slave
+              mode)</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PECERR</name>
+              <description>PEC Error in reception</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TIMEOUT</name>
+              <description>Timeout or tLOW detection
+              flag</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ALERT</name>
+              <description>SMBus alert</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BUSY</name>
+              <description>Bus busy</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIR</name>
+              <description>Transfer direction (Slave
+              mode)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADDCODE</name>
+              <description>Address match code (Slave
+              mode)</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ICR</name>
+          <displayName>ICR</displayName>
+          <description>Interrupt clear register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>write-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>ADDRCF</name>
+              <description>Address matched flag clear</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NACKCF</name>
+              <description>Not Acknowledge flag clear</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOPCF</name>
+              <description>Stop detection flag clear</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BERRCF</name>
+              <description>Bus error flag clear</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ARLOCF</name>
+              <description>Arbitration Lost flag
+              clear</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRCF</name>
+              <description>Overrun/Underrun flag
+              clear</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PECCF</name>
+              <description>PEC Error flag clear</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TIMOUTCF</name>
+              <description>Timeout detection flag
+              clear</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ALERTCF</name>
+              <description>Alert flag clear</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PECR</name>
+          <displayName>PECR</displayName>
+          <description>PEC register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>PEC</name>
+              <description>Packet error checking
+              register</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXDR</name>
+          <displayName>RXDR</displayName>
+          <description>Receive data register</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>RXDATA</name>
+              <description>8-bit receive data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TXDR</name>
+          <displayName>TXDR</displayName>
+          <description>Transmit data register</description>
+          <addressOffset>0x28</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>TXDATA</name>
+              <description>8-bit transmit data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>I2C3</name>
       <description>Inter-integrated circuit</description>
       <groupName>I2C</groupName>
@@ -13843,14 +14268,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>UART8</name>
-        <description>UART 8 global interrupt</description>
-        <value>83</value>
+        <name>I2C3_EV</name>
+        <description>I2C3 event interrupt</description>
+        <value>72</value>
       </interrupt>
       <interrupt>
-        <name>UART8</name>
-        <description>UART 8 global interrupt</description>
-        <value>83</value>
+        <name>I2C3_ER</name>
+        <description>I2C3 error interrupt</description>
+        <value>73</value>
       </interrupt>
       <registers>
         <register>
@@ -14327,29 +14752,39 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="I2C3">
       <name>I2C2</name>
       <baseAddress>0x40005800</baseAddress>
+      <interrupt>
+        <name>I2C2_EV</name>
+        <description>I2C2 event interrupt</description>
+        <value>33</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C2_ER</name>
+        <description>I2C2 error interrupt</description>
+        <value>34</value>
+      </interrupt>
     </peripheral>
     <peripheral derivedFrom="I2C3">
       <name>I2C1</name>
       <baseAddress>0x40005400</baseAddress>
       <interrupt>
-        <name>I2C3_EV</name>
-        <description>I2C3 event interrupt</description>
-        <value>72</value>
+        <name>I2C1_EV</name>
+        <description>I2C1 event interrupt</description>
+        <value>31</value>
       </interrupt>
       <interrupt>
-        <name>I2C3_EV</name>
-        <description>I2C3 event interrupt</description>
-        <value>72</value>
+        <name>I2C1_ER</name>
+        <description>I2C1 error interrupt</description>
+        <value>32</value>
       </interrupt>
       <interrupt>
-        <name>I2C3_ER</name>
-        <description>I2C3 error interrupt</description>
-        <value>73</value>
+        <name>FMPI2C1</name>
+        <description>FMPI2C1 event interrupt</description>
+        <value>95</value>
       </interrupt>
       <interrupt>
-        <name>I2C3_ER</name>
-        <description>I2C3 error interrupt</description>
-        <value>73</value>
+        <name>FMPI2C1_error</name>
+        <description>FMPI2C1 error interrupt</description>
+        <value>96</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -14362,26 +14797,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>I2C2_EV</name>
-        <description>I2C2 event interrupt</description>
-        <value>33</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_EV</name>
-        <description>I2C2 event interrupt</description>
-        <value>33</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_ER</name>
-        <description>I2C2 error interrupt</description>
-        <value>34</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_ER</name>
-        <description>I2C2 error interrupt</description>
-        <value>34</value>
-      </interrupt>
       <registers>
         <register>
           <name>KR</name>
@@ -14474,24 +14889,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>I2C1_EV</name>
-        <description>I2C1 event interrupt</description>
-        <value>31</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_EV</name>
-        <description>I2C1 event interrupt</description>
-        <value>31</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_ER</name>
-        <description>I2C1 error interrupt</description>
-        <value>32</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_ER</name>
-        <description>I2C1 error interrupt</description>
-        <value>32</value>
+        <name>WWDG</name>
+        <description>Window Watchdog interrupt</description>
+        <value>0</value>
       </interrupt>
       <registers>
         <register>
@@ -14582,6 +14982,18 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>RTC_WKUP</name>
+        <description>RTC Wakeup interrupt through the EXTI
+        line</description>
+        <value>3</value>
+      </interrupt>
+      <interrupt>
+        <name>RTC_Alarm</name>
+        <description>RTC Alarms (A and B) through EXTI line
+        interrupt</description>
+        <value>41</value>
+      </interrupt>
       <registers>
         <register>
           <name>TR</name>
@@ -15897,14 +16309,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>WWDG</name>
-        <description>Window Watchdog interrupt</description>
-        <value>0</value>
-      </interrupt>
-      <interrupt>
-        <name>WWDG</name>
-        <description>Window Watchdog interrupt</description>
-        <value>0</value>
+        <name>UART4</name>
+        <description>UART4 global interrupt</description>
+        <value>52</value>
       </interrupt>
       <registers>
         <register>
@@ -16182,6 +16589,24 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
+			<field>
+              <name>CTSIE</name>
+              <description> CTS interrupt enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+			<field>
+              <name>CTSE</name>
+              <description> CTS enable</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+			<field>
+              <name>RTSE</name>
+              <description> RTS enable</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
             <field>
               <name>DMAT</name>
               <description>DMA enable transmitter</description>
@@ -16226,28 +16651,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       <name>UART5</name>
       <baseAddress>0x40005000</baseAddress>
       <interrupt>
-        <name>RTC_WKUP</name>
-        <description>RTC Wakeup interrupt through the EXTI
-        line</description>
-        <value>3</value>
-      </interrupt>
-      <interrupt>
-        <name>RTC_WKUP</name>
-        <description>RTC Wakeup interrupt through the EXTI
-        line</description>
-        <value>3</value>
-      </interrupt>
-      <interrupt>
-        <name>RTC_Alarm</name>
-        <description>RTC Alarms (A and B) through EXTI line
-        interrupt</description>
-        <value>41</value>
-      </interrupt>
-      <interrupt>
-        <name>RTC_Alarm</name>
-        <description>RTC Alarms (A and B) through EXTI line
-        interrupt</description>
-        <value>41</value>
+        <name>UART5</name>
+        <description>UART5 global interrupt</description>
+        <value>53</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -16261,14 +16667,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>UART4</name>
-        <description>UART4 global interrupt</description>
-        <value>52</value>
-      </interrupt>
-      <interrupt>
-        <name>UART4</name>
-        <description>UART4 global interrupt</description>
-        <value>52</value>
+        <name>ADC</name>
+        <description>ADC1 global interrupt</description>
+        <value>18</value>
       </interrupt>
       <registers>
         <register>
@@ -16498,14 +16899,27 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>UART5</name>
-        <description>UART5 global interrupt</description>
-        <value>53</value>
+        <name>TIM1_BRK_TIM9</name>
+        <description>TIM1 Break interrupt and TIM9 global
+        interrupt</description>
+        <value>24</value>
       </interrupt>
       <interrupt>
-        <name>UART5</name>
-        <description>UART5 global interrupt</description>
-        <value>53</value>
+        <name>TIM1_UP_TIM10</name>
+        <description>TIM1 Update interrupt and TIM10 global
+        interrupt</description>
+        <value>25</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM1_TRG_COM_TIM11</name>
+        <description>TIM1 Trigger and Commutation interrupts and
+        TIM11 global interrupt</description>
+        <value>26</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM1_CC</name>
+        <description>TIM1 Capture Compare interrupt</description>
+        <value>27</value>
       </interrupt>
       <registers>
         <register>
@@ -17586,6 +18000,29 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="TIM1">
       <name>TIM8</name>
       <baseAddress>0x40010400</baseAddress>
+      <interrupt>
+        <name>TIM8_BRK_TIM12</name>
+        <description>TIM8 Break interrupt and TIM12 global
+        interrupt</description>
+        <value>43</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM8_UP_TIM13</name>
+        <description>TIM8 Update interrupt and TIM13 global
+        interrupt</description>
+        <value>44</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM8_TRG_COM_TIM14</name>
+        <description>TIM8 Trigger and Commutation interrupts and
+        TIM14 global interrupt</description>
+        <value>45</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM8_CC</name>
+        <description>TIM8 Capture Compare interrupt</description>
+        <value>46</value>
+      </interrupt>
     </peripheral>
     <peripheral>
       <name>TIM2</name>
@@ -17598,14 +18035,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TIM1_CC</name>
-        <description>TIM1 Capture Compare interrupt</description>
-        <value>27</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_CC</name>
-        <description>TIM1 Capture Compare interrupt</description>
-        <value>27</value>
+        <name>TIM2</name>
+        <description>TIM2 global interrupt</description>
+        <value>28</value>
       </interrupt>
       <registers>
         <register>
@@ -18106,8 +18538,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>O24CE</name>
-              <description>O24CE</description>
+              <name>OC4CE</name>
+              <description>OC4CE</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -18544,38 +18976,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TIM8_UP_TIM13</name>
-        <description>TIM8 Update interrupt and TIM13 global
-        interrupt</description>
-        <value>44</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_UP_TIM13</name>
-        <description>TIM8 Update interrupt and TIM13 global
-        interrupt</description>
-        <value>44</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_TRG_COM_TIM14</name>
-        <description>TIM8 Trigger and Commutation interrupts and
-        TIM14 global interrupt</description>
-        <value>45</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_TRG_COM_TIM14</name>
-        <description>TIM8 Trigger and Commutation interrupts and
-        TIM14 global interrupt</description>
-        <value>45</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_CC</name>
-        <description>TIM8 Capture Compare interrupt</description>
-        <value>46</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_CC</name>
-        <description>TIM8 Capture Compare interrupt</description>
-        <value>46</value>
+        <name>TIM3</name>
+        <description>TIM3 global interrupt</description>
+        <value>29</value>
       </interrupt>
       <registers>
         <register>
@@ -19076,8 +19479,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>O24CE</name>
-              <description>O24CE</description>
+              <name>OC4CE</name>
+              <description>OC4CE</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -19490,14 +19893,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       <name>TIM4</name>
       <baseAddress>0x40000800</baseAddress>
       <interrupt>
-        <name>TIM2</name>
-        <description>TIM2 global interrupt</description>
-        <value>28</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM2</name>
-        <description>TIM2 global interrupt</description>
-        <value>28</value>
+        <name>TIM4</name>
+        <description>TIM4 global interrupt</description>
+        <value>30</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -19511,14 +19909,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TIM3</name>
-        <description>TIM3 global interrupt</description>
-        <value>29</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM3</name>
-        <description>TIM3 global interrupt</description>
-        <value>29</value>
+        <name>TIM5</name>
+        <description>TIM5 global interrupt</description>
+        <value>50</value>
       </interrupt>
       <registers>
         <register>
@@ -20019,8 +20412,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>O24CE</name>
-              <description>O24CE</description>
+              <name>OC4CE</name>
+              <description>OC4CE</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -20456,16 +20849,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TIM4</name>
-        <description>TIM4 global interrupt</description>
-        <value>30</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM4</name>
-        <description>TIM4 global interrupt</description>
-        <value>30</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
@@ -20946,16 +21329,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="TIM9">
       <name>TIM12</name>
       <baseAddress>0x40001800</baseAddress>
-      <interrupt>
-        <name>TIM5</name>
-        <description>TIM5 global interrupt</description>
-        <value>50</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM5</name>
-        <description>TIM5 global interrupt</description>
-        <value>50</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>TIM10</name>
@@ -20967,18 +21340,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TIM1_BRK_TIM9</name>
-        <description>TIM1 Break interrupt and TIM9 global
-        interrupt</description>
-        <value>24</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_BRK_TIM9</name>
-        <description>TIM1 Break interrupt and TIM9 global
-        interrupt</description>
-        <value>24</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
@@ -21277,34 +21638,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="TIM10">
       <name>TIM13</name>
       <baseAddress>0x40001C00</baseAddress>
-      <interrupt>
-        <name>TIM8_BRK_TIM12</name>
-        <description>TIM8 Break interrupt and TIM12 global
-        interrupt</description>
-        <value>43</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM8_BRK_TIM12</name>
-        <description>TIM8 Break interrupt and TIM12 global
-        interrupt</description>
-        <value>43</value>
-      </interrupt>
     </peripheral>
     <peripheral derivedFrom="TIM10">
       <name>TIM14</name>
       <baseAddress>0x40002000</baseAddress>
-      <interrupt>
-        <name>TIM1_UP_TIM10</name>
-        <description>TIM1 Update interrupt and TIM10 global
-        interrupt</description>
-        <value>25</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_UP_TIM10</name>
-        <description>TIM1 Update interrupt and TIM10 global
-        interrupt</description>
-        <value>25</value>
-      </interrupt>
     </peripheral>
     <peripheral>
       <name>TIM11</name>
@@ -21639,6 +21976,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TIM6_DAC</name>
+        <description>TIM6 global interrupt, DAC1 and DAC2 underrun
+        error interrupt</description>
+        <value>54</value>
+      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
@@ -21812,16 +22155,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       <name>TIM7</name>
       <baseAddress>0x40001400</baseAddress>
       <interrupt>
-        <name>TIM1_TRG_COM_TIM11</name>
-        <description>TIM1 Trigger and Commutation interrupts and
-        TIM11 global interrupt</description>
-        <value>26</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_TRG_COM_TIM11</name>
-        <description>TIM1 Trigger and Commutation interrupts and
-        TIM11 global interrupt</description>
-        <value>26</value>
+        <name>TIM7</name>
+        <description>TIM7 global interrupt</description>
+        <value>55</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -21834,18 +22170,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TIM6_DAC</name>
-        <description>TIM6 global interrupt, DAC1 and DAC2 underrun
-        error interrupt</description>
-        <value>54</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM6_DAC</name>
-        <description>TIM6 global interrupt, DAC1 and DAC2 underrun
-        error interrupt</description>
-        <value>54</value>
-      </interrupt>
       <registers>
         <register>
           <name>DR</name>
@@ -21911,14 +22235,16 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TIM7</name>
-        <description>TIM7 global interrupt</description>
-        <value>55</value>
+        <name>OTG_FS_WKUP</name>
+        <description>USB On-The-Go FS Wakeup through EXTI line
+        interrupt</description>
+        <value>42</value>
       </interrupt>
       <interrupt>
-        <name>TIM7</name>
-        <description>TIM7 global interrupt</description>
-        <value>55</value>
+        <name>OTG_FS</name>
+        <description>USB On The Go FS global
+        interrupt</description>
+        <value>67</value>
       </interrupt>
       <registers>
         <register>
@@ -22655,7 +22981,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <register>
           <name>FS_GRXSTSP_Device</name>
           <displayName>FS_GRXSTSP_Device</displayName>
-          <description>OTG status read and pop registers(Device
+          <description>OTG_FS Receive status debug read(Device
           mode)</description>
           <addressOffset>0x20</addressOffset>
           <size>0x20</size>
@@ -23049,28 +23375,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>ETH</name>
-        <description>Ethernet global interrupt</description>
-        <value>61</value>
-      </interrupt>
-      <interrupt>
-        <name>ETH</name>
-        <description>Ethernet global interrupt</description>
-        <value>61</value>
-      </interrupt>
-      <interrupt>
-        <name>ETH_WKUP</name>
-        <description>Ethernet Wakeup through EXTI line
-        interrupt</description>
-        <value>62</value>
-      </interrupt>
-      <interrupt>
-        <name>ETH_WKUP</name>
-        <description>Ethernet Wakeup through EXTI line
-        interrupt</description>
-        <value>62</value>
-      </interrupt>
       <registers>
         <register>
           <name>FS_HCFG</name>
@@ -25336,6 +25640,13 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>11</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
+            <field>
+              <name>ERRATIM</name>
+              <description>Erratic error interrupt
+              mask</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
           </fields>
         </register>
         <register>
@@ -27176,6 +27487,26 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CAN1_TX</name>
+        <description>CAN1 TX interrupts</description>
+        <value>19</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN1_RX0</name>
+        <description>CAN1 RX0 interrupts</description>
+        <value>20</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN1_RX1</name>
+        <description>CAN1 RX1 interrupts</description>
+        <value>21</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN1_SCE</name>
+        <description>CAN1 SCE interrupt</description>
+        <value>22</value>
+      </interrupt>
       <registers>
         <register>
           <name>MCR</name>
@@ -40595,6 +40926,26 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <peripheral derivedFrom="CAN1">
       <name>CAN2</name>
       <baseAddress>0x40006800</baseAddress>
+      <interrupt>
+        <name>CAN2_TX</name>
+        <description>CAN2 TX interrupts</description>
+        <value>63</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN2_RX0</name>
+        <description>CAN2 RX0 interrupts</description>
+        <value>64</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN2_RX1</name>
+        <description>CAN2 RX1 interrupts</description>
+        <value>65</value>
+      </interrupt>
+      <interrupt>
+        <name>CAN2_SCE</name>
+        <description>CAN2 SCE interrupt</description>
+        <value>66</value>
+      </interrupt>
     </peripheral>
     <peripheral>
       <name>NVIC</name>
@@ -40604,33 +40955,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       <baseAddress>0xE000E100</baseAddress>
       <addressBlock>
         <offset>0x0</offset>
-        <size>0x355</size>
+        <size>0x369</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>OTG_FS_WKUP</name>
-        <description>USB On-The-Go FS Wakeup through EXTI line
-        interrupt</description>
-        <value>42</value>
-      </interrupt>
-      <interrupt>
-        <name>OTG_FS_WKUP</name>
-        <description>USB On-The-Go FS Wakeup through EXTI line
-        interrupt</description>
-        <value>42</value>
-      </interrupt>
-      <interrupt>
-        <name>OTG_FS</name>
-        <description>USB On The Go FS global
-        interrupt</description>
-        <value>67</value>
-      </interrupt>
-      <interrupt>
-        <name>OTG_FS</name>
-        <description>USB On The Go FS global
-        interrupt</description>
-        <value>67</value>
-      </interrupt>
       <registers>
         <register>
           <name>ISER0</name>
@@ -41628,6 +41955,51 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
+        <register>
+          <name>IPR21</name>
+          <displayName>IPR21</displayName>
+          <description>Interrupt Priority Register</description>
+          <addressOffset>0x354</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>IPR22</name>
+          <displayName>IPR22</displayName>
+          <description>Interrupt Priority Register</description>
+          <addressOffset>0x358</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>IPR23</name>
+          <displayName>IPR23</displayName>
+          <description>Interrupt Priority Register</description>
+          <addressOffset>0x35C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>IPR24</name>
+          <displayName>IPR24</displayName>
+          <description>Interrupt Priority Register</description>
+          <addressOffset>0x360</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>IPR25</name>
+          <displayName>IPR25</displayName>
+          <description>Interrupt Priority Register</description>
+          <addressOffset>0x364</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -41640,6 +42012,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>FLASH</name>
+        <description>Flash global interrupt</description>
+        <value>4</value>
+      </interrupt>
       <registers>
         <register>
           <name>ACR</name>
@@ -41943,6 +42320,53 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>PVD</name>
+        <description>PVD through EXTI line detection
+        interrupt</description>
+        <value>1</value>
+      </interrupt>
+      <interrupt>
+        <name>TAMP_STAMP</name>
+        <description>Tamper and TimeStamp interrupts through the
+        EXTI line</description>
+        <value>2</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI0</name>
+        <description>EXTI Line0 interrupt</description>
+        <value>6</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI1</name>
+        <description>EXTI Line1 interrupt</description>
+        <value>7</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI2</name>
+        <description>EXTI Line2 interrupt</description>
+        <value>8</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI3</name>
+        <description>EXTI Line3 interrupt</description>
+        <value>9</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI4</name>
+        <description>EXTI Line4 interrupt</description>
+        <value>10</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI9_5</name>
+        <description>EXTI Line[9:5] interrupts</description>
+        <value>23</value>
+      </interrupt>
+      <interrupt>
+        <name>EXTI15_10</name>
+        <description>EXTI Line[15:10] interrupts</description>
+        <value>40</value>
+      </interrupt>
       <registers>
         <register>
           <name>IMR</name>
@@ -42923,6 +43347,22 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>OTG_HS_EP1_OUT</name>
+        <description>USB On The Go HS End Point 1 Out</description>
+        <value>74</value>
+      </interrupt>
+      <interrupt>
+        <name>OTG_HS_EP1_IN</name>
+        <description>USB On The Go HS End Point 1 In</description>
+        <value>75</value>
+      </interrupt>
+      <interrupt>
+        <name>OTG_HS</name>
+        <description>USB On The Go HS global
+        interrupt</description>
+        <value>77</value>
+      </interrupt>
       <registers>
         <register>
           <name>OTG_HS_GOTGCTL</name>
@@ -44253,46 +44693,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CAN1_TX</name>
-        <description>CAN1 TX interrupts</description>
-        <value>19</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_TX</name>
-        <description>CAN1 TX interrupts</description>
-        <value>19</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_RX0</name>
-        <description>CAN1 RX0 interrupts</description>
-        <value>20</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_RX0</name>
-        <description>CAN1 RX0 interrupts</description>
-        <value>20</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_RX1</name>
-        <description>CAN1 RX1 interrupts</description>
-        <value>21</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_RX1</name>
-        <description>CAN1 RX1 interrupts</description>
-        <value>21</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_SCE</name>
-        <description>CAN1 SCE interrupt</description>
-        <value>22</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN1_SCE</name>
-        <description>CAN1 SCE interrupt</description>
-        <value>22</value>
-      </interrupt>
       <registers>
         <register>
           <name>OTG_HS_HCFG</name>
@@ -48470,46 +48870,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CAN2_TX</name>
-        <description>CAN2 TX interrupts</description>
-        <value>63</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_TX</name>
-        <description>CAN2 TX interrupts</description>
-        <value>63</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_RX0</name>
-        <description>CAN2 RX0 interrupts</description>
-        <value>64</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_RX0</name>
-        <description>CAN2 RX0 interrupts</description>
-        <value>64</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_RX1</name>
-        <description>CAN2 RX1 interrupts</description>
-        <value>65</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_RX1</name>
-        <description>CAN2 RX1 interrupts</description>
-        <value>65</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_SCE</name>
-        <description>CAN2 SCE interrupt</description>
-        <value>66</value>
-      </interrupt>
-      <interrupt>
-        <name>CAN2_SCE</name>
-        <description>CAN2 SCE interrupt</description>
-        <value>66</value>
-      </interrupt>
       <registers>
         <register>
           <name>OTG_HS_DCFG</name>
@@ -48553,6 +48913,19 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               interval</description>
               <bitOffset>24</bitOffset>
               <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>XCVRDLY</name>
+              <description>Transceiver delay</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ERRATIM</name>
+              <description>Erratic error interrupt
+              mask</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>
@@ -49006,7 +49379,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_HS_DIEPEACHMSK1</displayName>
           <description>OTG_HS device each in endpoint-1 interrupt
           register</description>
-          <addressOffset>0x40</addressOffset>
+          <addressOffset>0x44</addressOffset>
           <size>32</size>
           <access>read-write</access>
           <resetValue>0x0</resetValue>
@@ -49078,7 +49451,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_HS_DOEPEACHMSK1</displayName>
           <description>OTG_HS device each OUT endpoint-1 interrupt
           register</description>
-          <addressOffset>0x80</addressOffset>
+          <addressOffset>0x84</addressOffset>
           <size>32</size>
           <access>read-write</access>
           <resetValue>0x0</resetValue>
@@ -52062,6 +52435,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x3F200</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>OTG_HS_WKUP</name>
+        <description>USB On The Go HS Wakeup</description>
+        <value>76</value>
+      </interrupt>
       <registers>
         <register>
           <name>OTG_HS_PCGCR</name>
@@ -52105,6 +52483,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>SAI1</name>
+        <description>SAI1 global interrupt</description>
+        <value>87</value>
+      </interrupt>
       <registers>
         <register>
           <name>BCR1</name>
@@ -52963,14 +53346,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       <name>SAI2</name>
       <baseAddress>0x40015C00</baseAddress>
       <interrupt>
-        <name>FLASH</name>
-        <description>Flash global interrupt</description>
-        <value>4</value>
-      </interrupt>
-      <interrupt>
-        <name>FLASH</name>
-        <description>Flash global interrupt</description>
-        <value>4</value>
+        <name>SAI2</name>
+        <description>SAI2 global interrupt</description>
+        <value>91</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -52983,88 +53361,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>TAMP_STAMP</name>
-        <description>Tamper and TimeStamp interrupts through the
-        EXTI line</description>
-        <value>2</value>
-      </interrupt>
-      <interrupt>
-        <name>TAMP_STAMP</name>
-        <description>Tamper and TimeStamp interrupts through the
-        EXTI line</description>
-        <value>2</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI0</name>
-        <description>EXTI Line0 interrupt</description>
-        <value>6</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI0</name>
-        <description>EXTI Line0 interrupt</description>
-        <value>6</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI1</name>
-        <description>EXTI Line1 interrupt</description>
-        <value>7</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI1</name>
-        <description>EXTI Line1 interrupt</description>
-        <value>7</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI2</name>
-        <description>EXTI Line2 interrupt</description>
-        <value>8</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI2</name>
-        <description>EXTI Line2 interrupt</description>
-        <value>8</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI3</name>
-        <description>EXTI Line3 interrupt</description>
-        <value>9</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI3</name>
-        <description>EXTI Line3 interrupt</description>
-        <value>9</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI4</name>
-        <description>EXTI Line4 interrupt</description>
-        <value>10</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI4</name>
-        <description>EXTI Line4 interrupt</description>
-        <value>10</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI9_5</name>
-        <description>EXTI Line[9:5] interrupts</description>
-        <value>23</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI9_5</name>
-        <description>EXTI Line[9:5] interrupts</description>
-        <value>23</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI15_10</name>
-        <description>EXTI Line[15:10] interrupts</description>
-        <value>40</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI15_10</name>
-        <description>EXTI Line[15:10] interrupts</description>
-        <value>40</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -53291,24 +53587,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>LCD_TFT</name>
-        <description>LTDC global interrupt</description>
-        <value>88</value>
-      </interrupt>
-      <interrupt>
-        <name>LCD_TFT</name>
-        <description>LTDC global interrupt</description>
-        <value>88</value>
-      </interrupt>
-      <interrupt>
-        <name>LCD_TFT_1</name>
-        <description>LTDC global error interrupt</description>
-        <value>89</value>
-      </interrupt>
-      <interrupt>
-        <name>LCD_TFT_1</name>
-        <description>LTDC global error interrupt</description>
-        <value>89</value>
+        <name>QuadSPI</name>
+        <description>QuadSPI global interrupt</description>
+        <value>92</value>
       </interrupt>
       <registers>
         <register>
@@ -53773,6 +54054,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>SPDIF_Rx</name>
+        <description>SPDIF-Rx global interrupt</description>
+        <value>94</value>
+      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -54142,1458 +54428,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       </registers>
     </peripheral>
     <peripheral>
-      <name>SDMMC</name>
-      <description>SDMMC</description>
-      <groupName>SDMMC</groupName>
-      <baseAddress>0x40012C00</baseAddress>
-      <addressBlock>
-        <offset>0x0</offset>
-        <size>0x3FD</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>SDMMC_POWER</name>
-          <displayName>SDMMC_POWER</displayName>
-          <description>SDMMC power control register</description>
-          <addressOffset>0x0</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>PWRCTRL</name>
-              <description>SDMMC state control bits. These bits can
-              only be written when the SDMMC is not in the power-on
-              state (PWRCTRL?11). These bits are used to define the
-              functional state of the SDMMC signals: Any further
-              write will be ignored, PWRCTRL value will keep
-              11.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>VSWITCH</name>
-              <description>Voltage switch sequence start. This bit
-              is used to start the timing critical section of the
-              voltage switch sequence:</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>VSWITCHEN</name>
-              <description>Voltage switch procedure enable. This
-              bit can only be written by firmware when CPSM is
-              disabled (CPSMEN = 0). This bit is used to stop the
-              SDMMC_CK after the voltage switch command
-              response:</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DIRPOL</name>
-              <description>Data and command direction signals
-              polarity selection. This bit can only be written when
-              the SDMMC is in the power-off state (PWRCTRL =
-              00).</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_CLKCR</name>
-          <displayName>SDMMC_CLKCR</displayName>
-          <description>The SDMMC_CLKCR register controls the
-          SDMMC_CK output clock, the SDMMC_RX_CLK receive clock,
-          and the bus width.</description>
-          <addressOffset>0x4</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CLKDIV</name>
-              <description>Clock divide factor This bit can only be
-              written when the CPSM and DPSM are not active
-              (CPSMACT = 0 and DPSMACT = 0). This field defines the
-              divide factor between the input clock (SDMMCCLK) and
-              the output clock (SDMMC_CK): SDMMC_CK frequency =
-              SDMMCCLK / [2 * CLKDIV]. 0xx: etc.. xxx:
-              etc..</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>10</bitWidth>
-            </field>
-            <field>
-              <name>PWRSAV</name>
-              <description>Power saving configuration bit This bit
-              can only be written when the CPSM and DPSM are not
-              active (CPSMACT = 0 and DPSMACT = 0) For power
-              saving, the SDMMC_CK clock output can be disabled
-              when the bus is idle by setting PWRSAV:</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>WIDBUS</name>
-              <description>Wide bus mode enable bit This bit can
-              only be written when the CPSM and DPSM are not active
-              (CPSMACT = 0 and DPSMACT = 0)</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>NEGEDGE</name>
-              <description>SDMMC_CK dephasing selection bit for
-              data and Command. This bit can only be written when
-              the CPSM and DPSM are not active (CPSMACT = 0 and
-              DPSMACT = 0). When clock division = 1 (CLKDIV = 0),
-              this bit has no effect. Data and Command change on
-              SDMMC_CK falling edge. When clock division &amp;gt;1
-              (CLKDIV &amp;gt; 0) &amp;amp; DDR = 0: - SDMMC_CK
-              edge occurs on SDMMCCLK rising edge. When clock
-              division &gt;1 (CLKDIV &gt; 0) &amp; DDR = 1: - Data
-              changed on the SDMMCCLK falling edge succeeding a
-              SDMMC_CK edge. - SDMMC_CK edge occurs on SDMMCCLK
-              rising edge. - Data changed on the SDMMC_CK falling
-              edge succeeding a SDMMC_CK edge. - SDMMC_CK edge
-              occurs on SDMMCCLK rising edge.</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>HWFC_EN</name>
-              <description>Hardware flow control enable This bit
-              can only be written when the CPSM and DPSM are not
-              active (CPSMACT = 0 and DPSMACT = 0) When Hardware
-              flow control is enabled, the meaning of the TXFIFOE
-              and RXFIFOF flags change, please see SDMMC status
-              register definition in Section56.8.11.</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DDR</name>
-              <description>Data rate signaling selection This bit
-              can only be written when the CPSM and DPSM are not
-              active (CPSMACT = 0 and DPSMACT = 0) DDR rate shall
-              only be selected with 4-bit or 8-bit wide bus mode.
-              (WIDBUS &amp;gt; 00). DDR = 1 has no effect when
-              WIDBUS = 00 (1-bit wide bus). DDR rate shall only be
-              selected with clock division &amp;gt;1. (CLKDIV
-              &amp;gt; 0)</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSSPEED</name>
-              <description>Bus speed mode selection between DS, HS,
-              SDR12, SDR25 and SDR50, DDR50, SDR104. This bit can
-              only be written when the CPSM and DPSM are not active
-              (CPSMACT = 0 and DPSMACT = 0)</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SELCLKRX</name>
-              <description>Receive clock selection. These bits can
-              only be written when the CPSM and DPSM are not active
-              (CPSMACT = 0 and DPSMACT = 0)</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>2</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_ARGR</name>
-          <displayName>SDMMC_ARGR</displayName>
-          <description>The SDMMC_ARGR register contains a 32-bit
-          command argument, which is sent to a card as part of a
-          command message.</description>
-          <addressOffset>0x8</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CMDARG</name>
-              <description>Command argument. These bits can only be
-              written by firmware when CPSM is disabled (CPSMEN =
-              0). Command argument sent to a card as part of a
-              command message. If a command contains an argument,
-              it must be loaded into this register before writing a
-              command to the command register.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_CMDR</name>
-          <displayName>SDMMC_CMDR</displayName>
-          <description>The SDMMC_CMDR register contains the command
-          index and command type bits. The command index is sent to
-          a card as part of a command message. The command type
-          bits control the command path state machine
-          (CPSM).</description>
-          <addressOffset>0xC</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CMDINDEX</name>
-              <description>Command index. This bit can only be
-              written by firmware when CPSM is disabled (CPSMEN =
-              0). The command index is sent to the card as part of
-              a command message.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>6</bitWidth>
-            </field>
-            <field>
-              <name>CMDTRANS</name>
-              <description>The CPSM treats the command as a data
-              transfer command, stops the interrupt period, and
-              signals DataEnable to the DPSM This bit can only be
-              written by firmware when CPSM is disabled (CPSMEN =
-              0). If this bit is set, the CPSM issues an end of
-              interrupt period and issues DataEnable signal to the
-              DPSM when the command is sent.</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDSTOP</name>
-              <description>The CPSM treats the command as a Stop
-              Transmission command and signals Abort to the DPSM.
-              This bit can only be written by firmware when CPSM is
-              disabled (CPSMEN = 0). If this bit is set, the CPSM
-              issues the Abort signal to the DPSM when the command
-              is sent.</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>WAITRESP</name>
-              <description>Wait for response bits. This bit can
-              only be written by firmware when CPSM is disabled
-              (CPSMEN = 0). They are used to configure whether the
-              CPSM is to wait for a response, and if yes, which
-              kind of response.</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>WAITINT</name>
-              <description>CPSM waits for interrupt request. If
-              this bit is set, the CPSM disables command timeout
-              and waits for an card interrupt request (Response).
-              If this bit is cleared in the CPSM Wait state, will
-              cause the abort of the interrupt mode.</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>WAITPEND</name>
-              <description>CPSM Waits for end of data transfer
-              (CmdPend internal signal) from DPSM. This bit when
-              set, the CPSM waits for the end of data transfer
-              trigger before it starts sending a command. WAITPEND
-              is only taken into account when DTMODE = MMC stream
-              data transfer, WIDBUS = 1-bit wide bus mode, DPSMACT
-              = 1 and DTDIR = from host to card.</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CPSMEN</name>
-              <description>Command path state machine (CPSM) Enable
-              bit This bit is written 1 by firmware, and cleared by
-              hardware when the CPSM enters the Idle state. If this
-              bit is set, the CPSM is enabled. When DTEN = 1, no
-              command will be transfered nor boot procedure will be
-              started. CPSMEN is cleared to 0.</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTHOLD</name>
-              <description>Hold new data block transmission and
-              reception in the DPSM. If this bit is set, the DPSM
-              will not move from the Wait_S state to the Send state
-              or from the Wait_R state to the Receive
-              state.</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BOOTMODE</name>
-              <description>Select the boot mode procedure to be
-              used. This bit can only be written by firmware when
-              CPSM is disabled (CPSMEN = 0)</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BOOTEN</name>
-              <description>Enable boot mode
-              procedure.</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDSUSPEND</name>
-              <description>The CPSM treats the command as a Suspend
-              or Resume command and signals interrupt period
-              start/end. This bit can only be written by firmware
-              when CPSM is disabled (CPSMEN = 0). CMDSUSPEND = 1
-              and CMDTRANS = 0 Suspend command, start interrupt
-              period when response bit BS=0. CMDSUSPEND = 1 and
-              CMDTRANS = 1 Resume command with data, end interrupt
-              period when response bit DF=1.</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_RESP1R</name>
-          <displayName>SDMMC_RESP1R</displayName>
-          <description>The SDMMC_RESP1/2/3/4R registers contain the
-          status of a card, which is part of the received
-          response.</description>
-          <addressOffset>0x10</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CARDSTATUS1</name>
-              <description>see Table404.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_RESP2R</name>
-          <displayName>SDMMC_RESP2R</displayName>
-          <description>The SDMMC_RESP1/2/3/4R registers contain the
-          status of a card, which is part of the received
-          response.</description>
-          <addressOffset>0x14</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CARDSTATUS2</name>
-              <description>see Table404.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_RESP3R</name>
-          <displayName>SDMMC_RESP3R</displayName>
-          <description>The SDMMC_RESP1/2/3/4R registers contain the
-          status of a card, which is part of the received
-          response.</description>
-          <addressOffset>0x18</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CARDSTATUS3</name>
-              <description>see Table404.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_RESP4R</name>
-          <displayName>SDMMC_RESP4R</displayName>
-          <description>The SDMMC_RESP1/2/3/4R registers contain the
-          status of a card, which is part of the received
-          response.</description>
-          <addressOffset>0x1C</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CARDSTATUS4</name>
-              <description>see Table404.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_DTIMER</name>
-          <displayName>SDMMC_DTIMER</displayName>
-          <description>The SDMMC_DTIMER register contains the data
-          timeout period, in card bus clock periods. A counter
-          loads the value from the SDMMC_DTIMER register, and
-          starts decrementing when the data path state machine
-          (DPSM) enters the Wait_R or Busy state. If the timer
-          reaches 0 while the DPSM is in either of these states,
-          the timeout status flag is set.</description>
-          <addressOffset>0x24</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DATATIME</name>
-              <description>Data and R1b busy timeout period This
-              bit can only be written when the CPSM and DPSM are
-              not active (CPSMACT = 0 and DPSMACT = 0). Data and
-              R1b busy timeout period expressed in card bus clock
-              periods.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_DLENR</name>
-          <displayName>SDMMC_DLENR</displayName>
-          <description>The SDMMC_DLENR register contains the number
-          of data bytes to be transferred. The value is loaded into
-          the data counter when data transfer starts.</description>
-          <addressOffset>0x28</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DATALENGTH</name>
-              <description>Data length value This register can only
-              be written by firmware when DPSM is inactive (DPSMACT
-              = 0). Number of data bytes to be transferred. When
-              DDR = 1 DATALENGTH is truncated to a multiple of 2.
-              (The last odd byte is not transfered) When DATALENGTH
-              = 0 no data will be transfered, when requested by a
-              CPSMEN and CMDTRANS = 1 also no command will be
-              transfered. DTEN and CPSMEN are cleared to
-              0.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>25</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_DCTRL</name>
-          <displayName>SDMMC_DCTRL</displayName>
-          <description>The SDMMC_DCTRL register control the data
-          path state machine (DPSM).</description>
-          <addressOffset>0x2C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DTEN</name>
-              <description>Data transfer enable bit This bit can
-              only be written by firmware when DPSM is inactive
-              (DPSMACT = 0). This bit is cleared by Hardware when
-              data transfer completes. This bit shall only be used
-              to transfer data when no associated data transfer
-              command is used, i.e. shall not be used with SD or
-              eMMC cards.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTDIR</name>
-              <description>Data transfer direction selection This
-              bit can only be written by firmware when DPSM is
-              inactive (DPSMACT = 0).</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTMODE</name>
-              <description>Data transfer mode selection. This bit
-              can only be written by firmware when DPSM is inactive
-              (DPSMACT = 0).</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>2</bitWidth>
-            </field>
-            <field>
-              <name>DBLOCKSIZE</name>
-              <description>Data block size This bit can only be
-              written by firmware when DPSM is inactive (DPSMACT =
-              0). Define the data block length when the block data
-              transfer mode is selected: When DATALENGTH is not a
-              multiple of DBLOCKSIZE, the transfered data is
-              truncated at a multiple of DBLOCKSIZE. (Any remain
-              data will not be transfered.) When DDR = 1,
-              DBLOCKSIZE = 0000 shall not be used. (No data will be
-              transfered)</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>4</bitWidth>
-            </field>
-            <field>
-              <name>RWSTART</name>
-              <description>Read wait start. If this bit is set,
-              read wait operation starts.</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RWSTOP</name>
-              <description>Read wait stop This bit is written by
-              firmware and auto cleared by hardware when the DPSM
-              moves from the READ_WAIT state to the WAIT_R or IDLE
-              state.</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RWMOD</name>
-              <description>Read wait mode. This bit can only be
-              written by firmware when DPSM is inactive (DPSMACT =
-              0).</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SDIOEN</name>
-              <description>SD I/O interrupt enable functions This
-              bit can only be written by firmware when DPSM is
-              inactive (DPSMACT = 0). If this bit is set, the DPSM
-              enables the SD I/O card specific interrupt
-              operation.</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BOOTACKEN</name>
-              <description>Enable the reception of the boot
-              acknowledgment. This bit can only be written by
-              firmware when DPSM is inactive (DPSMACT =
-              0).</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>FIFORST</name>
-              <description>FIFO reset, will flush any remaining
-              data. This bit can only be written by firmware when
-              IDMAEN= 0 and DPSM is active (DPSMACT = 1). This bit
-              will only take effect when a transfer error or
-              transfer hold occurs.</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_DCNTR</name>
-          <displayName>SDMMC_DCNTR</displayName>
-          <description>The SDMMC_DCNTR register loads the value
-          from the data length register (see SDMMC_DLENR) when the
-          DPSM moves from the Idle state to the Wait_R or Wait_S
-          state. As data is transferred, the counter decrements the
-          value until it reaches 0. The DPSM then moves to the Idle
-          state and when there has been no error, the data status
-          end flag (DATAEND) is set.</description>
-          <addressOffset>0x30</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DATACOUNT</name>
-              <description>Data count value When read, the number
-              of remaining data bytes to be transferred is
-              returned. Write has no effect.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>27</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_STAR</name>
-          <displayName>SDMMC_STAR</displayName>
-          <description>The SDMMC_STAR register is a read-only
-          register. It contains two types of flag:Static flags
-          (bits [29,21,11:0]): these bits remain asserted until
-          they are cleared by writing to the SDMMC interrupt Clear
-          register (see SDMMC_ICR)Dynamic flags (bits [20:12]):
-          these bits change state depending on the state of the
-          underlying logic (for example, FIFO full and empty flags
-          are asserted and de-asserted as data while written to the
-          FIFO)</description>
-          <addressOffset>0x34</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CCRCFAIL</name>
-              <description>Command response received (CRC check
-              failed). Interrupt flag is cleared by writing
-              corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DCRCFAIL</name>
-              <description>Data block sent/received (CRC check
-              failed). Interrupt flag is cleared by writing
-              corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CTIMEOUT</name>
-              <description>Command response timeout. Interrupt flag
-              is cleared by writing corresponding interrupt clear
-              bit in SDMMC_ICR. The Command Timeout period has a
-              fixed value of 64 SDMMC_CK clock
-              periods.</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTIMEOUT</name>
-              <description>Data timeout. Interrupt flag is cleared
-              by writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXUNDERR</name>
-              <description>Transmit FIFO underrun error or IDMA
-              read transfer error. Interrupt flag is cleared by
-              writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXOVERR</name>
-              <description>Received FIFO overrun error or IDMA
-              write transfer error. Interrupt flag is cleared by
-              writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDREND</name>
-              <description>Command response received (CRC check
-              passed, or no CRC). Interrupt flag is cleared by
-              writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDSENT</name>
-              <description>Command sent (no response required).
-              Interrupt flag is cleared by writing corresponding
-              interrupt clear bit in SDMMC_ICR.</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DATAEND</name>
-              <description>Data transfer ended correctly. (data
-              counter, DATACOUNT is zero and no errors occur).
-              Interrupt flag is cleared by writing corresponding
-              interrupt clear bit in SDMMC_ICR.</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DHOLD</name>
-              <description>Data transfer Hold. Interrupt flag is
-              cleared by writing corresponding interrupt clear bit
-              in SDMMC_ICR.</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBCKEND</name>
-              <description>Data block sent/received. (CRC check
-              passed) and DPSM moves to the READWAIT state.
-              Interrupt flag is cleared by writing corresponding
-              interrupt clear bit in SDMMC_ICR.</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DABORT</name>
-              <description>Data transfer aborted by CMD12.
-              Interrupt flag is cleared by writing corresponding
-              interrupt clear bit in SDMMC_ICR.</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DPSMACT</name>
-              <description>Data path state machine active, i.e. not
-              in Idle state. This is a hardware status flag only,
-              does not generate an interrupt.</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CPSMACT</name>
-              <description>Command path state machine active, i.e.
-              not in Idle state. This is a hardware status flag
-              only, does not generate an interrupt.</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXFIFOHE</name>
-              <description>Transmit FIFO half empty At least half
-              the number of words can be written into the FIFO.
-              This bit is cleared when the FIFO becomes half+1
-              full.</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXFIFOHF</name>
-              <description>Receive FIFO half full There are at
-              least half the number of words in the FIFO. This bit
-              is cleared when the FIFO becomes half+1
-              empty.</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXFIFOF</name>
-              <description>Transmit FIFO full This is a hardware
-              status flag only, does not generate an interrupt.
-              This bit is cleared when one FIFO location becomes
-              empty.</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXFIFOF</name>
-              <description>Receive FIFO full This bit is cleared
-              when one FIFO location becomes empty.</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXFIFOE</name>
-              <description>Transmit FIFO empty This bit is cleared
-              when one FIFO location becomes full.</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXFIFOE</name>
-              <description>Receive FIFO empty This is a hardware
-              status flag only, does not generate an interrupt.
-              This bit is cleared when one FIFO location becomes
-              full.</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSYD0</name>
-              <description>Inverted value of SDMMC_D0 line (Busy),
-              sampled at the end of a CMD response and a second
-              time 2 SDMMC_CK cycles after the CMD response. This
-              bit is reset to not busy when the SDMMCD0 line
-              changes from busy to not busy. This bit does not
-              signal busy due to data transfer. This is a hardware
-              status flag only, it does not generate an
-              interrupt.</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSYD0END</name>
-              <description>end of SDMMC_D0 Busy following a CMD
-              response detected. This indicates only end of busy
-              following a CMD response. This bit does not signal
-              busy due to data transfer. Interrupt flag is cleared
-              by writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SDIOIT</name>
-              <description>SDIO interrupt received. Interrupt flag
-              is cleared by writing corresponding interrupt clear
-              bit in SDMMC_ICR.</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKFAIL</name>
-              <description>Boot acknowledgment received (boot
-              acknowledgment check fail). Interrupt flag is cleared
-              by writing corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKTIMEOUT</name>
-              <description>Boot acknowledgment timeout. Interrupt
-              flag is cleared by writing corresponding interrupt
-              clear bit in SDMMC_ICR.</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>VSWEND</name>
-              <description>Voltage switch critical timing section
-              completion. Interrupt flag is cleared by writing
-              corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CKSTOP</name>
-              <description>SDMMC_CK stopped in Voltage switch
-              procedure. Interrupt flag is cleared by writing
-              corresponding interrupt clear bit in
-              SDMMC_ICR.</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMATE</name>
-              <description>IDMA transfer error. Interrupt flag is
-              cleared by writing corresponding interrupt clear bit
-              in SDMMC_ICR.</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMABTC</name>
-              <description>IDMA buffer transfer complete. interrupt
-              flag is cleared by writing corresponding interrupt
-              clear bit in SDMMC_ICR.</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_ICR</name>
-          <displayName>SDMMC_ICR</displayName>
-          <description>The SDMMC_ICR register is a write-only
-          register. Writing a bit with 1 clears the corresponding
-          bit in the SDMMC_STAR status register.</description>
-          <addressOffset>0x38</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CCRCFAILC</name>
-              <description>CCRCFAIL flag clear bit Set by software
-              to clear the CCRCFAIL flag.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DCRCFAILC</name>
-              <description>DCRCFAIL flag clear bit Set by software
-              to clear the DCRCFAIL flag.</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CTIMEOUTC</name>
-              <description>CTIMEOUT flag clear bit Set by software
-              to clear the CTIMEOUT flag.</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTIMEOUTC</name>
-              <description>DTIMEOUT flag clear bit Set by software
-              to clear the DTIMEOUT flag.</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXUNDERRC</name>
-              <description>TXUNDERR flag clear bit Set by software
-              to clear TXUNDERR flag.</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXOVERRC</name>
-              <description>RXOVERR flag clear bit Set by software
-              to clear the RXOVERR flag.</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDRENDC</name>
-              <description>CMDREND flag clear bit Set by software
-              to clear the CMDREND flag.</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDSENTC</name>
-              <description>CMDSENT flag clear bit Set by software
-              to clear the CMDSENT flag.</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DATAENDC</name>
-              <description>DATAEND flag clear bit Set by software
-              to clear the DATAEND flag.</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DHOLDC</name>
-              <description>DHOLD flag clear bit Set by software to
-              clear the DHOLD flag.</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBCKENDC</name>
-              <description>DBCKEND flag clear bit Set by software
-              to clear the DBCKEND flag.</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DABORTC</name>
-              <description>DABORT flag clear bit Set by software to
-              clear the DABORT flag.</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSYD0ENDC</name>
-              <description>BUSYD0END flag clear bit Set by software
-              to clear the BUSYD0END flag.</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SDIOITC</name>
-              <description>SDIOIT flag clear bit Set by software to
-              clear the SDIOIT flag.</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKFAILC</name>
-              <description>ACKFAIL flag clear bit Set by software
-              to clear the ACKFAIL flag.</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKTIMEOUTC</name>
-              <description>ACKTIMEOUT flag clear bit Set by
-              software to clear the ACKTIMEOUT flag.</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>VSWENDC</name>
-              <description>VSWEND flag clear bit Set by software to
-              clear the VSWEND flag.</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CKSTOPC</name>
-              <description>CKSTOP flag clear bit Set by software to
-              clear the CKSTOP flag.</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMATEC</name>
-              <description>IDMA transfer error clear bit Set by
-              software to clear the IDMATE flag.</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMABTCC</name>
-              <description>IDMA buffer transfer complete clear bit
-              Set by software to clear the IDMABTC
-              flag.</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_MASKR</name>
-          <displayName>SDMMC_MASKR</displayName>
-          <description>The interrupt mask register determines which
-          status flags generate an interrupt request by setting the
-          corresponding bit to 1.</description>
-          <addressOffset>0x3C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CCRCFAILIE</name>
-              <description>Command CRC fail interrupt enable Set
-              and cleared by software to enable/disable interrupt
-              caused by command CRC failure.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DCRCFAILIE</name>
-              <description>Data CRC fail interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by data CRC failure.</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CTIMEOUTIE</name>
-              <description>Command timeout interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by command timeout.</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DTIMEOUTIE</name>
-              <description>Data timeout interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by data timeout.</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXUNDERRIE</name>
-              <description>Tx FIFO underrun error interrupt enable
-              Set and cleared by software to enable/disable
-              interrupt caused by Tx FIFO underrun
-              error.</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXOVERRIE</name>
-              <description>Rx FIFO overrun error interrupt enable
-              Set and cleared by software to enable/disable
-              interrupt caused by Rx FIFO overrun
-              error.</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDRENDIE</name>
-              <description>Command response received interrupt
-              enable Set and cleared by software to enable/disable
-              interrupt caused by receiving command
-              response.</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CMDSENTIE</name>
-              <description>Command sent interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by sending command.</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DATAENDIE</name>
-              <description>Data end interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by data end.</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DHOLDIE</name>
-              <description>Data hold interrupt enable Set and
-              cleared by software to enable/disable the interrupt
-              generated when sending new data is hold in the DPSM
-              Wait_S state.</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBCKENDIE</name>
-              <description>Data block end interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by data block end.</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DABORTIE</name>
-              <description>Data transfer aborted interrupt enable
-              Set and cleared by software to enable/disable
-              interrupt caused by a data transfer being
-              aborted.</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXFIFOHEIE</name>
-              <description>Tx FIFO half empty interrupt enable Set
-              and cleared by software to enable/disable interrupt
-              caused by Tx FIFO half empty.</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXFIFOHFIE</name>
-              <description>Rx FIFO half full interrupt enable Set
-              and cleared by software to enable/disable interrupt
-              caused by Rx FIFO half full.</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>RXFIFOFIE</name>
-              <description>Rx FIFO full interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by Rx FIFO full.</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TXFIFOEIE</name>
-              <description>Tx FIFO empty interrupt enable Set and
-              cleared by software to enable/disable interrupt
-              caused by Tx FIFO empty.</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSYD0ENDIE</name>
-              <description>BUSYD0END interrupt enable Set and
-              cleared by software to enable/disable the interrupt
-              generated when SDMMC_D0 signal changes from busy to
-              NOT busy following a CMD response.</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SDIOITIE</name>
-              <description>SDIO mode interrupt received interrupt
-              enable Set and cleared by software to enable/disable
-              the interrupt generated when receiving the SDIO mode
-              interrupt.</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKFAILIE</name>
-              <description>Acknowledgment Fail interrupt enable Set
-              and cleared by software to enable/disable interrupt
-              caused by acknowledgment Fail.</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACKTIMEOUTIE</name>
-              <description>Acknowledgment timeout interrupt enable
-              Set and cleared by software to enable/disable
-              interrupt caused by acknowledgment
-              timeout.</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>VSWENDIE</name>
-              <description>Voltage switch critical timing section
-              completion interrupt enable Set and cleared by
-              software to enable/disable the interrupt generated
-              when voltage switch critical timing section
-              completion.</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CKSTOPIE</name>
-              <description>Voltage Switch clock stopped interrupt
-              enable Set and cleared by software to enable/disable
-              interrupt caused by Voltage Switch clock
-              stopped.</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMABTCIE</name>
-              <description>IDMA buffer transfer complete interrupt
-              enable Set and cleared by software to enable/disable
-              the interrupt generated when the IDMA has transferred
-              all data belonging to a memory buffer.</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_ACKTIMER</name>
-          <displayName>SDMMC_ACKTIMER</displayName>
-          <description>The SDMMC_ACKTIMER register contains the
-          acknowledgment timeout period, in SDMMC_CK bus clock
-          periods. A counter loads the value from the
-          SDMMC_ACKTIMER register, and starts decrementing when the
-          data path state machine (DPSM) enters the Wait_Ack state.
-          If the timer reaches 0 while the DPSM is in this states,
-          the acknowledgment timeout status flag is
-          set.</description>
-          <addressOffset>0x40</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>ACKTIME</name>
-              <description>Boot acknowledgment timeout period This
-              bit can only be written by firmware when CPSM is
-              disabled (CPSMEN = 0). Boot acknowledgment timeout
-              period expressed in card bus clock
-              periods.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>25</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_IDMACTRLR</name>
-          <displayName>SDMMC_IDMACTRLR</displayName>
-          <description>The receive and transmit FIFOs can be read
-          or written as 32-bit wide registers. The FIFOs contain 32
-          entries on 32 sequential addresses. This allows the CPU
-          to use its load and store multiple operands to read
-          from/write to the FIFO.</description>
-          <addressOffset>0x50</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IDMAEN</name>
-              <description>IDMA enable This bit can only be written
-              by firmware when DPSM is inactive (DPSMACT =
-              0).</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMABMODE</name>
-              <description>Buffer mode selection. This bit can only
-              be written by firmware when DPSM is inactive (DPSMACT
-              = 0).</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>IDMABACT</name>
-              <description>Double buffer mode active buffer
-              indication This bit can only be written by firmware
-              when DPSM is inactive (DPSMACT = 0). When IDMA is
-              enabled this bit is toggled by
-              hardware.</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_IDMABSIZER</name>
-          <displayName>SDMMC_IDMABSIZER</displayName>
-          <description>The SDMMC_IDMABSIZER register contains the
-          buffers size when in double buffer
-          configuration.</description>
-          <addressOffset>0x54</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IDMABNDT</name>
-              <description>Number of transfers per buffer. This
-              8-bit value shall be multiplied by 8 to get the size
-              of the buffer in 32-bit words and by 32 to get the
-              size of the buffer in bytes. Example: IDMABNDT =
-              0x01: buffer size = 8 words = 32 bytes. These bits
-              can only be written by firmware when DPSM is inactive
-              (DPSMACT = 0).</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_IDMABASE0R</name>
-          <displayName>SDMMC_IDMABASE0R</displayName>
-          <description>The SDMMC_IDMABASE0R register contains the
-          memory buffer base address in single buffer configuration
-          and the buffer 0 base address in double buffer
-          configuration.</description>
-          <addressOffset>0x58</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IDMABASE0</name>
-              <description>Buffer 0 memory base address bits
-              [31:2], shall be word aligned (bit [1:0] are always 0
-              and read only). This register can be written by
-              firmware when DPSM is inactive (DPSMACT = 0), and can
-              dynamically be written by firmware when DPSM active
-              (DPSMACT = 1) and memory buffer 0 is inactive
-              (IDMABACT = 1).</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_IDMABASE1R</name>
-          <displayName>SDMMC_IDMABASE1R</displayName>
-          <description>The SDMMC_IDMABASE1R register contains the
-          double buffer configuration second buffer memory base
-          address.</description>
-          <addressOffset>0x5C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IDMABASE1</name>
-              <description>Buffer 1 memory base address, shall be
-              word aligned (bit [1:0] are always 0 and read only).
-              This register can be written by firmware when DPSM is
-              inactive (DPSMACT = 0), and can dynamically be
-              written by firmware when DPSM active (DPSMACT = 1)
-              and memory buffer 1 is inactive (IDMABACT =
-              0).</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_RESPCMDR</name>
-          <displayName>SDMMC_RESPCMDR</displayName>
-          <description>The SDMMC_RESPCMDR register contains the
-          command index field of the last command response
-          received. If the command response transmission does not
-          contain the command index field (long or OCR response),
-          the RESPCMD field is unknown, although it must contain
-          111111b (the value of the reserved field from the
-          response).</description>
-          <addressOffset>0x60</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>RESPCMD</name>
-              <description>Response command index Read-only bit
-              field. Contains the command index of the last command
-              response received.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>6</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_FIFOR</name>
-          <displayName>SDMMC_FIFOR</displayName>
-          <description>The receive and transmit FIFOs can be only
-          read or written as word (32-bit) wide registers. The
-          FIFOs contain 16 entries on sequential addresses. This
-          allows the CPU to use its load and store multiple
-          operands to read from/write to the FIFO.When accessing
-          SDMMC_FIFOR with half word or byte access an AHB bus
-          fault is generated.</description>
-          <addressOffset>0x80</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>FIFODATA</name>
-              <description>Receive and transmit FIFO data This
-              register can only be read or written by firmware when
-              the DPSM is active (DPSMACT=1). The FIFO data
-              occupies 16 entries of 32-bit words.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_VER</name>
-          <displayName>SDMMC_VER</displayName>
-          <description>SDMMC IP version register</description>
-          <addressOffset>0x3F4</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00000010</resetValue>
-          <fields>
-            <field>
-              <name>MINREV</name>
-              <description>IP minor revision number.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>4</bitWidth>
-            </field>
-            <field>
-              <name>MAJREV</name>
-              <description>IP major revision number.</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>4</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SDMMC_ID</name>
-          <displayName>SDMMC_ID</displayName>
-          <description>SDMMC IP identification
-          register</description>
-          <addressOffset>0x3F8</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x00140022</resetValue>
-          <fields>
-            <field>
-              <name>IP_ID</name>
-              <description>SDMMC IP identification.</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
       <name>HDMI_CEC</name>
       <description>HDMI-CEC controller</description>
       <groupName>HDMI_CEC</groupName>
@@ -55603,6 +54437,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>HDMI_CEC</name>
+        <description>HDMI-CEC global interrupt</description>
+        <value>93</value>
+      </interrupt>
       <registers>
         <register>
           <name>CEC_CR</name>
@@ -55948,11 +54787,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>Floating point unit interrupt</description>
         <value>81</value>
       </interrupt>
-      <interrupt>
-        <name>FPU</name>
-        <description>Floating point interrupt</description>
-        <value>81</value>
-      </interrupt>
       <registers>
         <register>
           <name>FPCCR</name>
@@ -56196,7 +55030,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <description>MPU control register</description>
           <addressOffset>0x4</addressOffset>
           <size>0x20</size>
-          <access>read-only</access>
+          <access>read-write</access>
           <resetValue>0X00000000</resetValue>
           <fields>
             <field>
@@ -56797,8 +55631,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>SHCRS</name>
-          <displayName>SHCRS</displayName>
+          <name>SHCSR</name>
+          <displayName>SHCSR</displayName>
           <description>System handler control and state
           register</description>
           <addressOffset>0x24</addressOffset>
@@ -57231,6 +56065,859 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>DISOOFP</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>SDIO</name>
+      <description>Secure digital input/output
+      interface</description>
+      <groupName>SDIO</groupName>
+      <baseAddress>0x40012C00</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>SDIO</name>
+        <description>SDIO global interrupt</description>
+        <value>49</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>POWER</name>
+          <displayName>POWER</displayName>
+          <description>power control register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PWRCTRL</name>
+              <description>PWRCTRL</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLKCR</name>
+          <displayName>CLKCR</displayName>
+          <description>SDI clock control register</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>HWFC_EN</name>
+              <description>HW Flow Control enable</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NEGEDGE</name>
+              <description>SDIO_CK dephasing selection
+              bit</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WIDBUS</name>
+              <description>Wide bus mode enable bit</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>BYPASS</name>
+              <description>Clock divider bypass enable
+              bit</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PWRSAV</name>
+              <description>Power saving configuration
+              bit</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLKEN</name>
+              <description>Clock enable bit</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLKDIV</name>
+              <description>Clock divide factor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ARG</name>
+          <displayName>ARG</displayName>
+          <description>argument register</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CMDARG</name>
+              <description>Command argument</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CMD</name>
+          <displayName>CMD</displayName>
+          <description>command register</description>
+          <addressOffset>0xC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CE_ATACMD</name>
+              <description>CE-ATA command</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>nIEN</name>
+              <description>not Interrupt Enable</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ENCMDcompl</name>
+              <description>Enable CMD completion</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDIOSuspend</name>
+              <description>SD I/O suspend command</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CPSMEN</name>
+              <description>Command path state machine (CPSM) Enable
+              bit</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WAITPEND</name>
+              <description>CPSM Waits for ends of data transfer
+              (CmdPend internal signal).</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WAITINT</name>
+              <description>CPSM waits for interrupt
+              request</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WAITRESP</name>
+              <description>Wait for response bits</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CMDINDEX</name>
+              <description>Command index</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RESPCMD</name>
+          <displayName>RESPCMD</displayName>
+          <description>command response register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RESPCMD</name>
+              <description>Response command index</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RESP1</name>
+          <displayName>RESP1</displayName>
+          <description>response 1..4 register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CARDSTATUS1</name>
+              <description>Card Status</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RESP2</name>
+          <displayName>RESP2</displayName>
+          <description>response 1..4 register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CARDSTATUS2</name>
+              <description>Card Status</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RESP3</name>
+          <displayName>RESP3</displayName>
+          <description>response 1..4 register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CARDSTATUS3</name>
+              <description>Card Status</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RESP4</name>
+          <displayName>RESP4</displayName>
+          <description>response 1..4 register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CARDSTATUS4</name>
+              <description>Card Status</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DTIMER</name>
+          <displayName>DTIMER</displayName>
+          <description>data timer register</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATATIME</name>
+              <description>Data timeout period</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DLEN</name>
+          <displayName>DLEN</displayName>
+          <description>data length register</description>
+          <addressOffset>0x28</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATALENGTH</name>
+              <description>Data length value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DCTRL</name>
+          <displayName>DCTRL</displayName>
+          <description>data control register</description>
+          <addressOffset>0x2C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SDIOEN</name>
+              <description>SD I/O enable functions</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RWMOD</name>
+              <description>Read wait mode</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RWSTOP</name>
+              <description>Read wait stop</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RWSTART</name>
+              <description>Read wait start</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DBLOCKSIZE</name>
+              <description>Data block size</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>DMAEN</name>
+              <description>DMA enable bit</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTMODE</name>
+              <description>Data transfer mode selection 1: Stream
+              or SDIO multibyte data transfer.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTDIR</name>
+              <description>Data transfer direction
+              selection</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTEN</name>
+              <description>DTEN</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DCOUNT</name>
+          <displayName>DCOUNT</displayName>
+          <description>data counter register</description>
+          <addressOffset>0x30</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATACOUNT</name>
+              <description>Data count value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STA</name>
+          <displayName>STA</displayName>
+          <description>status register</description>
+          <addressOffset>0x34</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CEATAEND</name>
+              <description>CE-ATA command completion signal
+              received for CMD61</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDIOIT</name>
+              <description>SDIO interrupt received</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXDAVL</name>
+              <description>Data available in receive
+              FIFO</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXDAVL</name>
+              <description>Data available in transmit
+              FIFO</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOE</name>
+              <description>Receive FIFO empty</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOE</name>
+              <description>Transmit FIFO empty</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOF</name>
+              <description>Receive FIFO full</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOF</name>
+              <description>Transmit FIFO full</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOHF</name>
+              <description>Receive FIFO half full: there are at
+              least 8 words in the FIFO</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOHE</name>
+              <description>Transmit FIFO half empty: at least 8
+              words can be written into the FIFO</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXACT</name>
+              <description>Data receive in progress</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXACT</name>
+              <description>Data transmit in progress</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDACT</name>
+              <description>Command transfer in
+              progress</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DBCKEND</name>
+              <description>Data block sent/received (CRC check
+              passed)</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STBITERR</name>
+              <description>Start bit not detected on all data
+              signals in wide bus mode</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DATAEND</name>
+              <description>Data end (data counter, SDIDCOUNT, is
+              zero)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDSENT</name>
+              <description>Command sent (no response
+              required)</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDREND</name>
+              <description>Command response received (CRC check
+              passed)</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXOVERR</name>
+              <description>Received FIFO overrun
+              error</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXUNDERR</name>
+              <description>Transmit FIFO underrun
+              error</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTIMEOUT</name>
+              <description>Data timeout</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTIMEOUT</name>
+              <description>Command response timeout</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DCRCFAIL</name>
+              <description>Data block sent/received (CRC check
+              failed)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CCRCFAIL</name>
+              <description>Command response received (CRC check
+              failed)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ICR</name>
+          <displayName>ICR</displayName>
+          <description>interrupt clear register</description>
+          <addressOffset>0x38</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CEATAENDC</name>
+              <description>CEATAEND flag clear bit</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDIOITC</name>
+              <description>SDIOIT flag clear bit</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DBCKENDC</name>
+              <description>DBCKEND flag clear bit</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STBITERRC</name>
+              <description>STBITERR flag clear bit</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DATAENDC</name>
+              <description>DATAEND flag clear bit</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDSENTC</name>
+              <description>CMDSENT flag clear bit</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDRENDC</name>
+              <description>CMDREND flag clear bit</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXOVERRC</name>
+              <description>RXOVERR flag clear bit</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXUNDERRC</name>
+              <description>TXUNDERR flag clear bit</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTIMEOUTC</name>
+              <description>DTIMEOUT flag clear bit</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTIMEOUTC</name>
+              <description>CTIMEOUT flag clear bit</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DCRCFAILC</name>
+              <description>DCRCFAIL flag clear bit</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CCRCFAILC</name>
+              <description>CCRCFAIL flag clear bit</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MASK</name>
+          <displayName>MASK</displayName>
+          <description>mask register</description>
+          <addressOffset>0x3C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CEATAENDIE</name>
+              <description>CE-ATA command completion signal
+              received interrupt enable</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDIOITIE</name>
+              <description>SDIO mode interrupt received interrupt
+              enable</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXDAVLIE</name>
+              <description>Data available in Rx FIFO interrupt
+              enable</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXDAVLIE</name>
+              <description>Data available in Tx FIFO interrupt
+              enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOEIE</name>
+              <description>Rx FIFO empty interrupt
+              enable</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOEIE</name>
+              <description>Tx FIFO empty interrupt
+              enable</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOFIE</name>
+              <description>Rx FIFO full interrupt
+              enable</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOFIE</name>
+              <description>Tx FIFO full interrupt
+              enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXFIFOHFIE</name>
+              <description>Rx FIFO half full interrupt
+              enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXFIFOHEIE</name>
+              <description>Tx FIFO half empty interrupt
+              enable</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXACTIE</name>
+              <description>Data receive acting interrupt
+              enable</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXACTIE</name>
+              <description>Data transmit acting interrupt
+              enable</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDACTIE</name>
+              <description>Command acting interrupt
+              enable</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DBCKENDIE</name>
+              <description>Data block end interrupt
+              enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STBITERRIE</name>
+              <description>Start bit error interrupt
+              enable</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DATAENDIE</name>
+              <description>Data end interrupt enable</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDSENTIE</name>
+              <description>Command sent interrupt
+              enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CMDRENDIE</name>
+              <description>Command response received interrupt
+              enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RXOVERRIE</name>
+              <description>Rx FIFO overrun error interrupt
+              enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TXUNDERRIE</name>
+              <description>Tx FIFO underrun error interrupt
+              enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTIMEOUTIE</name>
+              <description>Data timeout interrupt
+              enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTIMEOUTIE</name>
+              <description>Command timeout interrupt
+              enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DCRCFAILIE</name>
+              <description>Data CRC fail interrupt
+              enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CCRCFAILIE</name>
+              <description>Command CRC fail interrupt
+              enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FIFOCNT</name>
+          <displayName>FIFOCNT</displayName>
+          <description>FIFO counter register</description>
+          <addressOffset>0x48</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FIFOCOUNT</name>
+              <description>Remaining number of words to be written
+              to or read from the FIFO.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>24</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FIFO</name>
+          <displayName>FIFO</displayName>
+          <description>data FIFO register</description>
+          <addressOffset>0x80</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FIFOData</name>
+              <description>Receive and transmit FIFO
+              data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
             </field>
           </fields>
         </register>
