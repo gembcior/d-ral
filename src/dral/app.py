@@ -1,15 +1,17 @@
-from rich.traceback import install as traceback
+import argparse
+import importlib.resources as resources
+import os
+from pathlib import Path
+import re
+import sys
+
 from rich.console import Console
-from .generator import Generator
+from rich.traceback import install as traceback
+
 from .adapter.svd import SvdAdapter
 from .format import SingleFileFormat
 from .format import CMakeLibFormat
-from pathlib import Path
-import importlib.resources as resources
-import argparse
-import sys
-import re
-import os
+from .generator import Generator
 
 
 def get_svd_file(brand, chip):
@@ -53,12 +55,18 @@ def main():
     parser.add_argument("-f", "--format", default="cmake",
                         help="Output format.")
 
+    parser.add_argument("-w", "--white_list", default="",
+                        help="Registers white list.")
+
+    parser.add_argument("-b", "--black_list", default="",
+                        help="Registers black list.")
+
     args = parser.parse_args()
 
     pattern = [
-        re.compile("^(\/*.+)\.svd$"),
-        re.compile("^([a-zA-Z0-9]+\.?){1}[a-zA-Z0-9]+$"),
-        re.compile("^([a-zA-Z0-9]+\.?){2}[a-zA-Z0-9]+$"),
+        re.compile(r"^(\/*.+)\.svd$"),
+        re.compile(r"^([a-zA-Z0-9]+\.?){1}[a-zA-Z0-9]+$"),
+        re.compile(r"^([a-zA-Z0-9]+\.?){2}[a-zA-Z0-9]+$"),
     ]
     if re.search(pattern[0], args.svd) is not None:
         svd_path = Path(args.svd).expanduser().resolve()
