@@ -1,10 +1,16 @@
-from abc import ABC
-from typing import List
+from typing import overload, List
 
-class BaseType(ABC):
-    def __init__(self) -> None:
-        self._name = ""
-        self._description = ""
+
+class BaseType:
+    @overload
+    def __init__(self, name: None, description: None) -> None:
+        ...
+    @overload
+    def __init__(self, name: str, description: str) -> None:
+        ...
+    def __init__(self, name = None, description = None):
+        self._name = name
+        self._description = description
 
     def __eq__(self, other: 'BaseType') -> bool:
         if (other.name is not None) and (self._name is not None):
@@ -25,10 +31,17 @@ class BaseType(ABC):
 
 
 class Field(BaseType):
-    def __init__(self) -> None:
-        self._position = 0
-        self._mask = 0
-        self._width = 0
+    @overload
+    def __init__(self, name: None, description: None, position: None, mask: None, width: None) -> None:
+        ...
+    @overload
+    def __init__(self, name: str, description: str, position: int, mask: int, width: int) -> None:
+        ...
+    def __init__(self, name = None, description = None, position = None, mask = None, width = None):
+        super().__init__(name, description)
+        self._position = position
+        self._mask = mask
+        self._width = width
 
     def __eq__(self, other: 'Field') -> bool:
         if not super().__eq__(other):
@@ -58,16 +71,38 @@ class Field(BaseType):
 
 
 class Register(BaseType):
-    def __init__(self) -> None:
-        self._offset = 0
-        self._size = 0
-        self._access = ""
-        self._reset_value = 0
-        self._fields = []
+    @overload
+    def __init__(self, name: None, description: None, offset: None, size: None, access: None, reset_value: None, fields: None) -> None:
+        ...
+    @overload
+    def __init__(self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, fields: List[Field]) -> None:
+        ...
+    def __init__(self, name = None, description = None, offset = None, size = None, access = None, reset_value = None, fields = None):
+        super().__init__(name, description)
+        self._offset = offset
+        self._size = size
+        self._access = access
+        self._reset_value = reset_value
+        self._fields = fields
 
     def __eq__(self, other: 'Register') -> bool:
         if not super().__eq__(other):
             return False
+        if (other.offset is not None) and (self._offset is not None):
+            if other.offset != self._offset:
+                return False
+        if (other.size is not None) and (self._size is not None):
+            if other.size != self._size:
+                return False
+        if (other.access is not None) and (self._access is not None):
+            if other.access != other._access:
+                return False
+        if (other.reset_value is not None) and (self._reset_value is not None):
+            if other.reset_value != other._reset_value:
+                return False
+        if (other.fields is not None) and (self.fields is not None):
+            if other.fields != other._fields:
+                return False
         return True
 
     @property
@@ -92,13 +127,26 @@ class Register(BaseType):
 
 
 class Peripheral(BaseType):
-    def __init__(self) -> None:
-        self._address = 0
-        self._registers = []
+    @overload
+    def __init__(self, name: None, description: None, address: None, registers: None) -> None:
+        ...
+    @overload
+    def __init__(self, name: str, description: str, address: int, registers: List[Register]) -> None:
+        ...
+    def __init__(self, name = None, description = None, address = None, registers = None):
+        super().__init__(name, description)
+        self._address = address
+        self._registers = registers
 
     def __eq__(self, other: 'Peripheral') -> bool:
         if not super().__eq__(other):
             return False
+        if (other.address is not None) and (self._address is not None):
+            if other.address != self._address:
+                return False
+        if (other.registers is not None) and (self._registers is not None):
+            if other.registers != self._registers:
+                return False
         return True
 
     @property
@@ -111,8 +159,15 @@ class Peripheral(BaseType):
 
 
 class Device(BaseType):
-    def __init__(self) -> None:
-        self._peripherals = []
+    @overload
+    def __init__(self, name: None, description: None, peripherals: None):
+        ...
+    @overload
+    def __init__(self, name: str, description: str, peripherals: List[Peripheral]):
+        ...
+    def __init__(self, name = None, description = None, peripherals = None):
+        super().__init__(name, description)
+        self._peripherals = peripherals
 
     def __eq__(self, other: 'Device') -> bool:
         if not super().__eq__(other):
