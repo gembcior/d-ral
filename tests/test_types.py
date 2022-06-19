@@ -4,7 +4,7 @@ import yaml
 import dral
 
 
-class TestDRalTypes:
+class TestDralTypes:
 
     @pytest.fixture
     def test_fields(self, datadir):

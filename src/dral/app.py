@@ -97,6 +97,9 @@ def main():
         else:
             output_format = CMakeLibFormat(output, "dral")
         output_format.make(objects)
+        import yaml
+        with open(f'{args.svd.replace(".", "_")}.yaml', 'w') as dump:
+            yaml.dump(objects, dump)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
