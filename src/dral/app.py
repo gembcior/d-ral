@@ -87,19 +87,16 @@ def main():
     template = args.template
     generator = Generator(adapter, template=template)
 
-    info = "[bold green]Generating D-Ral files..."
-    with console.status(info):
-        objects = generator.generate(exclude=exclude)
-        if args.format == "cmake":
-            output_format = CMakeLibFormat(output, "dral")
-        elif args.format == "single":
-            output_format = SingleFileFormat(output, "dral.h")
-        else:
-            output_format = CMakeLibFormat(output, "dral")
-        output_format.make(objects)
-        import yaml
-        with open(f'{args.svd.replace(".", "_")}.yaml', 'w') as dump:
-            yaml.dump(objects, dump)
+    # info = "[bold green]Generating D-Ral files..."
+    # with console.status(info):
+    #     objects = generator.generate(exclude=exclude)
+    #     if args.format == "cmake":
+    #         output_format = CMakeLibFormat(output, "dral")
+    #     elif args.format == "single":
+    #         output_format = SingleFileFormat(output, "dral.h")
+    #     else:
+    #         output_format = CMakeLibFormat(output, "dral")
+    #     output_format.make(objects)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 

@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from ..types import Device
+
 
 class BaseAdapter(ABC):
     """
@@ -47,10 +49,10 @@ class BaseAdapter(ABC):
     convert()
         Returns data structure used by d-ral generator
     """
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
 
     @abstractmethod
-    def convert(self):
+    def convert(self) -> Device:
         pass

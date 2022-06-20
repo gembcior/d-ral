@@ -1,19 +1,7 @@
 from .objects import DralDevice
 from pathlib import Path
 import importlib.resources as resources
-
-
-class Utils:
-    def __init__(self, template, template_path=None):
-        self._template = template
-        self._template_path = template_path
-
-    def get_template(self, name):
-        if self._template_path is not None:
-            return Path(self._template_path) / name
-        else:
-            with resources.path("dral.templates.%s" % self._template, name) as template:
-                return Path(template)
+from .utils import Utils
 
 
 class Generator:
@@ -43,13 +31,13 @@ class Generator:
         pass
 
     def generate(self, exclude=[], white_list=[], black_list=[]):
-        data = self._adapter.convert()
-        if white_list: 
-            data["device"]["peripherals"] = self._white_list_filter(data, white_list)
-        if black_list:
-            data["device"]["peripherals"] = self._black_list_filter(data, white_list)
-        device = DralDevice(data["device"], utils=self._utils, exclude=exclude)
-        objects = device.parse()
+        device = self._adapter.convert()
+        # if white_list: 
+        #     data["device"]["peripherals"] = self._white_list_filter(data, white_list)
+        # if black_list:
+        #     data["device"]["peripherals"] = self._black_list_filter(data, white_list)
+        dral_device = DralDevice(device, utils=self._utils, exclude=exclude)
+        objects = dral_device.parse()
         if self._utils.get_template("model.dral").exists():
             objects.append({"name": "register_model", "content": self._get_register_model_content()})
         return objects

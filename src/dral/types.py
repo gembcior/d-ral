@@ -1,4 +1,4 @@
-from typing import overload, List
+from typing import List, overload
 
 
 class BaseType:
@@ -57,6 +57,10 @@ class Field(BaseType):
                 return False
         return True
 
+    def __str__(self) -> str:
+        # TODO consider something more sophisticated
+        return f"{self._name} | {self._position} | {self._width} | 0x{self._mask:02X}"
+
     @property
     def position(self) -> int:
         return self._position
@@ -105,6 +109,14 @@ class Register(BaseType):
                 return False
         return True
 
+    def __str__(self) -> str:
+        # TODO consider something more sophisticated
+        register = f"{self._name} | {self._offset} | {self._size}\n"
+        if self._fields:
+            for field in self._fields:
+                register += f"    {field}\n"
+        return register
+
     @property
     def offset(self) -> int:
         return self._offset
@@ -124,6 +136,38 @@ class Register(BaseType):
     @property
     def fields(self) -> List[Field]:
         return self._fields
+
+
+class RegisterBank(Register):
+    @overload
+    def __init__(self, name: None, description: None, offset: None, size: None, access: None, reset_value: None, bank_offset: None, fields: None) -> None:
+        ...
+    @overload
+    def __init__(self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, bank_offset: int, fields: List[Field]) -> None:
+        ...
+    def __init__(self, name = None, description = None, offset = None, size = None, access = None, reset_value = None, bank_offset = None, fields = None):
+        super().__init__(name, description, offset, size, access, reset_value, fields)
+        self._bank_offset = bank_offset
+
+    def __eq__(self, other: 'RegisterBank') -> bool:
+        if not super().__eq__(other):
+            return False
+        if (other.bank_offset is not None) and (self._bank_offset is not None):
+            if other.bank_offset != self._bank_offset:
+                return False
+        return True
+
+    def __str__(self) -> str:
+        # TODO consider something more sophisticated
+        register = f"{self._name} | {self._offset} | {self._size} | {self._bank_offset}\n"
+        if self._fields:
+            for field in self._fields:
+                register += f"    {field}\n"
+        return register
+
+    @property
+    def bank_offset(self) -> int:
+        return self._bank_offset
 
 
 class Peripheral(BaseType):
@@ -148,6 +192,15 @@ class Peripheral(BaseType):
             if other.registers != self._registers:
                 return False
         return True
+
+    def __str__(self) -> str:
+        # TODO consider something more sophisticated
+        peripheral = f"{self._name} | {self._address:08X}\n"
+        if self._registers:
+            for register in self._registers:
+                for substr in str(register).split('\n'):
+                    peripheral += f"    {substr}\n"
+        return peripheral
 
     @property
     def address(self) -> int:
@@ -176,6 +229,15 @@ class Device(BaseType):
             if other.peripherals != self._peripherals:
                 return False
         return True
+
+    def __str__(self) -> str:
+        # TODO consider something more sophisticated
+        device = f"{self._name}\n"
+        if self._peripherals:
+            for peripheral in self._peripherals:
+                for substr in str(peripheral).split('\n'):
+                    device += f"    {substr}\n"
+        return device
 
     @property
     def peripherals(self) -> List[Peripheral]:
