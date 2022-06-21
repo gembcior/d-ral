@@ -1,0 +1,27 @@
+field1:
+  name: Field1
+  description: Field1Description
+  position: 24
+  mask: 0xFFFF
+  width: 32
+
+field2:
+  name: Field2
+  description: Field2Description
+  position: 9
+  mask: 0x7FFFF
+  width: 16
+
+field3:
+  name: Field3
+  description: Field3Description
+  position: 0
+  mask: 0x77
+  width: 7
+
+field4:
+  name: Field4
+  description: Field4Description
+  position: 1
+  mask: 0x1
+  width: 8

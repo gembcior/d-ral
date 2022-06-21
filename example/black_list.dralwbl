@@ -1,0 +1,9 @@
+peripherals:
+  - name: sample_name
+    registers:
+      - name: sample_name
+      - name: sample_name
+  - name: sample_name
+  - name: sample_name
+    registers:
+      - name: sample_name
