@@ -14,12 +14,13 @@ class TestDralGenerator:
 
     @pytest.mark.parametrize("device", ["stm32.f4.stm32f411", "stm32.f4.stm32f446"])
     @pytest.mark.parametrize("template", ["default"])
-    def test_supported_svd_devices(self, device, template, datadir):
+    def test_supported_svd_devices(self, device: str, template: str, datadir: Path):
         svd = device.split(".")
         svd_path = self.get_svd_file("%s.%s" % (svd[0], svd[1]), svd[2])
         adapter = dral.adapter.SvdAdapter(svd_path)
-        generator = dral.Generator(adapter, template=template)
-        objects = generator.generate()
+        device_data = adapter.convert()
+        generator = dral.Generator(template=template)
+        objects = generator.generate(device_data)
 
         with open(datadir / "generator" / template / f"{device.replace('.', '_')}.yaml") as data:
             expected_output = yaml.load(data, Loader=yaml.FullLoader)

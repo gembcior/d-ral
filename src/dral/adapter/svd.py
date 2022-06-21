@@ -11,7 +11,7 @@ class SvdAdapter(BaseAdapter):
     def __init__(self, svd_file: Path) -> None:
         self._svd_file = svd_file
 
-    def _get_fields(self, svd_fields: Dict) -> List[Field]:
+    def _get_fields(self, svd_fields: List[Dict]) -> List[Field]:
         fields_list = []
         for field in svd_fields:
             new_field = Field(
@@ -23,7 +23,7 @@ class SvdAdapter(BaseAdapter):
             fields_list.append(new_field)
         return fields_list
 
-    def _get_registers(self, svd_registers: Dict) -> List[Register]:
+    def _get_registers(self, svd_registers: List[Dict]) -> List[Register]:
         registers_list = []
         for register in svd_registers:
             fields = []
@@ -40,7 +40,7 @@ class SvdAdapter(BaseAdapter):
             registers_list.append(new_register)
         return registers_list
 
-    def _get_peripherals(self, svd_peripherals: Dict) -> List[Peripheral]:
+    def _get_peripherals(self, svd_peripherals: List[Dict]) -> List[Peripheral]:
         peripherals_list = []
         for peripheral in svd_peripherals:
             registers = []

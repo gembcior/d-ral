@@ -9,6 +9,7 @@ from rich.console import Console
 from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
+from .adapter.white_black_list import WhiteBlackListAdapter
 from .format import SingleFileFormat
 from .format import CMakeLibFormat
 from .generator import Generator
@@ -47,19 +48,22 @@ def main():
     parser.add_argument("output", help="Path where files will be generated.")
 
     parser.add_argument("-t", "--template", default="default",
+                        choices=['default'],
                         help="Specify template used to generate files.")
 
     parser.add_argument("-e", "--exclude", action="extend", nargs="+", type=str,
+                        choices=['peripherals', 'registers', 'banks', 'fields'],
                         help="Exclude items from generation.")
 
     parser.add_argument("-f", "--format", default="cmake",
+                        choices=['single', 'cmake'],
                         help="Output format.")
 
-    parser.add_argument("-w", "--white_list", default="",
-                        help="Registers white list.")
+    parser.add_argument("-w", "--white_list", default=None,
+                        help="Paripherals and Registers white list.")
 
-    parser.add_argument("-b", "--black_list", default="",
-                        help="Registers black list.")
+    parser.add_argument("-b", "--black_list", default=None,
+                        help="Peripherals and Registers black list.")
 
     args = parser.parse_args()
 
@@ -81,22 +85,37 @@ def main():
         parser.print_help()
         sys.exit()
 
+    if args.white_list:
+        white_list_file = Path(args.white_list).expanduser().resolve()
+        white_list_adapter = WhiteBlackListAdapter(white_list_file)
+        white_list = white_list_adapter.convert()
+    else:
+        white_list = None
+
+    if args.black_list:
+        black_list_file = Path(args.black_list).expanduser().resolve()
+        black_list_adapter = WhiteBlackListAdapter(black_list_file)
+        black_list = black_list_adapter.convert()
+    else:
+        black_list = None
+
     exclude = args.exclude if args.exclude else []
     output = Path(args.output).expanduser().resolve()
     adapter = SvdAdapter(svd_path)
     template = args.template
-    generator = Generator(adapter, template=template)
+    generator = Generator(template=template)
 
-    # info = "[bold green]Generating D-Ral files..."
-    # with console.status(info):
-    #     objects = generator.generate(exclude=exclude)
-    #     if args.format == "cmake":
-    #         output_format = CMakeLibFormat(output, "dral")
-    #     elif args.format == "single":
-    #         output_format = SingleFileFormat(output, "dral.h")
-    #     else:
-    #         output_format = CMakeLibFormat(output, "dral")
-    #     output_format.make(objects)
+    info = "[bold green]Generating D-Ral files..."
+    with console.status(info):
+        device = adapter.convert()
+        objects = generator.generate(device, exclude=exclude, white_list=white_list, black_list=black_list)
+        if args.format == "cmake":
+            output_format = CMakeLibFormat(output, "dral")
+        elif args.format == "single":
+            output_format = SingleFileFormat(output, "dral.h")
+        else:
+            output_format = CMakeLibFormat(output, "dral")
+        output_format.make(objects)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
