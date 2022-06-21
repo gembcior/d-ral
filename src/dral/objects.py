@@ -315,7 +315,7 @@ class DralRegister(DralObject):
             elif pattern[1] == "access":
                 substitution = "%s" % self._root.access
             elif pattern[1] == "resetValue":
-                substitution = "0x%08X" % self._root.resetValue
+                substitution = "0x%08X" % self._root.reset_value
             elif pattern[1] == "fields":
                 substitution = self._get_children_content()
         return substitution
