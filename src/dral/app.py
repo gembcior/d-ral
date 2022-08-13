@@ -13,11 +13,7 @@ from .adapter.white_black_list import WhiteBlackListAdapter
 from .format import SingleFileFormat
 from .format import CMakeLibFormat
 from .generator import Generator
-
-
-def get_svd_file(brand, chip):
-    with resources.path("dral.devices.%s" % brand, "%s.svd" % chip) as svd:
-        return Path(svd)
+from .utils import Utils
 
 
 def main():
@@ -76,10 +72,10 @@ def main():
         svd_path = Path(args.svd).expanduser().resolve()
     elif re.search(pattern[1], args.svd) is not None:
         svd = args.svd.split(".")
-        svd_path = get_svd_file(svd[0], svd[1])
+        svd_path = Utils.get_svd_file(svd[0], svd[1])
     elif re.search(pattern[2], args.svd) is not None:
         svd = args.svd.split(".")
-        svd_path = get_svd_file("%s.%s" % (svd[0], svd[1]), svd[2])
+        svd_path = Utils.get_svd_file("%s.%s" % (svd[0], svd[1]), svd[2])
     else:
         console.print("ERROR: Invalid svd argument format!\n")
         parser.print_help()

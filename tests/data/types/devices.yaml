@@ -1,0 +1,241 @@
+device0:
+  name: device0
+  description: description for device0
+  peripherals:
+    - name: peripheral0
+      description: description for peripheral0
+      address: 0x1000
+      registers:
+        - name: register0
+          description: description for register0
+          offset: 0
+          size: 32
+          access: rw
+          reset_value: 0
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+        - name: register1
+          description: description for register1
+          offset: 4
+          size: 32
+          access: rw
+          reset_value: 0xF
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+    - name: peripheral1
+      description: description for peripheral1
+      address: 0x2000
+      registers:
+        - name: register0
+          description: description for register0
+          offset: 0
+          size: 32
+          access: rw
+          reset_value: 0
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+        - name: register1
+          description: description for register1
+          offset: 4
+          size: 32
+          access: rw
+          reset_value: 0xF
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+
+device1:
+  name: device1
+  description: description for device1
+  peripherals:
+    - name: peripheral0
+      description: description for peripheral0
+      address: 0x1000
+      registers:
+        - name: register0
+          description: description for register0
+          offset: 0
+          size: 32
+          access: rw
+          reset_value: 0
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+        - name: register1
+          description: description for register1
+          offset: 4
+          size: 32
+          access: rw
+          reset_value: 0xF
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+    - name: peripheral1
+      description: description for peripheral1
+      address: 0x2000
+      registers:
+        - name: register0
+          description: description for register0
+          offset: 0
+          size: 32
+          access: rw
+          reset_value: 0
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12
+        - name: register1
+          description: description for register1
+          offset: 4
+          size: 32
+          access: rw
+          reset_value: 0xF
+          fields:
+            - name: field0
+              description: description for field0
+              position: 0
+              mask: 0xF
+              width: 4
+            - name: field1
+              description: description for field1
+              position: 4
+              mask: 0xFF
+              width: 8
+            - name: field2
+              description: description for field2
+              position: 12
+              mask: 0x7F
+              width: 7
+            - name: field3
+              description: description for field3
+              position: 19
+              mask: 0xFFF
+              width: 12

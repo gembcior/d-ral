@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Dict, List, Union, overload
 
 from .objects import DralDevice
@@ -13,14 +12,11 @@ class Generator:
     @overload
     def __init__(self, template: str) -> None:
         ...
-    @overload
-    def __init__(self, template: str, template_path: Path) -> None:
-        ...
-    def __init__(self, template = "default", template_path = None):
-        self._utils = Utils(template, template_path)
+    def __init__(self, template = "default"):
+        self._template = template
 
     def _get_register_model_content(self):
-        model = self._utils.get_template("model.dral")
+        model = Utils.get_template(self._template, "model.dral")
         with open(model, "r") as f:
             return f.read()
 
@@ -51,8 +47,8 @@ class Generator:
             device = self._white_list_filter(device, white_list)
         if black_list:
             device = self._black_list_filter(device, black_list)
-        dral_device = DralDevice(device, utils=self._utils, exclude=exclude)
+        dral_device = DralDevice(device, self._template, exclude=exclude)
         objects = dral_device.parse()
-        if self._utils.get_template("model.dral").exists():
+        if Utils.get_template(self._template, "model.dral").exists():
             objects.append({"name": "register_model", "content": self._get_register_model_content()})
         return objects

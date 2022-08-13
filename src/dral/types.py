@@ -1,24 +1,22 @@
-from typing import List, overload
+from abc import ABC, abstractmethod
+from typing import Dict, List, Union
+
+import yaml
 
 
-class BaseType:
-    @overload
-    def __init__(self, name: None, description: None) -> None:
-        ...
-    @overload
-    def __init__(self, name: str, description: str) -> None:
-        ...
-    def __init__(self, name = None, description = None):
+class BaseType(ABC):
+    def __init__(self, name: str, description: str = ""):
         self._name = name
         self._description = description
 
+    def __str__(self) -> str:
+        return yaml.dump(self.asdict())
+
     def __eq__(self, other: 'BaseType') -> bool:
-        if (other.name is not None) and (self._name is not None):
-            if other.name != self._name:
-                return False
-        if (other.description is not None) and (self._description is not None):
-            if other.description != self._description:
-                return False
+        if other.name != self._name:
+            return False
+        if other.description != self._description:
+            return False
         return True
 
     @property
@@ -29,15 +27,14 @@ class BaseType:
     def description(self) -> str:
         return self._description
 
+    @abstractmethod
+    def asdict(self) -> Dict:
+        pass
+
 
 class Field(BaseType):
-    @overload
-    def __init__(self, name: None, description: None, position: None, mask: None, width: None) -> None:
-        ...
-    @overload
-    def __init__(self, name: str, description: str, position: int, mask: int, width: int) -> None:
-        ...
-    def __init__(self, name = None, description = None, position = None, mask = None, width = None):
+    def __init__(self, name: str, description: str = "",
+            position: Union[None, int] = None, mask: Union[None, int] = None, width: Union[None, int] = None) -> None:
         super().__init__(name, description)
         self._position = position
         self._mask = mask
@@ -57,31 +54,31 @@ class Field(BaseType):
                 return False
         return True
 
-    def __str__(self) -> str:
-        # TODO consider something more sophisticated
-        return f"{self._name} | {self._position} | {self._width} | 0x{self._mask:02X}"
+    def asdict(self) -> Dict:
+        return {'name': self._name,
+                'description': self._description,
+                'position': self._position,
+                'width': self._width,
+                'mask': self._mask}
 
     @property
-    def position(self) -> int:
+    def position(self) -> Union[None, int]:
         return self._position
 
     @property
-    def mask(self) -> int:
+    def mask(self) -> Union[None, int]:
         return self._mask
 
     @property
-    def width(self) -> int:
+    def width(self) -> Union[None, int]:
         return self._width
 
 
 class Register(BaseType):
-    @overload
-    def __init__(self, name: None, description: None, offset: None, size: None, access: None, reset_value: None, fields: None) -> None:
-        ...
-    @overload
-    def __init__(self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, fields: List[Field]) -> None:
-        ...
-    def __init__(self, name = None, description = None, offset = None, size = None, access = None, reset_value = None, fields = None):
+    def __init__(self, name: str, description: str = "",
+            offset: Union[None, int] = None, size: Union[None, int] = None,
+            access: Union[None, str] = None, reset_value: Union[None, int] = None,
+            fields: List[Field] = []):
         super().__init__(name, description)
         self._offset = offset
         self._size = size
@@ -109,28 +106,29 @@ class Register(BaseType):
                 return False
         return True
 
-    def __str__(self) -> str:
-        # TODO consider something more sophisticated
-        register = f"{self._name} | {self._offset} | {self._size}\n"
-        if self._fields:
-            for field in self._fields:
-                register += f"    {field}\n"
-        return register
+    def asdict(self) -> Dict:
+        return {'name': self._name,
+                'description': self._description,
+                'offset': self._offset,
+                'size': self._size,
+                'access': self._access,
+                'reset_value': self._reset_value,
+                'fields': [field.asdict() for field in self._fields]}
 
     @property
-    def offset(self) -> int:
+    def offset(self) -> Union[None, int]:
         return self._offset
 
     @property
-    def size(self) -> int:
+    def size(self) -> Union[None, int]:
         return self._size
 
     @property
-    def access(self) -> str:
+    def access(self) -> Union[None, str]:
         return self._access
 
     @property
-    def reset_value(self) -> int:
+    def reset_value(self) -> Union[None, int]:
         return self._reset_value
 
     @property
@@ -139,13 +137,11 @@ class Register(BaseType):
 
 
 class RegisterBank(Register):
-    @overload
-    def __init__(self, name: None, description: None, offset: None, size: None, access: None, reset_value: None, bank_offset: None, fields: None) -> None:
-        ...
-    @overload
-    def __init__(self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, bank_offset: int, fields: List[Field]) -> None:
-        ...
-    def __init__(self, name = None, description = None, offset = None, size = None, access = None, reset_value = None, bank_offset = None, fields = None):
+    def __init__(self, name: str, description: str = "",
+            offset: Union[None, int] = None, size: Union[None, int] = None,
+            access: Union[None, str] = None, reset_value: Union[None, int] = None,
+            bank_offset: Union[None, int] = None,
+            fields: List[Field] = []):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
 
@@ -157,27 +153,14 @@ class RegisterBank(Register):
                 return False
         return True
 
-    def __str__(self) -> str:
-        # TODO consider something more sophisticated
-        register = f"{self._name} | {self._offset} | {self._size} | {self._bank_offset}\n"
-        if self._fields:
-            for field in self._fields:
-                register += f"    {field}\n"
-        return register
-
     @property
-    def bank_offset(self) -> int:
+    def bank_offset(self) -> Union[None, int]:
         return self._bank_offset
 
 
 class Peripheral(BaseType):
-    @overload
-    def __init__(self, name: None, description: None, address: None, registers: None) -> None:
-        ...
-    @overload
-    def __init__(self, name: str, description: str, address: int, registers: List[Register]) -> None:
-        ...
-    def __init__(self, name = None, description = None, address = None, registers = None):
+    def __init__(self, name: str, description: str = "",
+            address: Union[None, int] = None, registers: List[Register] = []):
         super().__init__(name, description)
         self._address = address
         self._registers = registers
@@ -193,17 +176,14 @@ class Peripheral(BaseType):
                 return False
         return True
 
-    def __str__(self) -> str:
-        # TODO consider something more sophisticated
-        peripheral = f"{self._name} | {self._address:08X}\n"
-        if self._registers:
-            for register in self._registers:
-                for substr in str(register).split('\n'):
-                    peripheral += f"    {substr}\n"
-        return peripheral
+    def asdict(self) -> Dict:
+        return {'name': self._name,
+                'description': self._description,
+                'address': self._address,
+                'registers': [register.asdict() for register in self._registers]}
 
     @property
-    def address(self) -> int:
+    def address(self) -> Union[None, int]:
         return self._address
 
     @property
@@ -212,13 +192,8 @@ class Peripheral(BaseType):
 
 
 class Device(BaseType):
-    @overload
-    def __init__(self, name: None, description: None, peripherals: None):
-        ...
-    @overload
-    def __init__(self, name: str, description: str, peripherals: List[Peripheral]):
-        ...
-    def __init__(self, name = None, description = None, peripherals = None):
+    def __init__(self, name: str, description: str = "",
+            peripherals: List[Peripheral] = []):
         super().__init__(name, description)
         self._peripherals = peripherals
 
@@ -230,14 +205,10 @@ class Device(BaseType):
                 return False
         return True
 
-    def __str__(self) -> str:
-        # TODO consider something more sophisticated
-        device = f"{self._name}\n"
-        if self._peripherals:
-            for peripheral in self._peripherals:
-                for substr in str(peripheral).split('\n'):
-                    device += f"    {substr}\n"
-        return device
+    def asdict(self) -> Dict:
+        return {'name': self._name,
+                'description': self._description,
+                'peripherals': [peripheral.asdict() for peripheral in self._peripherals]}
 
     @property
     def peripherals(self) -> List[Peripheral]:

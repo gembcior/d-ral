@@ -3,13 +3,15 @@ from pathlib import Path
 
 
 class Utils:
-    def __init__(self, template, template_path=None):
-        self._template = template
-        self._template_path = template_path
+    def __init__(self) -> None:
+        pass
 
-    def get_template(self, name):
-        if self._template_path is not None:
-            return Path(self._template_path) / name
-        else:
-            with resources.path("dral.templates.%s" % self._template, name) as template:
-                return Path(template)
+    @staticmethod
+    def get_template(template: str, name: str) -> Path:
+        with resources.path("dral.templates.%s" % template, name) as item:
+            return Path(item)
+
+    @staticmethod
+    def get_svd_file(brand: str, chip: str) -> Path:
+        with resources.path("dral.devices.%s" % brand, "%s.svd" % chip) as svd:
+            return Path(svd)

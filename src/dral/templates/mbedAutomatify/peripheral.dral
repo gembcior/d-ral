@@ -1,0 +1,11 @@
+from ..base import Peripheral
+
+class [dral]peripheral.name%capitalize[#dral](Peripheral):
+    [dral]peripheral.registers[#dral]
+
+    def __init__(self, proxy):
+        super().__init__("[dral]peripheral.name%lowercase[#dral]",
+                         "[dral]peripheral.description[#dral]",
+                         [dral]peripheral.address[#dral])
+
+        [dral]peripheral.registers.simple[#dral]

@@ -60,7 +60,7 @@
     \  {\n  public:\n    using byte3 = FieldModel<address, 24, 0x000000FF>;\n    using\
     \ byte2 = FieldModel<address, 16, 0x000000FF>;\n    using byte1 = FieldModel<address,\
     \ 8, 0x000000FF>;\n    using byte0 = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using dr = DrReg<BaseAddress + 0x0028>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
+    \npublic:\n  using dr = DrReg<BaseAddress + 0x0028>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
     \ */\n"
   name: DCMI
 - content: "#ifndef DRAL_STM32F446_FMC_H\n#define DRAL_STM32F446_FMC_H\n\n#include\
@@ -293,7 +293,7 @@
     \    using re = FieldModel<address, 0, 0x00000001>;\n    using modes1 = FieldModel<address,\
     \ 1, 0x00000003>;\n    using modes2 = FieldModel<address, 3, 0x00000003>;\n  \
     \  using busy = FieldModel<address, 5, 0x00000001>;\n  };\n\npublic:\n  using\
-    \ sdsr = SdsrReg<BaseAddress + 0x0158>;\n\nprivate:\n  template <uint32_t address,\
+    \ sdsr = SdsrReg<BaseAddress + 0x0158>;\nprivate:\n  template <uint32_t address,\
     \ uint32_t bankOffset>\n  class BtrxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using accmod = FieldModel<address, 28, 0x00000003,\
     \ bankOffset>;\n    using datlat = FieldModel<address, 24, 0x0000000F, bankOffset>;\n\
@@ -413,7 +413,7 @@
     \    using dbg_tim9_stop = FieldModel<address, 16, 0x00000001>;\n    using dbg_tim10_stop\
     \ = FieldModel<address, 17, 0x00000001>;\n    using dbg_tim11_stop = FieldModel<address,\
     \ 18, 0x00000001>;\n  };\n\npublic:\n  using dbgmcu_apb2_fz = Dbgmcu_apb2_fzReg<BaseAddress\
-    \ + 0x000C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_DBG_H */\n"
+    \ + 0x000C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DBG_H */\n"
   name: DBG
 - content: "#ifndef DRAL_STM32F446_DMA2_H\n#define DRAL_STM32F446_DMA2_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass dma2\n{\npublic:\n\
@@ -728,16 +728,16 @@
     \    using feie = FieldModel<address, 7, 0x00000001>;\n    using fs = FieldModel<address,\
     \ 3, 0x00000007>;\n    using dmdis = FieldModel<address, 2, 0x00000001>;\n   \
     \ using fth = FieldModel<address, 0, 0x00000003>;\n  };\n\npublic:\n  using s7fcr\
-    \ = S7fcrReg<BaseAddress + 0x00CC>;\n\nprivate:\n  template <uint32_t address,\
-    \ uint32_t bankOffset>\n  class SxcrBankReg: public RegisterBankModel<address,\
-    \ bankOffset>\n  {\n  public:\n    using chsel = FieldModel<address, 25, 0x00000007,\
-    \ bankOffset>;\n    using mburst = FieldModel<address, 23, 0x00000003, bankOffset>;\n\
-    \    using pburst = FieldModel<address, 21, 0x00000003, bankOffset>;\n    using\
-    \ ct = FieldModel<address, 19, 0x00000001, bankOffset>;\n    using dbm = FieldModel<address,\
-    \ 18, 0x00000001, bankOffset>;\n    using pl = FieldModel<address, 16, 0x00000003,\
-    \ bankOffset>;\n    using pincos = FieldModel<address, 15, 0x00000001, bankOffset>;\n\
-    \    using msize = FieldModel<address, 13, 0x00000003, bankOffset>;\n    using\
-    \ psize = FieldModel<address, 11, 0x00000003, bankOffset>;\n    using minc = FieldModel<address,\
+    \ = S7fcrReg<BaseAddress + 0x00CC>;\nprivate:\n  template <uint32_t address, uint32_t\
+    \ bankOffset>\n  class SxcrBankReg: public RegisterBankModel<address, bankOffset>\n\
+    \  {\n  public:\n    using chsel = FieldModel<address, 25, 0x00000007, bankOffset>;\n\
+    \    using mburst = FieldModel<address, 23, 0x00000003, bankOffset>;\n    using\
+    \ pburst = FieldModel<address, 21, 0x00000003, bankOffset>;\n    using ct = FieldModel<address,\
+    \ 19, 0x00000001, bankOffset>;\n    using dbm = FieldModel<address, 18, 0x00000001,\
+    \ bankOffset>;\n    using pl = FieldModel<address, 16, 0x00000003, bankOffset>;\n\
+    \    using pincos = FieldModel<address, 15, 0x00000001, bankOffset>;\n    using\
+    \ msize = FieldModel<address, 13, 0x00000003, bankOffset>;\n    using psize =\
+    \ FieldModel<address, 11, 0x00000003, bankOffset>;\n    using minc = FieldModel<address,\
     \ 10, 0x00000001, bankOffset>;\n    using pinc = FieldModel<address, 9, 0x00000001,\
     \ bankOffset>;\n    using circ = FieldModel<address, 8, 0x00000001, bankOffset>;\n\
     \    using dir = FieldModel<address, 6, 0x00000003, bankOffset>;\n    using pfctrl\
@@ -1082,16 +1082,16 @@
     \    using feie = FieldModel<address, 7, 0x00000001>;\n    using fs = FieldModel<address,\
     \ 3, 0x00000007>;\n    using dmdis = FieldModel<address, 2, 0x00000001>;\n   \
     \ using fth = FieldModel<address, 0, 0x00000003>;\n  };\n\npublic:\n  using s7fcr\
-    \ = S7fcrReg<BaseAddress + 0x00CC>;\n\nprivate:\n  template <uint32_t address,\
-    \ uint32_t bankOffset>\n  class SxcrBankReg: public RegisterBankModel<address,\
-    \ bankOffset>\n  {\n  public:\n    using chsel = FieldModel<address, 25, 0x00000007,\
-    \ bankOffset>;\n    using mburst = FieldModel<address, 23, 0x00000003, bankOffset>;\n\
-    \    using pburst = FieldModel<address, 21, 0x00000003, bankOffset>;\n    using\
-    \ ct = FieldModel<address, 19, 0x00000001, bankOffset>;\n    using dbm = FieldModel<address,\
-    \ 18, 0x00000001, bankOffset>;\n    using pl = FieldModel<address, 16, 0x00000003,\
-    \ bankOffset>;\n    using pincos = FieldModel<address, 15, 0x00000001, bankOffset>;\n\
-    \    using msize = FieldModel<address, 13, 0x00000003, bankOffset>;\n    using\
-    \ psize = FieldModel<address, 11, 0x00000003, bankOffset>;\n    using minc = FieldModel<address,\
+    \ = S7fcrReg<BaseAddress + 0x00CC>;\nprivate:\n  template <uint32_t address, uint32_t\
+    \ bankOffset>\n  class SxcrBankReg: public RegisterBankModel<address, bankOffset>\n\
+    \  {\n  public:\n    using chsel = FieldModel<address, 25, 0x00000007, bankOffset>;\n\
+    \    using mburst = FieldModel<address, 23, 0x00000003, bankOffset>;\n    using\
+    \ pburst = FieldModel<address, 21, 0x00000003, bankOffset>;\n    using ct = FieldModel<address,\
+    \ 19, 0x00000001, bankOffset>;\n    using dbm = FieldModel<address, 18, 0x00000001,\
+    \ bankOffset>;\n    using pl = FieldModel<address, 16, 0x00000003, bankOffset>;\n\
+    \    using pincos = FieldModel<address, 15, 0x00000001, bankOffset>;\n    using\
+    \ msize = FieldModel<address, 13, 0x00000003, bankOffset>;\n    using psize =\
+    \ FieldModel<address, 11, 0x00000003, bankOffset>;\n    using minc = FieldModel<address,\
     \ 10, 0x00000001, bankOffset>;\n    using pinc = FieldModel<address, 9, 0x00000001,\
     \ bankOffset>;\n    using circ = FieldModel<address, 8, 0x00000001, bankOffset>;\n\
     \    using dir = FieldModel<address, 6, 0x00000003, bankOffset>;\n    using pfctrl\
@@ -1398,8 +1398,8 @@
     \ cecsel = FieldModel<address, 26, 0x00000001>;\n    using ck48msel = FieldModel<address,\
     \ 27, 0x00000001>;\n    using sdiosel = FieldModel<address, 28, 0x00000001>;\n\
     \    using spdifsel = FieldModel<address, 29, 0x00000001>;\n  };\n\npublic:\n\
-    \  using dckcfgr2 = Dckcfgr2Reg<BaseAddress + 0x0094>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_RCC_H\
-    \ */\n"
+    \  using dckcfgr2 = Dckcfgr2Reg<BaseAddress + 0x0094>;\n\n};\n\n}\n\n#endif /*\
+    \ DRAL_STM32F446_RCC_H */\n"
   name: RCC
 - content: "#ifndef DRAL_STM32F446_GPIOH_H\n#define DRAL_STM32F446_GPIOH_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpioh\n{\npublic:\n\
@@ -1534,7 +1534,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H */\n"
   name: GPIOH
 - content: "#ifndef DRAL_STM32F446_GPIOG_H\n#define DRAL_STM32F446_GPIOG_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpiog\n{\npublic:\n\
@@ -1669,7 +1669,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H */\n"
   name: GPIOG
 - content: "#ifndef DRAL_STM32F446_GPIOF_H\n#define DRAL_STM32F446_GPIOF_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpiof\n{\npublic:\n\
@@ -1804,7 +1804,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H */\n"
   name: GPIOF
 - content: "#ifndef DRAL_STM32F446_GPIOE_H\n#define DRAL_STM32F446_GPIOE_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpioe\n{\npublic:\n\
@@ -1939,7 +1939,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H */\n"
   name: GPIOE
 - content: "#ifndef DRAL_STM32F446_GPIOD_H\n#define DRAL_STM32F446_GPIOD_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpiod\n{\npublic:\n\
@@ -2074,7 +2074,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H */\n"
   name: GPIOD
 - content: "#ifndef DRAL_STM32F446_GPIOC_H\n#define DRAL_STM32F446_GPIOC_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpioc\n{\npublic:\n\
@@ -2209,7 +2209,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H */\n"
   name: GPIOC
 - content: "#ifndef DRAL_STM32F446_GPIOB_H\n#define DRAL_STM32F446_GPIOB_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpiob\n{\npublic:\n\
@@ -2344,7 +2344,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H */\n"
   name: GPIOB
 - content: "#ifndef DRAL_STM32F446_GPIOA_H\n#define DRAL_STM32F446_GPIOA_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass gpioa\n{\npublic:\n\
@@ -2479,7 +2479,7 @@
     \ 12, 0x0000000F>;\n    using afrh10 = FieldModel<address, 8, 0x0000000F>;\n \
     \   using afrh9 = FieldModel<address, 4, 0x0000000F>;\n    using afrh8 = FieldModel<address,\
     \ 0, 0x0000000F>;\n  };\n\npublic:\n  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H */\n"
   name: GPIOA
 - content: "#ifndef DRAL_STM32F446_SYSCFG_H\n#define DRAL_STM32F446_SYSCFG_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass syscfg\n{\npublic:\n\
@@ -2516,7 +2516,7 @@
     \ template <uint32_t address>\n  class CmpcrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using ready = FieldModel<address, 8, 0x00000001>;\n    using\
     \ cmp_pd = FieldModel<address, 0, 0x00000001>;\n  };\n\npublic:\n  using cmpcr\
-    \ = CmpcrReg<BaseAddress + 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
+    \ = CmpcrReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
     \ */\n"
   name: SYSCFG
 - content: "#ifndef DRAL_STM32F446_SPI1_H\n#define DRAL_STM32F446_SPI1_H\n\n#include\
@@ -2570,7 +2570,7 @@
     \ address>\n  class I2sprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using mckoe = FieldModel<address, 9, 0x00000001>;\n    using odd = FieldModel<address,\
     \ 8, 0x00000001>;\n    using i2sdiv = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n};\n\n}\n\n#endif\
+    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif\
     \ /* DRAL_STM32F446_SPI1_H */\n"
   name: SPI1
 - content: "#ifndef DRAL_STM32F446_SPI2_H\n#define DRAL_STM32F446_SPI2_H\n\n#include\
@@ -2624,7 +2624,7 @@
     \ address>\n  class I2sprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using mckoe = FieldModel<address, 9, 0x00000001>;\n    using odd = FieldModel<address,\
     \ 8, 0x00000001>;\n    using i2sdiv = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n};\n\n}\n\n#endif\
+    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif\
     \ /* DRAL_STM32F446_SPI2_H */\n"
   name: SPI2
 - content: "#ifndef DRAL_STM32F446_SPI3_H\n#define DRAL_STM32F446_SPI3_H\n\n#include\
@@ -2678,7 +2678,7 @@
     \ address>\n  class I2sprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using mckoe = FieldModel<address, 9, 0x00000001>;\n    using odd = FieldModel<address,\
     \ 8, 0x00000001>;\n    using i2sdiv = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n};\n\n}\n\n#endif\
+    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif\
     \ /* DRAL_STM32F446_SPI3_H */\n"
   name: SPI3
 - content: "#ifndef DRAL_STM32F446_SPI4_H\n#define DRAL_STM32F446_SPI4_H\n\n#include\
@@ -2732,7 +2732,7 @@
     \ address>\n  class I2sprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using mckoe = FieldModel<address, 9, 0x00000001>;\n    using odd = FieldModel<address,\
     \ 8, 0x00000001>;\n    using i2sdiv = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n};\n\n}\n\n#endif\
+    \npublic:\n  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif\
     \ /* DRAL_STM32F446_SPI4_H */\n"
   name: SPI4
 - content: "#ifndef DRAL_STM32F446_ADC1_H\n#define DRAL_STM32F446_ADC1_H\n\n#include\
@@ -2824,7 +2824,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using jdr4 = Jdr4Reg<BaseAddress + 0x0048>;\n\
     \nprivate:\n  template <uint32_t address>\n  class DrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using data = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\n\
-    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template <uint32_t\
+    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template <uint32_t\
     \ address, uint32_t bankOffset>\n  class SmprxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<address, 0, 0xFFFFFFFF,\
     \ bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress + 0x000C,\
@@ -2923,7 +2923,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using jdr4 = Jdr4Reg<BaseAddress + 0x0048>;\n\
     \nprivate:\n  template <uint32_t address>\n  class DrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using data = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\n\
-    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template <uint32_t\
+    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template <uint32_t\
     \ address, uint32_t bankOffset>\n  class SmprxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<address, 0, 0xFFFFFFFF,\
     \ bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress + 0x000C,\
@@ -3022,7 +3022,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using jdr4 = Jdr4Reg<BaseAddress + 0x0048>;\n\
     \nprivate:\n  template <uint32_t address>\n  class DrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using data = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\n\
-    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template <uint32_t\
+    public:\n  using dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template <uint32_t\
     \ address, uint32_t bankOffset>\n  class SmprxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<address, 0, 0xFFFFFFFF,\
     \ bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress + 0x000C,\
@@ -3083,7 +3083,7 @@
     \ <uint32_t address>\n  class GtprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using gt = FieldModel<address, 8, 0x000000FF>;\n    using psc = FieldModel<address,\
     \ 0, 0x000000FF>;\n  };\n\npublic:\n  using gtpr = GtprReg<BaseAddress + 0x0018>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H */\n"
   name: USART6
 - content: "#ifndef DRAL_STM32F446_USART1_H\n#define DRAL_STM32F446_USART1_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass usart1\n{\npublic:\n\
@@ -3136,7 +3136,7 @@
     \ <uint32_t address>\n  class GtprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using gt = FieldModel<address, 8, 0x000000FF>;\n    using psc = FieldModel<address,\
     \ 0, 0x000000FF>;\n  };\n\npublic:\n  using gtpr = GtprReg<BaseAddress + 0x0018>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H */\n"
   name: USART1
 - content: "#ifndef DRAL_STM32F446_USART2_H\n#define DRAL_STM32F446_USART2_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass usart2\n{\npublic:\n\
@@ -3189,7 +3189,7 @@
     \ <uint32_t address>\n  class GtprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using gt = FieldModel<address, 8, 0x000000FF>;\n    using psc = FieldModel<address,\
     \ 0, 0x000000FF>;\n  };\n\npublic:\n  using gtpr = GtprReg<BaseAddress + 0x0018>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H */\n"
   name: USART2
 - content: "#ifndef DRAL_STM32F446_USART3_H\n#define DRAL_STM32F446_USART3_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass usart3\n{\npublic:\n\
@@ -3242,7 +3242,7 @@
     \ <uint32_t address>\n  class GtprReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using gt = FieldModel<address, 8, 0x000000FF>;\n    using psc = FieldModel<address,\
     \ 0, 0x000000FF>;\n  };\n\npublic:\n  using gtpr = GtprReg<BaseAddress + 0x0018>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H */\n"
   name: USART3
 - content: "#ifndef DRAL_STM32F446_DAC_H\n#define DRAL_STM32F446_DAC_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass dac\n{\npublic:\n\
@@ -3301,7 +3301,7 @@
     \ address>\n  class SrReg: public RegisterModel<address>\n  {\n  public:\n   \
     \ using dmaudr2 = FieldModel<address, 29, 0x00000001>;\n    using dmaudr1 = FieldModel<address,\
     \ 13, 0x00000001>;\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0034>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */\n"
   name: DAC
 - content: "#ifndef DRAL_STM32F446_FMPI2C_H\n#define DRAL_STM32F446_FMPI2C_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass fmpi2c\n{\npublic:\n\
@@ -3382,7 +3382,7 @@
     \ + 0x0024>;\n\nprivate:\n  template <uint32_t address>\n  class TxdrReg: public\
     \ RegisterModel<address>\n  {\n  public:\n    using txdata = FieldModel<address,\
     \ 0, 0x000000FF>;\n  };\n\npublic:\n  using txdr = TxdrReg<BaseAddress + 0x0028>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */\n"
   name: FMPI2C
 - content: "#ifndef DRAL_STM32F446_I2C3_H\n#define DRAL_STM32F446_I2C3_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass i2c3\n{\npublic:\n\
@@ -3444,7 +3444,7 @@
     \ <uint32_t address>\n  class FltrReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using dnf = FieldModel<address, 0, 0x0000000F>;\n    using anoff = FieldModel<address,\
     \ 4, 0x00000001>;\n  };\n\npublic:\n  using fltr = FltrReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H */\n"
   name: I2C3
 - content: "#ifndef DRAL_STM32F446_I2C2_H\n#define DRAL_STM32F446_I2C2_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass i2c2\n{\npublic:\n\
@@ -3506,7 +3506,7 @@
     \ <uint32_t address>\n  class FltrReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using dnf = FieldModel<address, 0, 0x0000000F>;\n    using anoff = FieldModel<address,\
     \ 4, 0x00000001>;\n  };\n\npublic:\n  using fltr = FltrReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H */\n"
   name: I2C2
 - content: "#ifndef DRAL_STM32F446_I2C1_H\n#define DRAL_STM32F446_I2C1_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass i2c1\n{\npublic:\n\
@@ -3568,7 +3568,7 @@
     \ <uint32_t address>\n  class FltrReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using dnf = FieldModel<address, 0, 0x0000000F>;\n    using anoff = FieldModel<address,\
     \ 4, 0x00000001>;\n  };\n\npublic:\n  using fltr = FltrReg<BaseAddress + 0x0024>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H */\n"
   name: I2C1
 - content: "#ifndef DRAL_STM32F446_IWDG_H\n#define DRAL_STM32F446_IWDG_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass iwdg\n{\npublic:\n\
@@ -3584,7 +3584,7 @@
     \nprivate:\n  template <uint32_t address>\n  class SrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using rvu = FieldModel<address, 1, 0x00000001>;\n    using\
     \ pvu = FieldModel<address, 0, 0x00000001>;\n  };\n\npublic:\n  using sr = SrReg<BaseAddress\
-    \ + 0x000C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H */\n"
+    \ + 0x000C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H */\n"
   name: IWDG
 - content: "#ifndef DRAL_STM32F446_WWDG_H\n#define DRAL_STM32F446_WWDG_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass wwdg\n{\npublic:\n\
@@ -3599,7 +3599,8 @@
     public:\n  using cfr = CfrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template <uint32_t\
     \ address>\n  class SrReg: public RegisterModel<address>\n  {\n  public:\n   \
     \ using ewif = FieldModel<address, 0, 0x00000001>;\n  };\n\npublic:\n  using sr\
-    \ = SrReg<BaseAddress + 0x0008>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_WWDG_H */\n"
+    \ = SrReg<BaseAddress + 0x0008>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_WWDG_H\
+    \ */\n"
   name: WWDG
 - content: "#ifndef DRAL_STM32F446_RTC_H\n#define DRAL_STM32F446_RTC_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass rtc\n{\npublic:\n\
@@ -3782,8 +3783,8 @@
     \ bkp18r = Bkp18rReg<BaseAddress + 0x0098>;\n\nprivate:\n  template <uint32_t\
     \ address>\n  class Bkp19rReg: public RegisterModel<address>\n  {\n  public:\n\
     \    using bkp = FieldModel<address, 0, 0xFFFFFFFF>;\n  };\n\npublic:\n  using\
-    \ bkp19r = Bkp19rReg<BaseAddress + 0x009C>;\n\nprivate:\n  template <uint32_t\
-    \ address, uint32_t bankOffset>\n  class AlrmxssrBankReg: public RegisterBankModel<address,\
+    \ bkp19r = Bkp19rReg<BaseAddress + 0x009C>;\nprivate:\n  template <uint32_t address,\
+    \ uint32_t bankOffset>\n  class AlrmxssrBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using maskss = FieldModel<address, 24, 0x0000000F,\
     \ bankOffset>;\n    using ss = FieldModel<address, 0, 0x00007FFF, bankOffset>;\n\
     \  };\n\npublic:\n  using alrmxssr = AlrmxssrBankReg<BaseAddress + 0x0044, 0x0004>;\n\
@@ -3836,7 +3837,7 @@
     \ 3, 0x00000001>;\n    using irlp = FieldModel<address, 2, 0x00000001>;\n    using\
     \ iren = FieldModel<address, 1, 0x00000001>;\n    using eie = FieldModel<address,\
     \ 0, 0x00000001>;\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */\n"
   name: UART4
 - content: "#ifndef DRAL_STM32F446_UART5_H\n#define DRAL_STM32F446_UART5_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass uart5\n{\npublic:\n\
@@ -3881,7 +3882,7 @@
     \ 3, 0x00000001>;\n    using irlp = FieldModel<address, 2, 0x00000001>;\n    using\
     \ iren = FieldModel<address, 1, 0x00000001>;\n    using eie = FieldModel<address,\
     \ 0, 0x00000001>;\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */\n"
   name: UART5
 - content: "#ifndef DRAL_STM32F446_C_ADC_H\n#define DRAL_STM32F446_C_ADC_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass c_adc\n{\npublic:\n\
@@ -3910,7 +3911,7 @@
     \  class CdrReg: public RegisterModel<address>\n  {\n  public:\n    using data2\
     \ = FieldModel<address, 16, 0x0000FFFF>;\n    using data1 = FieldModel<address,\
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using cdr = CdrReg<BaseAddress + 0x0008>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H */\n"
   name: C_ADC
 - content: "#ifndef DRAL_STM32F446_TIM1_H\n#define DRAL_STM32F446_TIM1_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim1\n{\npublic:\n\
@@ -4045,8 +4046,8 @@
     \ 12, 0x00000001>;\n    using ossr = FieldModel<address, 11, 0x00000001>;\n  \
     \  using ossi = FieldModel<address, 10, 0x00000001>;\n    using lock = FieldModel<address,\
     \ 8, 0x00000003>;\n    using dtg = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_TIM1_H */\n"
+    \npublic:\n  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_TIM1_H */\n"
   name: TIM1
 - content: "#ifndef DRAL_STM32F446_TIM8_H\n#define DRAL_STM32F446_TIM8_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim8\n{\npublic:\n\
@@ -4181,8 +4182,8 @@
     \ 12, 0x00000001>;\n    using ossr = FieldModel<address, 11, 0x00000001>;\n  \
     \  using ossi = FieldModel<address, 10, 0x00000001>;\n    using lock = FieldModel<address,\
     \ 8, 0x00000003>;\n    using dtg = FieldModel<address, 0, 0x000000FF>;\n  };\n\
-    \npublic:\n  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_TIM8_H */\n"
+    \npublic:\n  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_TIM8_H */\n"
   name: TIM8
 - content: "#ifndef DRAL_STM32F446_TIM2_H\n#define DRAL_STM32F446_TIM2_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim2\n{\npublic:\n\
@@ -4302,7 +4303,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
     \nprivate:\n  template <uint32_t address>\n  class OrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using itr1_rmp = FieldModel<address, 10, 0x00000003>;\n \
-    \ };\n\npublic:\n  using or = OrReg<BaseAddress + 0x0050>;\n};\n\n}\n\n#endif\
+    \ };\n\npublic:\n  using or = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif\
     \ /* DRAL_STM32F446_TIM2_H */\n"
   name: TIM2
 - content: "#ifndef DRAL_STM32F446_TIM3_H\n#define DRAL_STM32F446_TIM3_H\n\n#include\
@@ -4421,7 +4422,7 @@
     \ + 0x0048>;\n\nprivate:\n  template <uint32_t address>\n  class DmarReg: public\
     \ RegisterModel<address>\n  {\n  public:\n    using dmab = FieldModel<address,\
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */\n"
   name: TIM3
 - content: "#ifndef DRAL_STM32F446_TIM4_H\n#define DRAL_STM32F446_TIM4_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim4\n{\npublic:\n\
@@ -4539,7 +4540,7 @@
     \ + 0x0048>;\n\nprivate:\n  template <uint32_t address>\n  class DmarReg: public\
     \ RegisterModel<address>\n  {\n  public:\n    using dmab = FieldModel<address,\
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */\n"
   name: TIM4
 - content: "#ifndef DRAL_STM32F446_TIM5_H\n#define DRAL_STM32F446_TIM5_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim5\n{\npublic:\n\
@@ -4659,7 +4660,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
     \nprivate:\n  template <uint32_t address>\n  class OrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using it4_rmp = FieldModel<address, 6, 0x00000003>;\n  };\n\
-    \npublic:\n  using or = OrReg<BaseAddress + 0x0050>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H\
+    \npublic:\n  using or = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H\
     \ */\n"
   name: TIM5
 - content: "#ifndef DRAL_STM32F446_TIM9_H\n#define DRAL_STM32F446_TIM9_H\n\n#include\
@@ -4727,7 +4728,7 @@
     \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class Ccr2Reg: public RegisterModel<address>\n  {\n  public:\n    using ccr2\
     \ = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using ccr2 = Ccr2Reg<BaseAddress\
-    \ + 0x0038>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H */\n"
+    \ + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H */\n"
   name: TIM9
 - content: "#ifndef DRAL_STM32F446_TIM12_H\n#define DRAL_STM32F446_TIM12_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim12\n{\npublic:\n\
@@ -4794,7 +4795,7 @@
     \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class Ccr2Reg: public RegisterModel<address>\n  {\n  public:\n    using ccr2\
     \ = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using ccr2 = Ccr2Reg<BaseAddress\
-    \ + 0x0038>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H */\n"
+    \ + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H */\n"
   name: TIM12
 - content: "#ifndef DRAL_STM32F446_TIM10_H\n#define DRAL_STM32F446_TIM10_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim10\n{\npublic:\n\
@@ -4839,7 +4840,7 @@
     public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\nprivate:\n  template <uint32_t\
     \ address>\n  class Ccr1Reg: public RegisterModel<address>\n  {\n  public:\n \
     \   using ccr1 = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using\
-    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H\
+    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H\
     \ */\n"
   name: TIM10
 - content: "#ifndef DRAL_STM32F446_TIM13_H\n#define DRAL_STM32F446_TIM13_H\n\n#include\
@@ -4885,7 +4886,7 @@
     public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\nprivate:\n  template <uint32_t\
     \ address>\n  class Ccr1Reg: public RegisterModel<address>\n  {\n  public:\n \
     \   using ccr1 = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using\
-    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H\
+    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H\
     \ */\n"
   name: TIM13
 - content: "#ifndef DRAL_STM32F446_TIM14_H\n#define DRAL_STM32F446_TIM14_H\n\n#include\
@@ -4931,7 +4932,7 @@
     public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\nprivate:\n  template <uint32_t\
     \ address>\n  class Ccr1Reg: public RegisterModel<address>\n  {\n  public:\n \
     \   using ccr1 = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using\
-    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H\
+    \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H\
     \ */\n"
   name: TIM14
 - content: "#ifndef DRAL_STM32F446_TIM11_H\n#define DRAL_STM32F446_TIM11_H\n\n#include\
@@ -4980,7 +4981,7 @@
     \ ccr1 = Ccr1Reg<BaseAddress + 0x0034>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class OrReg: public RegisterModel<address>\n  {\n  public:\n    using rmp =\
     \ FieldModel<address, 0, 0x00000003>;\n  };\n\npublic:\n  using or = OrReg<BaseAddress\
-    \ + 0x0050>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H */\n"
+    \ + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H */\n"
   name: TIM11
 - content: "#ifndef DRAL_STM32F446_TIM6_H\n#define DRAL_STM32F446_TIM6_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass tim6\n{\npublic:\n\
@@ -5009,7 +5010,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using psc = PscReg<BaseAddress + 0x0028>;\n\
     \nprivate:\n  template <uint32_t address>\n  class ArrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using arr = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\n\
-    public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H\
+    public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H\
     \ */\n"
   name: TIM6
 - content: "#ifndef DRAL_STM32F446_TIM7_H\n#define DRAL_STM32F446_TIM7_H\n\n#include\
@@ -5039,7 +5040,7 @@
     \ 0, 0x0000FFFF>;\n  };\n\npublic:\n  using psc = PscReg<BaseAddress + 0x0028>;\n\
     \nprivate:\n  template <uint32_t address>\n  class ArrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using arr = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\n\
-    public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H\
+    public:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H\
     \ */\n"
   name: TIM7
 - content: "#ifndef DRAL_STM32F446_CRC_H\n#define DRAL_STM32F446_CRC_H\n\n#include\
@@ -5052,8 +5053,8 @@
     \ = FieldModel<address, 0, 0x000000FF>;\n  };\n\npublic:\n  using idr = IdrReg<BaseAddress\
     \ + 0x0004>;\n\nprivate:\n  template <uint32_t address>\n  class CrReg: public\
     \ RegisterModel<address>\n  {\n  public:\n    using cr = FieldModel<address, 0,\
-    \ 0x00000001>;\n  };\n\npublic:\n  using cr = CrReg<BaseAddress + 0x0008>;\n};\n\
-    \n}\n\n#endif /* DRAL_STM32F446_CRC_H */\n"
+    \ 0x00000001>;\n  };\n\npublic:\n  using cr = CrReg<BaseAddress + 0x0008>;\n\n\
+    };\n\n}\n\n#endif /* DRAL_STM32F446_CRC_H */\n"
   name: CRC
 - content: "#ifndef DRAL_STM32F446_OTG_FS_GLOBAL_H\n#define DRAL_STM32F446_OTG_FS_GLOBAL_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass otg_fs_global\n\
@@ -5194,14 +5195,14 @@
     \ <uint32_t address>\n  class Fs_dieptxf3Reg: public RegisterModel<address>\n\
     \  {\n  public:\n    using ineptxsa = FieldModel<address, 0, 0x0000FFFF>;\n  \
     \  using ineptxfd = FieldModel<address, 16, 0x0000FFFF>;\n  };\n\npublic:\n  using\
-    \ fs_dieptxf3 = Fs_dieptxf3Reg<BaseAddress + 0x010C>;\n\nprivate:\n  template\
-    \ <uint32_t address, uint32_t bankOffset>\n  class Fs_grxstsx_deviceBankReg: public\
-    \ RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using epnum = FieldModel<address,\
-    \ 0, 0x0000000F, bankOffset>;\n    using bcnt = FieldModel<address, 4, 0x000007FF,\
-    \ bankOffset>;\n    using dpid = FieldModel<address, 15, 0x00000003, bankOffset>;\n\
-    \    using pktsts = FieldModel<address, 17, 0x0000000F, bankOffset>;\n    using\
-    \ frmnum = FieldModel<address, 21, 0x0000000F, bankOffset>;\n  };\n\npublic:\n\
-    \  using fs_grxstsx_device = Fs_grxstsx_deviceBankReg<BaseAddress + 0x001C, 0x0004>;\n\
+    \ fs_dieptxf3 = Fs_dieptxf3Reg<BaseAddress + 0x010C>;\nprivate:\n  template <uint32_t\
+    \ address, uint32_t bankOffset>\n  class Fs_grxstsx_deviceBankReg: public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using epnum = FieldModel<address, 0, 0x0000000F,\
+    \ bankOffset>;\n    using bcnt = FieldModel<address, 4, 0x000007FF, bankOffset>;\n\
+    \    using dpid = FieldModel<address, 15, 0x00000003, bankOffset>;\n    using\
+    \ pktsts = FieldModel<address, 17, 0x0000000F, bankOffset>;\n    using frmnum\
+    \ = FieldModel<address, 21, 0x0000000F, bankOffset>;\n  };\n\npublic:\n  using\
+    \ fs_grxstsx_device = Fs_grxstsx_deviceBankReg<BaseAddress + 0x001C, 0x0004>;\n\
     \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class Fs_grxstsx_hostBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using epnum\
     \ = FieldModel<address, 0, 0x0000000F, bankOffset>;\n    using bcnt = FieldModel<address,\
@@ -5490,7 +5491,7 @@
     \ address>\n  class Fs_hctsiz7Reg: public RegisterModel<address>\n  {\n  public:\n\
     \    using xfrsiz = FieldModel<address, 0, 0x0007FFFF>;\n    using pktcnt = FieldModel<address,\
     \ 19, 0x000003FF>;\n    using dpid = FieldModel<address, 29, 0x00000003>;\n  };\n\
-    \npublic:\n  using fs_hctsiz7 = Fs_hctsiz7Reg<BaseAddress + 0x01F0>;\n\nprivate:\n\
+    \npublic:\n  using fs_hctsiz7 = Fs_hctsiz7Reg<BaseAddress + 0x01F0>;\nprivate:\n\
     \  template <uint32_t address, uint32_t bankOffset>\n  class Fs_hccharxBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using mpsiz\
     \ = FieldModel<address, 0, 0x000007FF, bankOffset>;\n    using epnum = FieldModel<address,\
@@ -5762,7 +5763,7 @@
     \ public RegisterModel<address>\n  {\n  public:\n    using rxdpid_stupcnt = FieldModel<address,\
     \ 29, 0x00000003>;\n    using pktcnt = FieldModel<address, 19, 0x000003FF>;\n\
     \    using xfrsiz = FieldModel<address, 0, 0x0007FFFF>;\n  };\n\npublic:\n  using\
-    \ doeptsiz3 = Doeptsiz3Reg<BaseAddress + 0x0370>;\n\nprivate:\n  template <uint32_t\
+    \ doeptsiz3 = Doeptsiz3Reg<BaseAddress + 0x0370>;\nprivate:\n  template <uint32_t\
     \ address, uint32_t bankOffset>\n  class DiepctlxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using epena = FieldModel<address, 31, 0x00000001,\
     \ bankOffset>;\n    using epdis = FieldModel<address, 30, 0x00000001, bankOffset>;\n\
@@ -5828,7 +5829,7 @@
     \  {\n  public:\n    using stppclk = FieldModel<address, 0, 0x00000001>;\n   \
     \ using gatehclk = FieldModel<address, 1, 0x00000001>;\n    using physusp = FieldModel<address,\
     \ 4, 0x00000001>;\n  };\n\npublic:\n  using fs_pcgcctl = Fs_pcgcctlReg<BaseAddress\
-    \ + 0x0000>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
   name: OTG_FS_PWRCLK
 - content: "#ifndef DRAL_STM32F446_CAN1_H\n#define DRAL_STM32F446_CAN1_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass can1\n{\npublic:\n\
@@ -7399,7 +7400,7 @@
     \ 28, 0x00000001>;\n    using fb29 = FieldModel<address, 29, 0x00000001>;\n  \
     \  using fb30 = FieldModel<address, 30, 0x00000001>;\n    using fb31 = FieldModel<address,\
     \ 31, 0x00000001>;\n  };\n\npublic:\n  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\n\
-    \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class TixrBankReg:\
+    private:\n  template <uint32_t address, uint32_t bankOffset>\n  class TixrBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using stid\
     \ = FieldModel<address, 21, 0x000007FF, bankOffset>;\n    using exid = FieldModel<address,\
     \ 3, 0x0003FFFF, bankOffset>;\n    using ide = FieldModel<address, 2, 0x00000001,\
@@ -9033,7 +9034,7 @@
     \ 28, 0x00000001>;\n    using fb29 = FieldModel<address, 29, 0x00000001>;\n  \
     \  using fb30 = FieldModel<address, 30, 0x00000001>;\n    using fb31 = FieldModel<address,\
     \ 31, 0x00000001>;\n  };\n\npublic:\n  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\n\
-    \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class TixrBankReg:\
+    private:\n  template <uint32_t address, uint32_t bankOffset>\n  class TixrBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using stid\
     \ = FieldModel<address, 21, 0x000007FF, bankOffset>;\n    using exid = FieldModel<address,\
     \ 3, 0x0003FFFF, bankOffset>;\n    using ide = FieldModel<address, 2, 0x00000001,\
@@ -9258,7 +9259,7 @@
     \ RegisterModel<address>\n  {\n  public:\n    \n  };\n\npublic:\n  using ipr24\
     \ = Ipr24Reg<BaseAddress + 0x0360>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class Ipr25Reg: public RegisterModel<address>\n  {\n  public:\n    \n  };\n\
-    \npublic:\n  using ipr25 = Ipr25Reg<BaseAddress + 0x0364>;\n\nprivate:\n  template\
+    \npublic:\n  using ipr25 = Ipr25Reg<BaseAddress + 0x0364>;\nprivate:\n  template\
     \ <uint32_t address, uint32_t bankOffset>\n  class IserxBankReg: public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using setena = FieldModel<address, 0, 0xFFFFFFFF,\
     \ bankOffset>;\n  };\n\npublic:\n  using iserx = IserxBankReg<BaseAddress + 0x0000,\
@@ -9326,7 +9327,7 @@
     \ = FieldModel<address, 7, 0x00000001>;\n    using rdp = FieldModel<address, 8,\
     \ 0x000000FF>;\n    using nwrp = FieldModel<address, 16, 0x000000FF>;\n    using\
     \ sprmod = FieldModel<address, 31, 0x00000001>;\n  };\n\npublic:\n  using optcr\
-    \ = OptcrReg<BaseAddress + 0x0014>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H\
+    \ = OptcrReg<BaseAddress + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H\
     \ */\n"
   name: FLASH
 - content: "#ifndef DRAL_STM32F446_EXTI_H\n#define DRAL_STM32F446_EXTI_H\n\n#include\
@@ -9437,7 +9438,7 @@
     \  using pr19 = FieldModel<address, 19, 0x00000001>;\n    using pr20 = FieldModel<address,\
     \ 20, 0x00000001>;\n    using pr21 = FieldModel<address, 21, 0x00000001>;\n  \
     \  using pr22 = FieldModel<address, 22, 0x00000001>;\n  };\n\npublic:\n  using\
-    \ pr = PrReg<BaseAddress + 0x0014>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H\
+    \ pr = PrReg<BaseAddress + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H\
     \ */\n"
   name: EXTI
 - content: "#ifndef DRAL_STM32F446_OTG_HS_GLOBAL_H\n#define DRAL_STM32F446_OTG_HS_GLOBAL_H\n\
@@ -9609,8 +9610,8 @@
     \ dpid = FieldModel<address, 15, 0x00000003>;\n    using pktsts = FieldModel<address,\
     \ 17, 0x0000000F>;\n    using frmnum = FieldModel<address, 21, 0x0000000F>;\n\
     \  };\n\npublic:\n  using otg_hs_grxstsp_peripheral = Otg_hs_grxstsp_peripheralReg<BaseAddress\
-    \ + 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n\
-    \  class Otg_hs_grxstsx_hostBankReg: public RegisterBankModel<address, bankOffset>\n\
+    \ + 0x0020>;\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
+    \ class Otg_hs_grxstsx_hostBankReg: public RegisterBankModel<address, bankOffset>\n\
     \  {\n  public:\n    using chnum = FieldModel<address, 0, 0x0000000F, bankOffset>;\n\
     \    using bcnt = FieldModel<address, 4, 0x000007FF, bankOffset>;\n    using dpid\
     \ = FieldModel<address, 15, 0x00000003, bankOffset>;\n    using pktsts = FieldModel<address,\
@@ -10174,7 +10175,7 @@
     \nprivate:\n  template <uint32_t address>\n  class Otg_hs_hcdma11Reg: public RegisterModel<address>\n\
     \  {\n  public:\n    using dmaaddr = FieldModel<address, 0, 0xFFFFFFFF>;\n  };\n\
     \npublic:\n  using otg_hs_hcdma11 = Otg_hs_hcdma11Reg<BaseAddress + 0x0274>;\n\
-    \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class Otg_hs_hccharxBankReg:\
+    private:\n  template <uint32_t address, uint32_t bankOffset>\n  class Otg_hs_hccharxBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using mpsiz\
     \ = FieldModel<address, 0, 0x000007FF, bankOffset>;\n    using epnum = FieldModel<address,\
     \ 11, 0x0000000F, bankOffset>;\n    using epdir = FieldModel<address, 15, 0x00000001,\
@@ -10671,7 +10672,7 @@
     \ public RegisterModel<address>\n  {\n  public:\n    using xfrsiz = FieldModel<address,\
     \ 0, 0x0007FFFF>;\n    using pktcnt = FieldModel<address, 19, 0x000003FF>;\n \
     \   using rxdpid_stupcnt = FieldModel<address, 29, 0x00000003>;\n  };\n\npublic:\n\
-    \  using otg_hs_doeptsiz4 = Otg_hs_doeptsiz4Reg<BaseAddress + 0x0390>;\n\nprivate:\n\
+    \  using otg_hs_doeptsiz4 = Otg_hs_doeptsiz4Reg<BaseAddress + 0x0390>;\nprivate:\n\
     \  template <uint32_t address, uint32_t bankOffset>\n  class Otg_hs_diepctlxBankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using mpsiz\
     \ = FieldModel<address, 0, 0x000007FF, bankOffset>;\n    using usbaep = FieldModel<address,\
@@ -10748,7 +10749,7 @@
     \  {\n  public:\n    using stppclk = FieldModel<address, 0, 0x00000001>;\n   \
     \ using gatehclk = FieldModel<address, 1, 0x00000001>;\n    using physusp = FieldModel<address,\
     \ 4, 0x00000001>;\n  };\n\npublic:\n  using otg_hs_pcgcr = Otg_hs_pcgcrReg<BaseAddress\
-    \ + 0x0000>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
   name: OTG_HS_PWRCLK
 - content: "#ifndef DRAL_STM32F446_SAI1_H\n#define DRAL_STM32F446_SAI1_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass sai1\n{\npublic:\n\
@@ -10858,7 +10859,7 @@
     \ address>\n  class GcrReg: public RegisterModel<address>\n  {\n  public:\n  \
     \  using syncin = FieldModel<address, 0, 0x00000003>;\n    using syncout = FieldModel<address,\
     \ 4, 0x00000003>;\n  };\n\npublic:\n  using gcr = GcrReg<BaseAddress + 0x0000>;\n\
-    \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class Xcr2BankReg:\
+    private:\n  template <uint32_t address, uint32_t bankOffset>\n  class Xcr2BankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using comp\
     \ = FieldModel<address, 14, 0x00000003, bankOffset>;\n    using cpl = FieldModel<address,\
     \ 13, 0x00000001, bankOffset>;\n    using mutecn = FieldModel<address, 7, 0x0000003F,\
@@ -10994,7 +10995,7 @@
     \ address>\n  class GcrReg: public RegisterModel<address>\n  {\n  public:\n  \
     \  using syncin = FieldModel<address, 0, 0x00000003>;\n    using syncout = FieldModel<address,\
     \ 4, 0x00000003>;\n  };\n\npublic:\n  using gcr = GcrReg<BaseAddress + 0x0000>;\n\
-    \nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n  class Xcr2BankReg:\
+    private:\n  template <uint32_t address, uint32_t bankOffset>\n  class Xcr2BankReg:\
     \ public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using comp\
     \ = FieldModel<address, 14, 0x00000003, bankOffset>;\n    using cpl = FieldModel<address,\
     \ 13, 0x00000001, bankOffset>;\n    using mutecn = FieldModel<address, 7, 0x0000003F,\
@@ -11047,7 +11048,7 @@
     \ vosrdy = FieldModel<address, 14, 0x00000001>;\n    using odrdy = FieldModel<address,\
     \ 16, 0x00000001>;\n    using odswrdy = FieldModel<address, 17, 0x00000001>;\n\
     \    using udrdy = FieldModel<address, 18, 0x00000003>;\n  };\n\npublic:\n  using\
-    \ csr = CsrReg<BaseAddress + 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H\
+    \ csr = CsrReg<BaseAddress + 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H\
     \ */\n"
   name: PWR
 - content: "#ifndef DRAL_STM32F446_QUADSPI_H\n#define DRAL_STM32F446_QUADSPI_H\n\n\
@@ -11113,7 +11114,7 @@
     \ pir = PirReg<BaseAddress + 0x002C>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class LptrReg: public RegisterModel<address>\n  {\n  public:\n    using timeout\
     \ = FieldModel<address, 0, 0x0000FFFF>;\n  };\n\npublic:\n  using lptr = LptrReg<BaseAddress\
-    \ + 0x0030>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */\n"
+    \ + 0x0030>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */\n"
   name: QUADSPI
 - content: "#ifndef DRAL_STM32F446_SPDIF_RX_H\n#define DRAL_STM32F446_SPDIF_RX_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass spdif_rx\n\
@@ -11162,7 +11163,7 @@
     \nprivate:\n  template <uint32_t address>\n  class DirReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using thi = FieldModel<address, 0, 0x00001FFF>;\n    using\
     \ tlo = FieldModel<address, 16, 0x00001FFF>;\n  };\n\npublic:\n  using dir = DirReg<BaseAddress\
-    \ + 0x0018>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */\n"
+    \ + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */\n"
   name: SPDIF_RX
 - content: "#ifndef DRAL_STM32F446_HDMI_CEC_H\n#define DRAL_STM32F446_HDMI_CEC_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass hdmi_cec\n\
@@ -11207,7 +11208,7 @@
     \  using breie = FieldModel<address, 3, 0x00000001>;\n    using rxovrie = FieldModel<address,\
     \ 2, 0x00000001>;\n    using rxendie = FieldModel<address, 1, 0x00000001>;\n \
     \   using rxbrie = FieldModel<address, 0, 0x00000001>;\n  };\n\npublic:\n  using\
-    \ cec_ier = Cec_ierReg<BaseAddress + 0x0014>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H\
+    \ cec_ier = Cec_ierReg<BaseAddress + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H\
     \ */\n"
   name: HDMI_CEC
 - content: "#ifndef DRAL_STM32F446_FPU_H\n#define DRAL_STM32F446_FPU_H\n\n#include\
@@ -11235,7 +11236,7 @@
     \ using v = FieldModel<address, 28, 0x00000001>;\n    using c = FieldModel<address,\
     \ 29, 0x00000001>;\n    using z = FieldModel<address, 30, 0x00000001>;\n    using\
     \ n = FieldModel<address, 31, 0x00000001>;\n  };\n\npublic:\n  using fpscr = FpscrReg<BaseAddress\
-    \ + 0x0008>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */\n"
+    \ + 0x0008>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */\n"
   name: FPU
 - content: "#ifndef DRAL_STM32F446_MPU_H\n#define DRAL_STM32F446_MPU_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass mpu\n{\npublic:\n\
@@ -11264,7 +11265,7 @@
     \ 18, 0x00000001>;\n    using tex = FieldModel<address, 19, 0x00000007>;\n   \
     \ using ap = FieldModel<address, 24, 0x00000007>;\n    using xn = FieldModel<address,\
     \ 28, 0x00000001>;\n  };\n\npublic:\n  using mpu_rasr = Mpu_rasrReg<BaseAddress\
-    \ + 0x0010>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_MPU_H */\n"
+    \ + 0x0010>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_MPU_H */\n"
   name: MPU
 - content: "#ifndef DRAL_STM32F446_STK_H\n#define DRAL_STM32F446_STK_H\n\n#include\
     \ \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass stk\n{\npublic:\n\
@@ -11283,7 +11284,7 @@
     \ RegisterModel<address>\n  {\n  public:\n    using tenms = FieldModel<address,\
     \ 0, 0x00FFFFFF>;\n    using skew = FieldModel<address, 30, 0x00000001>;\n   \
     \ using noref = FieldModel<address, 31, 0x00000001>;\n  };\n\npublic:\n  using\
-    \ calib = CalibReg<BaseAddress + 0x000C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H\
+    \ calib = CalibReg<BaseAddress + 0x000C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H\
     \ */\n"
   name: STK
 - content: "#ifndef DRAL_STM32F446_SCB_H\n#define DRAL_STM32F446_SCB_H\n\n#include\
@@ -11375,23 +11376,23 @@
     \ bfar = BfarReg<BaseAddress + 0x0038>;\n\nprivate:\n  template <uint32_t address>\n\
     \  class AfsrReg: public RegisterModel<address>\n  {\n  public:\n    using impdef\
     \ = FieldModel<address, 0, 0xFFFFFFFF>;\n  };\n\npublic:\n  using afsr = AfsrReg<BaseAddress\
-    \ + 0x003C>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */\n"
+    \ + 0x003C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */\n"
   name: SCB
 - content: "#ifndef DRAL_STM32F446_NVIC_STIR_H\n#define DRAL_STM32F446_NVIC_STIR_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass nvic_stir\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000EF00;\n\nprivate:\n\
     \  template <uint32_t address>\n  class StirReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using intid = FieldModel<address, 0, 0x000001FF>;\n  };\n\
-    \npublic:\n  using stir = StirReg<BaseAddress + 0x0000>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_NVIC_STIR_H */\n"
+    \npublic:\n  using stir = StirReg<BaseAddress + 0x0000>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_NVIC_STIR_H */\n"
   name: NVIC_STIR
 - content: "#ifndef DRAL_STM32F446_FPU_CPACR_H\n#define DRAL_STM32F446_FPU_CPACR_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass fpu_cpacr\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000ED88;\n\nprivate:\n\
     \  template <uint32_t address>\n  class CpacrReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using cp = FieldModel<address, 20, 0x0000000F>;\n  };\n\n\
-    public:\n  using cpacr = CpacrReg<BaseAddress + 0x0000>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_FPU_CPACR_H */\n"
+    public:\n  using cpacr = CpacrReg<BaseAddress + 0x0000>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_FPU_CPACR_H */\n"
   name: FPU_CPACR
 - content: "#ifndef DRAL_STM32F446_SCB_ACTRL_H\n#define DRAL_STM32F446_SCB_ACTRL_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::stm32f446 {\n\nclass scb_actrl\n\
@@ -11401,7 +11402,7 @@
     \    using disdefwbuf = FieldModel<address, 1, 0x00000001>;\n    using disfold\
     \ = FieldModel<address, 2, 0x00000001>;\n    using disfpca = FieldModel<address,\
     \ 8, 0x00000001>;\n    using disoofp = FieldModel<address, 9, 0x00000001>;\n \
-    \ };\n\npublic:\n  using actrl = ActrlReg<BaseAddress + 0x0000>;\n};\n\n}\n\n\
+    \ };\n\npublic:\n  using actrl = ActrlReg<BaseAddress + 0x0000>;\n\n};\n\n}\n\n\
     #endif /* DRAL_STM32F446_SCB_ACTRL_H */\n"
   name: SCB_ACTRL
 - content: "#ifndef DRAL_STM32F446_SDIO_H\n#define DRAL_STM32F446_SDIO_H\n\n#include\
@@ -11517,8 +11518,8 @@
     \ };\n\npublic:\n  using fifocnt = FifocntReg<BaseAddress + 0x0048>;\n\nprivate:\n\
     \  template <uint32_t address>\n  class FifoReg: public RegisterModel<address>\n\
     \  {\n  public:\n    using fifodata = FieldModel<address, 0, 0xFFFFFFFF>;\n  };\n\
-    \npublic:\n  using fifo = FifoReg<BaseAddress + 0x0080>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_SDIO_H */\n"
+    \npublic:\n  using fifo = FifoReg<BaseAddress + 0x0080>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_SDIO_H */\n"
   name: SDIO
 - content: "#ifndef DRAL_REGISTER_MODEL_H\n#define DRAL_REGISTER_MODEL_H\n\n#include\
     \ <cstdint>\n\nnamespace dral {\n\ntemplate <uint32_t address>\nclass RegisterModel\n\

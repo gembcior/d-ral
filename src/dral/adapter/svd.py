@@ -1,10 +1,16 @@
 from pathlib import Path
+import re
 from typing import Dict, List
 
 import svd2py
 
 from ..types import Device, Field, Peripheral, Register
 from .base import BaseAdapter
+
+
+class IncorrectSvd(Exception):
+    def __init__(self, *args):
+        super().__init__(args)
 
 
 class SvdAdapter(BaseAdapter):
@@ -14,12 +20,23 @@ class SvdAdapter(BaseAdapter):
     def _get_fields(self, svd_fields: List[Dict]) -> List[Field]:
         fields_list = []
         for field in svd_fields:
+            if "bitRange" in field:
+                pattern = re.compile(r'(\d+):(\d+)')
+                result = re.search(pattern, field["bitRange"])
+                if result is not None:
+                    position = int(result.group(2))
+                    width = (int(result.group(1)) + 1) - position
+                else:
+                    raise IncorrectSvd("Determining the position and width of the field is impossible.")
+            else:
+                position = field["bitOffset"]
+                width = field["bitWidth"]
             new_field = Field(
                     name = field["name"],
                     description = field["description"],
-                    position = field["bitOffset"],
-                    mask = ((1 << field["bitWidth"]) - 1),
-                    width = field["bitWidth"])
+                    position = position,
+                    mask = ((1 << width) - 1),
+                    width = width)
             fields_list.append(new_field)
         return fields_list
 
