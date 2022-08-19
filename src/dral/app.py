@@ -1,5 +1,4 @@
 import argparse
-import importlib.resources as resources
 import os
 from pathlib import Path
 import re
@@ -10,6 +9,7 @@ from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
+from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import SingleFileFormat
 from .format import CMakeLibFormat
 from .generator import Generator
@@ -103,8 +103,23 @@ def main():
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
+        # Convert data using adapter
         device = adapter.convert()
-        objects = generator.generate(device, exclude=exclude, white_list=white_list, black_list=black_list)
+
+        # Apply filters
+        filters = []
+        if black_list:
+            filters.append(BlackListFilter(black_list))
+        if white_list:
+            filters.append(WhiteListFilter(white_list))
+        filters.append(BanksFilter())
+        for item in filters:
+            device = item.apply(device)
+
+        # Generate D-RAL data
+        objects = generator.generate(device, exclude=exclude)
+
+        # Make output
         if args.format == "cmake":
             output_format = CMakeLibFormat(output, "dral")
         elif args.format == "single":

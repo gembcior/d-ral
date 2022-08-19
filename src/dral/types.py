@@ -34,7 +34,7 @@ class BaseType(ABC):
 
 class Field(BaseType):
     def __init__(self, name: str, description: str = "",
-            position: Union[None, int] = None, mask: Union[None, int] = None, width: Union[None, int] = None) -> None:
+                 position: Union[None, int] = None, mask: Union[None, int] = None, width: Union[None, int] = None) -> None:
         super().__init__(name, description)
         self._position = position
         self._mask = mask
@@ -76,9 +76,9 @@ class Field(BaseType):
 
 class Register(BaseType):
     def __init__(self, name: str, description: str = "",
-            offset: Union[None, int] = None, size: Union[None, int] = None,
-            access: Union[None, str] = None, reset_value: Union[None, int] = None,
-            fields: List[Field] = []):
+                 offset: Union[None, int] = None, size: Union[None, int] = None,
+                 access: Union[None, str] = None, reset_value: Union[None, int] = None,
+                 fields: List[Field] = []):
         super().__init__(name, description)
         self._offset = offset
         self._size = size
@@ -136,16 +136,16 @@ class Register(BaseType):
         return self._fields
 
 
-class RegisterBank(Register):
+class Bank(Register):
     def __init__(self, name: str, description: str = "",
-            offset: Union[None, int] = None, size: Union[None, int] = None,
-            access: Union[None, str] = None, reset_value: Union[None, int] = None,
-            bank_offset: Union[None, int] = None,
-            fields: List[Field] = []):
+                 offset: Union[None, int] = None, size: Union[None, int] = None,
+                 access: Union[None, str] = None, reset_value: Union[None, int] = None,
+                 bank_offset: Union[None, int] = None,
+                 fields: List[Field] = []):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
 
-    def __eq__(self, other: 'RegisterBank') -> bool:
+    def __eq__(self, other: 'Bank') -> bool:
         if not super().__eq__(other):
             return False
         if (other.bank_offset is not None) and (self._bank_offset is not None):
@@ -160,10 +160,11 @@ class RegisterBank(Register):
 
 class Peripheral(BaseType):
     def __init__(self, name: str, description: str = "",
-            address: Union[None, int] = None, registers: List[Register] = []):
+                 address: Union[None, int] = None, registers: List[Register] = [], banks: List[Bank] = []):
         super().__init__(name, description)
         self._address = address
         self._registers = registers
+        self._banks = banks
 
     def __eq__(self, other: 'Peripheral') -> bool:
         if not super().__eq__(other):
@@ -190,10 +191,14 @@ class Peripheral(BaseType):
     def registers(self) -> List[Register]:
         return self._registers
 
+    @property
+    def banks(self) -> List[Bank]:
+        return self._banks
+
 
 class Device(BaseType):
     def __init__(self, name: str, description: str = "",
-            peripherals: List[Peripheral] = []):
+                 peripherals: List[Peripheral] = []):
         super().__init__(name, description)
         self._peripherals = peripherals
 

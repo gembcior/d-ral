@@ -20,6 +20,7 @@ class TestDralGenerator:
         svd_path = self.get_svd_file(f"{svd[0]}.{svd[1]}", svd[2])
         adapter = dral.adapter.SvdAdapter(svd_path)
         device_data = adapter.convert()
+        device_data = dral.filter.BanksFilter().apply(device_data)
         generator = dral.Generator(template=template)
         objects = generator.generate(device_data)
 

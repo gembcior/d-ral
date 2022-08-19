@@ -20,33 +20,7 @@ class Generator:
         with open(model, "r") as f:
             return f.read()
 
-    def _white_list_filter(self, data: Device, list: Device) -> Device:
-        # TODO simplify
-        new_peripheral_list = []
-        for peripheral in list.peripherals:
-            for item in data.peripherals:
-                if item.name == peripheral.name:
-                    if peripheral.registers:
-                        new_registers_list = []
-                        for register in peripheral.registers:
-                            for reg_item in item.registers:
-                                if reg_item.name == register.name:
-                                    new_registers_list.append(reg_item)
-                        new_peripheral = Peripheral(name=item.name, description=item.description, address=item.address, registers=new_registers_list)
-                        new_peripheral_list.append(new_peripheral)
-                    else:
-                        new_peripheral_list.append(item)
-        return Device(name=data.name, description=data.description, peripherals=new_peripheral_list)
-
-    def _black_list_filter(self, data: Device, list: Device) -> Device:
-        # TODO implement black list filtering
-        return data
-
-    def generate(self, device: Device, exclude: List[str] = [], white_list: Union[Device, None] = None, black_list: Union[Device, None] = None) -> List[Dict]:
-        if white_list:
-            device = self._white_list_filter(device, white_list)
-        if black_list:
-            device = self._black_list_filter(device, black_list)
+    def generate(self, device: Device, exclude: List[str] = []) -> List[Dict]:
         dral_device = DralDevice(device, self._template, exclude=exclude)
         objects = dral_device.parse()
         if Utils.get_template(self._template, "model.dral").exists():
