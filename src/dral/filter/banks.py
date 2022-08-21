@@ -11,11 +11,6 @@ class BanksFilter(BaseFilter):
     def __init__(self) -> None:
         super().__init__()
 
-    def apply(self, device: Device) -> Device:
-        for i, item in enumerate(device.peripherals):
-            device.peripherals[i]._banks = self._get_register_banks(item.registers)
-        return device
-
     # TODO refactor register banks support
     def _find_register_banks(self, registers):
         def get_symmetric_difference(str1, str2):
@@ -135,3 +130,8 @@ class BanksFilter(BaseFilter):
         if banks:
             register_banks = self._merge_register_banks(banks)
         return register_banks
+
+    def apply(self, device: Device) -> Device:
+        for i, item in enumerate(device.peripherals):
+            device.peripherals[i]._banks = self._get_register_banks(item.registers)
+        return device

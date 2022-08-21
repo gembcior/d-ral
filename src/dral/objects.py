@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import re
-from typing import List, Union, overload
+from typing import List, Union, overload, Iterator
 
 from .types import Device, Field, Peripheral, Register, Bank
 from .utils import Utils
@@ -37,20 +37,31 @@ class DralObject(ABC):
         self._template_file = ""
         self.name = self._root.name
 
-    def _apply_modifier(self, string, modifier):
+    def _apply_modifier(self, string: Union[str, List], modifier: str):
         if modifier == "uppercase":
-            string = string.upper()
+            if type(string) is str:
+                string = string.upper()
         elif modifier == "lowercase":
-            string = string.lower()
+            if type(string) is str:
+                string = string.lower()
         elif modifier == "capitalize":
-            string = string.capitalize()
+            if type(string) is str:
+                string = string.capitalize()
+        elif modifier == "strip":
+            if type(string) is str:
+                string = string.strip(" \n\r")
+        elif modifier == "LF":
+            if type(string) is str:
+                string = string + "\n"
+            else:
+                string = string + ["\n"]
         return string
 
     def _get_children_content(self, _type: str, variant: str = "default"):
         content = []
         try:
-            for item in self._children[_type][variant]:
-                content.append(item.parse())
+            for item in self._children[_type]:
+                content = content + item.parse(variant)
         except KeyError:
             # Raise an exception
             # Key not supported
@@ -61,57 +72,63 @@ class DralObject(ABC):
     def _get_pattern_substitution(self, pattern):
         modifier = pattern.split("%")
         pattern = modifier[0].split(".")
-        if len(modifier) > 1:
-            modifier = modifier[1]
-        else:
-            modifier = None
         substitution = self._get_substitution(pattern)
-        if modifier is not None and substitution is not None:
-            substitution = self._apply_modifier(substitution, modifier)
+        if substitution is not None:
+            if len(modifier) > 1:
+                for item in modifier[1:]:
+                    substitution = self._apply_modifier(substitution, item)
         return substitution
+
+
+    def _find_all_dral_pattern(self, string: str) -> Iterator[re.Match[str]]:
+        return re.finditer(self._dral_pattern, string)
+
+    def _replace_line(self, line: str) -> Union[str, None]:
+        dral_matches = self._find_all_dral_pattern(line)
+        if dral_matches:
+            for match in dral_matches:
+                pattern = match.group(1)
+                position = match.start()
+                leading_spaces = " " * position
+                substitution = self._get_pattern_substitution(pattern)
+                if substitution is not None:
+                    pattern = f"{self._dral_prefix}{pattern}{self._dral_sufix}"
+                    if type(substitution) is list:
+                        substitution = (leading_spaces.join(substitution)).strip("\n")
+                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
+            return line
+        else:
+            return None
 
     def _parse_string(self, string):
         content = []
         for line in string:
-            for pattern in re.findall(self._dral_pattern, line):
-                leading_spaces = len(line) - len(line.lstrip(" "))
-                leading_spaces = " " * leading_spaces
-                substitution = self._get_pattern_substitution(pattern)
-                if substitution is not None:
-                    pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
-                    if type(substitution) is list:
-                        substitution = (leading_spaces.join(substitution)).strip("\n")
-                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
-            content.append(line)
-        return content
+            new_line = self._replace_line(line)
+            if new_line is not None:
+                content.append(new_line)
+            else:
+                content.append(line)
+        new_content = []
+        for item in content:
+            new_content = new_content + item.splitlines(True)
+        return new_content
 
     def _parse_template(self, template):
-        content = []
         with open(template, "r") as f:
-            for line in f.readlines():
-                for pattern in re.findall(self._dral_pattern, line):
-                    leading_spaces = len(line) - len(line.lstrip(" "))
-                    leading_spaces = " " * leading_spaces
-                    substitution = self._get_pattern_substitution(pattern)
-                    if substitution is not None:
-                        pattern = "%s%s%s" % (self._dral_prefix, pattern, self._dral_sufix)
-                        if type(substitution) is list:
-                            substitution = (leading_spaces.join(substitution)).strip("\n")
-                        line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
-                content.append(line)
-        return content
+            template_content = f.readlines()
+        return self._parse_string(template_content)
 
-    def _get_string(self):
-        template = Utils.get_template(self._template, self._template_file)
+    def _get_string(self, variant):
+        template = Utils.get_template(self._template, self._template_file[variant])
         content = self._parse_template(template)
-        content = self._parse_string(content)
+        # content = self._parse_string(content)
         return content
 
-    def _add_children(self, _type: str, element: 'DralObject', variant: str = "default"):
+    def _add_children(self, _type: str, element: 'DralObject'):
         try:
-            self._children[_type][variant].append(element)
+            self._children[_type].append(element)
         except KeyError:
-            self._children.update({_type: {variant: [element]}})
+            self._children.update({_type: [element]})
 
     def _get_substitution(self, pattern: str) -> Union[None, str]:
         substitution = None
@@ -119,7 +136,9 @@ class DralObject(ABC):
             if pattern[1] == "name":
                 substitution = "%s" % self._root.name
             elif pattern[1] == "description":
-                substitution = "%s" % self._root.description
+                # TODO strip, remove new lines etc.
+                # substitution = "%s" % self._root.description
+                substitution = ""
         return substitution
 
     @property
@@ -131,7 +150,7 @@ class DralObject(ABC):
         self._name = value.strip()
 
     @abstractmethod
-    def parse(self):
+    def parse(self, variant: str="default"):
         pass
 
 
@@ -142,15 +161,15 @@ class DralDevice(DralObject):
     def __str__(self) -> str:
         return "device"
 
-    def parse(self):
+    def parse(self, variant: str="default"):
         if "peripherals" not in self._exclude:
             for item in self._root.peripherals:
                 peripheral = DralPeripheral(item, self._template, exclude=self._exclude)
                 self._add_children("peripherals", peripheral)
 
         content = []
-        for child in self._children["peripherals"]["default"]:
-            string = self._parse_string(child.parse().splitlines(True))
+        for child in self._children["peripherals"]:
+            string = self._parse_string(child.parse(variant))
             content.append({"name": child.name, "content": "".join(string)})
         return content
 
@@ -158,7 +177,7 @@ class DralDevice(DralObject):
 class DralPeripheral(DralObject):
     def __init__(self, root: Peripheral, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude)
-        self._template_file = "peripheral.dral"
+        self._template_file = {"default": "peripheral.dral"}
 
     def __str__(self) -> str:
         return "peripheral"
@@ -176,7 +195,7 @@ class DralPeripheral(DralObject):
                         substitution = self._get_children_content(pattern[1])
         return substitution
 
-    def parse(self):
+    def parse(self, variant: str="default"):
         if "registers" not in self._exclude:
             for item in self._root.registers:
                 register = DralRegister(item, self._template, exclude=self._exclude)
@@ -185,14 +204,15 @@ class DralPeripheral(DralObject):
             for item in self._root.banks:
                 register = DralBank(item, self._template, exclude=self._exclude)
                 self._add_children("banks", register)
-        content = "".join(self._get_string())
+        content = self._get_string(variant)
         return content
 
 
 class DralRegister(DralObject):
     def __init__(self, root: Register, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude)
-        self._template_file = "register.dral"
+        self._template_file = {"default": "register.dral",
+                               "simple": "register.simple.dral"}
 
     def __str__(self) -> str:
         return "register"
@@ -207,7 +227,7 @@ class DralRegister(DralObject):
                     substitution = "%d" % self._root.size
                 elif pattern[1] == "access":
                     substitution = "%s" % self._root.access
-                elif pattern[1] == "resetValue":
+                elif pattern[1] == "reset_value":
                     substitution = "0x%08X" % self._root.reset_value
                 elif pattern[1] in ["fields"]:
                     if len(pattern) > 2:
@@ -216,19 +236,19 @@ class DralRegister(DralObject):
                         substitution = self._get_children_content(pattern[1])
         return substitution
 
-    def parse(self):
+    def parse(self, variant: str="default"):
         if "fields" not in self._exclude:
             for item in self._root.fields:
                 field = DralField(item, self._template, exclude=self._exclude)
                 self._add_children("fields", field)
-        content = "".join(self._get_string())
+        content = self._get_string(variant)
         return content
 
 
 class DralBank(DralRegister):
     def __init__(self, root: Bank, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude=exclude)
-        self._template_file = "bank.dral"
+        self._template_file = {"default": "bank.dral"}
 
     def __str__(self) -> str:
         return "bank"
@@ -241,19 +261,19 @@ class DralBank(DralRegister):
                     substitution = "0x%04X" % self._root.bank_offset
         return substitution
 
-    def parse(self):
+    def parse(self, variant: str="default"):
         if "fields" not in self._exclude:
             for item in self._root.fields:
                 field = DralBankField(item, self._template, exclude=self._exclude)
                 self._add_children("fields", field)
-        content = "".join(self._get_string())
+        content = self._get_string(variant)
         return content
 
 
 class DralField(DralObject):
     def __init__(self, root: Field, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude)
-        self._template_file = "field.dral"
+        self._template_file = {"default": "field.dral"}
 
     def __str__(self) -> str:
         return "field"
@@ -270,12 +290,12 @@ class DralField(DralObject):
                     substitution = "%d" % self._root.width
         return substitution
 
-    def parse(self):
-        content = "".join(self._get_string())
+    def parse(self, variant: str="default"):
+        content = self._get_string(variant)
         return content
 
 
 class DralBankField(DralField):
     def __init__(self, root: Field, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude)
-        self._template_file = "bank.field.dral"
+        self._template_file = {"default": "bank.field.dral"}

@@ -12,6 +12,7 @@ from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import SingleFileFormat
 from .format import CMakeLibFormat
+from .format import MbedAutomatifyFormat
 from .generator import Generator
 from .utils import Utils
 
@@ -44,7 +45,7 @@ def main():
     parser.add_argument("output", help="Path where files will be generated.")
 
     parser.add_argument("-t", "--template", default="default",
-                        choices=['default'],
+                        choices=['default', 'mbedAutomatify'],
                         help="Specify template used to generate files.")
 
     parser.add_argument("-e", "--exclude", action="extend", nargs="+", type=str,
@@ -52,7 +53,7 @@ def main():
                         help="Exclude items from generation.")
 
     parser.add_argument("-f", "--format", default="cmake",
-                        choices=['single', 'cmake'],
+                        choices=['single', 'cmake', 'mbedAutomatify'],
                         help="Output format.")
 
     parser.add_argument("-w", "--white_list", default=None,
@@ -99,34 +100,38 @@ def main():
     output = Path(args.output).expanduser().resolve()
     adapter = SvdAdapter(svd_path)
     template = args.template
+    if template == "mbedAutomatify":
+        args.format = template
     generator = Generator(template=template)
 
     info = "[bold green]Generating D-Ral files..."
-    with console.status(info):
-        # Convert data using adapter
-        device = adapter.convert()
+    # with console.status(info):
+    # Convert data using adapter
+    device = adapter.convert()
 
-        # Apply filters
-        filters = []
-        if black_list:
-            filters.append(BlackListFilter(black_list))
-        if white_list:
-            filters.append(WhiteListFilter(white_list))
-        filters.append(BanksFilter())
-        for item in filters:
-            device = item.apply(device)
+    # Apply filters
+    filters = []
+    if black_list:
+        filters.append(BlackListFilter(black_list))
+    if white_list:
+        filters.append(WhiteListFilter(white_list))
+    filters.append(BanksFilter())
+    for item in filters:
+        device = item.apply(device)
 
-        # Generate D-RAL data
-        objects = generator.generate(device, exclude=exclude)
+    # Generate D-RAL data
+    objects = generator.generate(device, exclude=exclude)
 
-        # Make output
-        if args.format == "cmake":
-            output_format = CMakeLibFormat(output, "dral")
-        elif args.format == "single":
-            output_format = SingleFileFormat(output, "dral.h")
-        else:
-            output_format = CMakeLibFormat(output, "dral")
-        output_format.make(objects)
+    # Make output
+    if args.format == "cmake":
+        output_format = CMakeLibFormat(output, "dral")
+    elif args.format == "single":
+        output_format = SingleFileFormat(output, "dral.h")
+    elif args.format == "mbedAutomatify":
+        output_format = MbedAutomatifyFormat(output, svd_path.stem)
+    else:
+        output_format = CMakeLibFormat(output, "dral")
+    output_format.make(objects)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
