@@ -1,6 +1,6 @@
-from .reg.base import Peripheral
-from .reg.base import Register
-from .reg.base import Field
+from mbedautomatify.reg.base import Peripheral
+from mbedautomatify.reg.base import Register
+from mbedautomatify.reg.base import Field
 
 
 class [dral]peripheral.name%capitalize[#dral](Peripheral):

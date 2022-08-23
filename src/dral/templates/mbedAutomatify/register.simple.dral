@@ -1,1 +1,1 @@
-self.[dral]register.name%lowercase[#dral] = self.[dral]register.name%capitalize[#dral]Register(proxy)
+self.[dral]register.name%lowercase[#dral] = self.[dral]register.name%capitalize[#dral]Register(self.address, proxy)

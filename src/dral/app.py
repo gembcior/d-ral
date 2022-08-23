@@ -64,6 +64,10 @@ def main():
 
     args = parser.parse_args()
 
+    brand = ""
+    family = ""
+    chip = ""
+
     pattern = [
         re.compile(r"^(\/*.+)\.svd$"),
         re.compile(r"^([a-zA-Z0-9]+\.?){1}[a-zA-Z0-9]+$"),
@@ -73,10 +77,15 @@ def main():
         svd_path = Path(args.svd).expanduser().resolve()
     elif re.search(pattern[1], args.svd) is not None:
         svd = args.svd.split(".")
-        svd_path = Utils.get_svd_file(svd[0], svd[1])
+        brand = svd[0]
+        chip = svd[1]
+        svd_path = Utils.get_svd_file(brand, chip)
     elif re.search(pattern[2], args.svd) is not None:
         svd = args.svd.split(".")
-        svd_path = Utils.get_svd_file("%s.%s" % (svd[0], svd[1]), svd[2])
+        brand = svd[0]
+        family = svd[1]
+        chip = svd[2]
+        svd_path = Utils.get_svd_file("%s.%s" % (brand, family), chip)
     else:
         console.print("ERROR: Invalid svd argument format!\n")
         parser.print_help()
@@ -105,33 +114,33 @@ def main():
     generator = Generator(template=template)
 
     info = "[bold green]Generating D-Ral files..."
-    # with console.status(info):
-    # Convert data using adapter
-    device = adapter.convert()
+    with console.status(info):
+        # Convert data using adapter
+        device = adapter.convert()
 
-    # Apply filters
-    filters = []
-    if black_list:
-        filters.append(BlackListFilter(black_list))
-    if white_list:
-        filters.append(WhiteListFilter(white_list))
-    filters.append(BanksFilter())
-    for item in filters:
-        device = item.apply(device)
+        # Apply filters
+        filters = []
+        if black_list:
+            filters.append(BlackListFilter(black_list))
+        if white_list:
+            filters.append(WhiteListFilter(white_list))
+        filters.append(BanksFilter())
+        for item in filters:
+            device = item.apply(device)
 
-    # Generate D-RAL data
-    objects = generator.generate(device, exclude=exclude)
+        # Generate D-RAL data
+        objects = generator.generate(device, exclude=exclude)
 
-    # Make output
-    if args.format == "cmake":
-        output_format = CMakeLibFormat(output, "dral")
-    elif args.format == "single":
-        output_format = SingleFileFormat(output, "dral.h")
-    elif args.format == "mbedAutomatify":
-        output_format = MbedAutomatifyFormat(output, svd_path.stem)
-    else:
-        output_format = CMakeLibFormat(output, "dral")
-    output_format.make(objects)
+        # Make output
+        if args.format == "cmake":
+            output_format = CMakeLibFormat(output, "dral")
+        elif args.format == "single":
+            output_format = SingleFileFormat(output, "dral.h")
+        elif args.format == "mbedAutomatify":
+            output_format = MbedAutomatifyFormat(output, chip, brand, family)
+        else:
+            output_format = CMakeLibFormat(output, "dral")
+        output_format.make(objects)
 
     console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
 
