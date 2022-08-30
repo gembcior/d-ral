@@ -42,7 +42,7 @@ setuptools.setup(
     package_dir={'': 'src'},
     entry_points={
         'console_scripts': [
-            "dral = dral.app:main",
+            "dral = dral.app:cli",
         ]
     },
 )

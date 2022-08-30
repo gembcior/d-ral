@@ -1,8 +1,10 @@
 from pathlib import Path
 from typing import List
 
+from .base import BaseFormat
 
-class CMakeLibFormat:
+
+class CMakeLibFormat(BaseFormat):
     def __init__(self, directory: Path, name: str):
         self._directory = directory
         self._name = name
@@ -23,8 +25,14 @@ class CMakeLibFormat:
         Path.mkdir(directory_path, parents=True, exist_ok=True)
         return directory_path
 
-    def make(self, objects: List):
+    def _make_default(self, objects: List):
         directory = self._create_output_directory(self._directory)
         for item in objects:
             self._create_file("%s.h" % item["name"].lower(), directory, item["content"])
         self._create_file("CMakeLists.txt", self._directory / self._name, self._cmake_content)
+
+    def _make_single(self, objects: List):
+        # TODO refactor
+        from .single_file import SingleFileFormat
+        single = SingleFileFormat(self._directory, "dral.h")
+        single.make(objects)

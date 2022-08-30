@@ -1,117 +1,86 @@
-import argparse
-import os
 from pathlib import Path
-import re
-import sys
 
+import click
 from rich.console import Console
 from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
-from .format import SingleFileFormat
 from .format import CMakeLibFormat
 from .format import MbedAutomatifyFormat
 from .generator import Generator
 from .utils import Utils
 
 
-def main():
+def print_supported_devices(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo('TODO')
+    ctx.exit()
+
+
+def validate_svd(ctx, param, value):
+    if Path(value).exists():
+        return Path(value).resolve()
+    value = Utils.get_svd_file(value)
+    if value is not None:
+        return value
+    raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
+
+
+@click.command()
+@click.argument("svd",
+                type=click.UNPROCESSED, callback=validate_svd)
+@click.argument("output",
+                type=click.Path(resolve_path=True, path_type=Path))
+@click.option("-t", "--template", default="dral", show_default=True,
+              type=click.Choice(['dral', 'mbedAutomatify'], case_sensitive=False),
+              help="Specify template used to generate files.")
+@click.option("-e", "--exclude", multiple=True,
+              type=click.Choice(['peripherals', 'registers', 'banks', 'fields'], case_sensitive=False),
+              help="Exclude items from generation.")
+@click.option("-s", "--single", is_flag=True,
+              help="Generate output as a single file.")
+@click.option("-w", "--white-list",
+              type=click.Path(exists=True, resolve_path=True, path_type=Path),
+              help="Paripherals and Registers white list.")
+@click.option("-b", "--black-list",
+              type=click.Path(exists=True, resolve_path=True, path_type=Path),
+              help="Peripherals and Registers black list.")
+@click.option("--list", is_flag=True, is_eager=True, expose_value=False, callback=print_supported_devices,
+              help="Show list of the supported devices and exit.")
+@click.version_option()
+def cli(svd, output, template, exclude, single, white_list, black_list):
+    """D-RAL - Device Register Access Layer
+
+    Generate D-RAL files in the OUTPUT from SVD.
+
+    \b
+    SVD    - can be a path to external SVD file or name of the already supported device.
+             Type 'dral --list' to see all supported devices.
+
+    \b
+    OUTPUT - is a path where files will be generated.
+    """
     traceback()
     console = Console()
 
-    description = "D-RAL - Device Register Access Layer"
-    parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
-
-    arg_help = (
-        "SVD file from which files will be generated.\n"
-        "Can be a path to SVD file with .svd extension or string with special format pointing to internal SVD files.\n"
-        "\n"
-        "Supported formats:\n"
-        "- \"B.F.C\"\n"
-        "- \"B.C\"\n"
-        "\n"
-        "Where:\n"
-        "B - brand\n"
-        "F - family\n"
-        "C - chip\n"
-        "\n"
-        "Example: stm32.f4.stm32f411, rpi.rp2040"
-    )
-
-    parser.add_argument("svd", help=arg_help)
-
-    parser.add_argument("output", help="Path where files will be generated.")
-
-    parser.add_argument("-t", "--template", default="default",
-                        choices=['default', 'mbedAutomatify'],
-                        help="Specify template used to generate files.")
-
-    parser.add_argument("-e", "--exclude", action="extend", nargs="+", type=str,
-                        choices=['peripherals', 'registers', 'banks', 'fields'],
-                        help="Exclude items from generation.")
-
-    parser.add_argument("-f", "--format", default="cmake",
-                        choices=['single', 'cmake', 'mbedAutomatify'],
-                        help="Output format.")
-
-    parser.add_argument("-w", "--white_list", default=None,
-                        help="Paripherals and Registers white list.")
-
-    parser.add_argument("-b", "--black_list", default=None,
-                        help="Peripherals and Registers black list.")
-
-    args = parser.parse_args()
-
-    brand = ""
-    family = ""
-    chip = ""
-
-    pattern = [
-        re.compile(r"^(\/*.+)\.svd$"),
-        re.compile(r"^([a-zA-Z0-9]+\.?){1}[a-zA-Z0-9]+$"),
-        re.compile(r"^([a-zA-Z0-9]+\.?){2}[a-zA-Z0-9]+$"),
-    ]
-    if re.search(pattern[0], args.svd) is not None:
-        svd_path = Path(args.svd).expanduser().resolve()
-    elif re.search(pattern[1], args.svd) is not None:
-        svd = args.svd.split(".")
-        brand = svd[0]
-        chip = svd[1]
-        svd_path = Utils.get_svd_file(brand, chip)
-    elif re.search(pattern[2], args.svd) is not None:
-        svd = args.svd.split(".")
-        brand = svd[0]
-        family = svd[1]
-        chip = svd[2]
-        svd_path = Utils.get_svd_file("%s.%s" % (brand, family), chip)
-    else:
-        console.print("ERROR: Invalid svd argument format!\n")
-        parser.print_help()
-        sys.exit()
-
-    if args.white_list:
-        white_list_file = Path(args.white_list).expanduser().resolve()
-        white_list_adapter = WhiteBlackListAdapter(white_list_file)
+    if white_list:
+        white_list_adapter = WhiteBlackListAdapter(white_list)
         white_list = white_list_adapter.convert()
     else:
         white_list = None
 
-    if args.black_list:
-        black_list_file = Path(args.black_list).expanduser().resolve()
-        black_list_adapter = WhiteBlackListAdapter(black_list_file)
+    if black_list:
+        black_list_adapter = WhiteBlackListAdapter(black_list)
         black_list = black_list_adapter.convert()
     else:
         black_list = None
 
-    exclude = args.exclude if args.exclude else []
-    output = Path(args.output).expanduser().resolve()
-    adapter = SvdAdapter(svd_path)
-    template = args.template
-    if template == "mbedAutomatify":
-        args.format = template
-    generator = Generator(template=template)
+    exclude = exclude if exclude else []
+    adapter = SvdAdapter(svd)
+    generator = Generator(template)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
@@ -132,18 +101,18 @@ def main():
         objects = generator.generate(device, exclude=exclude)
 
         # Make output
-        if args.format == "cmake":
+        output = output / "dralOutput"
+        if template == "dral":
             output_format = CMakeLibFormat(output, "dral")
-        elif args.format == "single":
-            output_format = SingleFileFormat(output, "dral.h")
-        elif args.format == "mbedAutomatify":
-            output_format = MbedAutomatifyFormat(output, chip, brand, family)
+        elif template == "mbedAutomatify":
+            chip, family, brand = Utils.get_device_info(svd)
+            output_format = MbedAutomatifyFormat(output, chip, family, brand)
         else:
             output_format = CMakeLibFormat(output, "dral")
-        output_format.make(objects)
+        output_format.make(objects, single)
 
-    console.print("Successfully generated D-Ral files to %s" % os.path.abspath(args.output), style="green")
+    console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
 if __name__ == "__main__":
-    main()
+    cli()

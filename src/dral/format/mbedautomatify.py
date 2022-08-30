@@ -1,15 +1,17 @@
 from pathlib import Path
 from typing import List
 
+from .base import BaseFormat
 
-class MbedAutomatifyFormat:
-    def __init__(self, directory: Path, device: str, brand: str, family: str=""):
+
+class MbedAutomatifyFormat(BaseFormat):
+    def __init__(self, directory: Path, device: str, family: str, brand: str):
         self._directory = directory
         self._device = device
         self._brand = brand
         self._family = family
         self._device_file_content = (
-                f"class {self._device.upper()}():\n"
+                f"class dral():\n"
                 f"    def __init__(self, proxy):\n")
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
@@ -33,13 +35,20 @@ class MbedAutomatifyFormat:
         self._create_file(name, directory, content)
 
     def _create_init_files(self, directory: Path):
+        with open(directory / "__init__.py", "w") as init:
+            init.write("from .dral import dral")
+        directory = directory.parent
         while directory != self._directory:
             open(directory / "__init__.py", "w").close()
             directory = directory.parent
 
-    def make(self, objects: List):
+    def _make_default(self, objects: List):
         directory = self._create_output_directory(self._directory)
         for item in objects:
             self._create_file("%s.py" % item["name"].lower(), directory, item["content"])
-        self._create_device_file(f"{self._device}.py", directory, objects)
+        self._create_device_file("dral.py", directory, objects)
         self._create_init_files(directory)
+
+    def _make_single(self, objects: List):
+        # TODO
+        pass
