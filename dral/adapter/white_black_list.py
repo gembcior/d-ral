@@ -31,7 +31,9 @@ class WhiteBlackListAdapter(BaseAdapter):
         peripherals_list = []
         for peripheral in list_peripherals:
             if "registers" in peripheral:
-                peripheral.update({"registers": self._get_registers(peripheral["registers"])})
+                peripheral.update(
+                    {"registers": self._get_registers(peripheral["registers"])}
+                )
             new_peripheral = Peripheral(**peripheral)
             peripherals_list.append(new_peripheral)
         return peripherals_list

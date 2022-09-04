@@ -24,7 +24,9 @@ class SingleFileFormat:
 
         for i, item in enumerate(objects):
             if item["name"] == "register_model" and not self._includeRegModel:
-                self._create_file(f"{item['name'].lower()}.h", directory, item["content"])
+                self._create_file(
+                    f"{item['name'].lower()}.h", directory, item["content"]
+                )
             else:
                 with open(file_path, "a") as new_file:
                     if i > 0:

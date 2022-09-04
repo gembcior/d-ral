@@ -1,2 +1,57 @@
+[tool.poetry]
+name = "dral"
+homepage = "https://github.com/gembcior/d-ral"
+version = "3.0.0"
+description = "D-RAL - Device Register Access Layer"
+authors = ["Gembcior <gembcior@gmail.com>"]
+license="MIT"
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+packages = [
+    { include = "dral" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+svd2py = "*"
+rich = "*"
+click = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-sugar = "*"
+pytest-cov = "*"
+pytest-clarity = "*"
+pyyaml = "*"
+black = "^22.6"
+mypy = "^0.971"
+
+[tool.poetry.scripts]
+dral = "dral.app:cli"
+
 [build-system]
-requires = ["setuptools", "setuptools-scm", "wheel"]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = ["dral"]
+show_error_codes = true
+strict = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[[tool.mypy.overrides]]
+module = ["pygments.*", "IPython.*", "commonmark.*", "ipywidgets.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"

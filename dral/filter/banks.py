@@ -2,7 +2,6 @@ import sys
 
 from rich.console import Console
 
-from ..types import Device
 from ..types import Bank, Device
 from .base import BaseFilter
 
@@ -15,6 +14,7 @@ class BanksFilter(BaseFilter):
     def _find_register_banks(self, registers):
         def get_symmetric_difference(str1, str2):
             from difflib import Differ
+
             differ = Differ()
             output = []
             for item in list(differ.compare(str1, str2)):
@@ -45,7 +45,9 @@ class BanksFilter(BaseFilter):
         def compare(item1, item2):
             fields1 = item1.fields
             fields2 = item2.fields
-            diff = [i for i in fields1 + fields2 if i not in fields1 or i not in fields2]
+            diff = [
+                i for i in fields1 + fields2 if i not in fields1 or i not in fields2
+            ]
             if len(diff) == 0:
                 if item1.name != item2.name:
                     diff = get_symmetric_difference(item1.name, item2.name)
@@ -77,10 +79,12 @@ class BanksFilter(BaseFilter):
         offsets = []
         for item in registers:
             offsets.append(item.offset)
-        diff = [offsets[i+1] - offsets[i] for i in range(len(offsets) - 1)]
+        diff = [offsets[i + 1] - offsets[i] for i in range(len(offsets) - 1)]
         if len(set(diff)) != 1:
             console = Console()
-            console.print(f"[red]ERROR: Register banks offset not consistent: {offsets}")
+            console.print(
+                f"[red]ERROR: Register banks offset not consistent: {offsets}"
+            )
             console.print("Registers dump:")
             console.print(registers)
             sys.exit()
@@ -88,20 +92,21 @@ class BanksFilter(BaseFilter):
 
     def _get_register_bank_name(self, bank):
         from difflib import SequenceMatcher
+
         differ = SequenceMatcher(None, bank[0].name, bank[1].name)
         replace = differ.get_opcodes()[1]
         if replace[0] == "replace":
             position = replace[1]
             name = bank[0].name
-            name = name[:position] + "x" + name[position+1:]
+            name = name[:position] + "x" + name[position + 1 :]
             return name
         elif replace[0] == "equal":
             name = bank[0].name
-            if (len(name) - 1) == len(name[replace[1]:replace[2]]):
+            if (len(name) - 1) == len(name[replace[1] : replace[2]]):
                 if replace[1] > 0:
-                    name = "x" + name[replace[1]:replace[2]]
+                    name = "x" + name[replace[1] : replace[2]]
                 else:
-                    name = name[replace[1]:replace[2]] + "x"
+                    name = name[replace[1] : replace[2]] + "x"
                 return name
         console = Console()
         console.print(f"[red]ERROR: Wrong register bank name {bank[0].name}")
@@ -113,14 +118,15 @@ class BanksFilter(BaseFilter):
             first_offset, bank_offset = self._get_register_banks_offsets(bank)
             name = self._get_register_bank_name(bank)
             reg = Bank(
-                    name = name,
-                    description = bank[0].description,
-                    offset = first_offset,
-                    size = bank[0].size,
-                    access = bank[0].access,
-                    reset_value = bank[0].reset_value,
-                    bank_offset = bank_offset,
-                    fields = bank[0].fields)
+                name=name,
+                description=bank[0].description,
+                offset=first_offset,
+                size=bank[0].size,
+                access=bank[0].access,
+                reset_value=bank[0].reset_value,
+                bank_offset=bank_offset,
+                fields=bank[0].fields,
+            )
             register_banks.append(reg)
         return register_banks
 

@@ -3,7 +3,7 @@
 **/.eggs
 **/venv
 **/__pycache__
-/dral
 /dist
 .coverage
 **/dralOutput
+**/.tox

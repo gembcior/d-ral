@@ -7,8 +7,7 @@ from rich.traceback import install as traceback
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
-from .format import CMakeLibFormat
-from .format import MbedAutomatifyFormat
+from .format import CMakeLibFormat, MbedAutomatifyFormat
 from .generator import Generator
 from .utils import Utils
 
@@ -16,7 +15,7 @@ from .utils import Utils
 def print_supported_devices(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.echo('TODO')
+    click.echo("TODO")
     ctx.exit()
 
 
@@ -26,30 +25,52 @@ def validate_svd(ctx, param, value):
     value = Utils.get_svd_file(value)
     if value is not None:
         return value
-    raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
+    raise click.BadParameter(
+        "SVD must be a path to external SVD file or name of the already supported device"
+    )
 
 
 @click.command()
-@click.argument("svd",
-                type=click.UNPROCESSED, callback=validate_svd)
-@click.argument("output",
-                type=click.Path(resolve_path=True, path_type=Path))
-@click.option("-t", "--template", default="dral", show_default=True,
-              type=click.Choice(['dral', 'mbedAutomatify'], case_sensitive=False),
-              help="Specify template used to generate files.")
-@click.option("-e", "--exclude", multiple=True,
-              type=click.Choice(['peripherals', 'registers', 'banks', 'fields'], case_sensitive=False),
-              help="Exclude items from generation.")
-@click.option("-s", "--single", is_flag=True,
-              help="Generate output as a single file.")
-@click.option("-w", "--white-list",
-              type=click.Path(exists=True, resolve_path=True, path_type=Path),
-              help="Paripherals and Registers white list.")
-@click.option("-b", "--black-list",
-              type=click.Path(exists=True, resolve_path=True, path_type=Path),
-              help="Peripherals and Registers black list.")
-@click.option("--list", is_flag=True, is_eager=True, expose_value=False, callback=print_supported_devices,
-              help="Show list of the supported devices and exit.")
+@click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
+@click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
+@click.option(
+    "-t",
+    "--template",
+    default="dral",
+    show_default=True,
+    type=click.Choice(["dral", "mbedAutomatify"], case_sensitive=False),
+    help="Specify template used to generate files.",
+)
+@click.option(
+    "-e",
+    "--exclude",
+    multiple=True,
+    type=click.Choice(
+        ["peripherals", "registers", "banks", "fields"], case_sensitive=False
+    ),
+    help="Exclude items from generation.",
+)
+@click.option("-s", "--single", is_flag=True, help="Generate output as a single file.")
+@click.option(
+    "-w",
+    "--white-list",
+    type=click.Path(exists=True, resolve_path=True, path_type=Path),
+    help="Paripherals and Registers white list.",
+)
+@click.option(
+    "-b",
+    "--black-list",
+    type=click.Path(exists=True, resolve_path=True, path_type=Path),
+    help="Peripherals and Registers black list.",
+)
+@click.option(
+    "--list",
+    is_flag=True,
+    is_eager=True,
+    expose_value=False,
+    callback=print_supported_devices,
+    help="Show list of the supported devices and exit.",
+)
 @click.version_option()
 def cli(svd, output, template, exclude, single, white_list, black_list):
     """D-RAL - Device Register Access Layer

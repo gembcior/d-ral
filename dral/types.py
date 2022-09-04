@@ -12,7 +12,7 @@ class BaseType(ABC):
     def __str__(self) -> str:
         return yaml.dump(self.asdict())
 
-    def __eq__(self, other: 'BaseType') -> bool:
+    def __eq__(self, other: "BaseType") -> bool:
         if other.name != self._name:
             return False
         if other.description != self._description:
@@ -33,14 +33,20 @@ class BaseType(ABC):
 
 
 class Field(BaseType):
-    def __init__(self, name: str, description: str = "",
-                 position: Union[None, int] = None, mask: Union[None, int] = None, width: Union[None, int] = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        description: str = "",
+        position: Union[None, int] = None,
+        mask: Union[None, int] = None,
+        width: Union[None, int] = None,
+    ) -> None:
         super().__init__(name, description)
         self._position = position
         self._mask = mask
         self._width = width
 
-    def __eq__(self, other: 'Field') -> bool:
+    def __eq__(self, other: "Field") -> bool:
         if not super().__eq__(other):
             return False
         if (other.position is not None) and (self._position is not None):
@@ -55,11 +61,13 @@ class Field(BaseType):
         return True
 
     def asdict(self) -> Dict:
-        return {'name': self._name,
-                'description': self._description,
-                'position': self._position,
-                'width': self._width,
-                'mask': self._mask}
+        return {
+            "name": self._name,
+            "description": self._description,
+            "position": self._position,
+            "width": self._width,
+            "mask": self._mask,
+        }
 
     @property
     def position(self) -> Union[None, int]:
@@ -75,10 +83,16 @@ class Field(BaseType):
 
 
 class Register(BaseType):
-    def __init__(self, name: str, description: str = "",
-                 offset: Union[None, int] = None, size: Union[None, int] = None,
-                 access: Union[None, str] = None, reset_value: Union[None, int] = None,
-                 fields: List[Field] = []):
+    def __init__(
+        self,
+        name: str,
+        description: str = "",
+        offset: Union[None, int] = None,
+        size: Union[None, int] = None,
+        access: Union[None, str] = None,
+        reset_value: Union[None, int] = None,
+        fields: List[Field] = [],
+    ):
         super().__init__(name, description)
         self._offset = offset
         self._size = size
@@ -86,7 +100,7 @@ class Register(BaseType):
         self._reset_value = reset_value
         self._fields = fields
 
-    def __eq__(self, other: 'Register') -> bool:
+    def __eq__(self, other: "Register") -> bool:
         if not super().__eq__(other):
             return False
         if (other.offset is not None) and (self._offset is not None):
@@ -107,13 +121,15 @@ class Register(BaseType):
         return True
 
     def asdict(self) -> Dict:
-        return {'name': self._name,
-                'description': self._description,
-                'offset': self._offset,
-                'size': self._size,
-                'access': self._access,
-                'reset_value': self._reset_value,
-                'fields': [field.asdict() for field in self._fields]}
+        return {
+            "name": self._name,
+            "description": self._description,
+            "offset": self._offset,
+            "size": self._size,
+            "access": self._access,
+            "reset_value": self._reset_value,
+            "fields": [field.asdict() for field in self._fields],
+        }
 
     @property
     def offset(self) -> Union[None, int]:
@@ -137,15 +153,21 @@ class Register(BaseType):
 
 
 class Bank(Register):
-    def __init__(self, name: str, description: str = "",
-                 offset: Union[None, int] = None, size: Union[None, int] = None,
-                 access: Union[None, str] = None, reset_value: Union[None, int] = None,
-                 bank_offset: Union[None, int] = None,
-                 fields: List[Field] = []):
+    def __init__(
+        self,
+        name: str,
+        description: str = "",
+        offset: Union[None, int] = None,
+        size: Union[None, int] = None,
+        access: Union[None, str] = None,
+        reset_value: Union[None, int] = None,
+        bank_offset: Union[None, int] = None,
+        fields: List[Field] = [],
+    ):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
 
-    def __eq__(self, other: 'Bank') -> bool:
+    def __eq__(self, other: "Bank") -> bool:
         if not super().__eq__(other):
             return False
         if (other.bank_offset is not None) and (self._bank_offset is not None):
@@ -159,14 +181,20 @@ class Bank(Register):
 
 
 class Peripheral(BaseType):
-    def __init__(self, name: str, description: str = "",
-                 address: Union[None, int] = None, registers: List[Register] = [], banks: List[Bank] = []):
+    def __init__(
+        self,
+        name: str,
+        description: str = "",
+        address: Union[None, int] = None,
+        registers: List[Register] = [],
+        banks: List[Bank] = [],
+    ):
         super().__init__(name, description)
         self._address = address
         self._registers = registers
         self._banks = banks
 
-    def __eq__(self, other: 'Peripheral') -> bool:
+    def __eq__(self, other: "Peripheral") -> bool:
         if not super().__eq__(other):
             return False
         if (other.address is not None) and (self._address is not None):
@@ -178,10 +206,12 @@ class Peripheral(BaseType):
         return True
 
     def asdict(self) -> Dict:
-        return {'name': self._name,
-                'description': self._description,
-                'address': self._address,
-                'registers': [register.asdict() for register in self._registers]}
+        return {
+            "name": self._name,
+            "description": self._description,
+            "address": self._address,
+            "registers": [register.asdict() for register in self._registers],
+        }
 
     @property
     def address(self) -> Union[None, int]:
@@ -197,12 +227,13 @@ class Peripheral(BaseType):
 
 
 class Device(BaseType):
-    def __init__(self, name: str, description: str = "",
-                 peripherals: List[Peripheral] = []):
+    def __init__(
+        self, name: str, description: str = "", peripherals: List[Peripheral] = []
+    ):
         super().__init__(name, description)
         self._peripherals = peripherals
 
-    def __eq__(self, other: 'Device') -> bool:
+    def __eq__(self, other: "Device") -> bool:
         if not super().__eq__(other):
             return False
         if (other.peripherals is not None) and (self._peripherals is not None):
@@ -211,9 +242,11 @@ class Device(BaseType):
         return True
 
     def asdict(self) -> Dict:
-        return {'name': self._name,
-                'description': self._description,
-                'peripherals': [peripheral.asdict() for peripheral in self._peripherals]}
+        return {
+            "name": self._name,
+            "description": self._description,
+            "peripherals": [peripheral.asdict() for peripheral in self._peripherals],
+        }
 
     @property
     def peripherals(self) -> List[Peripheral]:

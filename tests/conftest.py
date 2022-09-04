@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import pytest
 
 
@@ -6,6 +7,7 @@ import pytest
 def rootdir() -> Path:
     path = Path(__file__)
     return path.parent
+
 
 @pytest.fixture
 def datadir(rootdir) -> Path:

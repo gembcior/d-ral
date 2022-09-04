@@ -19,11 +19,17 @@ class WhiteListFilter(BaseFilter):
                             for reg_item in item.registers:
                                 if reg_item.name == register.name:
                                     new_registers_list.append(reg_item)
-                        new_peripheral = Peripheral(name=item.name,
-                                                    description=item.description,
-                                                    address=item.address,
-                                                    registers=new_registers_list)
+                        new_peripheral = Peripheral(
+                            name=item.name,
+                            description=item.description,
+                            address=item.address,
+                            registers=new_registers_list,
+                        )
                         new_peripheral_list.append(new_peripheral)
                     else:
                         new_peripheral_list.append(item)
-        return Device(name=device.name, description=device.description, peripherals=new_peripheral_list)
+        return Device(
+            name=device.name,
+            description=device.description,
+            peripherals=new_peripheral_list,
+        )

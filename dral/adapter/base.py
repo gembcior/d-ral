@@ -17,9 +17,9 @@ class BaseAdapter(ABC):
     convert()
         Returns data structure used by d-ral generator
     """
+
     def __init__(self) -> None:
         pass
-
 
     @abstractmethod
     def convert(self) -> Device:

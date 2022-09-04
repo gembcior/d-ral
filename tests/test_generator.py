@@ -8,12 +8,13 @@ import dral
 
 
 class TestDralGenerator:
-
     def get_svd_file(self, brand, chip):
         with resources.path("dral.devices.%s" % brand, "%s.svd" % chip) as svd:
             return Path(svd)
 
-    @pytest.mark.parametrize("device", ["arm.example.example1", "stm32.f4.stm32f411", "stm32.f4.stm32f446"])
+    @pytest.mark.parametrize(
+        "device", ["arm.example.example1", "stm32.f4.stm32f411", "stm32.f4.stm32f446"]
+    )
     @pytest.mark.parametrize("template", ["dral"])
     def test_supported_svd_devices(self, device: str, template: str, datadir: Path):
         svd = device.split(".")

@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
 import re
-from typing import List, Union, overload, Iterator
+from abc import ABC, abstractmethod
+from typing import Iterator, List, Union, overload
 
-from .types import Device, Field, Peripheral, Register, Bank
+from .types import Bank, Device, Field, Peripheral, Register
 from .utils import Utils
 
 
@@ -15,21 +15,28 @@ class DralObject(ABC):
     @overload
     def __init__(self, root: Device, template: str, exclude: List[str] = []):
         ...
+
     @overload
-    def __init__(self, root: Peripheral, template: str,exclude: List[str] = []):
+    def __init__(self, root: Peripheral, template: str, exclude: List[str] = []):
         ...
+
     @overload
     def __init__(self, root: Register, template: str, exclude: List[str] = []):
         ...
+
     @overload
     def __init__(self, root: Field, template: str, exclude: List[str] = []):
         ...
+
     def __init__(self, root, template="default", exclude=[]):
         super().__init__()
         self._children = {}
         self._dral_prefix = r"\[dral\]"
         self._dral_sufix = r"\[#dral\]"
-        self._dral_pattern = re.compile(self._dral_prefix + "(.*?)" + self._dral_sufix, flags=(re.MULTILINE | re.DOTALL))
+        self._dral_pattern = re.compile(
+            self._dral_prefix + "(.*?)" + self._dral_sufix,
+            flags=(re.MULTILINE | re.DOTALL),
+        )
         self._exclude = exclude
         self._name = None
         self._root = root
@@ -79,7 +86,6 @@ class DralObject(ABC):
                     substitution = self._apply_modifier(substitution, item)
         return substitution
 
-
     def _find_all_dral_pattern(self, string: str) -> Iterator[re.Match[str]]:
         return re.finditer(self._dral_pattern, string)
 
@@ -95,7 +101,9 @@ class DralObject(ABC):
                     pattern = f"{self._dral_prefix}{pattern}{self._dral_sufix}"
                     if type(substitution) is list:
                         substitution = (leading_spaces.join(substitution)).strip("\n")
-                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
+                    line = re.sub(
+                        pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL)
+                    )
             return line
         else:
             return None
@@ -124,7 +132,7 @@ class DralObject(ABC):
         # content = self._parse_string(content)
         return content
 
-    def _add_children(self, _type: str, element: 'DralObject'):
+    def _add_children(self, _type: str, element: "DralObject"):
         try:
             self._children[_type].append(element)
         except KeyError:
@@ -150,7 +158,7 @@ class DralObject(ABC):
         self._name = value.strip()
 
     @abstractmethod
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         pass
 
 
@@ -161,7 +169,7 @@ class DralDevice(DralObject):
     def __str__(self) -> str:
         return "device"
 
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         if "peripherals" not in self._exclude:
             for item in self._root.peripherals:
                 peripheral = DralPeripheral(item, self._template, exclude=self._exclude)
@@ -190,12 +198,14 @@ class DralPeripheral(DralObject):
                     substitution = "0x%08X" % self._root.address
                 elif pattern[1] in ["registers", "banks"]:
                     if len(pattern) > 2:
-                        substitution = self._get_children_content(pattern[1], pattern[2])
+                        substitution = self._get_children_content(
+                            pattern[1], pattern[2]
+                        )
                     else:
                         substitution = self._get_children_content(pattern[1])
         return substitution
 
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         if "registers" not in self._exclude:
             for item in self._root.registers:
                 register = DralRegister(item, self._template, exclude=self._exclude)
@@ -211,8 +221,10 @@ class DralPeripheral(DralObject):
 class DralRegister(DralObject):
     def __init__(self, root: Register, template: str, exclude: List[str] = []):
         super().__init__(root, template, exclude)
-        self._template_file = {"default": "register.dral",
-                               "simple": "register.simple.dral"}
+        self._template_file = {
+            "default": "register.dral",
+            "simple": "register.simple.dral",
+        }
 
     def __str__(self) -> str:
         return "register"
@@ -231,12 +243,14 @@ class DralRegister(DralObject):
                     substitution = "0x%08X" % self._root.reset_value
                 elif pattern[1] in ["fields"]:
                     if len(pattern) > 2:
-                        substitution = self._get_children_content(pattern[1], pattern[2])
+                        substitution = self._get_children_content(
+                            pattern[1], pattern[2]
+                        )
                     else:
                         substitution = self._get_children_content(pattern[1])
         return substitution
 
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         if "fields" not in self._exclude:
             for item in self._root.fields:
                 field = DralField(item, self._template, exclude=self._exclude)
@@ -261,7 +275,7 @@ class DralBank(DralRegister):
                     substitution = "0x%04X" % self._root.bank_offset
         return substitution
 
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         if "fields" not in self._exclude:
             for item in self._root.fields:
                 field = DralBankField(item, self._template, exclude=self._exclude)
@@ -290,7 +304,7 @@ class DralField(DralObject):
                     substitution = "%d" % self._root.width
         return substitution
 
-    def parse(self, variant: str="default"):
+    def parse(self, variant: str = "default"):
         content = self._get_string(variant)
         return content
 

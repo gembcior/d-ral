@@ -11,8 +11,8 @@ class MbedAutomatifyFormat(BaseFormat):
         self._brand = brand
         self._family = family
         self._device_file_content = (
-                f"class dral():\n"
-                f"    def __init__(self, proxy):\n")
+            f"class dral():\n" f"    def __init__(self, proxy):\n"
+        )
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
         file_path = directory / name
@@ -20,14 +20,18 @@ class MbedAutomatifyFormat(BaseFormat):
             new_file.writelines(content)
 
     def _create_output_directory(self, output: Path) -> Path:
-        directory_path = output / f"{self._brand}" / f"{self._family}"/ f"{self._device}"
+        directory_path = (
+            output / f"{self._brand}" / f"{self._family}" / f"{self._device}"
+        )
         directory_path.mkdir(parents=True, exist_ok=True)
         return directory_path
 
     def _create_device_file(self, name: str, directory: Path, objects: List) -> None:
         content = ""
         for item in objects:
-            content += f"from .{item['name'].lower()} import {item['name'].capitalize()}\n"
+            content += (
+                f"from .{item['name'].lower()} import {item['name'].capitalize()}\n"
+            )
         content += "\n" * 2
         content += self._device_file_content
         for item in objects:
@@ -45,7 +49,9 @@ class MbedAutomatifyFormat(BaseFormat):
     def _make_default(self, objects: List):
         directory = self._create_output_directory(self._directory)
         for item in objects:
-            self._create_file("%s.py" % item["name"].lower(), directory, item["content"])
+            self._create_file(
+                "%s.py" % item["name"].lower(), directory, item["content"]
+            )
         self._create_device_file("dral.py", directory, objects)
         self._create_init_files(directory)
 

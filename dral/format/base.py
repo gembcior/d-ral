@@ -14,7 +14,7 @@ class BaseFormat(ABC):
     def _make_single(self, objects: List):
         pass
 
-    def make(self, objects: List, single: bool=False):
+    def make(self, objects: List, single: bool = False):
         if single:
             self._make_single(objects)
         else:
