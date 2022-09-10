@@ -1,11 +1,10 @@
+![Logo](https://github.com/gembcior/d-ral/raw/master/doc/logo.svg)
+
 ## D-RAL - Device Register Access Layer
 
-### Introduction
+[![Supported Python Versions](https://img.shields.io/pypi/pyversions/dral)](https://pypi.org/project/dral/) [![PyPI](https://img.shields.io/pypi/v/dral?label=dral)](https://pypi.org/project/dral/)
 
-### Project structure
-```
-📦d-ral
- ┣━📂devices            ─ contains device descriptions files
- ┣━📂src                ─ contains generator source files
- ┗━📂templates          ─ contains templates files for generator
-```
+---
+
+
+### Introduction
