@@ -1,4 +1,4 @@
-![Logo](https://github.com/gembcior/d-ral/raw/master/doc/logo.svg)
+![Logo](https://raw.githubusercontent.com/gembcior/d-ral/main/doc/logo.svg)
 
 ## D-RAL - Device Register Access Layer
 
