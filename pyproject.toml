@@ -32,6 +32,7 @@ pytest-clarity = "*"
 pyyaml = "*"
 black = "^22.6"
 mypy = "^0.971"
+pylama = "*"
 
 [tool.poetry.scripts]
 dral = "dral.app:cli"
@@ -55,3 +56,9 @@ testpaths = ["tests"]
 
 [tool.isort]
 profile = "black"
+
+[tool.pylama]
+format = "pylint"
+skip = "*/.tox/*,*/.env/*"
+linters = "eradicate,mccabe,pycodestyle,pydocstyle,pyflakes,pylint"
+ignore = "E501,D1"

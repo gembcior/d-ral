@@ -1,7 +1,7 @@
-from typing import Dict, List, Union, overload
+from typing import Dict, List, overload
 
 from .objects import DralDevice
-from .types import Device, Peripheral
+from .types import Device
 from .utils import Utils
 
 
@@ -19,8 +19,8 @@ class Generator:
 
     def _get_register_model_content(self):
         model = Utils.get_template(self._template, "model.dral")
-        with open(model, "r") as f:
-            return f.read()
+        with open(model, "r", encoding="UTF-8") as file:
+            return file.read()
 
     def generate(self, device: Device, exclude: List[str] = []) -> List[Dict]:
         dral_device = DralDevice(device, self._template, exclude=exclude)

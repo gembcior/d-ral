@@ -1,5 +1,5 @@
 import glob
-import importlib.resources as resources
+from importlib import resources
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -10,7 +10,7 @@ class Utils:
 
     @staticmethod
     def get_template(template: str, name: str) -> Path:
-        with resources.path("dral.templates.%s" % template, name) as item:
+        with resources.path(f"dral.templates.{template}", name) as item:
             return Path(item)
 
     @staticmethod
@@ -19,8 +19,7 @@ class Utils:
         svd = glob.glob(f"**/{device}.svd", root_dir=devices_path, recursive=True)
         if svd:
             return devices_path / Path(svd[0])
-        else:
-            return None
+        return None
 
     @staticmethod
     def get_device_info(svd: Path) -> Tuple:
@@ -29,5 +28,4 @@ class Utils:
         device_info = svd.parts
         if len(device_info) > 2:
             return svd.stem, device_info[1], device_info[0]
-        else:
-            return svd.stem, "", device_info[0]
+        return svd.stem, "", device_info[0]
