@@ -22,7 +22,7 @@ class Utils:
         return None
 
     @staticmethod
-    def get_device_info(svd: Path) -> Tuple:
+    def get_device_info(svd: Path) -> Tuple[str, str, str]:
         devices_path = str(resources.files("dral.devices"))
         svd = svd.resolve().relative_to(devices_path)
         device_info = svd.parts

@@ -3,7 +3,7 @@ from .base import BaseFilter
 
 
 class WhiteListFilter(BaseFilter):
-    def __init__(self, list) -> None:
+    def __init__(self, list: Device) -> None:
         super().__init__()
         self._list = list
 

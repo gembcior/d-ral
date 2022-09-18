@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, NoReturn
 
 import click
 from rich.console import Console
@@ -12,22 +13,20 @@ from .generator import Generator
 from .utils import Utils
 
 
-def print_supported_devices(ctx, param, value):
+def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
     if not value or ctx.resilient_parsing:
         return
     click.echo("TODO")
     ctx.exit()
 
 
-def validate_svd(ctx, param, value):
+def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     if Path(value).exists():
         return Path(value).resolve()
     value = Utils.get_svd_file(value)
     if value is not None:
         return value
-    raise click.BadParameter(
-        "SVD must be a path to external SVD file or name of the already supported device"
-    )
+    raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
 
 
 @click.command()
@@ -45,9 +44,7 @@ def validate_svd(ctx, param, value):
     "-e",
     "--exclude",
     multiple=True,
-    type=click.Choice(
-        ["peripherals", "registers", "banks", "fields"], case_sensitive=False
-    ),
+    type=click.Choice(["peripherals", "registers", "banks", "fields"], case_sensitive=False),
     help="Exclude items from generation.",
 )
 @click.option("-s", "--single", is_flag=True, help="Generate output as a single file.")
@@ -72,7 +69,7 @@ def validate_svd(ctx, param, value):
     help="Show list of the supported devices and exit.",
 )
 @click.version_option()
-def cli(svd, output, template, exclude, single, white_list, black_list):
+def cli(svd, output, template, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from SVD.
@@ -109,10 +106,10 @@ def cli(svd, output, template, exclude, single, white_list, black_list):
         device = adapter.convert()
 
         # Apply filters
-        filters = []
-        if black_list:
+        filters: Any = []
+        if black_list is not None:
             filters.append(BlackListFilter(black_list))
-        if white_list:
+        if white_list is not None:
             filters.append(WhiteListFilter(white_list))
         filters.append(BanksFilter())
         for item in filters:
@@ -123,17 +120,17 @@ def cli(svd, output, template, exclude, single, white_list, black_list):
 
         # Make output
         output = output / "dralOutput"
+
+        output_format: Any = CMakeLibFormat(output, "dral")
         if template == "dral":
             output_format = CMakeLibFormat(output, "dral")
         elif template == "mbedAutomatify":
             chip, family, brand = Utils.get_device_info(svd)
             output_format = MbedAutomatifyFormat(output, chip, family, brand)
-        else:
-            output_format = CMakeLibFormat(output, "dral")
         output_format.make(objects, single)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
 if __name__ == "__main__":
-    cli()
+    cli()  # noqa

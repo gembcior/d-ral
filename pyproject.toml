@@ -4,26 +4,24 @@ homepage = "https://github.com/gembcior/d-ral"
 version = "3.0.0"
 description = "D-RAL - Device Register Access Layer"
 authors = ["Gembcior <gembcior@gmail.com>"]
-license="MIT"
+license = "MIT"
 readme = "README.md"
 classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Environment :: Console",
-    "Operating System :: POSIX :: Linux",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
 ]
-packages = [
-    { include = "dral" },
-]
+packages = [{ include = "dral" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 svd2py = "^0.1"
 rich = "^12.5"
 click = "^8.1"
-pylama = {extras = ["all"], version = "^8.4.1"}
+pylama = { extras = ["all"], version = "^8.4.1" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.3"
@@ -33,7 +31,7 @@ pytest-clarity = "^1.0.1"
 pyyaml = "^6.0"
 black = "^22.8"
 mypy = "^0.971"
-pylama = {extras = ["all"], version = "^8.4"}
+pylama = { extras = ["all"], version = "^8.4" }
 
 [tool.poetry.scripts]
 dral = "dral.app:cli"
@@ -49,7 +47,7 @@ strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [[tool.mypy.overrides]]
-module = ["pygments.*", "IPython.*", "commonmark.*", "ipywidgets.*"]
+module = ["rich.*", "click.*", "svd2py.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -58,8 +56,22 @@ testpaths = ["tests"]
 [tool.isort]
 profile = "black"
 
+[tool.black]
+line-length = 160
+
 [tool.pylama]
 format = "pylint"
 skip = "*/.tox/*,*/.env/*"
-linters = "eradicate,mccabe,pycodestyle,pydocstyle,pyflakes,pylint"
-ignore = "E501,D1"
+linters = "eradicate,mccabe,pycodestyle,pyflakes,pylint"
+ignore = """
+  E501,
+  D1,
+  C0114,
+  C0115,
+  C0116,
+  C0301,
+  R0902,
+"""
+
+[tool.pylama.linter.pycodestyle]
+ignore = "E203"

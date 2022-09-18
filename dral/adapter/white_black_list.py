@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import yaml
 
@@ -11,14 +11,14 @@ class WhiteBlackListAdapter(BaseAdapter):
     def __init__(self, list_file: Path) -> None:
         self._list_file = list_file
 
-    def _get_fields(self, list_fields: Dict) -> List[Field]:
+    def _get_fields(self, list_fields: List[Dict[str, Any]]) -> List[Field]:
         fields_list = []
         for field in list_fields:
             new_field = Field(**field)
             fields_list.append(new_field)
         return fields_list
 
-    def _get_registers(self, list_registers: List[Dict]) -> List[Register]:
+    def _get_registers(self, list_registers: List[Dict[str, Any]]) -> List[Register]:
         registers_list = []
         for register in list_registers:
             if "fields" in register:
@@ -27,18 +27,16 @@ class WhiteBlackListAdapter(BaseAdapter):
             registers_list.append(new_register)
         return registers_list
 
-    def _get_peripherals(self, list_peripherals: List[Dict]) -> List[Peripheral]:
+    def _get_peripherals(self, list_peripherals: List[Dict[str, Any]]) -> List[Peripheral]:
         peripherals_list = []
         for peripheral in list_peripherals:
             if "registers" in peripheral:
-                peripheral.update(
-                    {"registers": self._get_registers(peripheral["registers"])}
-                )
+                peripheral.update({"registers": self._get_registers(peripheral["registers"])})
             new_peripheral = Peripheral(**peripheral)
             peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _list_to_dral(self, list: Dict) -> Device:
+    def _list_to_dral(self, list: Dict[str, Any]) -> Device:
         if "peripherals" in list:
             list.update({"peripherals": self._get_peripherals(list["peripherals"])})
         return Device(**list)

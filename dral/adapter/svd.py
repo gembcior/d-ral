@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import svd2py
 
@@ -9,7 +9,7 @@ from .base import BaseAdapter
 
 
 class IncorrectSvd(Exception):
-    def __init__(self, *args):
+    def __init__(self, *args: Any) -> None:
         super().__init__(args)
 
 
@@ -17,7 +17,7 @@ class SvdAdapter(BaseAdapter):
     def __init__(self, svd_file: Path) -> None:
         self._svd_file = svd_file
 
-    def _get_fields(self, svd_fields: List[Dict]) -> List[Field]:
+    def _get_fields(self, svd_fields: List[Dict[str, Any]]) -> List[Field]:
         fields_list = []
         for field in svd_fields:
             if "bitRange" in field:
@@ -27,9 +27,7 @@ class SvdAdapter(BaseAdapter):
                     position = int(result.group(2))
                     width = (int(result.group(1)) + 1) - position
                 else:
-                    raise IncorrectSvd(
-                        "Determining the position and width of the field is impossible."
-                    )
+                    raise IncorrectSvd("Determining the position and width of the field is impossible.")
             else:
                 position = field["bitOffset"]
                 width = field["bitWidth"]
@@ -43,7 +41,7 @@ class SvdAdapter(BaseAdapter):
             fields_list.append(new_field)
         return fields_list
 
-    def _get_registers(self, svd_registers: List[Dict]) -> List[Register]:
+    def _get_registers(self, svd_registers: List[Dict[str, Any]]) -> List[Register]:
         registers_list = []
         for register in svd_registers:
             fields = []
@@ -61,7 +59,7 @@ class SvdAdapter(BaseAdapter):
             registers_list.append(new_register)
         return registers_list
 
-    def _get_peripherals(self, svd_peripherals: List[Dict]) -> List[Peripheral]:
+    def _get_peripherals(self, svd_peripherals: List[Dict[str, Any]]) -> List[Peripheral]:
         peripherals_list = []
         for peripheral in svd_peripherals:
             registers = []
@@ -77,7 +75,7 @@ class SvdAdapter(BaseAdapter):
             peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _svd_to_dral(self, svd: Dict) -> Device:
+    def _svd_to_dral(self, svd: Dict[str, Any]) -> Device:
         svd_device = svd["device"]
         device = Device(
             name=svd_device["name"],
