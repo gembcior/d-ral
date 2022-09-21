@@ -1,5 +1,5 @@
 import sys
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Tuple
 
 from rich.console import Console
 
@@ -8,11 +8,8 @@ from .base import BaseFilter
 
 
 class BanksFilter(BaseFilter):
-    def __init__(self) -> None:
-        super().__init__()
-
     # TODO refactor register banks support
-    def _find_register_banks(self, registers: List[Register]) -> List[List[Register]]:
+    def _find_register_banks(self, registers: List[Register]) -> List[List[Register]]:  # noqa: C901
         def get_symmetric_difference(str1: str, str2: str) -> List[str]:
             from difflib import Differ
 
@@ -137,5 +134,5 @@ class BanksFilter(BaseFilter):
 
     def apply(self, device: Device) -> Device:
         for i, item in enumerate(device.peripherals):
-            device.peripherals[i]._banks = self._get_register_banks(item.registers)
+            device.peripherals[i]._banks = self._get_register_banks(item.registers)  # noqa: W0212
         return device

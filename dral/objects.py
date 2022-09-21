@@ -1,7 +1,7 @@
 import re
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Optional, Union
+from typing import Any, Dict, Iterator, List, Union
 
 from .types import Bank, Device, Field, Peripheral, Register
 from .utils import Utils

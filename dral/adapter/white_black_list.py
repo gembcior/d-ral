@@ -36,12 +36,12 @@ class WhiteBlackListAdapter(BaseAdapter):
             peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _list_to_dral(self, list: Dict[str, Any]) -> Device:
-        if "peripherals" in list:
-            list.update({"peripherals": self._get_peripherals(list["peripherals"])})
-        return Device(**list)
+    def _list_to_dral(self, _list: Dict[str, Any]) -> Device:
+        if "peripherals" in _list:
+            _list.update({"peripherals": self._get_peripherals(_list["peripherals"])})
+        return Device(**_list)
 
     def convert(self) -> Device:
-        with open(self._list_file, "r") as list_file:
-            list = yaml.load(list_file, Loader=yaml.FullLoader)
-        return self._list_to_dral(list)
+        with open(self._list_file, "r", encoding="UTF-8") as list_file:
+            _list = yaml.load(list_file, Loader=yaml.FullLoader)
+        return self._list_to_dral(_list)

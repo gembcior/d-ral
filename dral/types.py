@@ -106,7 +106,7 @@ class Register(BaseType):
             fields = []
         self._fields = fields
 
-    def __eq__(self, other: object) -> bool:
+    def __eq__(self, other: object) -> bool:  # noqa
         if not isinstance(other, Register):
             return NotImplemented
         if not super().__eq__(other):

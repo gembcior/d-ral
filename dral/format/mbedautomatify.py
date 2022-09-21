@@ -10,11 +10,11 @@ class MbedAutomatifyFormat(BaseFormat):
         self._device = device
         self._brand = brand
         self._family = family
-        self._device_file_content = "class dral():\n" "    def __init__(self, proxy):\n"
+        self._device_file_content = "class dral():\n" + "    def __init__(self, proxy):\n"
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
         file_path = directory / name
-        with open(file_path, "w") as new_file:
+        with open(file_path, "w", encoding="UTF-8") as new_file:
             new_file.writelines(content)
 
     def _create_output_directory(self, output: Path) -> Path:
@@ -33,11 +33,11 @@ class MbedAutomatifyFormat(BaseFormat):
         self._create_file(name, directory, content)
 
     def _create_init_files(self, directory: Path) -> None:
-        with open(directory / "__init__.py", "w") as init:
+        with open(directory / "__init__.py", "w", encoding="UTF-8") as init:
             init.write("from .dral import dral")
         directory = directory.parent
         while directory != self._directory:
-            open(directory / "__init__.py", "w").close()
+            open(directory / "__init__.py", "w", encoding="UTF-8").close()
             directory = directory.parent
 
     def _make_default(self, objects: List[Dict[str, str]]) -> None:

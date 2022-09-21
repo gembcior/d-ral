@@ -60,18 +60,18 @@ profile = "black"
 line-length = 160
 
 [tool.pylama]
+max-line-length = 160
 format = "pylint"
-skip = "*/.tox/*,*/.env/*"
+skip = "*/.tox/*,*/.env/*,**/__init__.py"
 linters = "eradicate,mccabe,pycodestyle,pyflakes,pylint"
 ignore = """
+  W0511,
   E501,
   D1,
-  C0114,
-  C0115,
-  C0116,
-  C0301,
-  R0902,
+  C,
+  R,
 """
 
 [tool.pylama.linter.pycodestyle]
-ignore = "E203"
+ignore = "E203,E501"
+max-line-length = 160

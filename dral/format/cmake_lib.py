@@ -19,7 +19,7 @@ class CMakeLibFormat(BaseFormat):
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
         file_path = directory / name
-        with open(file_path, "w") as new_file:
+        with open(file_path, "w", encoding="UTF-8") as new_file:
             new_file.writelines(content)
 
     def _create_output_directory(self, output: Path) -> Path:

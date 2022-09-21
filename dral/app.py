@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, NoReturn
+from typing import Any
 
 import click
 from rich.console import Console
@@ -14,6 +14,7 @@ from .utils import Utils
 
 
 def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
+    del param
     if not value or ctx.resilient_parsing:
         return
     click.echo("TODO")
@@ -21,6 +22,7 @@ def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
 
 
 def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
+    del ctx, param
     if Path(value).exists():
         return Path(value).resolve()
     value = Utils.get_svd_file(value)
