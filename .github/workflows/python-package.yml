@@ -35,6 +35,7 @@ jobs:
     - name: Lint with mypy
       run: |
         source .venv/bin/activate
+        mypy --install-types --non-interactive
         mypy -p dral
     - name: Test with pytest
       run: |

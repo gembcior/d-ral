@@ -1,18 +1,16 @@
 import sys
+from typing import Any, List, Tuple
 
 from rich.console import Console
 
-from ..types import Bank, Device
+from ..types import Bank, Device, Register
 from .base import BaseFilter
 
 
 class BanksFilter(BaseFilter):
-    def __init__(self) -> None:
-        super().__init__()
-
     # TODO refactor register banks support
-    def _find_register_banks(self, registers):
-        def get_symmetric_difference(str1, str2):
+    def _find_register_banks(self, registers: List[Register]) -> List[List[Register]]:  # noqa: C901
+        def get_symmetric_difference(str1: str, str2: str) -> List[str]:
             from difflib import Differ
 
             differ = Differ()
@@ -24,13 +22,13 @@ class BanksFilter(BaseFilter):
                     output.append(item.replace("-", "").strip())
             return output
 
-        def is_list_of_digits(digits):
+        def is_list_of_digits(digits: List[Any]) -> bool:
             for item in digits:
                 if not item.isdigit():
                     return False
             return True
 
-        def only_one_pos(s1, s2):
+        def only_one_pos(s1: str, s2: str) -> bool:
             ok = False
             if len(s1) != len(s2):
                 return False
@@ -42,16 +40,14 @@ class BanksFilter(BaseFilter):
                         ok = True
             return ok
 
-        def compare(item1, item2):
+        def compare(item1: Register, item2: Register) -> bool:
             fields1 = item1.fields
             fields2 = item2.fields
-            diff = [
-                i for i in fields1 + fields2 if i not in fields1 or i not in fields2
-            ]
+            diff = [i for i in fields1 + fields2 if i not in fields1 or i not in fields2]
             if len(diff) == 0:
                 if item1.name != item2.name:
-                    diff = get_symmetric_difference(item1.name, item2.name)
-                    if is_list_of_digits(diff):
+                    symmetric_diff = get_symmetric_difference(item1.name, item2.name)
+                    if is_list_of_digits(symmetric_diff):
                         return True
                     else:
                         # TODO
@@ -75,22 +71,21 @@ class BanksFilter(BaseFilter):
                     registers_copy.remove(item)
         return banks
 
-    def _get_register_banks_offsets(self, registers):
+    def _get_register_banks_offsets(self, registers: List[Register]) -> Tuple[Any, int]:
         offsets = []
         for item in registers:
             offsets.append(item.offset)
-        diff = [offsets[i + 1] - offsets[i] for i in range(len(offsets) - 1)]
+        diff = [offsets[i + 1] - offsets[i] for i in range(len(offsets) - 1)]  # type: ignore[operator]
         if len(set(diff)) != 1:
             console = Console()
-            console.print(
-                f"[red]ERROR: Register banks offset not consistent: {offsets}"
-            )
+            console.print(f"[red]ERROR: Register banks offset not consistent: {offsets}")
             console.print("Registers dump:")
             console.print(registers)
             sys.exit()
-        return min(offsets), diff[0]
+        min_offset = min(offsets)  # type: ignore[type-var]
+        return min_offset, diff[0]
 
-    def _get_register_bank_name(self, bank):
+    def _get_register_bank_name(self, bank: List[Register]) -> str:
         from difflib import SequenceMatcher
 
         differ = SequenceMatcher(None, bank[0].name, bank[1].name)
@@ -112,7 +107,7 @@ class BanksFilter(BaseFilter):
         console.print(f"[red]ERROR: Wrong register bank name {bank[0].name}")
         sys.exit()
 
-    def _merge_register_banks(self, registers):
+    def _merge_register_banks(self, registers: List[List[Register]]) -> List[Bank]:
         register_banks = []
         for bank in registers:
             first_offset, bank_offset = self._get_register_banks_offsets(bank)
@@ -130,7 +125,7 @@ class BanksFilter(BaseFilter):
             register_banks.append(reg)
         return register_banks
 
-    def _get_register_banks(self, registers):
+    def _get_register_banks(self, registers: List[Register]) -> List[Bank]:
         register_banks = []
         banks = self._find_register_banks(registers)
         if banks:
@@ -139,5 +134,5 @@ class BanksFilter(BaseFilter):
 
     def apply(self, device: Device) -> Device:
         for i, item in enumerate(device.peripherals):
-            device.peripherals[i]._banks = self._get_register_banks(item.registers)
+            device.peripherals[i]._banks = self._get_register_banks(item.registers)  # noqa: W0212
         return device

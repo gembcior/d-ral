@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 
 import yaml
 
@@ -10,9 +10,11 @@ class BaseType(ABC):
         self._description = description
 
     def __str__(self) -> str:
-        return yaml.dump(self.asdict())
+        return str(yaml.dump(self.asdict()))
 
-    def __eq__(self, other: "BaseType") -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, BaseType):
+            return NotImplemented
         if other.name != self._name:
             return False
         if other.description != self._description:
@@ -28,7 +30,7 @@ class BaseType(ABC):
         return self._description
 
     @abstractmethod
-    def asdict(self) -> Dict:
+    def asdict(self) -> Dict[str, Any]:
         pass
 
 
@@ -46,7 +48,9 @@ class Field(BaseType):
         self._mask = mask
         self._width = width
 
-    def __eq__(self, other: "Field") -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Field):
+            return NotImplemented
         if not super().__eq__(other):
             return False
         if (other.position is not None) and (self._position is not None):
@@ -60,7 +64,7 @@ class Field(BaseType):
                 return False
         return True
 
-    def asdict(self) -> Dict:
+    def asdict(self) -> Dict[str, Any]:
         return {
             "name": self._name,
             "description": self._description,
@@ -91,16 +95,20 @@ class Register(BaseType):
         size: Union[None, int] = None,
         access: Union[None, str] = None,
         reset_value: Union[None, int] = None,
-        fields: List[Field] = [],
+        fields: Union[None, List[Field]] = None,
     ):
         super().__init__(name, description)
         self._offset = offset
         self._size = size
         self._access = access
         self._reset_value = reset_value
+        if fields is None:
+            fields = []
         self._fields = fields
 
-    def __eq__(self, other: "Register") -> bool:
+    def __eq__(self, other: object) -> bool:  # noqa
+        if not isinstance(other, Register):
+            return NotImplemented
         if not super().__eq__(other):
             return False
         if (other.offset is not None) and (self._offset is not None):
@@ -115,12 +123,12 @@ class Register(BaseType):
         if (other.reset_value is not None) and (self._reset_value is not None):
             if other.reset_value != other._reset_value:
                 return False
-        if (other.fields is not None) and (self.fields is not None):
+        if other.fields and self.fields:
             if other.fields != other._fields:
                 return False
         return True
 
-    def asdict(self) -> Dict:
+    def asdict(self) -> Dict[str, Any]:
         return {
             "name": self._name,
             "description": self._description,
@@ -162,12 +170,14 @@ class Bank(Register):
         access: Union[None, str] = None,
         reset_value: Union[None, int] = None,
         bank_offset: Union[None, int] = None,
-        fields: List[Field] = [],
+        fields: Union[None, List[Field]] = None,
     ):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
 
-    def __eq__(self, other: "Bank") -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Bank):
+            return NotImplemented
         if not super().__eq__(other):
             return False
         if (other.bank_offset is not None) and (self._bank_offset is not None):
@@ -186,26 +196,35 @@ class Peripheral(BaseType):
         name: str,
         description: str = "",
         address: Union[None, int] = None,
-        registers: List[Register] = [],
-        banks: List[Bank] = [],
+        registers: Union[None, List[Register]] = None,
+        banks: Union[None, List[Bank]] = None,
     ):
         super().__init__(name, description)
         self._address = address
+        if registers is None:
+            registers = []
         self._registers = registers
+        if banks is None:
+            banks = []
         self._banks = banks
 
-    def __eq__(self, other: "Peripheral") -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Peripheral):
+            return NotImplemented
         if not super().__eq__(other):
             return False
         if (other.address is not None) and (self._address is not None):
             if other.address != self._address:
                 return False
-        if (other.registers is not None) and (self._registers is not None):
+        if other.registers and self._registers:
             if other.registers != self._registers:
+                return False
+        if other.banks and self._banks:
+            if other.banks != self._banks:
                 return False
         return True
 
-    def asdict(self) -> Dict:
+    def asdict(self) -> Dict[str, Any]:
         return {
             "name": self._name,
             "description": self._description,
@@ -227,21 +246,23 @@ class Peripheral(BaseType):
 
 
 class Device(BaseType):
-    def __init__(
-        self, name: str, description: str = "", peripherals: List[Peripheral] = []
-    ):
+    def __init__(self, name: str, description: str = "", peripherals: Union[None, List[Peripheral]] = None):
         super().__init__(name, description)
+        if peripherals is None:
+            peripherals = []
         self._peripherals = peripherals
 
-    def __eq__(self, other: "Device") -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Device):
+            return NotImplemented
         if not super().__eq__(other):
             return False
-        if (other.peripherals is not None) and (self._peripherals is not None):
+        if other.peripherals and self._peripherals:
             if other.peripherals != self._peripherals:
                 return False
         return True
 
-    def asdict(self) -> Dict:
+    def asdict(self) -> Dict[str, Any]:
         return {
             "name": self._name,
             "description": self._description,
