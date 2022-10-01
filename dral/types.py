@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 import yaml
 
@@ -39,9 +39,9 @@ class Field(BaseType):
         self,
         name: str,
         description: str = "",
-        position: None | int = None,
-        mask: None | int = None,
-        width: None | int = None,
+        position: Union[None, int] = None,
+        mask: Union[None, int] = None,
+        width: Union[None, int] = None,
     ) -> None:
         super().__init__(name, description)
         self._position = position
@@ -74,15 +74,15 @@ class Field(BaseType):
         }
 
     @property
-    def position(self) -> None | int:
+    def position(self) -> Union[None, int]:
         return self._position
 
     @property
-    def mask(self) -> None | int:
+    def mask(self) -> Union[None, int]:
         return self._mask
 
     @property
-    def width(self) -> None | int:
+    def width(self) -> Union[None, int]:
         return self._width
 
 
@@ -91,11 +91,11 @@ class Register(BaseType):
         self,
         name: str,
         description: str = "",
-        offset: None | int = None,
-        size: None | int = None,
-        access: None | str = None,
-        reset_value: None | int = None,
-        fields: None | List[Field] = None,
+        offset: Union[None, int] = None,
+        size: Union[None, int] = None,
+        access: Union[None, str] = None,
+        reset_value: Union[None, int] = None,
+        fields: Union[None, List[Field]] = None,
     ):
         super().__init__(name, description)
         self._offset = offset
@@ -140,19 +140,19 @@ class Register(BaseType):
         }
 
     @property
-    def offset(self) -> None | int:
+    def offset(self) -> Union[None, int]:
         return self._offset
 
     @property
-    def size(self) -> None | int:
+    def size(self) -> Union[None, int]:
         return self._size
 
     @property
-    def access(self) -> None | str:
+    def access(self) -> Union[None, str]:
         return self._access
 
     @property
-    def reset_value(self) -> None | int:
+    def reset_value(self) -> Union[None, int]:
         return self._reset_value
 
     @property
@@ -165,12 +165,12 @@ class Bank(Register):
         self,
         name: str,
         description: str = "",
-        offset: None | int = None,
-        size: None | int = None,
-        access: None | str = None,
-        reset_value: None | int = None,
-        bank_offset: None | int = None,
-        fields: None | List[Field] = None,
+        offset: Union[None, int] = None,
+        size: Union[None, int] = None,
+        access: Union[None, str] = None,
+        reset_value: Union[None, int] = None,
+        bank_offset: Union[None, int] = None,
+        fields: Union[None, List[Field]] = None,
     ):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
@@ -186,7 +186,7 @@ class Bank(Register):
         return True
 
     @property
-    def bank_offset(self) -> None | int:
+    def bank_offset(self) -> Union[None, int]:
         return self._bank_offset
 
 
@@ -195,9 +195,9 @@ class Peripheral(BaseType):
         self,
         name: str,
         description: str = "",
-        address: None | int = None,
-        registers: None | List[Register] = None,
-        banks: None | List[Bank] = None,
+        address: Union[None, int] = None,
+        registers: Union[None, List[Register]] = None,
+        banks: Union[None, List[Bank]] = None,
     ):
         super().__init__(name, description)
         self._address = address
@@ -233,7 +233,7 @@ class Peripheral(BaseType):
         }
 
     @property
-    def address(self) -> None | int:
+    def address(self) -> Union[None, int]:
         return self._address
 
     @property
@@ -246,7 +246,7 @@ class Peripheral(BaseType):
 
 
 class Device(BaseType):
-    def __init__(self, name: str, description: str = "", peripherals: None | List[Peripheral] = None):
+    def __init__(self, name: str, description: str = "", peripherals: Union[None, List[Peripheral]] = None):
         super().__init__(name, description)
         if peripherals is None:
             peripherals = []

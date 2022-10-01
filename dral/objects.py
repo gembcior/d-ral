@@ -15,12 +15,12 @@ class DralPatternInvalid(Exception):
 class DralObject(ABC):
     def __init__(
         self,
-        root: Device | Peripheral | Register | Field,
+        root: Union[Device, Peripheral, Register, Field],
         template: str = "default",
-        exclude: None | List[str] = None,
+        exclude: Union[None, List[str]] = None,
     ):
         super().__init__()
-        self._children: Dict[str, List[DralPeripheral | DralRegister | DralBank | DralField]] = {}
+        self._children: Dict[str, List[Union[DralPeripheral, DralRegister, DralBank, DralField]]] = {}
         self._dral_prefix = r"\[dral\]"
         self._dral_sufix = r"\[#dral\]"
         self._dral_pattern = re.compile(
@@ -36,7 +36,7 @@ class DralObject(ABC):
         self._template_file: Dict[str, str] = {}
         self.name = self._root.name
 
-    def _apply_modifier(self, item: str | List[str], modifier: str) -> str | List[str]:
+    def _apply_modifier(self, item: Union[str, List[str]], modifier: str) -> Union[str, List[str]]:
         output = item
         if isinstance(item, str):
             output = self._apply_string_modifier(item, modifier)
@@ -74,7 +74,7 @@ class DralObject(ABC):
             pass
         return content
 
-    def _get_pattern_substitution(self, pattern: str) -> None | str | List[str]:
+    def _get_pattern_substitution(self, pattern: str) -> Union[None, str, List[str]]:
         split_pattern = pattern.split("%")
         base = split_pattern[0].split(".")
         modifier = split_pattern[1:]
@@ -88,7 +88,7 @@ class DralObject(ABC):
     def _find_all_dral_pattern(self, string: str) -> Iterator[re.Match[str]]:
         return re.finditer(self._dral_pattern, string)
 
-    def _replace_line(self, line: str) -> str | None:
+    def _replace_line(self, line: str) -> Union[str, None]:
         dral_matches = self._find_all_dral_pattern(line)
         if dral_matches:  # type: ignore[truthy-bool]
             for match in dral_matches:
@@ -133,7 +133,7 @@ class DralObject(ABC):
         except KeyError:
             self._children.update({_type: [element]})
 
-    def _get_substitution(self, pattern: List[str]) -> None | str | List[str]:
+    def _get_substitution(self, pattern: List[str]) -> Union[None, str, List[str]]:
         substitution = None
         if str(self) == pattern[0]:
             if pattern[1] == "name":
@@ -157,7 +157,7 @@ class DralObject(ABC):
 
 
 class DralDevice(DralObject):
-    def __init__(self, root: Device, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Device, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
 
     def __str__(self) -> str:
@@ -177,14 +177,14 @@ class DralDevice(DralObject):
 
 
 class DralPeripheral(DralObject):
-    def __init__(self, root: Peripheral, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Peripheral, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "peripheral.dral"}
 
     def __str__(self) -> str:
         return "peripheral"
 
-    def _get_substitution(self, pattern: List[str]) -> None | str | List[str]:
+    def _get_substitution(self, pattern: List[str]) -> Union[None, str, List[str]]:
         substitution = super()._get_substitution(pattern)
         if substitution is None:
             if str(self) == pattern[0]:
@@ -211,7 +211,7 @@ class DralPeripheral(DralObject):
 
 
 class DralRegister(DralObject):
-    def __init__(self, root: Register, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Register, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {
             "default": "register.dral",
@@ -221,7 +221,7 @@ class DralRegister(DralObject):
     def __str__(self) -> str:
         return "register"
 
-    def _get_substitution(self, pattern: List[str]) -> None | str | List[str]:
+    def _get_substitution(self, pattern: List[str]) -> Union[None, str, List[str]]:
         substitution = super()._get_substitution(pattern)
         if substitution is None:
             if str(self) == pattern[0]:
@@ -250,14 +250,14 @@ class DralRegister(DralObject):
 
 
 class DralBank(DralRegister):
-    def __init__(self, root: Bank, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Bank, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude=exclude)
         self._template_file = {"default": "bank.dral"}
 
     def __str__(self) -> str:
         return "bank"
 
-    def _get_substitution(self, pattern: List[str]) -> None | str | List[str]:
+    def _get_substitution(self, pattern: List[str]) -> Union[None, str, List[str]]:
         substitution = super()._get_substitution(pattern)
         if substitution is None:
             if str(self) == pattern[0]:
@@ -275,14 +275,14 @@ class DralBank(DralRegister):
 
 
 class DralField(DralObject):
-    def __init__(self, root: Field, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Field, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "field.dral"}
 
     def __str__(self) -> str:
         return "field"
 
-    def _get_substitution(self, pattern: List[str]) -> None | str | List[str]:
+    def _get_substitution(self, pattern: List[str]) -> Union[None, str, List[str]]:
         substitution = super()._get_substitution(pattern)
         if substitution is None:
             if str(self) == pattern[0]:
@@ -300,6 +300,6 @@ class DralField(DralObject):
 
 
 class DralBankField(DralField):
-    def __init__(self, root: Field, template: str, exclude: None | List[str] = None):
+    def __init__(self, root: Field, template: str, exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "bank.field.dral"}

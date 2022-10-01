@@ -15,15 +15,15 @@ class Utils:
 
     @staticmethod
     def get_svd_file(device: str) -> Optional[Path]:
-        devices_path = str(resources.files("dral.devices"))
-        svd = glob.glob(f"**/{device}.svd", root_dir=devices_path, recursive=True)
+        devices_path = Path(__file__).parent / "devices"
+        svd = glob.glob(f"{devices_path}/**/{device}.svd", recursive=True)
         if svd:
             return devices_path / Path(svd[0])
         return None
 
     @staticmethod
     def get_device_info(svd: Path) -> Tuple[str, str, str]:
-        devices_path = str(resources.files("dral.devices"))
+        devices_path = Path(__file__).parent / "devices"
         svd = svd.resolve().relative_to(devices_path)
         device_info = svd.parts
         if len(device_info) > 2:

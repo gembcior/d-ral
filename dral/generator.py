@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from .objects import DralDevice
 from .types import Device
@@ -14,7 +14,7 @@ class Generator:
         with open(model, "r", encoding="UTF-8") as file:
             return file.read()
 
-    def generate(self, device: Device, exclude: None | List[str] = None) -> List[Dict[str, str]]:
+    def generate(self, device: Device, exclude: Union[None, List[str]] = None) -> List[Dict[str, str]]:
         dral_device = DralDevice(device, self._template, exclude=exclude)
         objects = dral_device.parse()
         if Utils.get_template(self._template, "model.dral").exists():
