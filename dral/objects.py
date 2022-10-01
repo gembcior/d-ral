@@ -85,7 +85,7 @@ class DralObject(ABC):
             return substitution
         return None
 
-    def _find_all_dral_pattern(self, string: str) -> Iterator[re.Match[str]]:
+    def _find_all_dral_pattern(self, string: str) -> Iterator[Any]:
         return re.finditer(self._dral_pattern, string)
 
     def _replace_line(self, line: str) -> Union[str, None]:
@@ -100,7 +100,7 @@ class DralObject(ABC):
                     pattern = f"{self._dral_prefix}{pattern}{self._dral_sufix}"
                     if isinstance(substitution, list):
                         substitution = (leading_spaces.join(substitution)).strip("\n")
-                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))
+                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))  # type: ignore[arg-type]
             return line
         return None
 
