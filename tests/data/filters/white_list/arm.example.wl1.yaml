@@ -1,0 +1,6 @@
+peripherals:
+  - name: TIMER0
+    registers:
+      - name: CR
+      - name: SR
+      - name: INT

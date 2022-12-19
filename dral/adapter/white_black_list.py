@@ -39,7 +39,7 @@ class WhiteBlackListAdapter(BaseAdapter):
     def _list_to_dral(self, _list: Dict[str, Any]) -> Device:
         if "peripherals" in _list:
             _list.update({"peripherals": self._get_peripherals(_list["peripherals"])})
-        return Device(**_list)
+        return Device(name="WhiteList", **_list)
 
     def convert(self) -> Device:
         with open(self._list_file, "r", encoding="UTF-8") as list_file:

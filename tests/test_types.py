@@ -123,9 +123,7 @@ class TestDralTypes:
             "peripheral1",
         ],
     )
-    def test_peripheral_type_comparison(
-        self, peripheral_a, peripheral_b, test_peripherals
-    ):
+    def test_peripheral_type_comparison(self, peripheral_a, peripheral_b, test_peripherals):
         test_peripheral_a = dral.Peripheral(**test_peripherals[peripheral_a])
         test_peripheral_b = dral.Peripheral(**test_peripherals[peripheral_b])
 
