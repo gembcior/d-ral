@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Dict, List, Union
 
 from .objects import DralDevice
@@ -6,7 +7,7 @@ from .utils import Utils
 
 
 class Generator:
-    def __init__(self, template: str = "default") -> None:
+    def __init__(self, template: Union[str, Path] = "default") -> None:
         self._template = template
 
     def _get_register_model_content(self) -> str:
