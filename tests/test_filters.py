@@ -19,7 +19,6 @@ class TestDralFilters:
     def wldir(self, datadir):
         return datadir / "filters" / "white_list"
 
-
     def create_device_object(self, data: Dict) -> Device:
         return Device(
             name=data["name"],
@@ -56,26 +55,19 @@ class TestDralFilters:
         )
 
     @pytest.mark.parametrize("device", ["arm.example.example1"])
-    @pytest.mark.parametrize("white_list", ["arm.example.wl1"])
-    def test_white_list_filter(self, device, white_list, wldir, datadir):
+    @pytest.mark.parametrize("white_list", ["arm.example.wl1", "arm.example.wl2", "arm.example.wl3", "arm.example.wl4"])
+    def test_white_list_filter(self, device, white_list, wldir):
         svd = device.split(".")
         svd_path = self.get_svd_file(f"{svd[0]}.{svd[1]}", svd[2])
         dral = SvdAdapter(svd_path).convert()
-        wl = WhiteBlackListAdapter(wldir / f"{white_list}.yaml").convert()
+
+        wl = WhiteBlackListAdapter(wldir / "input" / f"{white_list}.yaml").convert()
         wl_filter = WhiteListFilter(wl)
 
-        print()
-        from rich import inspect
-        for item in wl.peripherals:
-            inspect(item, all=True)
-        data = wl_filter.apply(dral)
-        for item in data.peripherals:
-            inspect(item, all=True)
-        print(data)
+        with open(wldir / "expected" / f"{white_list}.yaml") as data:
+            expected_output = yaml.load(data, Loader=yaml.FullLoader)
+        expected_device = self.create_device_object(expected_output)
 
+        result = wl_filter.apply(dral)
 
-        # with open(datadir / "adapter" / f"{device}.yaml") as data:
-        #     expected_output = yaml.load(data, Loader=yaml.FullLoader)
-        # expected_device = self.create_device_object(expected_output)
-
-        # assert dral == expected_device
+        assert result == expected_device

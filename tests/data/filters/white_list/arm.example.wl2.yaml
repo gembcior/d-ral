@@ -1,8 +1,0 @@
-peripherals:
-  - name: TIMER2
-    registers:
-      - name: MODE
-      - name: EN
-      - name: CAPSRC
-      - name: CNT
-      - name: EN

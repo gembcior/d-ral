@@ -1,0 +1,6 @@
+peripherals:
+  - name: TIMER2
+    registers:
+      - name: COUNT
+      - name: INT
+      - name: SR

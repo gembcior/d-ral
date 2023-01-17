@@ -1,0 +1,81 @@
+description: 'ARM 32-bit Cortex-M3 Microcontroller based device, CPU clock up to 80MHz, etc. '
+name: ARM_Example
+peripherals:
+- address: 1073807360
+  description: 32 Timer / Counter, counting up or down from different sources
+  name: TIMER0
+  registers:
+  - access: read-write
+    description: The Match Register stores the compare Value for the MATCH condition
+    fields: []
+    name: MATCH
+    offset: 36
+    reset_value: 0
+    size: 32
+
+- address: 1073807872
+  description: 32 Timer / Counter, counting up or down from different sources
+  name: TIMER2
+  registers:
+  - access: read-write
+    description: Status Register
+    fields:
+    - description: Shows if Timer is running or not
+      mask: 1
+      name: RUN
+      position: 0
+      width: 1
+    - description: Shows if the MATCH was hit
+      mask: 1
+      name: MATCH
+      position: 8
+      width: 1
+    - description: Shows if an underflow occured. This flag is sticky
+      mask: 1
+      name: UN
+      position: 9
+      width: 1
+    - description: Shows if an overflow occured. This flag is sticky
+      mask: 1
+      name: OV
+      position: 10
+      width: 1
+    - description: Shows if Timer is in RESET state
+      mask: 1
+      name: RST
+      position: 12
+      width: 1
+    - description: Shows the currently active RELOAD Register
+      mask: 3
+      name: RELOAD
+      position: 14
+      width: 2
+    name: SR
+    offset: 4
+    reset_value: 0
+    size: 16
+  - access: read-write
+    description: Interrupt Register
+    fields:
+    - description: Interrupt Enable
+      mask: 1
+      name: EN
+      position: 0
+      width: 1
+    - description: Interrupt Mode, selects on which condition the Timer should generate
+        an Interrupt
+      mask: 7
+      name: MODE
+      position: 4
+      width: 3
+    name: INT
+    offset: 16
+    reset_value: 0
+    size: 16
+  - access: read-write
+    description: The Counter Register reflects the actual Value of the Timer/Counter
+    fields: []
+    name: COUNT
+    offset: 32
+    reset_value: 0
+    size: 32
