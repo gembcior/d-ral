@@ -1,7 +1,7 @@
 import glob
 from importlib import resources
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Union
 
 
 class Utils:
@@ -9,9 +9,12 @@ class Utils:
         pass
 
     @staticmethod
-    def get_template(template: str, name: str) -> Path:
-        with resources.path(f"dral.templates.{template}", name) as item:
-            return Path(item)
+    def get_template(template: Union[str, Path], name: str) -> Path:
+        if isinstance(template, Path):
+            return template / name
+        else:
+            with resources.path(f"dral.templates.{template}", name) as item:
+                return Path(item)
 
     @staticmethod
     def get_svd_file(device: str) -> Optional[Path]:

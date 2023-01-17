@@ -1,0 +1,9 @@
+peripherals:
+  - name: TIMER0
+    registers:
+      - name: MATCH
+  - name: TIMER2
+    registers:
+      - name: COUNT
+      - name: INT
+      - name: SR

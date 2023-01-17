@@ -16,7 +16,7 @@ class DralObject(ABC):
     def __init__(
         self,
         root: Union[Device, Peripheral, Register, Field],
-        template: str = "default",
+        template: Union[str, Path] = "default",
         exclude: Union[None, List[str]] = None,
     ):
         super().__init__()
@@ -125,6 +125,7 @@ class DralObject(ABC):
     def _get_string(self, variant: str) -> List[str]:
         template = Utils.get_template(self._template, self._template_file[variant])
         content = self._parse_template(template)
+        content = self._parse_string(content)
         return content
 
     def _add_children(self, _type: str, element: Union["DralPeripheral", "DralRegister", "DralField"]) -> None:
@@ -157,7 +158,7 @@ class DralObject(ABC):
 
 
 class DralDevice(DralObject):
-    def __init__(self, root: Device, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Device, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
 
     def __str__(self) -> str:
@@ -177,7 +178,7 @@ class DralDevice(DralObject):
 
 
 class DralPeripheral(DralObject):
-    def __init__(self, root: Peripheral, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Peripheral, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "peripheral.dral"}
 
@@ -211,7 +212,7 @@ class DralPeripheral(DralObject):
 
 
 class DralRegister(DralObject):
-    def __init__(self, root: Register, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Register, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {
             "default": "register.dral",
@@ -250,7 +251,7 @@ class DralRegister(DralObject):
 
 
 class DralBank(DralRegister):
-    def __init__(self, root: Bank, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Bank, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude=exclude)
         self._template_file = {"default": "bank.dral"}
 
@@ -275,7 +276,7 @@ class DralBank(DralRegister):
 
 
 class DralField(DralObject):
-    def __init__(self, root: Field, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Field, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "field.dral"}
 
@@ -300,6 +301,6 @@ class DralField(DralObject):
 
 
 class DralBankField(DralField):
-    def __init__(self, root: Field, template: str, exclude: Union[None, List[str]] = None):
+    def __init__(self, root: Field, template: Union[str, Path], exclude: Union[None, List[str]] = None):
         super().__init__(root, template, exclude)
         self._template_file = {"default": "bank.field.dral"}

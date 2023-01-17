@@ -1,4 +1,6 @@
-from ..types import Device, Peripheral
+from typing import List, Optional, Union
+
+from ..types import Device, Peripheral, Register
 from .base import BaseFilter
 
 
@@ -7,29 +9,26 @@ class WhiteListFilter(BaseFilter):
         super().__init__()
         self._list = _list
 
+    def can_remove(self, item: Union[Peripheral, Register], _list: Union[List[Peripheral], List[Register]]) -> bool:
+        for x in _list:
+            if item.name == x.name:
+                return False
+        return True
+
+    def find_peripheral(self, item: Peripheral, _list: List[Peripheral]) -> Optional[Peripheral]:
+        for x in _list:
+            if item.name == x.name:
+                return x
+        return None
+
     def apply(self, device: Device) -> Device:
-        # TODO simplify
-        new_peripheral_list = []
-        for peripheral in self._list.peripherals:
-            for item in device.peripherals:
-                if item.name == peripheral.name:
-                    if peripheral.registers:
-                        new_registers_list = []
-                        for register in peripheral.registers:
-                            for reg_item in item.registers:
-                                if reg_item.name == register.name:
-                                    new_registers_list.append(reg_item)
-                        new_peripheral = Peripheral(
-                            name=item.name,
-                            description=item.description,
-                            address=item.address,
-                            registers=new_registers_list,
-                        )
-                        new_peripheral_list.append(new_peripheral)
-                    else:
-                        new_peripheral_list.append(item)
-        return Device(
-            name=device.name,
-            description=device.description,
-            peripherals=new_peripheral_list,
-        )
+        for i in reversed(range(len(device.peripherals))):
+            if self.can_remove(device.peripherals[i], self._list.peripherals):
+                del device.peripherals[i]
+            else:
+                peripheral = self.find_peripheral(device.peripherals[i], self._list.peripherals)
+                if peripheral is not None:
+                    for j in reversed(range(len(device.peripherals[i].registers))):
+                        if self.can_remove(device.peripherals[i].registers[j], peripheral.registers):
+                            del device.peripherals[i].registers[j]
+        return device
