@@ -1,0 +1,59 @@
+field:
+  name:
+    default:
+      format: "{}"
+      value: dral.filed.name
+  description:
+    default:
+      format: "{}"
+      value: dral.filed.description
+  position:
+    default:
+      format: "{}"
+      value: dral.filed.position
+  mask:
+    default:
+      format: "{:#08x}"
+      value: dral.filed.position
+  width:
+    default:
+      format: "{}"
+      value: dral.filed.width
+
+register:
+  name:
+    default:
+      format: "{}"
+      value: dral.filed.name
+  description:
+    default:
+      format: "{}"
+      value: dral.filed.description
+  offset:
+    value: "{:#04x}"
+    name: offset
+  size:
+    value: "{}"
+    name: size
+  access:
+    value: "{}"
+    name: access
+  reset_value:
+    value: "{:#08x}"
+    name: reset_value
+  fields:
+    format: "{}"
+    value: fields
+    type: list
+
+pripheral:
+  address:
+    value: "{:#08x}"
+    name: address
+  registers:
+    default:
+      value: "{}"
+      name: dral.peripheral.registers
+    simple:
+      value: "{}"
+      name: dral.peripheral.registers

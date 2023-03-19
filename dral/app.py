@@ -9,8 +9,10 @@ from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import CMakeLibFormat, MbedAutomatifyFormat
-from .generator import Generator
+from .generator import DralGenerator
+from .mapping import DralMapping
 from .utils import Utils
+from .template import DralTemplate
 
 
 def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
@@ -43,6 +45,12 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     help="Specify template used to generate files.",
 )
 @click.option(
+    "-m",
+    "--mapping",
+    type=click.Path(exists=True, resolve_path=True, path_type=Path),
+    help="Specify mapping used to generate files.",
+)
+@click.option(
     "-e",
     "--exclude",
     multiple=True,
@@ -71,7 +79,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     help="Show list of the supported devices and exit.",
 )
 @click.version_option()
-def cli(svd, output, template, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
+def cli(svd, output, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from SVD.
@@ -100,7 +108,9 @@ def cli(svd, output, template, exclude, single, white_list, black_list):  # type
 
     exclude = exclude if exclude else []
     adapter = SvdAdapter(svd)
-    generator = Generator(template)
+    mapping_object = DralMapping(mapping) if mapping else DralMapping("default")
+    template_object= DralTemplate(template)
+    generator = DralGenerator(mapping_object, template_object)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
