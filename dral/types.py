@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Union
 
 import yaml
 
 
-class BaseType(ABC):
+class DralBaseType(ABC):
     def __init__(self, name: str, description: str = ""):
         self._name = name
         self._description = description
@@ -13,7 +15,7 @@ class BaseType(ABC):
         return str(yaml.dump(self.asdict()))
 
     def __eq__(self, other: object) -> bool:
-        if not isinstance(other, BaseType):
+        if not isinstance(other, DralBaseType):
             return NotImplemented
         if other.name != self._name:
             return False
@@ -34,7 +36,7 @@ class BaseType(ABC):
         pass
 
 
-class Field(BaseType):
+class Field(DralBaseType):
     def __init__(
         self,
         name: str,
@@ -86,7 +88,7 @@ class Field(BaseType):
         return self._width
 
 
-class Register(BaseType):
+class Register(DralBaseType):
     def __init__(
         self,
         name: str,
@@ -190,7 +192,7 @@ class Bank(Register):
         return self._bank_offset
 
 
-class Peripheral(BaseType):
+class Peripheral(DralBaseType):
     def __init__(
         self,
         name: str,
@@ -245,7 +247,7 @@ class Peripheral(BaseType):
         return self._banks
 
 
-class Device(BaseType):
+class Device(DralBaseType):
     def __init__(self, name: str, description: str = "", peripherals: Union[None, List[Peripheral]] = None):
         super().__init__(name, description)
         if peripherals is None:

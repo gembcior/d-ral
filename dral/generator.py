@@ -1,28 +1,20 @@
-from pathlib import Path
-from typing import Dict, List, Union
+from __future__ import annotations
 
+from typing import Dict, List, Optional, Union
+
+from .mapping import DralMapping
 from .objects import DralDevice
+from .template import DralTemplate
 from .types import Device
-from .utils import Utils
 
 
-class Generator:
-    def __init__(self, template: Union[str, Path] = "default") -> None:
+class DralGenerator:
+    def __init__(self, template: DralTemplate) -> None:
         self._template = template
 
-    def _get_register_model_content(self) -> str:
-        model = Utils.get_template(self._template, "model.dral")
-        with open(model, "r", encoding="UTF-8") as file:
-            return file.read()
-
-    def generate(self, device: Device, exclude: Union[None, List[str]] = None) -> List[Dict[str, str]]:
-        dral_device = DralDevice(device, self._template, exclude=exclude)
+    def generate(self, device: Device, exclude: Union[None, List[str]] = None, mapping: Optional[DralMapping] = None) -> List[Dict[str, str]]:
+        dral_device = DralDevice(device, self._template, exclude=exclude, mapping=mapping)
         objects = dral_device.parse()
-        if Utils.get_template(self._template, "model.dral").exists():
-            objects.append(
-                {
-                    "name": "register_model",
-                    "content": self._get_register_model_content(),
-                }
-            )
+        if self._template.exists("model.dral"):
+            objects.append({"name": "register_model", "content": self._template.read("model.dral")})
         return objects

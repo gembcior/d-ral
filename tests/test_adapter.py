@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import importlib.resources as resources
 from pathlib import Path
 from typing import Dict
@@ -18,10 +20,7 @@ class TestDralAdapter:
         return Device(
             name=data["name"],
             description=data["description"],
-            peripherals=[
-                self.create_peripheral_object(peripheral)
-                for peripheral in data["peripherals"]
-            ],
+            peripherals=[self.create_peripheral_object(peripheral) for peripheral in data["peripherals"]],
         )
 
     def create_peripheral_object(self, data: Dict) -> Peripheral:
@@ -29,9 +28,7 @@ class TestDralAdapter:
             name=data["name"],
             description=data["description"],
             address=data["address"],
-            registers=[
-                self.create_regiter_object(register) for register in data["registers"]
-            ],
+            registers=[self.create_regiter_object(register) for register in data["registers"]],
         )
 
     def create_regiter_object(self, data: Dict) -> Register:
@@ -54,9 +51,7 @@ class TestDralAdapter:
             width=data["width"],
         )
 
-    @pytest.mark.parametrize(
-        "device", ["arm.example.example1", "stm32.f4.stm32f411", "stm32.f4.stm32f446"]
-    )
+    @pytest.mark.parametrize("device", ["arm.example.example1", "stm32.f4.stm32f411", "stm32.f4.stm32f446"])
     def test_svd_adapter(self, device, datadir):
         svd = device.split(".")
         svd_path = self.get_svd_file(f"{svd[0]}.{svd[1]}", svd[2])
