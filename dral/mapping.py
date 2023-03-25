@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Optional, Union
 
 import yaml
 
-from .types import DralBaseType
 from .utils import Utils
+
+MappingType = dict[str, dict[str, dict[str, str | list[str]]]]
 
 
 class DralMapping:
@@ -16,13 +19,16 @@ class DralMapping:
         with open(mapping_file, "r", encoding="UTF-8") as file:
             self._mapping = yaml.load(file, Loader=yaml.FullLoader)
 
-    def get(self, root: DralBaseType) -> Dict:
-        mapping: Dict = self._mapping[str(root)]
+    def get(self) -> MappingType:
         output = {}
-        for attr, rules in mapping.items():
-            try:
-                value = getattr(root, attr)
-            except AttributeError:
-                continue
-            output.update({attr: rules["value"].format(value)})
+        for object, attr in self._mapping.items():
+            output.update(
+                {
+                    object: {
+                        "default": attr,
+                        "simple": attr,
+                    },
+                }
+            )
+
         return output

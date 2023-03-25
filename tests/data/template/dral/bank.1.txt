@@ -1,0 +1,11 @@
+private:
+  template <uint32_t address, uint32_t bankOffset>
+  class [dral]bank.name%capitalize[#dral]BankReg: public RegisterBankModel<address, bankOffset>
+  {
+  public:
+    [dral]bank.fields[#dral]
+  };
+
+public:
+  using [dral]bank.name%lowercase[#dral] = [dral]bank.name%capitalize[#dral]BankReg<BaseAddress + [dral]bank.offset[#dral], [dral]bank.bankOffset[#dral]>;
+

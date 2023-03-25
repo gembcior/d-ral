@@ -11,8 +11,8 @@ from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import CMakeLibFormat, MbedAutomatifyFormat
 from .generator import DralGenerator
 from .mapping import DralMapping
-from .utils import Utils
 from .template import DralTemplate
+from .utils import Utils
 
 
 def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
@@ -48,7 +48,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     "-m",
     "--mapping",
     type=click.Path(exists=True, resolve_path=True, path_type=Path),
-    help="Specify mapping used to generate files.",
+    help="Specify mapping file to overwrite values with constants.",
 )
 @click.option(
     "-e",
@@ -108,9 +108,9 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
 
     exclude = exclude if exclude else []
     adapter = SvdAdapter(svd)
-    mapping_object = DralMapping(mapping) if mapping else DralMapping("default")
-    template_object= DralTemplate(template)
-    generator = DralGenerator(mapping_object, template_object)
+    mapping_object = DralMapping(mapping) if mapping else None
+    template_object = DralTemplate(template)
+    generator = DralGenerator(template_object)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
@@ -128,7 +128,7 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
             device = item.apply(device)
 
         # Generate D-RAL data
-        objects = generator.generate(device, exclude=exclude)
+        objects = generator.generate(device, exclude=exclude, mapping=mapping_object)
 
         # Make output
         output = output / "dralOutput"
