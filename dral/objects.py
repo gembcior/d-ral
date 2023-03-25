@@ -94,7 +94,7 @@ class DralDevice(DralObject):
             mapping = self._get_mapping()
             string = string if string is not None else child.parse(variant)
             string = self._template.replace(string, mapping)
-            content.append({"name": child._root.name, "content": "".join(string)})
+            content.append({"name": child._root.name, "content": "".join(string)})  # noqa: W0212
         return content
 
 
@@ -145,8 +145,8 @@ class DralPeripheral(DralObject):
             content = self._template.replace(self._template_file[variant], mapping)
 
         mapping = self._get_mapping()
-        content = content if content is not None else self._template_file[variant]
-        content = self._template.replace(content, mapping)
+        content = content if content is not None else self._template_file[variant]  # type: ignore[assignment]
+        content = self._template.replace(content, mapping)  # type: ignore[arg-type]
         return content
 
 
@@ -197,8 +197,8 @@ class DralRegister(DralObject):
             content = self._template.replace(self._template_file[variant], mapping)
 
         mapping = self._get_mapping()
-        content = content if content is not None else self._template_file[variant]
-        content = self._template.replace(content, mapping)
+        content = content if content is not None else self._template_file[variant]  # type: ignore[assignment]
+        content = self._template.replace(content, mapping)  # type: ignore[arg-type]
         return content
 
 
@@ -251,8 +251,8 @@ class DralBank(DralRegister):
             content = self._template.replace(self._template_file[variant], mapping)
 
         mapping = self._get_mapping()
-        content = content if content is not None else self._template_file[variant]
-        content = self._template.replace(content, mapping)
+        content = content if content is not None else self._template_file[variant]  # type: ignore[assignment]
+        content = self._template.replace(content, mapping)  # type: ignore[arg-type]
         return content
 
 
@@ -295,8 +295,8 @@ class DralField(DralObject):
             content = self._template.replace(self._template_file[variant], mapping)
 
         mapping = self._get_mapping()
-        content = content if content is not None else self._template_file[variant]
-        content = self._template.replace(content, mapping)
+        content = content if content is not None else self._template_file[variant]  # type: ignore[assignment]
+        content = self._template.replace(content, mapping)  # type: ignore[arg-type]
         return content
 
 

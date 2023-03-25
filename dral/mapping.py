@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Union
+from typing import Dict, List, Union
 
 import yaml
 
 from .utils import Utils
 
-MappingType = dict[str, dict[str, dict[str, str | list[str]]]]
+MappingType = Dict[str, Dict[str, Dict[str, Union[str, List[str]]]]]
 
 
 class DralMapping:
@@ -21,10 +21,10 @@ class DralMapping:
 
     def get(self) -> MappingType:
         output = {}
-        for object, attr in self._mapping.items():
+        for _object, attr in self._mapping.items():
             output.update(
                 {
-                    object: {
+                    _object: {
                         "default": attr,
                         "simple": attr,
                     },

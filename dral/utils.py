@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import glob
 from importlib import resources
 from pathlib import Path
@@ -40,5 +42,5 @@ class Utils:
 
     @staticmethod
     def get_mapping_file(name: str) -> Path:
-        with resources.path(f"dral.mappings", name) as item:
+        with resources.path("dral.mappings", name) as item:
             return Path(item)

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from . import adapter, filter, format
 from .generator import DralGenerator
 from .mapping import DralMapping

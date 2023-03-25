@@ -67,16 +67,16 @@ class DralTemplate:
             _list = _list + ["\n"]
         return _list
 
-    def _get_substitution(self, pattern: List[str], mapping: MappingType) -> Optional[str | list[str]]:
-        object = pattern[0]
-        if object not in mapping:
-            return
+    def _get_substitution(self, pattern: List[str], mapping: MappingType) -> Optional[Union[str, list[str]]]:
+        _object = pattern[0]
+        if _object not in mapping:
+            return None
         variant = pattern[2] if len(pattern) > 2 else "default"
         attr = pattern[1]
         try:
-            output = mapping[object][variant][attr]
+            output = mapping[_object][variant][attr]
         except KeyError:
-            return
+            return None
         return output
 
     def _get_pattern_substitution(self, pattern: str, mapping: MappingType) -> Union[None, str, List[str]]:
@@ -122,17 +122,17 @@ class DralTemplate:
             new_content = new_content + item.splitlines(True)
         return new_content
 
-    def _continue(self, string: List[str], mapping) -> bool:
+    def _continue(self, string: List[str], mapping: MappingType) -> bool:
         for line in string:
             dral_matches = self._find_all_dral_pattern(line)
-            if dral_matches:
+            if dral_matches:  # type: ignore[truthy-bool]
                 for match in dral_matches:
-                    object = match.group(1)[0].split(".")[0]
-                    if object in mapping:
+                    _object = match.group(1)[0].split(".")[0]
+                    if _object in mapping:
                         return True
         return False
 
-    def replace(self, template: str | List[str], mapping: MappingType) -> List[str]:
+    def replace(self, template: Union[str, List[str]], mapping: MappingType) -> List[str]:
         if isinstance(template, str):
             template_content = self.readlines(template)
         else:

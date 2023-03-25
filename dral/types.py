@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Union
 
@@ -20,9 +22,6 @@ class DralBaseType(ABC):
         if other.description != self._description:
             return False
         return True
-
-    def __str__(self) -> str:
-        return self.__class__.__name__.lower()
 
     @property
     def name(self) -> str:

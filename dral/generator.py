@@ -1,5 +1,6 @@
-from pathlib import Path
-from typing import Dict, List, Union, Optional
+from __future__ import annotations
+
+from typing import Dict, List, Optional, Union
 
 from .mapping import DralMapping
 from .objects import DralDevice
