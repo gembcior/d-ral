@@ -1,28 +1,79 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterator, List, Optional, Union
+from typing import Dict, List, Optional, Union
 
-from .mapping import MappingType
-from .utils import Utils
+
+class DralMarkerError(Exception):
+    pass
+
+
+@dataclass
+class DralMarkerAttribute:
+    style: Optional[str] = None
+    template: Optional[str] = None
+    format: Optional[str] = None
+
+
+@dataclass
+class DralMarkerItem:
+    key: str
+    parameter: str
+
+
+@dataclass
+class DralMarker:
+    item: DralMarkerItem
+    attributes: DralMarkerAttribute
+    start: int
+    end: int
+
+
+@dataclass
+class DralIncludeMarker:
+    template: str
+    start: int
+    end: int
 
 
 class DralTemplate:
-    def __init__(self, template: Union[str, Path]):
-        if isinstance(template, Path):
-            self._template = template
-        else:
-            self._template = Utils.get_template_dir(template)
-        self._dral_prefix = r"\[dral\]"
-        self._dral_sufix = r"\[#dral\]"
-        self._dral_pattern = re.compile(
-            self._dral_prefix + "(.*?)" + self._dral_sufix,
-            flags=(re.MULTILINE | re.DOTALL),
-        )
+    """
+    A class to parse a template files
+
+    ...
+
+    Attributes
+    ----------
+    root : Path
+        a Path object pointing to the root directory with template files
+
+    Methods
+    -------
+    get(template, mapping)
+        Get parsed string
+    """
+
+    def __init__(self, root: Optional[Path] = None):
+        self._root = root
 
     def readlines(self, template: str) -> List[str]:
-        template_file = self._template / template
+        """
+        Get template file content
+
+        Parameters
+        ----------
+        template : str
+            Template file name
+
+        Returns
+        -------
+        list[str]
+        """
+        if self._root is None:
+            return []
+        template_file = self._root / template
         if not template_file.exists():
             return []
         with open(template_file, "r", encoding="UTF-8") as file:
@@ -30,7 +81,21 @@ class DralTemplate:
         return template_content
 
     def read(self, template: str) -> str:
-        template_file = self._template / template
+        """
+        Get template file content
+
+        Parameters
+        ----------
+        template : str
+            Template file name
+
+        Returns
+        -------
+        str
+        """
+        if self._root is None:
+            return ""
+        template_file = self._root / template
         if not template_file.exists():
             return ""
         with open(template_file, "r", encoding="UTF-8") as file:
@@ -38,105 +103,181 @@ class DralTemplate:
         return template_content
 
     def exists(self, template: str) -> bool:
-        file = self._template / template
+        """
+        Check if given template file exists
+
+        Parameters
+        ----------
+        template : str
+            Template file name
+
+        Returns
+        -------
+        bool
+        """
+        if self._root is None:
+            return False
+        file = self._root / template
         return file.exists()
 
-    def _apply_modifier(self, item: Union[str, List[str]], modifier: str) -> Union[str, List[str]]:
-        output = item
-        if isinstance(item, str):
-            output = self._apply_string_modifier(item, modifier)
-        elif isinstance(item, list):
-            output = self._apply_list_modifier(item, modifier)
+    def parse_from_template(self, template: str, mapping: Dict) -> List[str]:
+        """
+        Get parsed string from template file
+
+        Parameters
+        ----------
+        template : str
+            Template file name
+        mapping : dict
+
+        Returns
+        -------
+        str
+        """
+        input_content = self.readlines(template)
+        output = self._parse_include(input_content)
+        while output != input_content:
+            input_content = output
+            output = self._parse_include(input_content)
+        output = self._parse_string(output, mapping)
+        while output != input_content:
+            input_content = output
+            output = self._parse_string(output, mapping)
         return output
 
-    def _apply_string_modifier(self, string: str, modifier: str) -> str:
-        if modifier == "uppercase":
-            string = string.upper()
-        elif modifier == "lowercase":
-            string = string.lower()
-        elif modifier == "capitalize":
-            string = string.capitalize()
-        elif modifier == "strip":
-            string = string.strip(" \n\r")
-        elif modifier == "LF":
-            string = string + "\n"
-        return string
+    def parse_from_string(self, text: Union[str, List[str]], mapping: Dict) -> List[str]:
+        """
+        Get parsed string from string
 
-    def _apply_list_modifier(self, _list: List[str], modifier: str) -> List[str]:
-        if modifier == "LF":
-            _list = _list + ["\n"]
-        return _list
+        Parameters
+        ----------
+        text : str
+        mapping : dict
 
-    def _get_substitution(self, pattern: List[str], mapping: MappingType) -> Optional[Union[str, list[str]]]:
-        _object = pattern[0]
-        if _object not in mapping:
-            return None
-        variant = pattern[2] if len(pattern) > 2 else "default"
-        attr = pattern[1]
+        Returns
+        -------
+        str
+        """
+        if isinstance(text, str):
+            input_content = text.splitlines()
+        else:
+            input_content = text
+        output = self._parse_include(input_content)
+        while output != input_content:
+            input_content = output
+            output = self._parse_include(input_content)
+        output = self._parse_string(output, mapping)
+        while output != input_content:
+            input_content = output
+            output = self._parse_string(output, mapping)
+        return output
+
+    def _parse_attributes(self, attributes: str) -> DralMarkerAttribute:
+        pattern = re.compile(r"(\w+?)=\"(.+?)\"")
+        attributes_dict = {}
+        for match in re.finditer(pattern, attributes):
+            attributes_dict[match.group(1)] = match.group(2)
+        return DralMarkerAttribute(**attributes_dict)
+
+    def _parse_item(self, item: str) -> DralMarkerItem:
+        key, parameter = item.split(".")
+        return DralMarkerItem(key, parameter)
+
+    def _get_markers(self, line: str) -> List[DralMarker]:
+        pattern = re.compile(r"\[dral ?([^\[\]]*)\](.*?)\[#dral\]", flags=(re.MULTILINE | re.DOTALL))
+        markers = []
+        for match in re.finditer(pattern, line):
+            attributes = self._parse_attributes(match.group(1))
+            item = self._parse_item(match.group(2))
+            markers.append(DralMarker(item, attributes, match.start(), match.end()))
+        return markers
+
+    def _get_list_replacement(self, substitution: List[Dict], marker: DralMarker) -> str:
+        if marker.attributes.template is None:
+            raise DralMarkerError
+        new_substitution = []
+        for item in substitution:
+            new_substitution += self.parse_from_template(marker.attributes.template, item)
+        leading_spaces = " " * marker.start
+        new_substitution = (leading_spaces.join(new_substitution)).strip("\n")
+        return new_substitution
+
+    def _get_number_replacement(self, substitution: int, marker: DralMarker) -> str:
+        if marker.attributes.format is not None:
+            output = marker.attributes.format.format(substitution)
+        else:
+            output = str(substitution)
+        return output
+
+    def _get_replacement(self, marker: DralMarker, mapping: Dict) -> str:
+        replacement = mapping[marker.item.key][marker.item.parameter]
+        if isinstance(replacement, list):
+            output = self._get_list_replacement(replacement, marker)
+        elif isinstance(replacement, int):
+            output = self._get_number_replacement(replacement, marker)
+        else:
+            output = replacement
+        if marker.attributes.style is not None:
+            output = self._apply_style(output, marker.attributes.style)
+        return output
+
+    def _apply_style(self, line: str, style: str) -> str:
+        if style == "uppercase":
+            line = line.upper()
+        elif style == "lowercase":
+            line = line.lower()
+        elif style == "capitalize":
+            line = line.capitalize()
+        elif style == "strip":
+            line = line.strip(" \n\r")
+        elif style == "LF":
+            line = line + "\n"
+        return line
+
+    def _apply_replacement(self, line: str, substitution: str, marker: DralMarker) -> str:
         try:
-            output = mapping[_object][variant][attr]
+            output = line[: marker.start] + substitution + line[marker.end :]
         except KeyError:
-            return None
+            raise DralMarkerError
         return output
 
-    def _get_pattern_substitution(self, pattern: str, mapping: MappingType) -> Union[None, str, List[str]]:
-        split_pattern = pattern.split("%")
-        base = split_pattern[0].split(".")
-        modifier = split_pattern[1:]
-        substitution = self._get_substitution(base, mapping)
-        if substitution is not None:
-            for item in modifier:
-                substitution = self._apply_modifier(substitution, item)
-            return substitution
-        return None
-
-    def _find_all_dral_pattern(self, string: str) -> Iterator[Any]:
-        return re.finditer(self._dral_pattern, string)
-
-    def _replace_line(self, line: str, mapping: MappingType) -> Union[str, None]:
-        dral_matches = self._find_all_dral_pattern(line)
-        if dral_matches:  # type: ignore[truthy-bool]
-            for match in dral_matches:
-                pattern = match.group(1)
-                position = match.start()
-                leading_spaces = " " * position
-                substitution = self._get_pattern_substitution(pattern, mapping)
-                if substitution is not None:
-                    pattern = f"{self._dral_prefix}{pattern}{self._dral_sufix}"
-                    if isinstance(substitution, list):
-                        substitution = (leading_spaces.join(substitution)).strip("\n")
-                    line = re.sub(pattern, substitution, line, flags=(re.MULTILINE | re.DOTALL))  # type: ignore[arg-type]
+    def _parse_line(self, line: str, mapping: Dict) -> str:
+        dral_markers = self._get_markers(line)
+        if not dral_markers:
             return line
-        return None
+        dral_markers.sort(reverse=True, key=lambda x: x.start)
+        for marker in dral_markers:
+            substitution = self._get_replacement(marker, mapping)
+            line = self._apply_replacement(line, substitution, marker)
+        return line
 
-    def _parse_string(self, string: List[str], mapping: MappingType) -> List[str]:
+    def _parse_string(self, string: List[str], mapping: Dict) -> List[str]:
         content: List[str] = []
         for line in string:
-            new_line = self._replace_line(line, mapping)
-            if new_line is not None:
-                content.append(new_line)
-            else:
-                content.append(line)
-        new_content: List[str] = []
-        for item in content:
-            new_content = new_content + item.splitlines(True)
-        return new_content
+            content += self._parse_line(line, mapping).splitlines(keepends=True)
+        return content
 
-    def _continue(self, string: List[str], mapping: MappingType) -> bool:
-        for line in string:
-            dral_matches = self._find_all_dral_pattern(line)
-            if dral_matches:  # type: ignore[truthy-bool]
-                for match in dral_matches:
-                    _object = match.group(1)[0].split(".")[0]
-                    if _object in mapping:
-                        return True
-        return False
+    def _get_includes(self, line: str) -> List[DralIncludeMarker]:
+        pattern = re.compile(r"\[dral\]include (.+)\[#dral\]", flags=(re.MULTILINE | re.DOTALL))
+        markers = []
+        for match in re.finditer(pattern, line):
+            template = match.group(1)
+            markers.append(DralIncludeMarker(template, match.start(), match.end()))
+        return markers
 
-    def replace(self, template: Union[str, List[str]], mapping: MappingType) -> List[str]:
-        if isinstance(template, str):
-            template_content = self.readlines(template)
-        else:
-            template_content = template
-        content = self._parse_string(template_content, mapping)
-        content = self._parse_string(content, mapping)
+    def _parse_include(self, string: List[str]) -> List[str]:
+        content: List[str] = []
+        for i in reversed(range(len(string))):
+            dral_include_markers = self._get_includes(string[i])
+            if not dral_include_markers:
+                content.append(string[i])
+                continue
+            dral_include_markers.sort(reverse=True, key=lambda x: x.start)
+            for marker in dral_include_markers:
+                substitution = self.readlines(marker.template)
+                substitution.reverse()
+                content.append(substitution[0].rstrip("\n") + string[i][marker.end :])
+                content += substitution[1:-1]
+                content.append(string[i][: marker.start] + substitution[-1])
+        content.reverse()
         return content
