@@ -10868,23 +10868,23 @@
     \ = FieldModel<address, 4, 0x00000001, bankOffset>;\n    using fflus = FieldModel<address,\
     \ 3, 0x00000001, bankOffset>;\n    using fth = FieldModel<address, 0, 0x00000007,\
     \ bankOffset>;\n  };\n\npublic:\n  using xcr2 = Xcr2BankReg<BaseAddress + 0x0008,\
-    \ 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
+    \ 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
     \ class XfrcrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using fsoff = FieldModel<address, 18, 0x00000001, bankOffset>;\n    using\
     \ fspol = FieldModel<address, 17, 0x00000001, bankOffset>;\n    using fsdef =\
     \ FieldModel<address, 16, 0x00000001, bankOffset>;\n    using fsall = FieldModel<address,\
     \ 8, 0x0000007F, bankOffset>;\n    using frl = FieldModel<address, 0, 0x000000FF,\
     \ bankOffset>;\n  };\n\npublic:\n  using xfrcr = XfrcrBankReg<BaseAddress + 0x000C,\
-    \ 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
+    \ 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
     \ class XslotrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using sloten = FieldModel<address, 16, 0x0000FFFF, bankOffset>;\n    using\
     \ nbslot = FieldModel<address, 8, 0x0000000F, bankOffset>;\n    using slotsz =\
     \ FieldModel<address, 6, 0x00000003, bankOffset>;\n    using fboff = FieldModel<address,\
     \ 0, 0x0000001F, bankOffset>;\n  };\n\npublic:\n  using xslotr = XslotrBankReg<BaseAddress\
-    \ + 0x0010, 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n\
+    \ + 0x0010, 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n\
     \  class XdrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using data = FieldModel<address, 0, 0xFFFFFFFF, bankOffset>;\n  };\n\npublic:\n\
-    \  using xdr = XdrBankReg<BaseAddress + 0x0020, 0x-020>;\n};\n\n}\n\n#endif /*\
+    \  using xdr = XdrBankReg<BaseAddress + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /*\
     \ DRAL_STM32F446_SAI1_H */\n"
   name: SAI1
 - content: "#ifndef DRAL_STM32F446_SAI2_H\n#define DRAL_STM32F446_SAI2_H\n\n#include\
@@ -11004,23 +11004,23 @@
     \ = FieldModel<address, 4, 0x00000001, bankOffset>;\n    using fflus = FieldModel<address,\
     \ 3, 0x00000001, bankOffset>;\n    using fth = FieldModel<address, 0, 0x00000007,\
     \ bankOffset>;\n  };\n\npublic:\n  using xcr2 = Xcr2BankReg<BaseAddress + 0x0008,\
-    \ 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
+    \ 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
     \ class XfrcrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using fsoff = FieldModel<address, 18, 0x00000001, bankOffset>;\n    using\
     \ fspol = FieldModel<address, 17, 0x00000001, bankOffset>;\n    using fsdef =\
     \ FieldModel<address, 16, 0x00000001, bankOffset>;\n    using fsall = FieldModel<address,\
     \ 8, 0x0000007F, bankOffset>;\n    using frl = FieldModel<address, 0, 0x000000FF,\
     \ bankOffset>;\n  };\n\npublic:\n  using xfrcr = XfrcrBankReg<BaseAddress + 0x000C,\
-    \ 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
+    \ 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n \
     \ class XslotrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using sloten = FieldModel<address, 16, 0x0000FFFF, bankOffset>;\n    using\
     \ nbslot = FieldModel<address, 8, 0x0000000F, bankOffset>;\n    using slotsz =\
     \ FieldModel<address, 6, 0x00000003, bankOffset>;\n    using fboff = FieldModel<address,\
     \ 0, 0x0000001F, bankOffset>;\n  };\n\npublic:\n  using xslotr = XslotrBankReg<BaseAddress\
-    \ + 0x0010, 0x-020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n\
+    \ + 0x0010, 0x0020>;\n\nprivate:\n  template <uint32_t address, uint32_t bankOffset>\n\
     \  class XdrBankReg: public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
     \    using data = FieldModel<address, 0, 0xFFFFFFFF, bankOffset>;\n  };\n\npublic:\n\
-    \  using xdr = XdrBankReg<BaseAddress + 0x0020, 0x-020>;\n};\n\n}\n\n#endif /*\
+    \  using xdr = XdrBankReg<BaseAddress + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /*\
     \ DRAL_STM32F446_SAI2_H */\n"
   name: SAI2
 - content: "#ifndef DRAL_STM32F446_PWR_H\n#define DRAL_STM32F446_PWR_H\n\n#include\

@@ -15,6 +15,7 @@ class DralMarkerAttribute:
     style: Optional[str] = None
     template: Optional[str] = None
     format: Optional[str] = None
+    extras: Optional[str] = None
 
 
 @dataclass
@@ -207,6 +208,7 @@ class DralTemplate:
             output = marker.attributes.format.format(substitution)
         else:
             output = str(substitution)
+        output = output.replace("X", "x")
         return output
 
     def _get_replacement(self, marker: DralMarker, mapping: Dict) -> str:
@@ -219,6 +221,8 @@ class DralTemplate:
             output = replacement
         if marker.attributes.style is not None:
             output = self._apply_style(output, marker.attributes.style)
+        if marker.attributes.extras is not None:
+            output = self._apply_extras(output, marker.attributes.extras)
         return output
 
     def _apply_style(self, line: str, style: str) -> str:
@@ -232,6 +236,9 @@ class DralTemplate:
             line = line.strip(" \n\r")
         elif style == "LF":
             line = line + "\n"
+        return line
+
+    def _apply_extras(self, line: str, extras: str) -> str:
         return line
 
     def _apply_replacement(self, line: str, substitution: str, marker: DralMarker) -> str:
