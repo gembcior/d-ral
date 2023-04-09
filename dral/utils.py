@@ -39,8 +39,3 @@ class Utils:
         if len(device_info) > 2:
             return svd.stem, device_info[1], device_info[0]
         return svd.stem, "", device_info[0]
-
-    @staticmethod
-    def get_mapping_file(name: str) -> Path:
-        with resources.path("dral.mappings", name) as item:
-            return Path(item)

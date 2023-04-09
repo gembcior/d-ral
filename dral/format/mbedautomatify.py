@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List
+from typing import List
 
+from ..generator import DralOutputFile
 from .base import BaseFormat
 
 
@@ -24,14 +25,14 @@ class MbedAutomatifyFormat(BaseFormat):
         directory_path.mkdir(parents=True, exist_ok=True)
         return directory_path
 
-    def _create_device_file(self, name: str, directory: Path, objects: List[Dict[str, str]]) -> None:
+    def _create_device_file(self, name: str, directory: Path, objects: List[DralOutputFile]) -> None:
         content = ""
         for item in objects:
-            content += f"from .{item['name'].lower()} import {item['name'].capitalize()}\n"
+            content += f"from .{item.name.lower()} import {item.name.capitalize()}\n"
         content += "\n" * 2
         content += self._device_file_content
         for item in objects:
-            content += f"{' ' * 8}self.{item['name'].lower()} = {item['name'].capitalize()}(proxy)\n"
+            content += f"{' ' * 8}self.{item.name.lower()} = {item.name.capitalize()}(proxy)\n"
         self._create_file(name, directory, content)
 
     def _create_init_files(self, directory: Path) -> None:
@@ -42,12 +43,12 @@ class MbedAutomatifyFormat(BaseFormat):
             open(directory / "__init__.py", "w", encoding="UTF-8").close()
             directory = directory.parent
 
-    def _make_default(self, objects: List[Dict[str, str]]) -> None:
+    def _make_default(self, objects: List[DralOutputFile]) -> None:
         directory = self._create_output_directory(self._directory)
         for item in objects:
-            self._create_file("%s.py" % item["name"].lower(), directory, item["content"])
+            self._create_file("%s.py" % item.name.lower(), directory, item.content)
         self._create_device_file("dral.py", directory, objects)
         self._create_init_files(directory)
 
-    def _make_single(self, objects: List[Dict[str, str]]) -> None:
+    def _make_single(self, objects: List[DralOutputFile]) -> None:
         pass

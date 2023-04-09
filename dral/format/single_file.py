@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List
+from typing import List
+
+from ..generator import DralOutputFile
 
 
 class SingleFileFormat:
@@ -19,16 +21,16 @@ class SingleFileFormat:
         output.mkdir(parents=True, exist_ok=True)
         return self._directory
 
-    def make(self, objects: List[Dict[str, str]]) -> None:
+    def make(self, objects: List[DralOutputFile]) -> None:
         directory = self._create_output_directory(self._directory)
         file_path = self._directory / f"{self._name}"
         self._create_file(file_path.name, directory, "")
 
         for i, item in enumerate(objects):
-            if item["name"] == "register_model" and not self._includeRegModel:
-                self._create_file(f"{item['name'].lower()}.h", directory, item["content"])
+            if item.name == "register_model" and not self._includeRegModel:
+                self._create_file(f"{item.name.lower()}.h", directory, item.content)
             else:
                 with open(file_path, "a", encoding="UTF-8") as new_file:
                     if i > 0:
                         new_file.write("\n\n")
-                    new_file.writelines(item["content"])
+                    new_file.writelines(item.content)

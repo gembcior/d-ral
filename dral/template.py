@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
@@ -193,11 +194,12 @@ class DralTemplate:
             markers.append(DralMarker(item, attributes, match.start(), match.end()))
         return markers
 
-    def _get_list_replacement(self, substitution: List[Dict], marker: DralMarker) -> str:
+    def _get_list_replacement(self, substitution: List[Dict], marker: DralMarker, mapping: Dict) -> str:
         if marker.attributes.template is None:
             raise DralMarkerError
         new_substitution = []
         for item in substitution:
+            item.update(mapping)
             new_substitution += self.parse_from_template(marker.attributes.template, item)
         leading_spaces = " " * marker.start
         new_substitution = (leading_spaces.join(new_substitution)).strip("\n")
@@ -211,10 +213,22 @@ class DralTemplate:
         output = output.replace("X", "x")
         return output
 
+    def _get_system_replacement(self, marker: DralMarker) -> str:
+        output = ""
+        if marker.item.parameter == "year":
+            output = str(datetime.now().year)
+        return output
+
     def _get_replacement(self, marker: DralMarker, mapping: Dict) -> str:
-        replacement = mapping[marker.item.key][marker.item.parameter]
+        try:
+            replacement = mapping[marker.item.key][marker.item.parameter]
+        except KeyError:
+            if marker.item.key == "system":
+                replacement = self._get_system_replacement(marker)
+            else:
+                raise DralMarkerError
         if isinstance(replacement, list):
-            output = self._get_list_replacement(replacement, marker)
+            output = self._get_list_replacement(replacement, marker, mapping)
         elif isinstance(replacement, int):
             output = self._get_number_replacement(replacement, marker)
         else:

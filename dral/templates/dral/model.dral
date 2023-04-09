@@ -1,3 +1,5 @@
+[dral]include header.dral[#dral]
+
 #ifndef DRAL_REGISTER_MODEL_H
 #define DRAL_REGISTER_MODEL_H
 

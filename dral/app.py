@@ -4,15 +4,15 @@ from pathlib import Path
 from typing import Any
 
 import click
+import yaml
 from rich.console import Console
 from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
-from .filter import BanksFilter, BlackListFilter, WhiteListFilter
+from .filter import BanksFilter, BlackListFilter, WhiteListFilter, ExcludeFilter
 from .format import CMakeLibFormat, MbedAutomatifyFormat
 from .generator import DralGenerator
-from .mapping import DralMapping
 from .template import DralTemplate
 from .utils import Utils
 
@@ -110,8 +110,11 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
 
     exclude = exclude if exclude else []
     adapter = SvdAdapter(svd)
-    mapping_object = DralMapping(mapping) if mapping else None
-    template_object = DralTemplate(template)
+    template_dir = Utils.get_template_dir(template)
+    template_object = DralTemplate(template_dir)
+    if mapping:
+        with open(mapping, "r", encoding="utf-8") as mapping_file:
+            mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
     generator = DralGenerator(template_object)
 
     info = "[bold green]Generating D-Ral files..."
@@ -126,11 +129,13 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
         if white_list is not None:
             filters.append(WhiteListFilter(white_list))
         filters.append(BanksFilter())
+        if exclude:
+            filters.append(ExcludeFilter(exclude))
         for item in filters:
             device = item.apply(device)
 
         # Generate D-RAL data
-        objects = generator.generate(device, exclude=exclude, mapping=mapping_object)
+        objects = generator.generate(device, mapping=mapping)
 
         # Make output
         output = output / "dralOutput"

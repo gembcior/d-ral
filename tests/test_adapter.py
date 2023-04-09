@@ -47,7 +47,6 @@ class TestDralAdapter:
             name=data["name"],
             description=data["description"],
             position=data["position"],
-            mask=data["mask"],
             width=data["width"],
         )
 

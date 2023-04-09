@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 
 
 class DralBaseType(ABC):
-    def __init__(self, name: str, description: str):
+    def __init__(self, name: str, description: Optional[str] = None):
         self._name = name
         self._description = description
 
@@ -22,7 +22,7 @@ class DralBaseType(ABC):
         return self._name
 
     @property
-    def description(self) -> str:
+    def description(self) -> Optional[str]:
         return self._description
 
     @abstractmethod
@@ -31,11 +31,11 @@ class DralBaseType(ABC):
 
 
 class Field(DralBaseType):
-    def __init__(self, name: str, description: str, position: int, width: int) -> None:
+    def __init__(self, name: str, description: Optional[str] = None, position: Optional[int] = None, width: Optional[int] = None) -> None:
         super().__init__(name, description)
         self._position = position
-        self._mask = (1 << width) - 1
         self._width = width
+        self._mask = (1 << width) - 1 if width is not None else None
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -49,20 +49,29 @@ class Field(DralBaseType):
         }
 
     @property
-    def position(self) -> int:
+    def position(self) -> Optional[int]:
         return self._position
 
     @property
-    def mask(self) -> int:
+    def mask(self) -> Optional[int]:
         return self._mask
 
     @property
-    def width(self) -> int:
+    def width(self) -> Optional[int]:
         return self._width
 
 
 class Register(DralBaseType):
-    def __init__(self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, fields: Optional[List[Field]] = None):
+    def __init__(
+        self,
+        name: str,
+        description: Optional[str] = None,
+        offset: Optional[int] = None,
+        size: Optional[int] = None,
+        access: Optional[str] = None,
+        reset_value: Optional[int] = None,
+        fields: Optional[List[Field]] = None,
+    ):
         super().__init__(name, description)
         self._offset = offset
         self._size = size
@@ -86,19 +95,19 @@ class Register(DralBaseType):
         }
 
     @property
-    def offset(self) -> int:
+    def offset(self) -> Optional[int]:
         return self._offset
 
     @property
-    def size(self) -> int:
+    def size(self) -> Optional[int]:
         return self._size
 
     @property
-    def access(self) -> str:
+    def access(self) -> Optional[str]:
         return self._access
 
     @property
-    def reset_value(self) -> int:
+    def reset_value(self) -> Optional[int]:
         return self._reset_value
 
     @property
@@ -108,7 +117,15 @@ class Register(DralBaseType):
 
 class Bank(Register):
     def __init__(
-        self, name: str, description: str, offset: int, size: int, access: str, reset_value: int, bank_offset: int, fields: Optional[List[Field]] = None
+        self,
+        name: str,
+        description: Optional[str] = None,
+        offset: Optional[int] = None,
+        size: Optional[int] = None,
+        access: Optional[str] = None,
+        reset_value: Optional[int] = None,
+        bank_offset: Optional[int] = None,
+        fields: Optional[List[Field]] = None,
     ):
         super().__init__(name, description, offset, size, access, reset_value, fields)
         self._bank_offset = bank_offset
@@ -128,12 +145,19 @@ class Bank(Register):
         }
 
     @property
-    def bank_offset(self) -> int:
+    def bank_offset(self) -> Optional[int]:
         return self._bank_offset
 
 
 class Peripheral(DralBaseType):
-    def __init__(self, name: str, description: str, address: int, registers: Optional[List[Register]] = None, banks: Optional[List[Bank]] = None):
+    def __init__(
+        self,
+        name: str,
+        description: Optional[str] = None,
+        address: Optional[int] = None,
+        registers: Optional[List[Register]] = None,
+        banks: Optional[List[Bank]] = None,
+    ):
         super().__init__(name, description)
         self._address = address
         if registers is None:
@@ -155,7 +179,7 @@ class Peripheral(DralBaseType):
         }
 
     @property
-    def address(self) -> int:
+    def address(self) -> Optional[int]:
         return self._address
 
     @property
@@ -168,7 +192,7 @@ class Peripheral(DralBaseType):
 
 
 class Device(DralBaseType):
-    def __init__(self, name: str, description: str, peripherals: Optional[List[Peripheral]] = None):
+    def __init__(self, name: str, description: Optional[str] = None, peripherals: Optional[List[Peripheral]] = None):
         super().__init__(name, description)
         if peripherals is None:
             peripherals = []

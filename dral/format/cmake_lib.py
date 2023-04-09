@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List
+from typing import List
 
+from ..generator import DralOutputFile
 from .base import BaseFormat
 
 
@@ -29,13 +30,13 @@ class CMakeLibFormat(BaseFormat):
         Path.mkdir(directory_path, parents=True, exist_ok=True)
         return directory_path
 
-    def _make_default(self, objects: List[Dict[str, str]]) -> None:
+    def _make_default(self, objects: List[DralOutputFile]) -> None:
         directory = self._create_output_directory(self._directory)
         for item in objects:
-            self._create_file("%s.h" % item["name"].lower(), directory, item["content"])
+            self._create_file("%s.h" % item.name.lower(), directory, item.content)
         self._create_file("CMakeLists.txt", self._directory / self._name, self._cmake_content)
 
-    def _make_single(self, objects: List[Dict[str, str]]) -> None:
+    def _make_single(self, objects: List[DralOutputFile]) -> None:
         # TODO refactor
         from .single_file import SingleFileFormat
 

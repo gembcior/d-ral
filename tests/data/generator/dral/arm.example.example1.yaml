@@ -1,4 +1,20 @@
-- content: "#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n * \n * Copyright (c) 2023 Gembcior\n * \n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n * \n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n * \n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer0\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010000;\n\nprivate:\n\
     \  template <uint32_t address>\n  class CrReg: public RegisterModel<address>\n\
@@ -44,7 +60,23 @@
     \  public:\n    \n  };\n\npublic:\n  using reload[x] = Reload[x]BankReg<BaseAddress\
     \ + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H */\n"
   name: TIMER0
-- content: "#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n * \n * Copyright (c) 2023 Gembcior\n * \n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n * \n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n * \n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010100;\n\nprivate:\n\
     \  template <uint32_t address>\n  class CrReg: public RegisterModel<address>\n\
@@ -90,7 +122,23 @@
     \  public:\n    \n  };\n\npublic:\n  using reload[x] = Reload[x]BankReg<BaseAddress\
     \ + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H */\n"
   name: TIMER1
-- content: "#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n * \n * Copyright (c) 2023 Gembcior\n * \n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n * \n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n * \n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
     \n#include \"register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010200;\n\nprivate:\n\
     \  template <uint32_t address>\n  class CrReg: public RegisterModel<address>\n\
@@ -136,10 +184,26 @@
     \  public:\n    \n  };\n\npublic:\n  using reload[x] = Reload[x]BankReg<BaseAddress\
     \ + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H */\n"
   name: TIMER2
-- content: "#ifndef DRAL_REGISTER_MODEL_H\n#define DRAL_REGISTER_MODEL_H\n\n#include\
-    \ <cstdint>\n\nnamespace dral {\n\ntemplate <uint32_t address>\nclass RegisterModel\n\
-    {\npublic:\n  static constexpr uint32_t Address = address;\n\npublic:\n  static\
-    \ uint32_t read()\n  {\n    volatile uint32_t* reg = reinterpret_cast<volatile\
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n * \n * Copyright (c) 2023 Gembcior\n * \n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n * \n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n * \n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_REGISTER_MODEL_H\n#define DRAL_REGISTER_MODEL_H\n\
+    \n#include <cstdint>\n\nnamespace dral {\n\ntemplate <uint32_t address>\nclass\
+    \ RegisterModel\n{\npublic:\n  static constexpr uint32_t Address = address;\n\n\
+    public:\n  static uint32_t read()\n  {\n    volatile uint32_t* reg = reinterpret_cast<volatile\
     \ uint32_t*>(address);\n    return *reg;\n  }\n\n  static void write(uint32_t\
     \ value)\n  {\n    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address);\n\
     \    *reg = value;\n  }\n};\n\n\ntemplate <uint32_t address, uint32_t bankOffset>\n\
