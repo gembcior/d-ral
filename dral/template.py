@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 
 class DralMarkerError(Exception):
@@ -122,7 +122,7 @@ class DralTemplate:
         file = self._root / template
         return file.exists()
 
-    def parse_from_template(self, template: str, mapping: Dict) -> List[str]:
+    def parse_from_template(self, template: str, mapping: Dict[str, Any]) -> List[str]:
         """
         Get parsed string from template file
 
@@ -147,7 +147,7 @@ class DralTemplate:
             output = self._parse_string(output, mapping)
         return output
 
-    def parse_from_string(self, text: Union[str, List[str]], mapping: Dict) -> List[str]:
+    def parse_from_string(self, text: Union[str, List[str]], mapping: Dict[str, Any]) -> List[str]:
         """
         Get parsed string from string
 
@@ -194,7 +194,7 @@ class DralTemplate:
             markers.append(DralMarker(item, attributes, match.start(), match.end()))
         return markers
 
-    def _get_list_replacement(self, substitution: List[Dict], marker: DralMarker, mapping: Dict) -> str:
+    def _get_list_replacement(self, substitution: List[Dict[str, Any]], marker: DralMarker, mapping: Dict[str, Any]) -> str:
         if marker.attributes.template is None:
             raise DralMarkerError
         new_substitution = []
@@ -202,8 +202,8 @@ class DralTemplate:
             item.update(mapping)
             new_substitution += self.parse_from_template(marker.attributes.template, item)
         leading_spaces = " " * marker.start
-        new_substitution = (leading_spaces.join(new_substitution)).strip("\n")
-        return new_substitution
+        new_substitution_string = (leading_spaces.join(new_substitution)).strip("\n")
+        return new_substitution_string
 
     def _get_number_replacement(self, substitution: int, marker: DralMarker) -> str:
         if marker.attributes.format is not None:
@@ -219,14 +219,14 @@ class DralTemplate:
             output = str(datetime.now().year)
         return output
 
-    def _get_replacement(self, marker: DralMarker, mapping: Dict) -> str:
+    def _get_replacement(self, marker: DralMarker, mapping: Dict[str, Any]) -> str:
         try:
             replacement = mapping[marker.item.key][marker.item.parameter]
-        except KeyError:
+        except KeyError as exception:
             if marker.item.key == "system":
                 replacement = self._get_system_replacement(marker)
             else:
-                raise DralMarkerError
+                raise DralMarkerError from exception
         if isinstance(replacement, list):
             output = self._get_list_replacement(replacement, marker, mapping)
         elif isinstance(replacement, int):
@@ -253,16 +253,16 @@ class DralTemplate:
         return line
 
     def _apply_extras(self, line: str, extras: str) -> str:
-        return line
+        raise NotImplementedError
 
     def _apply_replacement(self, line: str, substitution: str, marker: DralMarker) -> str:
         try:
             output = line[: marker.start] + substitution + line[marker.end :]
-        except KeyError:
-            raise DralMarkerError
+        except KeyError as exception:
+            raise DralMarkerError from exception
         return output
 
-    def _parse_line(self, line: str, mapping: Dict) -> str:
+    def _parse_line(self, line: str, mapping: Dict[str, Any]) -> str:
         dral_markers = self._get_markers(line)
         if not dral_markers:
             return line
@@ -272,7 +272,7 @@ class DralTemplate:
             line = self._apply_replacement(line, substitution, marker)
         return line
 
-    def _parse_string(self, string: List[str], mapping: Dict) -> List[str]:
+    def _parse_string(self, string: List[str], mapping: Dict[str, Any]) -> List[str]:
         content: List[str] = []
         for line in string:
             content += self._parse_line(line, mapping).splitlines(keepends=True)

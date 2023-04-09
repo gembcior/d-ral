@@ -10,7 +10,7 @@ from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
-from .filter import BanksFilter, BlackListFilter, WhiteListFilter, ExcludeFilter
+from .filter import BanksFilter, BlackListFilter, ExcludeFilter, WhiteListFilter
 from .format import CMakeLibFormat, MbedAutomatifyFormat
 from .generator import DralGenerator
 from .template import DralTemplate

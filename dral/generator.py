@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from .template import DralTemplate
 from .types import Device
@@ -17,7 +17,7 @@ class DralGenerator:
     def __init__(self, template: DralTemplate) -> None:
         self._template = template
 
-    def generate(self, device: Device, mapping: Optional[Dict] = None) -> List[DralOutputFile]:
+    def generate(self, device: Device, mapping: Optional[Dict[str, Any]] = None) -> List[DralOutputFile]:
         device_mapping = device.asdict()
         del device_mapping["device"]["peripherals"]
         peripheral_file_content = []
