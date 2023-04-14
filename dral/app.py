@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import glob
 from pathlib import Path
 from typing import Any
 
@@ -21,7 +22,12 @@ def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
     del param
     if not value or ctx.resilient_parsing:
         return
-    click.echo("TODO")
+    devices_path = Path(__file__).parent / "devices"
+    svd = glob.glob(f"{devices_path}/**/*.svd", recursive=True)
+    svd.sort()
+    for device in svd:
+        chip, family, brand = Utils.get_device_info(Path(device))
+        click.echo(f"{brand}::{family}::{chip}")
     ctx.exit()
 
 
@@ -39,12 +45,18 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
 @click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
+    "-l",
+    "--language",
+    default="cpp",
+    show_default=True,
+    type=click.Choice(["c", "cpp", "python"], case_sensitive=False),
+    help="Specify the programming language for which you want to generate files.",
+)
+@click.option(
     "-t",
     "--template",
-    default="dral",
-    show_default=True,
-    type=click.Choice(["dral", "mbedAutomatify"], case_sensitive=False),
-    help="Specify template used to generate files.",
+    type=click.Path(exists=True, resolve_path=True, path_type=Path),
+    help="Specify path to template files used to generate files.",
 )
 @click.option(
     "-m",
@@ -81,7 +93,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     help="Show list of the supported devices and exit.",
 )
 @click.version_option()
-def cli(svd, output, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
+def cli(svd, output, language, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from SVD.
@@ -109,17 +121,22 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
         black_list = None
 
     exclude = exclude if exclude else []
-    adapter = SvdAdapter(svd)
-    template_dir = Utils.get_template_dir(template)
+
+    if template:
+        template_dir = template
+    else:
+        template = Utils.get_device_template(svd)
+        template_dir = Utils.get_template_dir(language, template)
     template_object = DralTemplate(template_dir)
+
     if mapping:
         with open(mapping, "r", encoding="utf-8") as mapping_file:
             mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
-    generator = DralGenerator(template_object)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
         # Convert data using adapter
+        adapter = SvdAdapter(svd)
         device = adapter.convert()
 
         # Apply filters
@@ -135,15 +152,16 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
             device = item.apply(device)
 
         # Generate D-RAL data
+        generator = DralGenerator(template_object)
         objects = generator.generate(device, mapping=mapping)
 
         # Make output
         output = output / "dralOutput"
 
         output_format: Any = CMakeLibFormat(output, "dral")
-        if template == "dral":
+        if language == "cpp":
             output_format = CMakeLibFormat(output, "dral")
-        elif template == "mbedAutomatify":
+        elif language == "python":
             chip, family, brand = Utils.get_device_info(svd)
             output_format = MbedAutomatifyFormat(output, chip, family, brand)
         output_format.make(objects, single)

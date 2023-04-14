@@ -1,1 +1,0 @@
-using [dral style="lowercase"]field.name[#dral] = FieldModel<address, [dral]field.position[#dral], [dral format="{:#010X}"]field.mask[#dral]>;

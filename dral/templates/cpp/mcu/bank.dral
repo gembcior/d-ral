@@ -1,6 +1,6 @@
 private:
-  template <uint32_t address, uint32_t bankOffset>
-  class [dral style="capitalize"]bank.name[#dral]BankReg: public RegisterBankModel<address, bankOffset>
+  template<uint32_t address, uint32_t bankOffset>
+  class [dral style="capitalize"]bank.name[#dral]BankReg : public RegisterBankModel<address, bankOffset>
   {
   public:
     [dral template="bank.field.dral"]bank.fields[#dral]
