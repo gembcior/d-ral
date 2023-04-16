@@ -47,3 +47,8 @@ class Utils:
         if chip == "tmc2209":
             output = "serial"
         return output
+
+    @staticmethod
+    def get_model_dir() -> Path:
+        model_path = Path(__file__).parent / "templates" / "model"
+        return model_path

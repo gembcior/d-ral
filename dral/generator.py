@@ -29,8 +29,4 @@ class DralGenerator:
             content = self._template.parse_from_template("peripheral.dral", peripheral_mapping)
             dral_output_file = DralOutputFile(peripheral.name, "".join(content))
             peripheral_file_content.append(dral_output_file)
-        if self._template.exists("model.dral"):
-            model_content = self._template.parse_from_template("model.dral", mapping={})
-            dral_output_file = DralOutputFile("register_model", "".join(model_content))
-            peripheral_file_content.append(dral_output_file)
         return peripheral_file_content

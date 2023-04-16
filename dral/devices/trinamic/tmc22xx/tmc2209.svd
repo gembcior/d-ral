@@ -14,7 +14,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <register>
           <name>GCONF</name>
           <displayName>GCONF</displayName>
-          <description>Global configuration flags</description>
+          <description>GENERAL CONFIGURATION REGISTERS</description>
           <addressOffset>0x00</addressOffset>
           <size>10</size>
           <resetValue>0</resetValue>
@@ -34,7 +34,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>en_SpreadCycle</name>
+              <name>en_Spread_Cycle</name>
               <description></description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
@@ -122,7 +122,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
-
         <register>
           <name>IFCNT</name>
           <displayName>IFCNT</displayName>
@@ -140,7 +139,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
-
         <register>
           <name>SLAVECONF</name>
           <displayName>SLAVECONF</displayName>
@@ -148,8 +146,16 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <addressOffset>0x03</addressOffset>
           <size>4</size>
           <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>send_delay</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
-
         <register>
           <name>OTP_PROG</name>
           <displayName>OTP_PROG</displayName>
@@ -157,8 +163,30 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <addressOffset>0x04</addressOffset>
           <size>16</size>
           <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>otpbit</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otpbyte</name>
+              <description></description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otpmagic</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
-
         <register>
           <name>OTP_READ</name>
           <displayName>OTP_READ</displayName>
@@ -166,8 +194,128 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <addressOffset>0x05</addressOffset>
           <size>24</size>
           <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>otp_fclktrim</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_ottrim</name>
+              <description></description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_internal_rsense</name>
+              <description></description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_tbl</name>
+              <description></description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_chopconf_3_0</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_pwm_grad</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_chopconf_4</name>
+              <description></description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_pwm_autograd</name>
+              <description></description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_chopconf_7_5</name>
+              <description></description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_tpwmthrs</name>
+              <description></description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_chopconf_8</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_pwm_ofs</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_pwm_reg</name>
+              <description></description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_pwm_freq</name>
+              <description></description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_ihold_delay</name>
+              <description></description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_ihold</name>
+              <description></description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>otp_en_spread_cycle</name>
+              <description></description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
-
         <register>
           <name>IOIN</name>
           <displayName>IOIN</displayName>
@@ -175,8 +323,72 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <addressOffset>0x06</addressOffset>
           <size>18</size>
           <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>enn</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ms1</name>
+              <description></description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ms2</name>
+              <description></description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>diag</name>
+              <description></description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pdn_uart</name>
+              <description></description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>step</name>
+              <description></description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>spread_en</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>dir</name>
+              <description></description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>version</name>
+              <description></description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
-
         <register>
           <name>FACTORY_CONF</name>
           <displayName>FACTORY_CONF</displayName>
@@ -184,41 +396,598 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <addressOffset>0x07</addressOffset>
           <size>7</size>
           <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>fclktrim</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ottrim</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
         </register>
       </registers>
     </peripheral>
-
     <peripheral>
       <name>Velocity</name>
-      <description>Velocity Dependent Control</description>
+      <description>VELOCITY DEPENDENT DRIVER FEATURE CONTROL REGISTER SET</description>
       <baseAddress>0x10</baseAddress>
       <registers>
+        <register>
+          <name>IHOLD_IRUN</name>
+          <displayName>IHOLD_IRUN</displayName>
+          <description>Driver current control</description>
+          <addressOffset>0x00</addressOffset>
+          <size>14</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>ihold</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>irun</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ihold_delay</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TPOWER_DOWN</name>
+          <displayName>TPOWER_DOWN</displayName>
+          <description>Sets the delay time from stand still (stst) detection to motor current power down.</description>
+          <addressOffset>0x01</addressOffset>
+          <size>8</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>tpower_down_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TSTEP</name>
+          <displayName>TSTEP</displayName>
+          <description>Actual measured time between two 1/256 microsteps derived from the step input frequency in units of 1/fCLK.</description>
+          <addressOffset>0x02</addressOffset>
+          <size>20</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>tstep_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>20</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TPWMTHRS</name>
+          <displayName>TPWMTHRS</displayName>
+          <description>Sets the upper velocity for StealthChop voltage PWM mode.</description>
+          <addressOffset>0x03</addressOffset>
+          <size>20</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>tpwmthrs_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>20</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>VACTUAL</name>
+          <displayName>VACTUAL</displayName>
+          <description>VACTUAL allows moving the motor by UART control.</description>
+          <addressOffset>0x12</addressOffset>
+          <size>24</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>vactual_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>24</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
-
     <peripheral>
       <name>StallGuard</name>
-      <description>StallGuard Control</description>
+      <description>COOLSTEP AND STALLGUARD CONTROL REGISTER SET</description>
       <baseAddress>0x14</baseAddress>
       <registers>
+        <register>
+          <name>TCOOLTHRS</name>
+          <displayName>TCOOLTHRS</displayName>
+          <description>This is the lower threshold velocity for switching on smart energy CoolStep and StallGuard to DIAG output.</description>
+          <addressOffset>0x00</addressOffset>
+          <size>20</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>tcoolthrs_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>20</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SGTHRS</name>
+          <displayName>SGTHRS</displayName>
+          <description>Detection threshold for stall.</description>
+          <addressOffset>0x2C</addressOffset>
+          <size>8</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>sgthrs_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SG_RESULT</name>
+          <displayName>SG_RESULT</displayName>
+          <description>StallGuard result.</description>
+          <addressOffset>0x2D</addressOffset>
+          <size>10</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>sg_result_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>10</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COOLCONF</name>
+          <displayName>COOLCONF</displayName>
+          <description>CoolStep configuration</description>
+          <addressOffset>0x2E</addressOffset>
+          <size>16</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>semin</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>seup</name>
+              <description></description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>semax</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>sedn</name>
+              <description></description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>seimin</name>
+              <description></description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
-
     <peripheral>
       <name>Sequencer</name>
-      <description>Sequencer Registers</description>
+      <description>MICROSTEPPING CONTROL REGISTER SET</description>
       <baseAddress>0x60</baseAddress>
       <registers>
+        <register>
+          <name>MSCNT</name>
+          <displayName>MSCNT</displayName>
+          <description>Microstep counter</description>
+          <addressOffset>0x0A</addressOffset>
+          <size>10</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>mscnt_f</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>10</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MSCURACT</name>
+          <displayName>MSCURACT</displayName>
+          <description>Actual microstep current</description>
+          <addressOffset>0x0B</addressOffset>
+          <size>18</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>cur_a</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>9</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>cur_b</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>9</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
-
     <peripheral>
       <name>Chopper</name>
       <description>Chopper Control Registers</description>
       <baseAddress>0x6C</baseAddress>
       <registers>
+        <register>
+          <name>CHOPCONF</name>
+          <displayName>CHOPCONF</displayName>
+          <description>Chopper and driver configuration</description>
+          <addressOffset>0x00</addressOffset>
+          <size>32</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>toff</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hstrt</name>
+              <description></description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hend</name>
+              <description></description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>tbl</name>
+              <description></description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>vsense</name>
+              <description></description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>mres</name>
+              <description></description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>intpol</name>
+              <description></description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>dedge</name>
+              <description></description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>diss2g</name>
+              <description></description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>diss2vs</name>
+              <description></description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>DRV_STATUS</name>
+          <displayName>DRV_STATUS</displayName>
+          <description>Driver status flags and current level read back</description>
+          <addressOffset>0x03</addressOffset>
+          <size>32</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>otpw</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ot</name>
+              <description></description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>s2ga</name>
+              <description></description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>s2gb</name>
+              <description></description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>s2vsa</name>
+              <description></description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>s2vsb</name>
+              <description></description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ola</name>
+              <description></description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>olb</name>
+              <description></description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>t120</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>t143</name>
+              <description></description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>t150</name>
+              <description></description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>t157</name>
+              <description></description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>cs_actual</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>stealth</name>
+              <description></description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>stst</name>
+              <description></description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PWMCONF</name>
+          <displayName>PWMCONF</displayName>
+          <description>StealthChop PWM chopper configuration</description>
+          <addressOffset>0x04</addressOffset>
+          <size>22</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>pwm_ofs</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_grad</name>
+              <description></description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_freq</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_autoscale</name>
+              <description></description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_autograd</name>
+              <description></description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>freewheel</name>
+              <description></description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_reg</name>
+              <description></description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_lim</name>
+              <description></description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PWM_SCALE</name>
+          <displayName>PWM_SCALE</displayName>
+          <description>Results of StealthChop amplitude regulator.</description>
+          <addressOffset>0x05</addressOffset>
+          <size>17</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>pwm_scale_sum</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_scale_auto</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>9</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PWM_AUTO</name>
+          <displayName>PWM_AUTO</displayName>
+          <description>These automatically generated values can be read out in order to determine a default / power up setting for PWM_GRAD and PWM_OFS.</description>
+          <addressOffset>0x06</addressOffset>
+          <size>16</size>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>pwm_ofs_auto</name>
+              <description></description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pwm_grad_auto</name>
+              <description></description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
-
   </peripherals>
 </device>
