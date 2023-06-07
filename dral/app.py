@@ -93,7 +93,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     help="Show list of the supported devices and exit.",
 )
 @click.version_option()
-def cli(svd, output, language, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
+def cli(svd, output, language, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from SVD.
