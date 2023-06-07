@@ -19,8 +19,8 @@ class Utils:
                 return Path(item)
 
     @staticmethod
-    def get_template_dir(name: str) -> Path:
-        templates_path = Path(__file__).parent / "templates"
+    def get_template_dir(language: str, name: str) -> Path:
+        templates_path = Path(__file__).parent / "templates" / language
         return templates_path / name
 
     @staticmethod
@@ -41,6 +41,14 @@ class Utils:
         return svd.stem, "", device_info[0]
 
     @staticmethod
-    def get_mapping_file(name: str) -> Path:
-        with resources.path("dral.mappings", name) as item:
-            return Path(item)
+    def get_device_template(svd: Path) -> str:
+        chip, _, _ = Utils.get_device_info(svd)
+        output = "mcu"
+        if chip == "tmc2209":
+            output = "serial"
+        return output
+
+    @staticmethod
+    def get_model_dir() -> Path:
+        model_path = Path(__file__).parent / "templates" / "model"
+        return model_path

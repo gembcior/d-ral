@@ -85,7 +85,7 @@ class BanksFilter(BaseFilter):
             console.print(registers)
             sys.exit()
         min_offset = min(offsets)  # type: ignore[type-var]
-        return min_offset, diff[0]
+        return min_offset, abs(diff[0])
 
     def _get_register_bank_name(self, bank: List[Register]) -> str:
         from difflib import SequenceMatcher

@@ -43,8 +43,8 @@ class TestDralTypes:
         assert field.name == test_field["name"]
         assert field.description == test_field["description"]
         assert field.position == test_field["position"]
-        assert field.mask == test_field["mask"]
         assert field.width == test_field["width"]
+        assert field.mask == ((1 << test_field["width"]) - 1)
 
     @pytest.mark.parametrize(
         "field_a",

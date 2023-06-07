@@ -1,0 +1,18 @@
+fruits:
+  name: Sweet Fruits
+  apples:
+    - apple:
+        name: apple
+        color: red
+        shape: square
+    - apple:
+        name: apple
+        color: green
+        shape: circle
+    - apple:
+        name: apple
+        color: blue
+        shape: triangle
+
+vegetables:
+  name: Fresh Vegetables

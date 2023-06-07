@@ -1,0 +1,21 @@
+[dral]include header.dral[#dral]
+
+#ifndef DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
+#define DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
+
+#include "dral/register_model.h"
+
+namespace dral::[dral style="lowercase"]device.name[#dral] {
+
+class [dral style="lowercase"]peripheral.name[#dral]
+{
+public:
+  static constexpr uint32_t BaseAddress = [dral format="{:#010X}"]peripheral.address[#dral];
+
+[dral template="register.dral"]peripheral.registers[#dral]
+[dral template="bank.dral"]peripheral.banks[#dral]
+};
+
+}
+
+#endif /* DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H */

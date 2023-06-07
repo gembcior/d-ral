@@ -8,14 +8,13 @@ from dral.utils import Utils
 
 
 class TestDralUtils:
-    @pytest.mark.parametrize("template", ["dral", "mbedAutomatify"])
-    def test_get_template(self, template: str, rootdir: Path):
-        base_template_files = ["peripheral.dral", "register.dral", "field.dral"]
+    @pytest.mark.parametrize("template", ["mcu"])
+    @pytest.mark.parametrize("language", ["cpp", "python"])
+    def test_get_template(self, template: str, language: str, rootdir: Path):
         templates_subpath = "dral/templates"
-        for name in base_template_files:
-            result = Utils.get_template(template, name)
-            expected = rootdir.parents[0] / templates_subpath / template / name
-            assert expected == result
+        result = Utils.get_template_dir(language, template)
+        expected = rootdir.parents[0] / templates_subpath / language / template
+        assert expected == result
 
     @pytest.mark.parametrize("device, svd", [("stm32f446", "stm32/f4/stm32f446.svd"), ("stm32f411", "stm32/f4/stm32f411.svd")])
     def test_get_svd_file(self, device: str, svd: str, rootdir: Path):

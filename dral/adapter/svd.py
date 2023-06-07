@@ -37,7 +37,6 @@ class SvdAdapter(BaseAdapter):
                 name=field["name"],
                 description=field["description"],
                 position=position,
-                mask=((1 << width) - 1),
                 width=width,
             )
             fields_list.append(new_field)

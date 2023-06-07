@@ -1,0 +1,1 @@
+self.[dral style="lowercase"]register.name[#dral] = self.[dral style="capitalize"]register.name[#dral]Register(self.address, proxy)

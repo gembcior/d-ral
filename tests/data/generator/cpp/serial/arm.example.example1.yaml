@@ -1,0 +1,135 @@
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n *\n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
+    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
+    \ cr\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0000;\n  union\n\
+    \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
+    \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
+    \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\
+    \    BitFieldModel<16, 2> capedge;\n    BitFieldModel<20, 2> trgext;\n    BitFieldModel<24,\
+    \ 2> reload;\n    BitFieldModel<26, 2> idr;\n    BitFieldModel<31, 1> s;\n  };\n\
+    };\n\nstruct sr\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0004;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> run;\n    BitFieldModel<8,\
+    \ 1> match;\n    BitFieldModel<9, 1> un;\n    BitFieldModel<10, 1> ov;\n    BitFieldModel<12,\
+    \ 1> rst;\n    BitFieldModel<14, 2> reload;\n  };\n};\n\nstruct int\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010000 + 0x0010;\n  union\n  {\n    uint32_t value;\n\
+    \    BitFieldModel<0, 1> en;\n    BitFieldModel<4, 3> mode;\n  };\n};\n\nstruct\
+    \ count\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0020;\n  union\n\
+    \  {\n    uint32_t value;\n    \n  };\n};\n\nstruct match\n{\n  constexpr static\
+    \ uint32_t Address = 0x40010000 + 0x0024;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct prescale_rd\n{\n  constexpr static uint32_t Address\
+    \ = 0x40010000 + 0x0028;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct prescale_wr\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0028;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[0]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010000 + 0x0050;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct reload[1]\n{\n  constexpr static uint32_t Address =\
+    \ 0x40010000 + 0x0054;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct reload[2]\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0058;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[3]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010000 + 0x005C;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H */\n"
+  name: TIMER0
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n *\n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
+    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
+    \ cr\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0000;\n  union\n\
+    \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
+    \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
+    \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\
+    \    BitFieldModel<16, 2> capedge;\n    BitFieldModel<20, 2> trgext;\n    BitFieldModel<24,\
+    \ 2> reload;\n    BitFieldModel<26, 2> idr;\n    BitFieldModel<31, 1> s;\n  };\n\
+    };\n\nstruct sr\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0004;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> run;\n    BitFieldModel<8,\
+    \ 1> match;\n    BitFieldModel<9, 1> un;\n    BitFieldModel<10, 1> ov;\n    BitFieldModel<12,\
+    \ 1> rst;\n    BitFieldModel<14, 2> reload;\n  };\n};\n\nstruct int\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010100 + 0x0010;\n  union\n  {\n    uint32_t value;\n\
+    \    BitFieldModel<0, 1> en;\n    BitFieldModel<4, 3> mode;\n  };\n};\n\nstruct\
+    \ count\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0020;\n  union\n\
+    \  {\n    uint32_t value;\n    \n  };\n};\n\nstruct match\n{\n  constexpr static\
+    \ uint32_t Address = 0x40010100 + 0x0024;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct prescale_rd\n{\n  constexpr static uint32_t Address\
+    \ = 0x40010100 + 0x0028;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct prescale_wr\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0028;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[0]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010100 + 0x0050;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct reload[1]\n{\n  constexpr static uint32_t Address =\
+    \ 0x40010100 + 0x0054;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct reload[2]\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0058;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[3]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010100 + 0x005C;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H */\n"
+  name: TIMER1
+- content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
+    \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
+    \ hereby granted, free of charge, to any person obtaining a copy\n * of this software\
+    \ and associated documentation files (the \"Software\"), to deal\n * in the Software\
+    \ without restriction, including without limitation the rights\n * to use, copy,\
+    \ modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the\
+    \ Software, and to permit persons to whom the Software is\n * furnished to do\
+    \ so, subject to the following conditions:\n *\n * The above copyright notice\
+    \ and this permission notice shall be included in all\n * copies or substantial\
+    \ portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT\
+    \ WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE\
+    \ WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+    \ IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\
+    \ DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\
+    \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
+    \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
+    \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
+    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
+    \ cr\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0000;\n  union\n\
+    \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
+    \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
+    \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\
+    \    BitFieldModel<16, 2> capedge;\n    BitFieldModel<20, 2> trgext;\n    BitFieldModel<24,\
+    \ 2> reload;\n    BitFieldModel<26, 2> idr;\n    BitFieldModel<31, 1> s;\n  };\n\
+    };\n\nstruct sr\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0004;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> run;\n    BitFieldModel<8,\
+    \ 1> match;\n    BitFieldModel<9, 1> un;\n    BitFieldModel<10, 1> ov;\n    BitFieldModel<12,\
+    \ 1> rst;\n    BitFieldModel<14, 2> reload;\n  };\n};\n\nstruct int\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010200 + 0x0010;\n  union\n  {\n    uint32_t value;\n\
+    \    BitFieldModel<0, 1> en;\n    BitFieldModel<4, 3> mode;\n  };\n};\n\nstruct\
+    \ count\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0020;\n  union\n\
+    \  {\n    uint32_t value;\n    \n  };\n};\n\nstruct match\n{\n  constexpr static\
+    \ uint32_t Address = 0x40010200 + 0x0024;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct prescale_rd\n{\n  constexpr static uint32_t Address\
+    \ = 0x40010200 + 0x0028;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct prescale_wr\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0028;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[0]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010200 + 0x0050;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\nstruct reload[1]\n{\n  constexpr static uint32_t Address =\
+    \ 0x40010200 + 0x0054;\n  union\n  {\n    uint32_t value;\n    \n  };\n};\n\n\
+    struct reload[2]\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0058;\n\
+    \  union\n  {\n    uint32_t value;\n    \n  };\n};\n\nstruct reload[3]\n{\n  constexpr\
+    \ static uint32_t Address = 0x40010200 + 0x005C;\n  union\n  {\n    uint32_t value;\n\
+    \    \n  };\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H */\n"
+  name: TIMER2

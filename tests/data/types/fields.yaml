@@ -2,12 +2,10 @@ field0:
   name: field0
   description: description for field0
   position: 24
-  mask: 0xFFFF
   width: 32
 
 field1:
   name: field1
   description: description for field0
   position: 9
-  mask: 0x7FFFF
   width: 16

@@ -1,18 +1,19 @@
 from __future__ import annotations
 
+import glob
 from pathlib import Path
 from typing import Any
 
 import click
+import yaml
 from rich.console import Console
 from rich.traceback import install as traceback
 
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
-from .filter import BanksFilter, BlackListFilter, WhiteListFilter
+from .filter import BanksFilter, BlackListFilter, ExcludeFilter, WhiteListFilter
 from .format import CMakeLibFormat, MbedAutomatifyFormat
-from .generator import DralGenerator
-from .mapping import DralMapping
+from .generator import DralGenerator, DralOutputFile
 from .template import DralTemplate
 from .utils import Utils
 
@@ -21,7 +22,12 @@ def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
     del param
     if not value or ctx.resilient_parsing:
         return
-    click.echo("TODO")
+    devices_path = Path(__file__).parent / "devices"
+    svd = glob.glob(f"{devices_path}/**/*.svd", recursive=True)
+    svd.sort()
+    for device in svd:
+        chip, family, brand = Utils.get_device_info(Path(device))
+        click.echo(f"{brand}::{family}::{chip}")
     ctx.exit()
 
 
@@ -39,12 +45,18 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
 @click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
+    "-l",
+    "--language",
+    default="cpp",
+    show_default=True,
+    type=click.Choice(["c", "cpp", "python"], case_sensitive=False),
+    help="Specify the programming language for which you want to generate files.",
+)
+@click.option(
     "-t",
     "--template",
-    default="dral",
-    show_default=True,
-    type=click.Choice(["dral", "mbedAutomatify"], case_sensitive=False),
-    help="Specify template used to generate files.",
+    type=click.Path(exists=True, resolve_path=True, path_type=Path),
+    help="Specify path to template files used to generate files.",
 )
 @click.option(
     "-m",
@@ -81,7 +93,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     help="Show list of the supported devices and exit.",
 )
 @click.version_option()
-def cli(svd, output, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def]
+def cli(svd, output, language, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from SVD.
@@ -109,14 +121,22 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
         black_list = None
 
     exclude = exclude if exclude else []
-    adapter = SvdAdapter(svd)
-    mapping_object = DralMapping(mapping) if mapping else None
-    template_object = DralTemplate(template)
-    generator = DralGenerator(template_object)
+
+    if template:
+        template_dir = template
+    else:
+        template = Utils.get_device_template(svd)
+        template_dir = Utils.get_template_dir(language, template)
+    template_object = DralTemplate(template_dir)
+
+    if mapping:
+        with open(mapping, "r", encoding="utf-8") as mapping_file:
+            mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
         # Convert data using adapter
+        adapter = SvdAdapter(svd)
         device = adapter.convert()
 
         # Apply filters
@@ -126,22 +146,31 @@ def cli(svd, output, template, mapping, exclude, single, white_list, black_list)
         if white_list is not None:
             filters.append(WhiteListFilter(white_list))
         filters.append(BanksFilter())
+        if exclude:
+            filters.append(ExcludeFilter(exclude))
         for item in filters:
             device = item.apply(device)
 
         # Generate D-RAL data
-        objects = generator.generate(device, exclude=exclude, mapping=mapping_object)
+        generator = DralGenerator(template_object)
+        objects = generator.generate(device, mapping=mapping)
+
+        # Get D-RAL register model file
+        model_dir = Utils.get_model_dir()
+        model_template = DralTemplate(model_dir)
+        model_content = model_template.parse_from_template(f"{language}.dral", mapping={})
+        dral_model_file = DralOutputFile("register_model", "".join(model_content))
 
         # Make output
         output = output / "dralOutput"
 
-        output_format: Any = CMakeLibFormat(output, "dral")
-        if template == "dral":
-            output_format = CMakeLibFormat(output, "dral")
-        elif template == "mbedAutomatify":
-            chip, family, brand = Utils.get_device_info(svd)
+        chip, family, brand = Utils.get_device_info(svd)
+        output_format: Any = CMakeLibFormat(output, "dral", chip)
+        if language == "cpp":
+            output_format = CMakeLibFormat(output, "dral", chip)
+        elif language == "python":
             output_format = MbedAutomatifyFormat(output, chip, family, brand)
-        output_format.make(objects, single)
+        output_format.make(objects, model=dral_model_file, single=single)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 

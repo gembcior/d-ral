@@ -1,4 +1,0 @@
-class [dral]register.name%capitalize[#dral]Register(Register):
-    def __init__(self, address, proxy):
-        super().__init__("[dral]register.name[#dral]", "[dral]register.description%strip[#dral]", address + [dral]register.offset[#dral], [dral]register.size[#dral], "[dral]register.access[#dral]", [dral]register.reset_value[#dral], proxy)
-        [dral]register.fields%LF[#dral]

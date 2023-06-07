@@ -18947,7 +18947,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>OR</name>
+          <name>_OR</name>
           <displayName>OR</displayName>
           <description>TIM5 option register</description>
           <addressOffset>0x50</addressOffset>
@@ -20821,7 +20821,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>OR</name>
+          <name>_OR</name>
           <displayName>OR</displayName>
           <description>TIM5 option register</description>
           <addressOffset>0x50</addressOffset>
@@ -22267,6 +22267,27 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>SRQ</name>
               <description>Session request</description>
               <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>AVALOEN</name>
+              <description>AVALOEN</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>BVALOEN</name>
+              <description>BVALOEN</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>BVALOVAL</name>
+              <description>BVALOVAL</description>
+              <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>

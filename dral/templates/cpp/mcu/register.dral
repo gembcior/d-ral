@@ -1,0 +1,18 @@
+private:
+  template<uint32_t address>
+  class [dral style="capitalize"]register.name[#dral]Reg : public RegisterModel<address>
+  {
+  public:
+    [dral template="field.dral"]register.fields[#dral]
+
+  public:
+    union reg
+    {
+      uint32_t value;
+      [dral template="bitfield.dral"]register.fields[#dral]
+    };
+  };
+
+public:
+  using [dral style="lowercase"]register.name[#dral] = [dral style="capitalize"]register.name[#dral]Reg<BaseAddress + [dral format="{:#06X}"]register.offset[#dral]>;
+

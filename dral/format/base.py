@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import List, Optional
+
+from ..generator import DralOutputFile
 
 
 class BaseFormat(ABC):
@@ -9,15 +11,15 @@ class BaseFormat(ABC):
         pass
 
     @abstractmethod
-    def _make_default(self, objects: List[Dict[str, str]]) -> None:
+    def _make_default(self, objects: List[DralOutputFile], model: Optional[DralOutputFile]) -> None:
         pass
 
     @abstractmethod
-    def _make_single(self, objects: List[Dict[str, str]]) -> None:
+    def _make_single(self, objects: List[DralOutputFile]) -> None:
         pass
 
-    def make(self, objects: List[Dict[str, str]], single: bool = False) -> None:
+    def make(self, objects: List[DralOutputFile], model: Optional[DralOutputFile] = None, single: bool = False) -> None:
         if single:
             self._make_single(objects)
         else:
-            self._make_default(objects)
+            self._make_default(objects, model=model)

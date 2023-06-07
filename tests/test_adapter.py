@@ -20,7 +20,7 @@ class TestDralAdapter:
         return Device(
             name=data["name"],
             description=data["description"],
-            peripherals=[self.create_peripheral_object(peripheral) for peripheral in data["peripherals"]],
+            peripherals=[self.create_peripheral_object(peripheral["peripheral"]) for peripheral in data["peripherals"]],
         )
 
     def create_peripheral_object(self, data: Dict) -> Peripheral:
@@ -28,7 +28,7 @@ class TestDralAdapter:
             name=data["name"],
             description=data["description"],
             address=data["address"],
-            registers=[self.create_regiter_object(register) for register in data["registers"]],
+            registers=[self.create_regiter_object(register["register"]) for register in data["registers"]],
         )
 
     def create_regiter_object(self, data: Dict) -> Register:
@@ -39,7 +39,7 @@ class TestDralAdapter:
             size=data["size"],
             access=data["access"],
             reset_value=data["reset_value"],
-            fields=[self.create_field_object(field) for field in data["fields"]],
+            fields=[self.create_field_object(field["field"]) for field in data["fields"]],
         )
 
     def create_field_object(self, data: Dict) -> Field:
@@ -47,7 +47,6 @@ class TestDralAdapter:
             name=data["name"],
             description=data["description"],
             position=data["position"],
-            mask=data["mask"],
             width=data["width"],
         )
 
@@ -60,6 +59,7 @@ class TestDralAdapter:
 
         with open(datadir / "adapter" / f"{device}.yaml") as data:
             expected_output = yaml.load(data, Loader=yaml.FullLoader)
-        expected_device = self.create_device_object(expected_output)
+        expected_device = self.create_device_object(expected_output["device"])
 
+        assert dral.asdict() == expected_device.asdict()
         assert dral == expected_device
