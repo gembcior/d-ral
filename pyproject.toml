@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "dral"
 homepage = "https://github.com/gembcior/d-ral"
-version = "0.3.3"
+version = "0.4.0"
 description = "D-RAL - Device Register Access Layer"
 authors = ["Gembcior <gembcior@gmail.com>"]
 license = "MIT"
