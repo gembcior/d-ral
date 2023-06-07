@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from ..generator import DralOutputFile
 from .base import BaseFormat
@@ -43,7 +43,7 @@ class MbedAutomatifyFormat(BaseFormat):
             open(directory / "__init__.py", "w", encoding="UTF-8").close()
             directory = directory.parent
 
-    def _make_default(self, objects: List[DralOutputFile]) -> None:
+    def _make_default(self, objects: List[DralOutputFile], model: Optional[DralOutputFile] = None) -> None:
         directory = self._create_output_directory(self._directory)
         for item in objects:
             self._create_file("%s.py" % item.name.lower(), directory, item.content)
