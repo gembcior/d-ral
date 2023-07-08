@@ -1,1 +1,0 @@
-self.[dral style="lowercase"]field.name[#dral] = Field("[dral style="lowercase"]field.name[#dral]", "[dral style="strip"]field.description[#dral]", self._address, [dral]field.position[#dral], [dral format="{:#06X}"]field.mask[#dral], [dral]field.width[#dral], proxy)

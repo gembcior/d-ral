@@ -1,0 +1,8 @@
+@property
+def [dral style="lowercase"]register.name[#dral](self) -> [dral style="capitalize"]register.name[#dral]Register:
+    return self._[dral style="lowercase"]register.name[#dral]
+
+@[dral style="lowercase"]register.name[#dral].setter
+def [dral style="lowercase"]register.name[#dral](self, value: int) -> None:
+    self._[dral style="lowercase"]register.name[#dral].value = value
+

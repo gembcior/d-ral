@@ -12,7 +12,7 @@ from rich.traceback import install as traceback
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, ExcludeFilter, WhiteListFilter
-from .format import CMakeLibFormat, MbedAutomatifyFormat
+from .format import CppFormat, PythonFormat
 from .generator import DralGenerator, DralOutputFile
 from .template import DralTemplate
 from .utils import Utils
@@ -156,20 +156,20 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
         objects = generator.generate(device, mapping=mapping)
 
         # Get D-RAL register model file
-        model_dir = Utils.get_model_dir()
+        model_dir = Utils.get_model_dir(language)
         model_template = DralTemplate(model_dir)
-        model_content = model_template.parse_from_template(f"{language}.dral", mapping={})
+        model_content = model_template.parse_from_template("model.dral", mapping={})
         dral_model_file = DralOutputFile("register_model", "".join(model_content))
 
         # Make output
         output = output / "dralOutput"
 
-        chip, family, brand = Utils.get_device_info(svd)
-        output_format: Any = CMakeLibFormat(output, "dral", chip)
+        chip = Utils.get_device_info(svd)[0]
+        output_format: Any = CppFormat(output, "dral", chip)
         if language == "cpp":
-            output_format = CMakeLibFormat(output, "dral", chip)
+            output_format = CppFormat(output, "dral", chip)
         elif language == "python":
-            output_format = MbedAutomatifyFormat(output, chip, family, brand)
+            output_format = PythonFormat(output, chip)
         output_format.make(objects, model=dral_model_file, single=single)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")

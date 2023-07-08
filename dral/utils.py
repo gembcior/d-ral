@@ -49,6 +49,6 @@ class Utils:
         return output
 
     @staticmethod
-    def get_model_dir() -> Path:
-        model_path = Path(__file__).parent / "templates" / "model"
+    def get_model_dir(language: str) -> Path:
+        model_path = Path(__file__).parent / "templates" / "model" / language
         return model_path

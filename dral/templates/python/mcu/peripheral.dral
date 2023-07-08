@@ -1,10 +1,17 @@
-from mbedautomatify.reg.base import Peripheral
-from mbedautomatify.reg.base import Register
-from mbedautomatify.reg.base import Field
+[dral]include header.dral[#dral]
 
+from model import Field, Peripheral, Register
+
+[dral template="register.dral"]peripheral.registers[#dral]
 
 class [dral style="capitalize"]peripheral.name[#dral](Peripheral):
-    [dral template="register.dral"]peripheral.registers[#dral]
-    def __init__(self, proxy):
-        super().__init__("[dral style="lowercase"]peripheral.name[#dral]", "[dral style="strip"]peripheral.description[#dral]", [dral format="{:#010X}"]peripheral.address[#dral])
-        [dral template="register.simple.dral"]peripheral.registers[#dral]
+    """
+    [dral style="uppercase"]peripheral.name[#dral]
+
+    [dral style="strip"]peripheral.description[#dral]
+    """
+    def __init__(self):
+        super().__init__("[dral style="lowercase"]peripheral.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral])
+        [dral template="register.constructor.dral"]peripheral.registers[#dral]
+
+    [dral template="register.property.dral"]peripheral.registers[#dral]

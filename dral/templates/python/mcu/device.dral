@@ -1,0 +1,7 @@
+[dral]include header.dral[#dral]
+
+[dral template="peripheral.import.dral"]device.peripherals[#dral]
+
+class [dral]device.name[#dral]():
+    def __init__(self):
+        [dral template="peripheral.constructor.dral"]device.peripherals[#dral]
