@@ -67,4 +67,5 @@ class TestDralGenerator:
         #         temp.append({"name": item.name, "content": item.content})
         #     yaml.dump(temp, myfile)
 
-        assert objects == expected_output
+        result = objects == expected_output
+        assert result

@@ -364,8 +364,8 @@
     \ 16> iepint;\n    BitFieldModel<16, 16> oepint;\n  };\n};\n\nstruct fs_daintmsk\n\
     {\n  constexpr static uint32_t Address = 0x50000800 + 0x001C;\n  union\n  {\n\
     \    uint32_t value;\n    BitFieldModel<0, 16> iepm;\n    BitFieldModel<16, 16>\
-    \ oepint;\n  };\n};\n\nstruct dvbusdis\n{\n  constexpr static uint32_t Address\
-    \ = 0x50000800 + 0x0028;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
+    \ oepm;\n  };\n};\n\nstruct dvbusdis\n{\n  constexpr static uint32_t Address =\
+    \ 0x50000800 + 0x0028;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
     \ 16> vbusdt;\n  };\n};\n\nstruct dvbuspulse\n{\n  constexpr static uint32_t Address\
     \ = 0x50000800 + 0x002C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
     \ 12> dvbusp;\n  };\n};\n\nstruct diepempmsk\n{\n  constexpr static uint32_t Address\
@@ -507,55 +507,64 @@
     \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nstruct\
     \ fs_gotgctl\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0000;\n\
     \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> srqscs;\n    BitFieldModel<1,\
-    \ 1> srq;\n    BitFieldModel<8, 1> hngscs;\n    BitFieldModel<9, 1> hnprq;\n \
-    \   BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11, 1> dhnpen;\n    BitFieldModel<16,\
-    \ 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n    BitFieldModel<18, 1> asvld;\n\
-    \    BitFieldModel<19, 1> bsvld;\n  };\n};\n\nstruct fs_gotgint\n{\n  constexpr\
-    \ static uint32_t Address = 0x50000000 + 0x0004;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8, 1> srsschg;\n    BitFieldModel<9,\
-    \ 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n    BitFieldModel<18, 1> adtochg;\n\
-    \    BitFieldModel<19, 1> dbcdne;\n  };\n};\n\nstruct fs_gahbcfg\n{\n  constexpr\
-    \ static uint32_t Address = 0x50000000 + 0x0008;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<0, 1> gint;\n    BitFieldModel<7, 1> txfelvl;\n    BitFieldModel<8,\
-    \ 1> ptxfelvl;\n  };\n};\n\nstruct fs_gusbcfg\n{\n  constexpr static uint32_t\
-    \ Address = 0x50000000 + 0x000C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
-    \ 3> tocal;\n    BitFieldModel<6, 1> physel;\n    BitFieldModel<8, 1> srpcap;\n\
-    \    BitFieldModel<9, 1> hnpcap;\n    BitFieldModel<10, 4> trdt;\n    BitFieldModel<29,\
-    \ 1> fhmod;\n    BitFieldModel<30, 1> fdmod;\n    BitFieldModel<31, 1> ctxpkt;\n\
-    \  };\n};\n\nstruct fs_grstctl\n{\n  constexpr static uint32_t Address = 0x50000000\
-    \ + 0x0010;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> csrst;\n\
-    \    BitFieldModel<1, 1> hsrst;\n    BitFieldModel<2, 1> fcrst;\n    BitFieldModel<4,\
-    \ 1> rxfflsh;\n    BitFieldModel<5, 1> txfflsh;\n    BitFieldModel<6, 5> txfnum;\n\
-    \    BitFieldModel<31, 1> ahbidl;\n  };\n};\n\nstruct fs_gintsts\n{\n  constexpr\
-    \ static uint32_t Address = 0x50000000 + 0x0014;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<0, 1> cmod;\n    BitFieldModel<1, 1> mmis;\n    BitFieldModel<2,\
-    \ 1> otgint;\n    BitFieldModel<3, 1> sof;\n    BitFieldModel<4, 1> rxflvl;\n\
-    \    BitFieldModel<5, 1> nptxfe;\n    BitFieldModel<6, 1> ginakeff;\n    BitFieldModel<7,\
-    \ 1> goutnakeff;\n    BitFieldModel<10, 1> esusp;\n    BitFieldModel<11, 1> usbsusp;\n\
-    \    BitFieldModel<12, 1> usbrst;\n    BitFieldModel<13, 1> enumdne;\n    BitFieldModel<14,\
-    \ 1> isoodrp;\n    BitFieldModel<15, 1> eopf;\n    BitFieldModel<18, 1> iepint;\n\
-    \    BitFieldModel<19, 1> oepint;\n    BitFieldModel<20, 1> iisoixfr;\n    BitFieldModel<21,\
-    \ 1> ipxfr_incompisoout;\n    BitFieldModel<24, 1> hprtint;\n    BitFieldModel<25,\
-    \ 1> hcint;\n    BitFieldModel<26, 1> ptxfe;\n    BitFieldModel<28, 1> cidschg;\n\
-    \    BitFieldModel<29, 1> discint;\n    BitFieldModel<30, 1> srqint;\n    BitFieldModel<31,\
-    \ 1> wkupint;\n  };\n};\n\nstruct fs_gintmsk\n{\n  constexpr static uint32_t Address\
-    \ = 0x50000000 + 0x0018;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<1,\
-    \ 1> mmism;\n    BitFieldModel<2, 1> otgint;\n    BitFieldModel<3, 1> sofm;\n\
-    \    BitFieldModel<4, 1> rxflvlm;\n    BitFieldModel<5, 1> nptxfem;\n    BitFieldModel<6,\
-    \ 1> ginakeffm;\n    BitFieldModel<7, 1> gonakeffm;\n    BitFieldModel<10, 1>\
-    \ esuspm;\n    BitFieldModel<11, 1> usbsuspm;\n    BitFieldModel<12, 1> usbrst;\n\
-    \    BitFieldModel<13, 1> enumdnem;\n    BitFieldModel<14, 1> isoodrpm;\n    BitFieldModel<15,\
-    \ 1> eopfm;\n    BitFieldModel<17, 1> epmism;\n    BitFieldModel<18, 1> iepint;\n\
-    \    BitFieldModel<19, 1> oepint;\n    BitFieldModel<20, 1> iisoixfrm;\n    BitFieldModel<21,\
-    \ 1> ipxfrm_iisooxfrm;\n    BitFieldModel<24, 1> prtim;\n    BitFieldModel<25,\
-    \ 1> hcim;\n    BitFieldModel<26, 1> ptxfem;\n    BitFieldModel<28, 1> cidschgm;\n\
-    \    BitFieldModel<29, 1> discint;\n    BitFieldModel<30, 1> srqim;\n    BitFieldModel<31,\
-    \ 1> wuim;\n  };\n};\n\nstruct fs_grxstsr_device\n{\n  constexpr static uint32_t\
-    \ Address = 0x50000000 + 0x001C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
+    \ 1> srq;\n    BitFieldModel<4, 1> avaloen;\n    BitFieldModel<6, 1> bvaloen;\n\
+    \    BitFieldModel<7, 1> bvaloval;\n    BitFieldModel<8, 1> hngscs;\n    BitFieldModel<9,\
+    \ 1> hnprq;\n    BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11, 1> dhnpen;\n\
+    \    BitFieldModel<16, 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n    BitFieldModel<18,\
+    \ 1> asvld;\n    BitFieldModel<19, 1> bsvld;\n  };\n};\n\nstruct fs_gotgint\n\
+    {\n  constexpr static uint32_t Address = 0x50000000 + 0x0004;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8, 1>\
+    \ srsschg;\n    BitFieldModel<9, 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n\
+    \    BitFieldModel<18, 1> adtochg;\n    BitFieldModel<19, 1> dbcdne;\n  };\n};\n\
+    \nstruct fs_gahbcfg\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0008;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> gint;\n    BitFieldModel<7,\
+    \ 1> txfelvl;\n    BitFieldModel<8, 1> ptxfelvl;\n  };\n};\n\nstruct fs_gusbcfg\n\
+    {\n  constexpr static uint32_t Address = 0x50000000 + 0x000C;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<0, 3> tocal;\n    BitFieldModel<6, 1>\
+    \ physel;\n    BitFieldModel<8, 1> srpcap;\n    BitFieldModel<9, 1> hnpcap;\n\
+    \    BitFieldModel<10, 4> trdt;\n    BitFieldModel<29, 1> fhmod;\n    BitFieldModel<30,\
+    \ 1> fdmod;\n    BitFieldModel<31, 1> ctxpkt;\n  };\n};\n\nstruct fs_grstctl\n\
+    {\n  constexpr static uint32_t Address = 0x50000000 + 0x0010;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<0, 1> csrst;\n    BitFieldModel<1, 1>\
+    \ hsrst;\n    BitFieldModel<2, 1> fcrst;\n    BitFieldModel<4, 1> rxfflsh;\n \
+    \   BitFieldModel<5, 1> txfflsh;\n    BitFieldModel<6, 5> txfnum;\n    BitFieldModel<31,\
+    \ 1> ahbidl;\n  };\n};\n\nstruct fs_gintsts\n{\n  constexpr static uint32_t Address\
+    \ = 0x50000000 + 0x0014;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
+    \ 1> cmod;\n    BitFieldModel<1, 1> mmis;\n    BitFieldModel<2, 1> otgint;\n \
+    \   BitFieldModel<3, 1> sof;\n    BitFieldModel<4, 1> rxflvl;\n    BitFieldModel<5,\
+    \ 1> nptxfe;\n    BitFieldModel<6, 1> ginakeff;\n    BitFieldModel<7, 1> goutnakeff;\n\
+    \    BitFieldModel<10, 1> esusp;\n    BitFieldModel<11, 1> usbsusp;\n    BitFieldModel<12,\
+    \ 1> usbrst;\n    BitFieldModel<13, 1> enumdne;\n    BitFieldModel<14, 1> isoodrp;\n\
+    \    BitFieldModel<15, 1> eopf;\n    BitFieldModel<18, 1> iepint;\n    BitFieldModel<19,\
+    \ 1> oepint;\n    BitFieldModel<20, 1> iisoixfr;\n    BitFieldModel<21, 1> ipxfr_incompisoout;\n\
+    \    BitFieldModel<24, 1> hprtint;\n    BitFieldModel<25, 1> hcint;\n    BitFieldModel<26,\
+    \ 1> ptxfe;\n    BitFieldModel<28, 1> cidschg;\n    BitFieldModel<29, 1> discint;\n\
+    \    BitFieldModel<30, 1> srqint;\n    BitFieldModel<31, 1> wkupint;\n  };\n};\n\
+    \nstruct fs_gintmsk\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0018;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<1, 1> mmism;\n    BitFieldModel<2,\
+    \ 1> otgint;\n    BitFieldModel<3, 1> sofm;\n    BitFieldModel<4, 1> rxflvlm;\n\
+    \    BitFieldModel<5, 1> nptxfem;\n    BitFieldModel<6, 1> ginakeffm;\n    BitFieldModel<7,\
+    \ 1> gonakeffm;\n    BitFieldModel<10, 1> esuspm;\n    BitFieldModel<11, 1> usbsuspm;\n\
+    \    BitFieldModel<12, 1> usbrst;\n    BitFieldModel<13, 1> enumdnem;\n    BitFieldModel<14,\
+    \ 1> isoodrpm;\n    BitFieldModel<15, 1> eopfm;\n    BitFieldModel<17, 1> epmism;\n\
+    \    BitFieldModel<18, 1> iepint;\n    BitFieldModel<19, 1> oepint;\n    BitFieldModel<20,\
+    \ 1> iisoixfrm;\n    BitFieldModel<21, 1> ipxfrm_iisooxfrm;\n    BitFieldModel<24,\
+    \ 1> prtim;\n    BitFieldModel<25, 1> hcim;\n    BitFieldModel<26, 1> ptxfem;\n\
+    \    BitFieldModel<28, 1> cidschgm;\n    BitFieldModel<29, 1> discint;\n    BitFieldModel<30,\
+    \ 1> srqim;\n    BitFieldModel<31, 1> wuim;\n  };\n};\n\nstruct fs_grxstsr_device\n\
+    {\n  constexpr static uint32_t Address = 0x50000000 + 0x001C;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<0, 4> epnum;\n    BitFieldModel<4, 11>\
+    \ bcnt;\n    BitFieldModel<15, 2> dpid;\n    BitFieldModel<17, 4> pktsts;\n  \
+    \  BitFieldModel<21, 4> frmnum;\n  };\n};\n\nstruct fs_grxstsp_device\n{\n  constexpr\
+    \ static uint32_t Address = 0x50000000 + 0x0020;\n  union\n  {\n    uint32_t value;\n\
+    \    BitFieldModel<0, 4> epnum;\n    BitFieldModel<4, 11> bcnt;\n    BitFieldModel<15,\
+    \ 2> dpid;\n    BitFieldModel<17, 4> pktsts;\n    BitFieldModel<21, 4> frmnum;\n\
+    \  };\n};\n\nstruct fs_grxstsr_host\n{\n  constexpr static uint32_t Address =\
+    \ 0x50000000 + 0x001C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
     \ 4> epnum;\n    BitFieldModel<4, 11> bcnt;\n    BitFieldModel<15, 2> dpid;\n\
     \    BitFieldModel<17, 4> pktsts;\n    BitFieldModel<21, 4> frmnum;\n  };\n};\n\
-    \nstruct fs_grxstsr_host\n{\n  constexpr static uint32_t Address = 0x50000000\
-    \ + 0x001C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 4> epnum;\n\
+    \nstruct fs_grxstsp_host\n{\n  constexpr static uint32_t Address = 0x50000000\
+    \ + 0x0020;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 4> epnum;\n\
     \    BitFieldModel<4, 11> bcnt;\n    BitFieldModel<15, 2> dpid;\n    BitFieldModel<17,\
     \ 4> pktsts;\n    BitFieldModel<21, 4> frmnum;\n  };\n};\n\nstruct fs_grxfsiz\n\
     {\n  constexpr static uint32_t Address = 0x50000000 + 0x0024;\n  union\n  {\n\

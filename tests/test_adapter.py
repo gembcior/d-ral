@@ -61,5 +61,8 @@ class TestDralAdapter:
             expected_output = yaml.load(data, Loader=yaml.FullLoader)
         expected_device = self.create_device_object(expected_output["device"])
 
+        # with open(f"{device}-adapter.yaml", "w") as myfile:
+        #     yaml.dump(dral.asdict(), myfile)
+
         assert dral.asdict() == expected_device.asdict()
         assert dral == expected_device

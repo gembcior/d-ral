@@ -41,7 +41,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
 
 
-@click.command()
+@click.command() # type: ignore[arg-type] # noqa
 @click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
@@ -176,4 +176,4 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
 
 
 if __name__ == "__main__":
-    cli()  # noqa
+    cli()  # type: ignore[misc] # noqa

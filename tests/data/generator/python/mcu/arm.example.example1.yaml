@@ -1,243 +1,521 @@
-- content: "from mbedautomatify.reg.base import Peripheral\nfrom mbedautomatify.reg.base\
-    \ import Register\nfrom mbedautomatify.reg.base import Field\n\n\nclass Timer0(Peripheral):\n\
-    \    class CrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"CR\", \"Control Register\", address + 0x0000,\
-    \ 32, \"read-write\", 0x0000, proxy)\n            self.en = Field(\"en\", \"Enable\"\
-    , self._address, 0, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\", \"\
-    Reset Timer\", self._address, 1, 0x0001, 1, proxy)\n            self.cnt = Field(\"\
-    cnt\", \"Counting direction\", self._address, 2, 0x0003, 2, proxy)\n         \
-    \   self.mode = Field(\"mode\", \"Operation Mode\", self._address, 4, 0x0007,\
-    \ 3, proxy)\n            self.psc = Field(\"psc\", \"Use Prescaler\", self._address,\
-    \ 7, 0x0001, 1, proxy)\n            self.cntsrc = Field(\"cntsrc\", \"Timer /\
-    \ Counter Source Divider\", self._address, 8, 0x000F, 4, proxy)\n            self.capsrc\
-    \ = Field(\"capsrc\", \"Timer / Counter Capture Source\", self._address, 12, 0x000F,\
-    \ 4, proxy)\n            self.capedge = Field(\"capedge\", \"Capture Edge, select\
-    \ which Edge should result in a counter increment or decrement\", self._address,\
-    \ 16, 0x0003, 2, proxy)\n            self.trgext = Field(\"trgext\", \"Triggers\
-    \ an other Peripheral\", self._address, 20, 0x0003, 2, proxy)\n            self.reload\
-    \ = Field(\"reload\", \"Select RELOAD Register n to reload Timer on condition\"\
-    , self._address, 24, 0x0003, 2, proxy)\n            self.idr = Field(\"idr\",\
-    \ \"Selects, if Reload Register number is incremented, decremented or not modified\"\
-    , self._address, 26, 0x0003, 2, proxy)\n            self.s = Field(\"s\", \"Starts\
-    \ and Stops the Timer / Counter\", self._address, 31, 0x0001, 1, proxy)\n    \n\
-    \    class SrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"SR\", \"Status Register\", address + 0x0004, 16,\
-    \ \"read-write\", 0x0000, proxy)\n            self.run = Field(\"run\", \"Shows\
-    \ if Timer is running or not\", self._address, 0, 0x0001, 1, proxy)\n        \
-    \    self.match = Field(\"match\", \"Shows if the MATCH was hit\", self._address,\
-    \ 8, 0x0001, 1, proxy)\n            self.un = Field(\"un\", \"Shows if an underflow\
-    \ occured. This flag is sticky\", self._address, 9, 0x0001, 1, proxy)\n      \
-    \      self.ov = Field(\"ov\", \"Shows if an overflow occured. This flag is sticky\"\
-    , self._address, 10, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\",\
-    \ \"Shows if Timer is in RESET state\", self._address, 12, 0x0001, 1, proxy)\n\
-    \            self.reload = Field(\"reload\", \"Shows the currently active RELOAD\
-    \ Register\", self._address, 14, 0x0003, 2, proxy)\n    \n    class IntRegister(Register):\n\
-    \        def __init__(self, address, proxy):\n            super().__init__(\"\
-    INT\", \"Interrupt Register\", address + 0x0010, 16, \"read-write\", 0x0000, proxy)\n\
-    \            self.en = Field(\"en\", \"Interrupt Enable\", self._address, 0, 0x0001,\
-    \ 1, proxy)\n            self.mode = Field(\"mode\", \"Interrupt Mode, selects\
-    \ on which condition the Timer should generate an Interrupt\", self._address,\
-    \ 4, 0x0007, 3, proxy)\n    \n    class CountRegister(Register):\n        def\
-    \ __init__(self, address, proxy):\n            super().__init__(\"COUNT\", \"\
-    The Counter Register reflects the actual Value of the Timer/Counter\", address\
-    \ + 0x0020, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ MatchRegister(Register):\n        def __init__(self, address, proxy):\n    \
-    \        super().__init__(\"MATCH\", \"The Match Register stores the compare Value\
-    \ for the MATCH condition\", address + 0x0024, 32, \"read-write\", 0x0000, proxy)\n\
-    \            \n    \n    class Prescale_rdRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_RD\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"read-only\", 0x0000, proxy)\n        \
-    \    \n    \n    class Prescale_wrRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_WR\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"write-only\", 0x0000, proxy)\n       \
-    \     \n    \n    class Reload[0]Register(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"RELOAD[0]\", \"The Reload Register\
-    \ stores the Value the COUNT Register gets reloaded on a when a condition was\
-    \ met.\", address + 0x0050, 32, \"read-write\", 0x0000, proxy)\n            \n\
-    \    \n    class Reload[1]Register(Register):\n        def __init__(self, address,\
-    \ proxy):\n            super().__init__(\"RELOAD[1]\", \"The Reload Register stores\
-    \ the Value the COUNT Register gets reloaded on a when a condition was met.\"\
-    , address + 0x0054, 32, \"read-write\", 0x0000, proxy)\n            \n    \n \
-    \   class Reload[2]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[2]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x0058, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ Reload[3]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[3]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x005C, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    def __init__(self,\
-    \ proxy):\n        super().__init__(\"timer0\", \"32 Timer / Counter, counting\
-    \ up or down from different sources\", 0x40010000)\n        self.cr = self.CrRegister(self.address,\
-    \ proxy)\n        self.sr = self.SrRegister(self.address, proxy)\n        self.int\
-    \ = self.IntRegister(self.address, proxy)\n        self.count = self.CountRegister(self.address,\
-    \ proxy)\n        self.match = self.MatchRegister(self.address, proxy)\n     \
-    \   self.prescale_rd = self.Prescale_rdRegister(self.address, proxy)\n       \
-    \ self.prescale_wr = self.Prescale_wrRegister(self.address, proxy)\n        self.reload[0]\
-    \ = self.Reload[0]Register(self.address, proxy)\n        self.reload[1] = self.Reload[1]Register(self.address,\
-    \ proxy)\n        self.reload[2] = self.Reload[2]Register(self.address, proxy)\n\
-    \        self.reload[3] = self.Reload[3]Register(self.address, proxy)\n"
+- content: "\"\"\"\nD-RAL - Device Register Access Layer\nhttps://github.com/gembcior/d-ral\n\
+    \nMIT License\n\nCopyright (c) 2023 Gembcior\n\nPermission is hereby granted,\
+    \ free of charge, to any person obtaining a copy\nof this software and associated\
+    \ documentation files (the \"Software\"), to deal\nin the Software without restriction,\
+    \ including without limitation the rights\nto use, copy, modify, merge, publish,\
+    \ distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons\
+    \ to whom the Software is\nfurnished to do so, subject to the following conditions:\n\
+    \nThe above copyright notice and this permission notice shall be included in all\n\
+    copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"\
+    AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT\
+    \ LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE\
+    \ AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE\
+    \ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+    \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
+    \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
+    \ file. Do not modify!\n\"\"\"\n\n\nfrom model import Field, Peripheral, Register\n\
+    \nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"CR\", 0x40010000\
+    \ + 0x0)\n        self._en = Field(\"en\", 0, 1)\n        self._rst = Field(\"\
+    rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode = Field(\"\
+    mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
+    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
+    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
+    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
+    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n    @property\n\
+    \    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n        Enable\n\
+    \        \"\"\"\n        return self._en\n    \n    @en.setter\n    def en(self,\
+    \ value: int) -> None:\n        self._en.value = value\n    \n    @property\n\
+    \    def rst(self) -> Field:\n        \"\"\"\n        RST\n    \n        Reset\
+    \ Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n   \
+    \ def rst(self, value: int) -> None:\n        self._rst.value = value\n    \n\
+    \    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n   \
+    \ \n        Counting direction\n        \"\"\"\n        return self._cnt\n   \
+    \ \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    SR\", 0x40010000 + 0x4)\n        self._run = Field(\"run\", 0, 1)\n        self._match\
+    \ = Field(\"match\", 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov\
+    \ = Field(\"ov\", 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload\
+    \ = Field(\"reload\", 14, 2)\n\n    @property\n    def run(self) -> Field:\n \
+    \       \"\"\"\n        RUN\n    \n        Shows if Timer is running or not\n\
+    \        \"\"\"\n        return self._run\n    \n    @run.setter\n    def run(self,\
+    \ value: int) -> None:\n        self._run.value = value\n    \n    @property\n\
+    \    def match(self) -> Field:\n        \"\"\"\n        MATCH\n    \n        Shows\
+    \ if the MATCH was hit\n        \"\"\"\n        return self._match\n    \n   \
+    \ @match.setter\n    def match(self, value: int) -> None:\n        self._match.value\
+    \ = value\n    \n    @property\n    def un(self) -> Field:\n        \"\"\"\n \
+    \       UN\n    \n        Shows if an underflow occured. This flag is sticky\n\
+    \        \"\"\"\n        return self._un\n    \n    @un.setter\n    def un(self,\
+    \ value: int) -> None:\n        self._un.value = value\n    \n    @property\n\
+    \    def ov(self) -> Field:\n        \"\"\"\n        OV\n    \n        Shows if\
+    \ an overflow occured. This flag is sticky\n        \"\"\"\n        return self._ov\n\
+    \    \n    @ov.setter\n    def ov(self, value: int) -> None:\n        self._ov.value\
+    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
+    \        RST\n    \n        Shows if Timer is in RESET state\n        \"\"\"\n\
+    \        return self._rst\n    \n    @rst.setter\n    def rst(self, value: int)\
+    \ -> None:\n        self._rst.value = value\n    \n    @property\n    def reload(self)\
+    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Shows the currently\
+    \ active RELOAD Register\n        \"\"\"\n        return self._reload\n    \n\
+    \    @reload.setter\n    def reload(self, value: int) -> None:\n        self._reload.value\
+    \ = value\n    \nclass IntRegister(Register):\n    \"\"\"\n    INT\n\n    Interrupt\
+    \ Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"INT\"\
+    , 0x40010000 + 0x10)\n        self._en = Field(\"en\", 0, 1)\n        self._mode\
+    \ = Field(\"mode\", 4, 3)\n\n    @property\n    def en(self) -> Field:\n     \
+    \   \"\"\"\n        EN\n    \n        Interrupt Enable\n        \"\"\"\n     \
+    \   return self._en\n    \n    @en.setter\n    def en(self, value: int) -> None:\n\
+    \        self._en.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
+    \        \"\"\"\n        MODE\n    \n        Interrupt Mode, selects on which\
+    \ condition the Timer should generate an Interrupt\n        \"\"\"\n        return\
+    \ self._mode\n    \n    @mode.setter\n    def mode(self, value: int) -> None:\n\
+    \        self._mode.value = value\n    \nclass CountRegister(Register):\n    \"\
+    \"\"\n    COUNT\n\n    The Counter Register reflects the actual Value of the Timer/Counter\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"COUNT\", 0x40010000\
+    \ + 0x20)\n        \n\n    \nclass MatchRegister(Register):\n    \"\"\"\n    MATCH\n\
+    \n    The Match Register stores the compare Value for the MATCH condition\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"MATCH\", 0x40010000\
+    \ + 0x24)\n        \n\n    \nclass Prescale_rdRegister(Register):\n    \"\"\"\n\
+    \    PRESCALE_RD\n\n    The Prescale Register stores the Value for the prescaler.\
+    \ The cont event gets divided by this value\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"PRESCALE_RD\", 0x40010000 + 0x28)\n        \n\n  \
+    \  \nclass Prescale_wrRegister(Register):\n    \"\"\"\n    PRESCALE_WR\n\n   \
+    \ The Prescale Register stores the Value for the prescaler. The cont event gets\
+    \ divided by this value\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    PRESCALE_WR\", 0x40010000 + 0x28)\n        \n\n    \nclass Reload[0]Register(Register):\n\
+    \    \"\"\"\n    RELOAD[0]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[0]\", 0x40010000 + 0x50)\n        \n\n    \n\
+    class Reload[1]Register(Register):\n    \"\"\"\n    RELOAD[1]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[1]\"\
+    , 0x40010000 + 0x54)\n        \n\n    \nclass Reload[2]Register(Register):\n \
+    \   \"\"\"\n    RELOAD[2]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[2]\", 0x40010000 + 0x58)\n        \n\n    \n\
+    class Reload[3]Register(Register):\n    \"\"\"\n    RELOAD[3]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[3]\"\
+    , 0x40010000 + 0x5C)\n        \n\n    \n\nclass Timer0(Peripheral):\n    \"\"\"\
+    \n    TIMER0\n\n    32 Timer / Counter, counting up or down from different sources\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"timer0\", 0x40010000)\n\
+    \        self._cr = CrRegister()\n        self._sr = SrRegister()\n        self._int\
+    \ = IntRegister()\n        self._count = CountRegister()\n        self._match\
+    \ = MatchRegister()\n        self._prescale_rd = Prescale_rdRegister()\n     \
+    \   self._prescale_wr = Prescale_wrRegister()\n        self._reload[0] = Reload[0]Register()\n\
+    \        self._reload[1] = Reload[1]Register()\n        self._reload[2] = Reload[2]Register()\n\
+    \        self._reload[3] = Reload[3]Register()\n\n    @property\n    def cr(self)\
+    \ -> CrRegister:\n        return self._cr\n    \n    @cr.setter\n    def cr(self,\
+    \ value: int) -> None:\n        self._cr.value = value\n    \n    @property\n\
+    \    def sr(self) -> SrRegister:\n        return self._sr\n    \n    @sr.setter\n\
+    \    def sr(self, value: int) -> None:\n        self._sr.value = value\n    \n\
+    \    @property\n    def int(self) -> IntRegister:\n        return self._int\n\
+    \    \n    @int.setter\n    def int(self, value: int) -> None:\n        self._int.value\
+    \ = value\n    \n    @property\n    def count(self) -> CountRegister:\n      \
+    \  return self._count\n    \n    @count.setter\n    def count(self, value: int)\
+    \ -> None:\n        self._count.value = value\n    \n    @property\n    def match(self)\
+    \ -> MatchRegister:\n        return self._match\n    \n    @match.setter\n   \
+    \ def match(self, value: int) -> None:\n        self._match.value = value\n  \
+    \  \n    @property\n    def prescale_rd(self) -> Prescale_rdRegister:\n      \
+    \  return self._prescale_rd\n    \n    @prescale_rd.setter\n    def prescale_rd(self,\
+    \ value: int) -> None:\n        self._prescale_rd.value = value\n    \n    @property\n\
+    \    def prescale_wr(self) -> Prescale_wrRegister:\n        return self._prescale_wr\n\
+    \    \n    @prescale_wr.setter\n    def prescale_wr(self, value: int) -> None:\n\
+    \        self._prescale_wr.value = value\n    \n    @property\n    def reload[0](self)\
+    \ -> Reload[0]Register:\n        return self._reload[0]\n    \n    @reload[0].setter\n\
+    \    def reload[0](self, value: int) -> None:\n        self._reload[0].value =\
+    \ value\n    \n    @property\n    def reload[1](self) -> Reload[1]Register:\n\
+    \        return self._reload[1]\n    \n    @reload[1].setter\n    def reload[1](self,\
+    \ value: int) -> None:\n        self._reload[1].value = value\n    \n    @property\n\
+    \    def reload[2](self) -> Reload[2]Register:\n        return self._reload[2]\n\
+    \    \n    @reload[2].setter\n    def reload[2](self, value: int) -> None:\n \
+    \       self._reload[2].value = value\n    \n    @property\n    def reload[3](self)\
+    \ -> Reload[3]Register:\n        return self._reload[3]\n    \n    @reload[3].setter\n\
+    \    def reload[3](self, value: int) -> None:\n        self._reload[3].value =\
+    \ value\n    \n"
   name: TIMER0
-- content: "from mbedautomatify.reg.base import Peripheral\nfrom mbedautomatify.reg.base\
-    \ import Register\nfrom mbedautomatify.reg.base import Field\n\n\nclass Timer1(Peripheral):\n\
-    \    class CrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"CR\", \"Control Register\", address + 0x0000,\
-    \ 32, \"read-write\", 0x0000, proxy)\n            self.en = Field(\"en\", \"Enable\"\
-    , self._address, 0, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\", \"\
-    Reset Timer\", self._address, 1, 0x0001, 1, proxy)\n            self.cnt = Field(\"\
-    cnt\", \"Counting direction\", self._address, 2, 0x0003, 2, proxy)\n         \
-    \   self.mode = Field(\"mode\", \"Operation Mode\", self._address, 4, 0x0007,\
-    \ 3, proxy)\n            self.psc = Field(\"psc\", \"Use Prescaler\", self._address,\
-    \ 7, 0x0001, 1, proxy)\n            self.cntsrc = Field(\"cntsrc\", \"Timer /\
-    \ Counter Source Divider\", self._address, 8, 0x000F, 4, proxy)\n            self.capsrc\
-    \ = Field(\"capsrc\", \"Timer / Counter Capture Source\", self._address, 12, 0x000F,\
-    \ 4, proxy)\n            self.capedge = Field(\"capedge\", \"Capture Edge, select\
-    \ which Edge should result in a counter increment or decrement\", self._address,\
-    \ 16, 0x0003, 2, proxy)\n            self.trgext = Field(\"trgext\", \"Triggers\
-    \ an other Peripheral\", self._address, 20, 0x0003, 2, proxy)\n            self.reload\
-    \ = Field(\"reload\", \"Select RELOAD Register n to reload Timer on condition\"\
-    , self._address, 24, 0x0003, 2, proxy)\n            self.idr = Field(\"idr\",\
-    \ \"Selects, if Reload Register number is incremented, decremented or not modified\"\
-    , self._address, 26, 0x0003, 2, proxy)\n            self.s = Field(\"s\", \"Starts\
-    \ and Stops the Timer / Counter\", self._address, 31, 0x0001, 1, proxy)\n    \n\
-    \    class SrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"SR\", \"Status Register\", address + 0x0004, 16,\
-    \ \"read-write\", 0x0000, proxy)\n            self.run = Field(\"run\", \"Shows\
-    \ if Timer is running or not\", self._address, 0, 0x0001, 1, proxy)\n        \
-    \    self.match = Field(\"match\", \"Shows if the MATCH was hit\", self._address,\
-    \ 8, 0x0001, 1, proxy)\n            self.un = Field(\"un\", \"Shows if an underflow\
-    \ occured. This flag is sticky\", self._address, 9, 0x0001, 1, proxy)\n      \
-    \      self.ov = Field(\"ov\", \"Shows if an overflow occured. This flag is sticky\"\
-    , self._address, 10, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\",\
-    \ \"Shows if Timer is in RESET state\", self._address, 12, 0x0001, 1, proxy)\n\
-    \            self.reload = Field(\"reload\", \"Shows the currently active RELOAD\
-    \ Register\", self._address, 14, 0x0003, 2, proxy)\n    \n    class IntRegister(Register):\n\
-    \        def __init__(self, address, proxy):\n            super().__init__(\"\
-    INT\", \"Interrupt Register\", address + 0x0010, 16, \"read-write\", 0x0000, proxy)\n\
-    \            self.en = Field(\"en\", \"Interrupt Enable\", self._address, 0, 0x0001,\
-    \ 1, proxy)\n            self.mode = Field(\"mode\", \"Interrupt Mode, selects\
-    \ on which condition the Timer should generate an Interrupt\", self._address,\
-    \ 4, 0x0007, 3, proxy)\n    \n    class CountRegister(Register):\n        def\
-    \ __init__(self, address, proxy):\n            super().__init__(\"COUNT\", \"\
-    The Counter Register reflects the actual Value of the Timer/Counter\", address\
-    \ + 0x0020, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ MatchRegister(Register):\n        def __init__(self, address, proxy):\n    \
-    \        super().__init__(\"MATCH\", \"The Match Register stores the compare Value\
-    \ for the MATCH condition\", address + 0x0024, 32, \"read-write\", 0x0000, proxy)\n\
-    \            \n    \n    class Prescale_rdRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_RD\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"read-only\", 0x0000, proxy)\n        \
-    \    \n    \n    class Prescale_wrRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_WR\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"write-only\", 0x0000, proxy)\n       \
-    \     \n    \n    class Reload[0]Register(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"RELOAD[0]\", \"The Reload Register\
-    \ stores the Value the COUNT Register gets reloaded on a when a condition was\
-    \ met.\", address + 0x0050, 32, \"read-write\", 0x0000, proxy)\n            \n\
-    \    \n    class Reload[1]Register(Register):\n        def __init__(self, address,\
-    \ proxy):\n            super().__init__(\"RELOAD[1]\", \"The Reload Register stores\
-    \ the Value the COUNT Register gets reloaded on a when a condition was met.\"\
-    , address + 0x0054, 32, \"read-write\", 0x0000, proxy)\n            \n    \n \
-    \   class Reload[2]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[2]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x0058, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ Reload[3]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[3]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x005C, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    def __init__(self,\
-    \ proxy):\n        super().__init__(\"timer1\", \"32 Timer / Counter, counting\
-    \ up or down from different sources\", 0x40010100)\n        self.cr = self.CrRegister(self.address,\
-    \ proxy)\n        self.sr = self.SrRegister(self.address, proxy)\n        self.int\
-    \ = self.IntRegister(self.address, proxy)\n        self.count = self.CountRegister(self.address,\
-    \ proxy)\n        self.match = self.MatchRegister(self.address, proxy)\n     \
-    \   self.prescale_rd = self.Prescale_rdRegister(self.address, proxy)\n       \
-    \ self.prescale_wr = self.Prescale_wrRegister(self.address, proxy)\n        self.reload[0]\
-    \ = self.Reload[0]Register(self.address, proxy)\n        self.reload[1] = self.Reload[1]Register(self.address,\
-    \ proxy)\n        self.reload[2] = self.Reload[2]Register(self.address, proxy)\n\
-    \        self.reload[3] = self.Reload[3]Register(self.address, proxy)\n"
+- content: "\"\"\"\nD-RAL - Device Register Access Layer\nhttps://github.com/gembcior/d-ral\n\
+    \nMIT License\n\nCopyright (c) 2023 Gembcior\n\nPermission is hereby granted,\
+    \ free of charge, to any person obtaining a copy\nof this software and associated\
+    \ documentation files (the \"Software\"), to deal\nin the Software without restriction,\
+    \ including without limitation the rights\nto use, copy, modify, merge, publish,\
+    \ distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons\
+    \ to whom the Software is\nfurnished to do so, subject to the following conditions:\n\
+    \nThe above copyright notice and this permission notice shall be included in all\n\
+    copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"\
+    AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT\
+    \ LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE\
+    \ AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE\
+    \ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+    \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
+    \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
+    \ file. Do not modify!\n\"\"\"\n\n\nfrom model import Field, Peripheral, Register\n\
+    \nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"CR\", 0x40010100\
+    \ + 0x0)\n        self._en = Field(\"en\", 0, 1)\n        self._rst = Field(\"\
+    rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode = Field(\"\
+    mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
+    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
+    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
+    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
+    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n    @property\n\
+    \    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n        Enable\n\
+    \        \"\"\"\n        return self._en\n    \n    @en.setter\n    def en(self,\
+    \ value: int) -> None:\n        self._en.value = value\n    \n    @property\n\
+    \    def rst(self) -> Field:\n        \"\"\"\n        RST\n    \n        Reset\
+    \ Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n   \
+    \ def rst(self, value: int) -> None:\n        self._rst.value = value\n    \n\
+    \    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n   \
+    \ \n        Counting direction\n        \"\"\"\n        return self._cnt\n   \
+    \ \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    SR\", 0x40010100 + 0x4)\n        self._run = Field(\"run\", 0, 1)\n        self._match\
+    \ = Field(\"match\", 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov\
+    \ = Field(\"ov\", 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload\
+    \ = Field(\"reload\", 14, 2)\n\n    @property\n    def run(self) -> Field:\n \
+    \       \"\"\"\n        RUN\n    \n        Shows if Timer is running or not\n\
+    \        \"\"\"\n        return self._run\n    \n    @run.setter\n    def run(self,\
+    \ value: int) -> None:\n        self._run.value = value\n    \n    @property\n\
+    \    def match(self) -> Field:\n        \"\"\"\n        MATCH\n    \n        Shows\
+    \ if the MATCH was hit\n        \"\"\"\n        return self._match\n    \n   \
+    \ @match.setter\n    def match(self, value: int) -> None:\n        self._match.value\
+    \ = value\n    \n    @property\n    def un(self) -> Field:\n        \"\"\"\n \
+    \       UN\n    \n        Shows if an underflow occured. This flag is sticky\n\
+    \        \"\"\"\n        return self._un\n    \n    @un.setter\n    def un(self,\
+    \ value: int) -> None:\n        self._un.value = value\n    \n    @property\n\
+    \    def ov(self) -> Field:\n        \"\"\"\n        OV\n    \n        Shows if\
+    \ an overflow occured. This flag is sticky\n        \"\"\"\n        return self._ov\n\
+    \    \n    @ov.setter\n    def ov(self, value: int) -> None:\n        self._ov.value\
+    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
+    \        RST\n    \n        Shows if Timer is in RESET state\n        \"\"\"\n\
+    \        return self._rst\n    \n    @rst.setter\n    def rst(self, value: int)\
+    \ -> None:\n        self._rst.value = value\n    \n    @property\n    def reload(self)\
+    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Shows the currently\
+    \ active RELOAD Register\n        \"\"\"\n        return self._reload\n    \n\
+    \    @reload.setter\n    def reload(self, value: int) -> None:\n        self._reload.value\
+    \ = value\n    \nclass IntRegister(Register):\n    \"\"\"\n    INT\n\n    Interrupt\
+    \ Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"INT\"\
+    , 0x40010100 + 0x10)\n        self._en = Field(\"en\", 0, 1)\n        self._mode\
+    \ = Field(\"mode\", 4, 3)\n\n    @property\n    def en(self) -> Field:\n     \
+    \   \"\"\"\n        EN\n    \n        Interrupt Enable\n        \"\"\"\n     \
+    \   return self._en\n    \n    @en.setter\n    def en(self, value: int) -> None:\n\
+    \        self._en.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
+    \        \"\"\"\n        MODE\n    \n        Interrupt Mode, selects on which\
+    \ condition the Timer should generate an Interrupt\n        \"\"\"\n        return\
+    \ self._mode\n    \n    @mode.setter\n    def mode(self, value: int) -> None:\n\
+    \        self._mode.value = value\n    \nclass CountRegister(Register):\n    \"\
+    \"\"\n    COUNT\n\n    The Counter Register reflects the actual Value of the Timer/Counter\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"COUNT\", 0x40010100\
+    \ + 0x20)\n        \n\n    \nclass MatchRegister(Register):\n    \"\"\"\n    MATCH\n\
+    \n    The Match Register stores the compare Value for the MATCH condition\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"MATCH\", 0x40010100\
+    \ + 0x24)\n        \n\n    \nclass Prescale_rdRegister(Register):\n    \"\"\"\n\
+    \    PRESCALE_RD\n\n    The Prescale Register stores the Value for the prescaler.\
+    \ The cont event gets divided by this value\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"PRESCALE_RD\", 0x40010100 + 0x28)\n        \n\n  \
+    \  \nclass Prescale_wrRegister(Register):\n    \"\"\"\n    PRESCALE_WR\n\n   \
+    \ The Prescale Register stores the Value for the prescaler. The cont event gets\
+    \ divided by this value\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    PRESCALE_WR\", 0x40010100 + 0x28)\n        \n\n    \nclass Reload[0]Register(Register):\n\
+    \    \"\"\"\n    RELOAD[0]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[0]\", 0x40010100 + 0x50)\n        \n\n    \n\
+    class Reload[1]Register(Register):\n    \"\"\"\n    RELOAD[1]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[1]\"\
+    , 0x40010100 + 0x54)\n        \n\n    \nclass Reload[2]Register(Register):\n \
+    \   \"\"\"\n    RELOAD[2]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[2]\", 0x40010100 + 0x58)\n        \n\n    \n\
+    class Reload[3]Register(Register):\n    \"\"\"\n    RELOAD[3]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[3]\"\
+    , 0x40010100 + 0x5C)\n        \n\n    \n\nclass Timer1(Peripheral):\n    \"\"\"\
+    \n    TIMER1\n\n    32 Timer / Counter, counting up or down from different sources\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"timer1\", 0x40010100)\n\
+    \        self._cr = CrRegister()\n        self._sr = SrRegister()\n        self._int\
+    \ = IntRegister()\n        self._count = CountRegister()\n        self._match\
+    \ = MatchRegister()\n        self._prescale_rd = Prescale_rdRegister()\n     \
+    \   self._prescale_wr = Prescale_wrRegister()\n        self._reload[0] = Reload[0]Register()\n\
+    \        self._reload[1] = Reload[1]Register()\n        self._reload[2] = Reload[2]Register()\n\
+    \        self._reload[3] = Reload[3]Register()\n\n    @property\n    def cr(self)\
+    \ -> CrRegister:\n        return self._cr\n    \n    @cr.setter\n    def cr(self,\
+    \ value: int) -> None:\n        self._cr.value = value\n    \n    @property\n\
+    \    def sr(self) -> SrRegister:\n        return self._sr\n    \n    @sr.setter\n\
+    \    def sr(self, value: int) -> None:\n        self._sr.value = value\n    \n\
+    \    @property\n    def int(self) -> IntRegister:\n        return self._int\n\
+    \    \n    @int.setter\n    def int(self, value: int) -> None:\n        self._int.value\
+    \ = value\n    \n    @property\n    def count(self) -> CountRegister:\n      \
+    \  return self._count\n    \n    @count.setter\n    def count(self, value: int)\
+    \ -> None:\n        self._count.value = value\n    \n    @property\n    def match(self)\
+    \ -> MatchRegister:\n        return self._match\n    \n    @match.setter\n   \
+    \ def match(self, value: int) -> None:\n        self._match.value = value\n  \
+    \  \n    @property\n    def prescale_rd(self) -> Prescale_rdRegister:\n      \
+    \  return self._prescale_rd\n    \n    @prescale_rd.setter\n    def prescale_rd(self,\
+    \ value: int) -> None:\n        self._prescale_rd.value = value\n    \n    @property\n\
+    \    def prescale_wr(self) -> Prescale_wrRegister:\n        return self._prescale_wr\n\
+    \    \n    @prescale_wr.setter\n    def prescale_wr(self, value: int) -> None:\n\
+    \        self._prescale_wr.value = value\n    \n    @property\n    def reload[0](self)\
+    \ -> Reload[0]Register:\n        return self._reload[0]\n    \n    @reload[0].setter\n\
+    \    def reload[0](self, value: int) -> None:\n        self._reload[0].value =\
+    \ value\n    \n    @property\n    def reload[1](self) -> Reload[1]Register:\n\
+    \        return self._reload[1]\n    \n    @reload[1].setter\n    def reload[1](self,\
+    \ value: int) -> None:\n        self._reload[1].value = value\n    \n    @property\n\
+    \    def reload[2](self) -> Reload[2]Register:\n        return self._reload[2]\n\
+    \    \n    @reload[2].setter\n    def reload[2](self, value: int) -> None:\n \
+    \       self._reload[2].value = value\n    \n    @property\n    def reload[3](self)\
+    \ -> Reload[3]Register:\n        return self._reload[3]\n    \n    @reload[3].setter\n\
+    \    def reload[3](self, value: int) -> None:\n        self._reload[3].value =\
+    \ value\n    \n"
   name: TIMER1
-- content: "from mbedautomatify.reg.base import Peripheral\nfrom mbedautomatify.reg.base\
-    \ import Register\nfrom mbedautomatify.reg.base import Field\n\n\nclass Timer2(Peripheral):\n\
-    \    class CrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"CR\", \"Control Register\", address + 0x0000,\
-    \ 32, \"read-write\", 0x0000, proxy)\n            self.en = Field(\"en\", \"Enable\"\
-    , self._address, 0, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\", \"\
-    Reset Timer\", self._address, 1, 0x0001, 1, proxy)\n            self.cnt = Field(\"\
-    cnt\", \"Counting direction\", self._address, 2, 0x0003, 2, proxy)\n         \
-    \   self.mode = Field(\"mode\", \"Operation Mode\", self._address, 4, 0x0007,\
-    \ 3, proxy)\n            self.psc = Field(\"psc\", \"Use Prescaler\", self._address,\
-    \ 7, 0x0001, 1, proxy)\n            self.cntsrc = Field(\"cntsrc\", \"Timer /\
-    \ Counter Source Divider\", self._address, 8, 0x000F, 4, proxy)\n            self.capsrc\
-    \ = Field(\"capsrc\", \"Timer / Counter Capture Source\", self._address, 12, 0x000F,\
-    \ 4, proxy)\n            self.capedge = Field(\"capedge\", \"Capture Edge, select\
-    \ which Edge should result in a counter increment or decrement\", self._address,\
-    \ 16, 0x0003, 2, proxy)\n            self.trgext = Field(\"trgext\", \"Triggers\
-    \ an other Peripheral\", self._address, 20, 0x0003, 2, proxy)\n            self.reload\
-    \ = Field(\"reload\", \"Select RELOAD Register n to reload Timer on condition\"\
-    , self._address, 24, 0x0003, 2, proxy)\n            self.idr = Field(\"idr\",\
-    \ \"Selects, if Reload Register number is incremented, decremented or not modified\"\
-    , self._address, 26, 0x0003, 2, proxy)\n            self.s = Field(\"s\", \"Starts\
-    \ and Stops the Timer / Counter\", self._address, 31, 0x0001, 1, proxy)\n    \n\
-    \    class SrRegister(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"SR\", \"Status Register\", address + 0x0004, 16,\
-    \ \"read-write\", 0x0000, proxy)\n            self.run = Field(\"run\", \"Shows\
-    \ if Timer is running or not\", self._address, 0, 0x0001, 1, proxy)\n        \
-    \    self.match = Field(\"match\", \"Shows if the MATCH was hit\", self._address,\
-    \ 8, 0x0001, 1, proxy)\n            self.un = Field(\"un\", \"Shows if an underflow\
-    \ occured. This flag is sticky\", self._address, 9, 0x0001, 1, proxy)\n      \
-    \      self.ov = Field(\"ov\", \"Shows if an overflow occured. This flag is sticky\"\
-    , self._address, 10, 0x0001, 1, proxy)\n            self.rst = Field(\"rst\",\
-    \ \"Shows if Timer is in RESET state\", self._address, 12, 0x0001, 1, proxy)\n\
-    \            self.reload = Field(\"reload\", \"Shows the currently active RELOAD\
-    \ Register\", self._address, 14, 0x0003, 2, proxy)\n    \n    class IntRegister(Register):\n\
-    \        def __init__(self, address, proxy):\n            super().__init__(\"\
-    INT\", \"Interrupt Register\", address + 0x0010, 16, \"read-write\", 0x0000, proxy)\n\
-    \            self.en = Field(\"en\", \"Interrupt Enable\", self._address, 0, 0x0001,\
-    \ 1, proxy)\n            self.mode = Field(\"mode\", \"Interrupt Mode, selects\
-    \ on which condition the Timer should generate an Interrupt\", self._address,\
-    \ 4, 0x0007, 3, proxy)\n    \n    class CountRegister(Register):\n        def\
-    \ __init__(self, address, proxy):\n            super().__init__(\"COUNT\", \"\
-    The Counter Register reflects the actual Value of the Timer/Counter\", address\
-    \ + 0x0020, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ MatchRegister(Register):\n        def __init__(self, address, proxy):\n    \
-    \        super().__init__(\"MATCH\", \"The Match Register stores the compare Value\
-    \ for the MATCH condition\", address + 0x0024, 32, \"read-write\", 0x0000, proxy)\n\
-    \            \n    \n    class Prescale_rdRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_RD\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"read-only\", 0x0000, proxy)\n        \
-    \    \n    \n    class Prescale_wrRegister(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"PRESCALE_WR\", \"The Prescale\
-    \ Register stores the Value for the prescaler. The cont event gets divided by\
-    \ this value\", address + 0x0028, 32, \"write-only\", 0x0000, proxy)\n       \
-    \     \n    \n    class Reload[0]Register(Register):\n        def __init__(self,\
-    \ address, proxy):\n            super().__init__(\"RELOAD[0]\", \"The Reload Register\
-    \ stores the Value the COUNT Register gets reloaded on a when a condition was\
-    \ met.\", address + 0x0050, 32, \"read-write\", 0x0000, proxy)\n            \n\
-    \    \n    class Reload[1]Register(Register):\n        def __init__(self, address,\
-    \ proxy):\n            super().__init__(\"RELOAD[1]\", \"The Reload Register stores\
-    \ the Value the COUNT Register gets reloaded on a when a condition was met.\"\
-    , address + 0x0054, 32, \"read-write\", 0x0000, proxy)\n            \n    \n \
-    \   class Reload[2]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[2]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x0058, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    class\
-    \ Reload[3]Register(Register):\n        def __init__(self, address, proxy):\n\
-    \            super().__init__(\"RELOAD[3]\", \"The Reload Register stores the\
-    \ Value the COUNT Register gets reloaded on a when a condition was met.\", address\
-    \ + 0x005C, 32, \"read-write\", 0x0000, proxy)\n            \n    \n    def __init__(self,\
-    \ proxy):\n        super().__init__(\"timer2\", \"32 Timer / Counter, counting\
-    \ up or down from different sources\", 0x40010200)\n        self.cr = self.CrRegister(self.address,\
-    \ proxy)\n        self.sr = self.SrRegister(self.address, proxy)\n        self.int\
-    \ = self.IntRegister(self.address, proxy)\n        self.count = self.CountRegister(self.address,\
-    \ proxy)\n        self.match = self.MatchRegister(self.address, proxy)\n     \
-    \   self.prescale_rd = self.Prescale_rdRegister(self.address, proxy)\n       \
-    \ self.prescale_wr = self.Prescale_wrRegister(self.address, proxy)\n        self.reload[0]\
-    \ = self.Reload[0]Register(self.address, proxy)\n        self.reload[1] = self.Reload[1]Register(self.address,\
-    \ proxy)\n        self.reload[2] = self.Reload[2]Register(self.address, proxy)\n\
-    \        self.reload[3] = self.Reload[3]Register(self.address, proxy)\n"
+- content: "\"\"\"\nD-RAL - Device Register Access Layer\nhttps://github.com/gembcior/d-ral\n\
+    \nMIT License\n\nCopyright (c) 2023 Gembcior\n\nPermission is hereby granted,\
+    \ free of charge, to any person obtaining a copy\nof this software and associated\
+    \ documentation files (the \"Software\"), to deal\nin the Software without restriction,\
+    \ including without limitation the rights\nto use, copy, modify, merge, publish,\
+    \ distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons\
+    \ to whom the Software is\nfurnished to do so, subject to the following conditions:\n\
+    \nThe above copyright notice and this permission notice shall be included in all\n\
+    copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"\
+    AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT\
+    \ LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE\
+    \ AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE\
+    \ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+    \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
+    \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
+    \ file. Do not modify!\n\"\"\"\n\n\nfrom model import Field, Peripheral, Register\n\
+    \nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"CR\", 0x40010200\
+    \ + 0x0)\n        self._en = Field(\"en\", 0, 1)\n        self._rst = Field(\"\
+    rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode = Field(\"\
+    mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
+    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
+    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
+    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
+    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n    @property\n\
+    \    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n        Enable\n\
+    \        \"\"\"\n        return self._en\n    \n    @en.setter\n    def en(self,\
+    \ value: int) -> None:\n        self._en.value = value\n    \n    @property\n\
+    \    def rst(self) -> Field:\n        \"\"\"\n        RST\n    \n        Reset\
+    \ Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n   \
+    \ def rst(self, value: int) -> None:\n        self._rst.value = value\n    \n\
+    \    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n   \
+    \ \n        Counting direction\n        \"\"\"\n        return self._cnt\n   \
+    \ \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    SR\", 0x40010200 + 0x4)\n        self._run = Field(\"run\", 0, 1)\n        self._match\
+    \ = Field(\"match\", 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov\
+    \ = Field(\"ov\", 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload\
+    \ = Field(\"reload\", 14, 2)\n\n    @property\n    def run(self) -> Field:\n \
+    \       \"\"\"\n        RUN\n    \n        Shows if Timer is running or not\n\
+    \        \"\"\"\n        return self._run\n    \n    @run.setter\n    def run(self,\
+    \ value: int) -> None:\n        self._run.value = value\n    \n    @property\n\
+    \    def match(self) -> Field:\n        \"\"\"\n        MATCH\n    \n        Shows\
+    \ if the MATCH was hit\n        \"\"\"\n        return self._match\n    \n   \
+    \ @match.setter\n    def match(self, value: int) -> None:\n        self._match.value\
+    \ = value\n    \n    @property\n    def un(self) -> Field:\n        \"\"\"\n \
+    \       UN\n    \n        Shows if an underflow occured. This flag is sticky\n\
+    \        \"\"\"\n        return self._un\n    \n    @un.setter\n    def un(self,\
+    \ value: int) -> None:\n        self._un.value = value\n    \n    @property\n\
+    \    def ov(self) -> Field:\n        \"\"\"\n        OV\n    \n        Shows if\
+    \ an overflow occured. This flag is sticky\n        \"\"\"\n        return self._ov\n\
+    \    \n    @ov.setter\n    def ov(self, value: int) -> None:\n        self._ov.value\
+    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
+    \        RST\n    \n        Shows if Timer is in RESET state\n        \"\"\"\n\
+    \        return self._rst\n    \n    @rst.setter\n    def rst(self, value: int)\
+    \ -> None:\n        self._rst.value = value\n    \n    @property\n    def reload(self)\
+    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Shows the currently\
+    \ active RELOAD Register\n        \"\"\"\n        return self._reload\n    \n\
+    \    @reload.setter\n    def reload(self, value: int) -> None:\n        self._reload.value\
+    \ = value\n    \nclass IntRegister(Register):\n    \"\"\"\n    INT\n\n    Interrupt\
+    \ Register\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"INT\"\
+    , 0x40010200 + 0x10)\n        self._en = Field(\"en\", 0, 1)\n        self._mode\
+    \ = Field(\"mode\", 4, 3)\n\n    @property\n    def en(self) -> Field:\n     \
+    \   \"\"\"\n        EN\n    \n        Interrupt Enable\n        \"\"\"\n     \
+    \   return self._en\n    \n    @en.setter\n    def en(self, value: int) -> None:\n\
+    \        self._en.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
+    \        \"\"\"\n        MODE\n    \n        Interrupt Mode, selects on which\
+    \ condition the Timer should generate an Interrupt\n        \"\"\"\n        return\
+    \ self._mode\n    \n    @mode.setter\n    def mode(self, value: int) -> None:\n\
+    \        self._mode.value = value\n    \nclass CountRegister(Register):\n    \"\
+    \"\"\n    COUNT\n\n    The Counter Register reflects the actual Value of the Timer/Counter\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"COUNT\", 0x40010200\
+    \ + 0x20)\n        \n\n    \nclass MatchRegister(Register):\n    \"\"\"\n    MATCH\n\
+    \n    The Match Register stores the compare Value for the MATCH condition\n  \
+    \  \"\"\"\n    def __init__(self):\n        super().__init__(\"MATCH\", 0x40010200\
+    \ + 0x24)\n        \n\n    \nclass Prescale_rdRegister(Register):\n    \"\"\"\n\
+    \    PRESCALE_RD\n\n    The Prescale Register stores the Value for the prescaler.\
+    \ The cont event gets divided by this value\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"PRESCALE_RD\", 0x40010200 + 0x28)\n        \n\n  \
+    \  \nclass Prescale_wrRegister(Register):\n    \"\"\"\n    PRESCALE_WR\n\n   \
+    \ The Prescale Register stores the Value for the prescaler. The cont event gets\
+    \ divided by this value\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"\
+    PRESCALE_WR\", 0x40010200 + 0x28)\n        \n\n    \nclass Reload[0]Register(Register):\n\
+    \    \"\"\"\n    RELOAD[0]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[0]\", 0x40010200 + 0x50)\n        \n\n    \n\
+    class Reload[1]Register(Register):\n    \"\"\"\n    RELOAD[1]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[1]\"\
+    , 0x40010200 + 0x54)\n        \n\n    \nclass Reload[2]Register(Register):\n \
+    \   \"\"\"\n    RELOAD[2]\n\n    The Reload Register stores the Value the COUNT\
+    \ Register gets reloaded on a when a condition was met.\n    \"\"\"\n    def __init__(self):\n\
+    \        super().__init__(\"RELOAD[2]\", 0x40010200 + 0x58)\n        \n\n    \n\
+    class Reload[3]Register(Register):\n    \"\"\"\n    RELOAD[3]\n\n    The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n    \"\"\"\n    def __init__(self):\n        super().__init__(\"RELOAD[3]\"\
+    , 0x40010200 + 0x5C)\n        \n\n    \n\nclass Timer2(Peripheral):\n    \"\"\"\
+    \n    TIMER2\n\n    32 Timer / Counter, counting up or down from different sources\n\
+    \    \"\"\"\n    def __init__(self):\n        super().__init__(\"timer2\", 0x40010200)\n\
+    \        self._cr = CrRegister()\n        self._sr = SrRegister()\n        self._int\
+    \ = IntRegister()\n        self._count = CountRegister()\n        self._match\
+    \ = MatchRegister()\n        self._prescale_rd = Prescale_rdRegister()\n     \
+    \   self._prescale_wr = Prescale_wrRegister()\n        self._reload[0] = Reload[0]Register()\n\
+    \        self._reload[1] = Reload[1]Register()\n        self._reload[2] = Reload[2]Register()\n\
+    \        self._reload[3] = Reload[3]Register()\n\n    @property\n    def cr(self)\
+    \ -> CrRegister:\n        return self._cr\n    \n    @cr.setter\n    def cr(self,\
+    \ value: int) -> None:\n        self._cr.value = value\n    \n    @property\n\
+    \    def sr(self) -> SrRegister:\n        return self._sr\n    \n    @sr.setter\n\
+    \    def sr(self, value: int) -> None:\n        self._sr.value = value\n    \n\
+    \    @property\n    def int(self) -> IntRegister:\n        return self._int\n\
+    \    \n    @int.setter\n    def int(self, value: int) -> None:\n        self._int.value\
+    \ = value\n    \n    @property\n    def count(self) -> CountRegister:\n      \
+    \  return self._count\n    \n    @count.setter\n    def count(self, value: int)\
+    \ -> None:\n        self._count.value = value\n    \n    @property\n    def match(self)\
+    \ -> MatchRegister:\n        return self._match\n    \n    @match.setter\n   \
+    \ def match(self, value: int) -> None:\n        self._match.value = value\n  \
+    \  \n    @property\n    def prescale_rd(self) -> Prescale_rdRegister:\n      \
+    \  return self._prescale_rd\n    \n    @prescale_rd.setter\n    def prescale_rd(self,\
+    \ value: int) -> None:\n        self._prescale_rd.value = value\n    \n    @property\n\
+    \    def prescale_wr(self) -> Prescale_wrRegister:\n        return self._prescale_wr\n\
+    \    \n    @prescale_wr.setter\n    def prescale_wr(self, value: int) -> None:\n\
+    \        self._prescale_wr.value = value\n    \n    @property\n    def reload[0](self)\
+    \ -> Reload[0]Register:\n        return self._reload[0]\n    \n    @reload[0].setter\n\
+    \    def reload[0](self, value: int) -> None:\n        self._reload[0].value =\
+    \ value\n    \n    @property\n    def reload[1](self) -> Reload[1]Register:\n\
+    \        return self._reload[1]\n    \n    @reload[1].setter\n    def reload[1](self,\
+    \ value: int) -> None:\n        self._reload[1].value = value\n    \n    @property\n\
+    \    def reload[2](self) -> Reload[2]Register:\n        return self._reload[2]\n\
+    \    \n    @reload[2].setter\n    def reload[2](self, value: int) -> None:\n \
+    \       self._reload[2].value = value\n    \n    @property\n    def reload[3](self)\
+    \ -> Reload[3]Register:\n        return self._reload[3]\n    \n    @reload[3].setter\n\
+    \    def reload[3](self, value: int) -> None:\n        self._reload[3].value =\
+    \ value\n    \n"
   name: TIMER2
+- content: "\"\"\"\nD-RAL - Device Register Access Layer\nhttps://github.com/gembcior/d-ral\n\
+    \nMIT License\n\nCopyright (c) 2023 Gembcior\n\nPermission is hereby granted,\
+    \ free of charge, to any person obtaining a copy\nof this software and associated\
+    \ documentation files (the \"Software\"), to deal\nin the Software without restriction,\
+    \ including without limitation the rights\nto use, copy, modify, merge, publish,\
+    \ distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons\
+    \ to whom the Software is\nfurnished to do so, subject to the following conditions:\n\
+    \nThe above copyright notice and this permission notice shall be included in all\n\
+    copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"\
+    AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT\
+    \ LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE\
+    \ AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE\
+    \ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+    \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
+    \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
+    \ file. Do not modify!\n\"\"\"\n\n\nfrom .timer0 import Timer0\nfrom .timer1 import\
+    \ Timer1\nfrom .timer2 import Timer2\n\nclass ARM_Example():\n    def __init__(self):\n\
+    \        self.timer0 = Timer0()\n        self.timer1 = Timer1()\n        self.timer2\
+    \ = Timer2()\n"
+  name: ARM_Example

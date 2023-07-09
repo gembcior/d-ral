@@ -2448,7 +2448,7 @@ device:
           - field:
               description: "OUT endpoint interrupt\n              bits"
               mask: 65535
-              name: OEPINT
+              name: OEPM
               position: 16
               width: 16
           name: FS_DAINTMSK
@@ -3764,6 +3764,24 @@ device:
               position: 1
               width: 1
           - field:
+              description: AVALOEN
+              mask: 1
+              name: AVALOEN
+              position: 4
+              width: 1
+          - field:
+              description: BVALOEN
+              mask: 1
+              name: BVALOEN
+              position: 6
+              width: 1
+          - field:
+              description: BVALOVAL
+              mask: 1
+              name: BVALOVAL
+              position: 7
+              width: 1
+          - field:
               description: Host negotiation success
               mask: 1
               name: HNGSCS
@@ -4353,6 +4371,44 @@ device:
           size: 32
       - register:
           access: read-only
+          description: "OTG_FS Receive status debug read(Device\n          mode)"
+          fields:
+          - field:
+              description: Endpoint number
+              mask: 15
+              name: EPNUM
+              position: 0
+              width: 4
+          - field:
+              description: Byte count
+              mask: 2047
+              name: BCNT
+              position: 4
+              width: 11
+          - field:
+              description: Data PID
+              mask: 3
+              name: DPID
+              position: 15
+              width: 2
+          - field:
+              description: Packet status
+              mask: 15
+              name: PKTSTS
+              position: 17
+              width: 4
+          - field:
+              description: Frame number
+              mask: 15
+              name: FRMNUM
+              position: 21
+              width: 4
+          name: FS_GRXSTSP_Device
+          offset: 32
+          reset_value: 0
+          size: 32
+      - register:
+          access: read-only
           description: "OTG_FS Receive status debug read(Host\n          mode)"
           fields:
           - field:
@@ -4387,6 +4443,44 @@ device:
               width: 4
           name: FS_GRXSTSR_Host
           offset: 28
+          reset_value: 0
+          size: 32
+      - register:
+          access: read-only
+          description: "OTG_FS Receive status debug read(Host\n          mode)"
+          fields:
+          - field:
+              description: Endpoint number
+              mask: 15
+              name: EPNUM
+              position: 0
+              width: 4
+          - field:
+              description: Byte count
+              mask: 2047
+              name: BCNT
+              position: 4
+              width: 11
+          - field:
+              description: Data PID
+              mask: 3
+              name: DPID
+              position: 15
+              width: 2
+          - field:
+              description: Packet status
+              mask: 15
+              name: PKTSTS
+              position: 17
+              width: 4
+          - field:
+              description: Frame number
+              mask: 15
+              name: FRMNUM
+              position: 21
+              width: 4
+          name: FS_GRXSTSP_Host
+          offset: 32
           reset_value: 0
           size: 32
       - register:
