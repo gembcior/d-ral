@@ -38,6 +38,28 @@ class Register:
         self._name = name
         self._address = address
         self._value = 0
+        self._fields = self._get_all_fields()
+        self._index = 0
+
+    def _get_all_fields(self) -> tuple[Field]:
+        fields = list(filter(lambda x: isinstance(x, Field), self.__dict__.values()))
+        sorted_fields = sorted(fields, key=lambda x: x.position)
+        return tuple(sorted_fields)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < len(self._fields):
+            item = self._fields[self._index]
+            self._index += 1
+            return item
+        else:
+            raise StopIteration
+
+    @property
+    def name(self) -> str:
+        return self._name
 
     @property
     def address(self) -> int:
@@ -59,6 +81,28 @@ class Peripheral:
     def __init__(self, name: str, address: int) -> None:
         self._name = name
         self._address = address
+        self._registers = self._get_all_registers()
+        self._index = 0
+
+    def _get_all_registers(self) -> tuple[Register]:
+        registers = list(filter(lambda x: isinstance(x, Register), self.__dict__.values()))
+        sorted_registers = sorted(registers, key=lambda x: x.address)
+        return tuple(sorted_registers)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < len(self._registers):
+            item = self._registers[self._index]
+            self._index += 1
+            return item
+        else:
+            raise StopIteration
+
+    @property
+    def name(self) -> str:
+        return self._name
 
     @property
     def address(self) -> int:

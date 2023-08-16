@@ -3861,7 +3861,7 @@
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x002C;\n  union\n  {\n\
     \    uint32_t value;\n    BitFieldModel<0, 16> arr;\n  };\n};\n\nstruct ccr1\n\
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x0034;\n  union\n  {\n\
-    \    uint32_t value;\n    BitFieldModel<0, 16> ccr1;\n  };\n};\n\nstruct or\n\
+    \    uint32_t value;\n    BitFieldModel<0, 16> ccr1;\n  };\n};\n\nstruct or_\n\
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x0050;\n  union\n  {\n\
     \    uint32_t value;\n    BitFieldModel<0, 2> rmp;\n  };\n};\n\n}\n\n#endif /*\
     \ DRAL_STM32F446_TIM11_H */\n"

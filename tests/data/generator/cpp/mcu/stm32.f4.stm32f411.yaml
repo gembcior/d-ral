@@ -3065,7 +3065,7 @@
     \ = Ccr1Reg<BaseAddress + 0x0034>;\n\nprivate:\n  template<uint32_t address>\n\
     \  class OrReg : public RegisterModel<address>\n  {\n  public:\n    using rmp\
     \ = FieldModel<address, 0, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      BitFieldModel<0, 2> rmp;\n    };\n  };\n\npublic:\n  using or\
+    \ value;\n      BitFieldModel<0, 2> rmp;\n    };\n  };\n\npublic:\n  using or_\
     \ = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM11_H\
     \ */\n"
   name: TIM11
@@ -3251,7 +3251,7 @@
     \  class OrReg : public RegisterModel<address>\n  {\n  public:\n    using itr1_rmp\
     \ = FieldModel<address, 10, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      BitFieldModel<10, 2> itr1_rmp;\n    };\n  };\n\npublic:\n  using\
-    \ or = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM2_H\
+    \ or_ = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM2_H\
     \ */\n"
   name: TIM2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -3798,7 +3798,7 @@
     \  class OrReg : public RegisterModel<address>\n  {\n  public:\n    using it4_rmp\
     \ = FieldModel<address, 6, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      BitFieldModel<6, 2> it4_rmp;\n    };\n  };\n\npublic:\n  using\
-    \ or = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM5_H\
+    \ or_ = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM5_H\
     \ */\n"
   name: TIM5
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\

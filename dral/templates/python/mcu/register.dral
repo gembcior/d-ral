@@ -5,6 +5,6 @@ class [dral style="capitalize"]register.name[#dral]Register(Register):
     [dral style="strip"]register.description[#dral]
     """
     def __init__(self):
-        super().__init__("[dral]register.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral] + [dral format="{:#X}"]register.offset[#dral])
         [dral style="LF" template="field.constructor.dral"]register.fields[#dral]
+        super().__init__("[dral]register.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral] + [dral format="{:#X}"]register.offset[#dral])
     [dral template="field.property.dral"]register.fields[#dral]

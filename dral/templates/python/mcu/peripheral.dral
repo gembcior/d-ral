@@ -1,6 +1,6 @@
 [dral]include header.dral[#dral]
 
-from model import Field, Peripheral, Register
+[dral]include model.import.dral[#dral]
 
 [dral template="register.dral"]peripheral.registers[#dral]
 
@@ -11,7 +11,7 @@ class [dral style="capitalize"]peripheral.name[#dral](Peripheral):
     [dral style="strip"]peripheral.description[#dral]
     """
     def __init__(self):
-        super().__init__("[dral style="lowercase"]peripheral.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral])
         [dral template="register.constructor.dral"]peripheral.registers[#dral]
+        super().__init__("[dral style="lowercase"]peripheral.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral])
 
     [dral template="register.property.dral"]peripheral.registers[#dral]

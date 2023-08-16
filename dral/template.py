@@ -57,8 +57,10 @@ class DralTemplate:
         Get parsed string
     """
 
-    def __init__(self, root: Optional[Path] = None):
+    def __init__(self, root: Optional[Union[Path, List[Path]]] = None):
         self._root = root
+        if isinstance(root, Path):
+            self._root = [root]
 
     def readlines(self, template: str) -> List[str]:
         """
@@ -75,12 +77,13 @@ class DralTemplate:
         """
         if self._root is None:
             return []
-        template_file = self._root / template
-        if not template_file.exists():
-            return []
-        with open(template_file, "r", encoding="UTF-8") as file:
-            template_content = file.readlines()
-        return template_content
+        for item in self._root:
+            template_file = item / template
+            if template_file.exists():
+                with open(template_file, "r", encoding="UTF-8") as file:
+                    template_content = file.readlines()
+                return template_content
+        return []
 
     def read(self, template: str) -> str:
         """
@@ -97,12 +100,13 @@ class DralTemplate:
         """
         if self._root is None:
             return ""
-        template_file = self._root / template
-        if not template_file.exists():
-            return ""
-        with open(template_file, "r", encoding="UTF-8") as file:
-            template_content = file.read()
-        return template_content
+        for item in self._root:
+            template_file = item / template
+            if template_file.exists():
+                with open(template_file, "r", encoding="UTF-8") as file:
+                    template_content = file.read()
+                return template_content
+        return ""
 
     def exists(self, template: str) -> bool:
         """
@@ -119,8 +123,11 @@ class DralTemplate:
         """
         if self._root is None:
             return False
-        file = self._root / template
-        return file.exists()
+        for item in self._root:
+            file = item / template
+            if file.exists():
+                return True
+        return False
 
     def parse_from_template(self, template: str, mapping: Dict[str, Any]) -> List[str]:
         """
@@ -237,6 +244,8 @@ class DralTemplate:
             output = self._apply_style(output, marker.attributes.style)
         if marker.attributes.extras is not None:
             output = self._apply_extras(output, marker.attributes.extras)
+        if output in ["or", "and"]:
+            output = output + "_"
         return output
 
     def _apply_style(self, line: str, style: str) -> str:

@@ -1533,7 +1533,7 @@
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x002C;\n  union\n  {\n\
     \    uint32_t value;\n    BitFieldModel<0, 16> arr;\n  };\n};\n\nstruct ccr1\n\
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x0034;\n  union\n  {\n\
-    \    uint32_t value;\n    BitFieldModel<0, 16> ccr1;\n  };\n};\n\nstruct or\n\
+    \    uint32_t value;\n    BitFieldModel<0, 16> ccr1;\n  };\n};\n\nstruct or_\n\
     {\n  constexpr static uint32_t Address = 0x40014800 + 0x0050;\n  union\n  {\n\
     \    uint32_t value;\n    BitFieldModel<0, 2> rmp;\n  };\n};\n\n}\n\n#endif /*\
     \ DRAL_STM32F411_TIM11_H */\n"
@@ -1628,7 +1628,7 @@
     \ + 0x0048;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<8, 5> dbl;\n\
     \    BitFieldModel<0, 5> dba;\n  };\n};\n\nstruct dmar\n{\n  constexpr static\
     \ uint32_t Address = 0x40000000 + 0x004C;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<0, 16> dmab;\n  };\n};\n\nstruct or\n{\n  constexpr static\
+    \    BitFieldModel<0, 16> dmab;\n  };\n};\n\nstruct or_\n{\n  constexpr static\
     \ uint32_t Address = 0x40000000 + 0x0050;\n  union\n  {\n    uint32_t value;\n\
     \    BitFieldModel<10, 2> itr1_rmp;\n  };\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM2_H\
     \ */\n"
@@ -1909,7 +1909,7 @@
     \ + 0x0048;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<8, 5> dbl;\n\
     \    BitFieldModel<0, 5> dba;\n  };\n};\n\nstruct dmar\n{\n  constexpr static\
     \ uint32_t Address = 0x40000C00 + 0x004C;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<0, 16> dmab;\n  };\n};\n\nstruct or\n{\n  constexpr static\
+    \    BitFieldModel<0, 16> dmab;\n  };\n};\n\nstruct or_\n{\n  constexpr static\
     \ uint32_t Address = 0x40000C00 + 0x0050;\n  union\n  {\n    uint32_t value;\n\
     \    BitFieldModel<6, 2> it4_rmp;\n  };\n};\n\n}\n\n#endif /* DRAL_STM32F411_TIM5_H\
     \ */\n"

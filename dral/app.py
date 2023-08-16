@@ -41,7 +41,7 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
 
 
-@click.command() # type: ignore[arg-type] # noqa
+@click.command()  # type: ignore[arg-type] # noqa
 @click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
@@ -122,12 +122,10 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
 
     exclude = exclude if exclude else []
 
+    template_dir_list = [Utils.get_template_dir(language, Utils.get_device_template(svd))]
     if template:
-        template_dir = template
-    else:
-        template = Utils.get_device_template(svd)
-        template_dir = Utils.get_template_dir(language, template)
-    template_object = DralTemplate(template_dir)
+        template_dir_list.insert(0, template)
+    template_object = DralTemplate(template_dir_list)
 
     if mapping:
         with open(mapping, "r", encoding="utf-8") as mapping_file:
