@@ -26,7 +26,10 @@ D-RAL generates a set of header files that you can simply copy and paste into yo
 ### Example
 Let's take the STM32F411 microcontroller and its general-purpose timers as an example. We want to configure the TIM2 timer as a countdown timer. To do this, we need to set the direction bit in one of the timer's control registers.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gembcior/d-ral/main/doc/stm32f411_tim2_control_register.svg" alt="STM32F411 Tim2 Control Register"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gembcior/d-ral/main/doc/stm32f411_tim2_control_register_dark.svg">
+    <img alt="STM32F411 Tim2 Control Register" src="https://raw.githubusercontent.com/gembcior/d-ral/main/doc/stm32f411_tim2_control_register.svg">
+  </picture>
 </p>
 
 We can accomplish this in C++ by utilizing raw pointers:
