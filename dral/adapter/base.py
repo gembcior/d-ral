@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from pathlib import Path
 
 from ..types import Device
 
@@ -20,7 +21,7 @@ class BaseAdapter(ABC):
         Returns data structure used by d-ral generator
     """
 
-    def __init__(self) -> None:
+    def __init__(self, _ = Path) -> None:
         pass
 
     @abstractmethod

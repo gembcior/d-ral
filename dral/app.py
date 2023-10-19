@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-import glob
 from pathlib import Path
-from typing import Any
+from typing import Any, Type
 
 import click
 import yaml
 from rich.console import Console
 from rich.traceback import install as traceback
 
+from .adapter.base import BaseAdapter
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, ExcludeFilter, WhiteListFilter
@@ -17,32 +17,16 @@ from .generator import DralGenerator, DralOutputFile
 from .template import DralTemplate
 from .utils import Utils
 
-
-def print_supported_devices(ctx: Any, param: Any, value: Any) -> None:
-    del param
-    if not value or ctx.resilient_parsing:
-        return
-    devices_path = Path(__file__).parent / "devices"
-    svd = glob.glob(f"{devices_path}/**/*.svd", recursive=True)
-    svd.sort()
-    for device in svd:
-        chip, family, brand = Utils.get_device_info(Path(device))
-        click.echo(f"{brand}::{family}::{chip}")
-    ctx.exit()
+DRAL_CUSTOM_ADAPTER = SvdAdapter
 
 
-def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
-    del ctx, param
-    if Path(value).exists():
-        return Path(value).resolve()
-    value = Utils.get_svd_file(value)
-    if value is not None:
-        return value
-    raise click.BadParameter("SVD must be a path to external SVD file or name of the already supported device")
+def override_adapter(adapter: Type[BaseAdapter]) -> None:
+    global DRAL_CUSTOM_ADAPTER
+    DRAL_CUSTOM_ADAPTER = adapter
 
 
 @click.command()  # type: ignore[arg-type] # noqa
-@click.argument("svd", type=click.UNPROCESSED, callback=validate_svd)
+@click.argument("input", type=click.Path(resolve_path=True, path_type=Path))
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
     "-l",
@@ -54,7 +38,15 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
 )
 @click.option(
     "-t",
-    "--template",
+    "--template_type",
+    default="mcu",
+    show_default=True,
+    type=click.Choice(["mcu", "serial"], case_sensitive=False),
+    help="Specify the template type used to generate files.",
+)
+@click.option(
+    "-T",
+    "--template_path",
     type=click.Path(exists=True, resolve_path=True, path_type=Path),
     help="Specify path to template files used to generate files.",
 )
@@ -84,26 +76,17 @@ def validate_svd(ctx: Any, param: Any, value: Any) -> Any:
     type=click.Path(exists=True, resolve_path=True, path_type=Path),
     help="Peripherals and Registers black list.",
 )
-@click.option(
-    "--list",
-    is_flag=True,
-    is_eager=True,
-    expose_value=False,
-    callback=print_supported_devices,
-    help="Show list of the supported devices and exit.",
-)
 @click.version_option()
-def cli(svd, output, language, template, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
+def cli(input, output, language, template_type, template_path, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
     """D-RAL - Device Register Access Layer
 
-    Generate D-RAL files in the OUTPUT from SVD.
+    Generate D-RAL files in the OUTPUT from INPUT.
 
     \b
-    SVD    - can be a path to external SVD file or name of the already supported device.
-             Type 'dral --list' to see all supported devices.
+    INPUT  - path to external device description file.
 
     \b
-    OUTPUT - is a path where files will be generated.
+    OUTPUT - path where files will be generated.
     """
     traceback()
     console = Console()
@@ -122,9 +105,9 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
 
     exclude = exclude if exclude else []
 
-    template_dir_list = [Utils.get_template_dir(language, Utils.get_device_template(svd))]
-    if template:
-        template_dir_list.insert(0, template)
+    template_dir_list = [Utils.get_template_dir(language, template_type)]
+    if template_path:
+        template_dir_list.insert(0, template_path)
     template_object = DralTemplate(template_dir_list)
 
     if mapping:
@@ -134,7 +117,7 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
         # Convert data using adapter
-        adapter = SvdAdapter(svd)
+        adapter = DRAL_CUSTOM_ADAPTER(input)
         device = adapter.convert()
 
         # Apply filters
@@ -162,7 +145,7 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
         # Make output
         output = output / "dralOutput"
 
-        chip = Utils.get_device_info(svd)[0]
+        chip = Utils.get_device_info(input)[0]
         output_format: Any = CppFormat(output, "dral", chip)
         if language == "cpp":
             output_format = CppFormat(output, "dral", chip)
@@ -173,5 +156,9 @@ def cli(svd, output, language, template, mapping, exclude, single, white_list, b
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
-if __name__ == "__main__":
+def main():
     cli()  # type: ignore[misc] # noqa
+
+
+if __name__ == "__main__":
+    main()

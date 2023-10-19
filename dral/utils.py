@@ -33,20 +33,8 @@ class Utils:
 
     @staticmethod
     def get_device_info(svd: Path) -> Tuple[str, str, str]:
-        devices_path = Path(__file__).parent / "devices"
-        svd = svd.resolve().relative_to(devices_path)
-        device_info = svd.parts
-        if len(device_info) > 2:
-            return svd.stem, device_info[1], device_info[0]
-        return svd.stem, "", device_info[0]
-
-    @staticmethod
-    def get_device_template(svd: Path) -> str:
-        chip, _, _ = Utils.get_device_info(svd)
-        output = "mcu"
-        if chip == "tmc2209":
-            output = "serial"
-        return output
+        svd = svd.resolve()
+        return svd.stem, "", ""
 
     @staticmethod
     def get_model_dir(language: str) -> Path:
