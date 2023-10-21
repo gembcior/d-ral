@@ -3,7 +3,7 @@
 #ifndef DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
 #define DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
 
-#include "dral/register_model.h"
+[dral]include model.import.dral[#dral]
 
 namespace dral::[dral style="lowercase"]device.name[#dral] {
 

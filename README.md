@@ -69,9 +69,9 @@ Whichever method you use, you should have a `dral` command on your path.
 ## Usage
 D-RAL is a CLI tool that takes two positional arguments
 ```
-dral SVD OUTPUT
+dral [OPTIONS] INPUT OUTPUT
 ```
-- SVD - a path to external SVD file
+- INPUT - path to external device description file
 - OUTPUT - a path where D-RAL files will be generated.
 
 ## Extra functionality
