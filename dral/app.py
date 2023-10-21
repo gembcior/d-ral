@@ -21,8 +21,8 @@ DRAL_CUSTOM_ADAPTER = SvdAdapter
 
 
 def override_adapter(adapter: Type[BaseAdapter]) -> None:
-    global DRAL_CUSTOM_ADAPTER
-    DRAL_CUSTOM_ADAPTER = adapter
+    global DRAL_CUSTOM_ADAPTER  # noqa: W0603
+    DRAL_CUSTOM_ADAPTER = adapter  # type: ignore[assignment]
 
 
 @click.command()  # type: ignore[arg-type] # noqa
@@ -156,7 +156,7 @@ def cli(input, output, language, template_type, template_path, mapping, exclude,
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
-def main():
+def main() -> None:
     cli()  # type: ignore[misc] # noqa
 
 

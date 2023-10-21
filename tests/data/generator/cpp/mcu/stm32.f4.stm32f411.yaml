@@ -15,7 +15,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_ADC_COMMON_H\n#define DRAL_STM32F411_ADC_COMMON_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass adc_common\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass adc_common\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40012300;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CsrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ovr3 = FieldModel<address, 21, 1>;\n    using strt3\
@@ -64,7 +64,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_ADC1_H\n#define DRAL_STM32F411_ADC1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass adc1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass adc1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40012000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class SrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ovr = FieldModel<address, 5, 1>;\n    using strt =\
@@ -215,7 +215,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_CRC_H\n#define DRAL_STM32F411_CRC_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass crc\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass crc\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40023000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class DrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using dr = FieldModel<address, 0, 32>;\n\n  public:\n   \
@@ -248,7 +248,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_DBG_H\n#define DRAL_STM32F411_DBG_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dbg\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dbg\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE0042000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Dbgmcu_idcodeReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using dev_id = FieldModel<address, 0, 12>;\n    using rev_id\
@@ -306,7 +306,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_EXTI_H\n#define DRAL_STM32F411_EXTI_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass exti\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass exti\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40013C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ImrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using mr0 = FieldModel<address, 0, 1>;\n    using mr1 = FieldModel<address,\
@@ -473,7 +473,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_FLASH_H\n#define DRAL_STM32F411_FLASH_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass flash\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass flash\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40023C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class AcrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using latency = FieldModel<address, 0, 3>;\n    using prften\
@@ -543,7 +543,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_IWDG_H\n#define DRAL_STM32F411_IWDG_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass iwdg\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass iwdg\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40003000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class KrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using key = FieldModel<address, 0, 16>;\n\n  public:\n  \
@@ -581,7 +581,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_OTG_FS_DEVICE_H\n#define DRAL_STM32F411_OTG_FS_DEVICE_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_device\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_device\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x50000800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Fs_dcfgReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using dspd = FieldModel<address, 0, 2>;\n    using nzlsohsk\
@@ -974,7 +974,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_OTG_FS_GLOBAL_H\n#define DRAL_STM32F411_OTG_FS_GLOBAL_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_global\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_global\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x50000000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Fs_gotgctlReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using srqscs = FieldModel<address, 0, 1>;\n    using srq\
@@ -1204,7 +1204,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_OTG_FS_HOST_H\n#define DRAL_STM32F411_OTG_FS_HOST_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_host\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_host\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x50000400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Fs_hcfgReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using fslspcs = FieldModel<address, 0, 2>;\n    using fslss\
@@ -1643,7 +1643,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_OTG_FS_PWRCLK_H\n#define DRAL_STM32F411_OTG_FS_PWRCLK_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_pwrclk\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass otg_fs_pwrclk\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x50000E00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Fs_pcgcctlReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using stppclk = FieldModel<address, 0, 1>;\n    using gatehclk\
@@ -1670,7 +1670,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_PWR_H\n#define DRAL_STM32F411_PWR_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass pwr\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass pwr\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40007000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using vos = FieldModel<address, 14, 2>;\n    using adcdc1\
@@ -1713,7 +1713,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_RCC_H\n#define DRAL_STM32F411_RCC_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass rcc\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass rcc\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40023800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using plli2srdy = FieldModel<address, 27, 1>;\n    using\
@@ -1991,7 +1991,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_RTC_H\n#define DRAL_STM32F411_RTC_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass rtc\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass rtc\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40002800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class TrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using pm = FieldModel<address, 22, 1>;\n    using ht = FieldModel<address,\
@@ -2271,7 +2271,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SDIO_H\n#define DRAL_STM32F411_SDIO_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass sdio\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass sdio\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40012C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class PowerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using pwrctrl = FieldModel<address, 0, 2>;\n\n  public:\n\
@@ -2450,7 +2450,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SYSCFG_H\n#define DRAL_STM32F411_SYSCFG_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass syscfg\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass syscfg\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40013800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class MemrmReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using mem_mode = FieldModel<address, 0, 2>;\n\n  public:\n\
@@ -2512,7 +2512,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM1_H\n#define DRAL_STM32F411_TIM1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -2717,7 +2717,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM8_H\n#define DRAL_STM32F411_TIM8_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim8\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim8\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -2922,7 +2922,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM10_H\n#define DRAL_STM32F411_TIM10_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim10\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim10\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40014400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3002,7 +3002,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM11_H\n#define DRAL_STM32F411_TIM11_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim11\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim11\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40014800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3086,7 +3086,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM2_H\n#define DRAL_STM32F411_TIM2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim2\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40000000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3271,7 +3271,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM3_H\n#define DRAL_STM32F411_TIM3_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim3\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim3\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40000400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3452,7 +3452,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM4_H\n#define DRAL_STM32F411_TIM4_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim4\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim4\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40000800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3633,7 +3633,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM5_H\n#define DRAL_STM32F411_TIM5_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim5\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim5\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40000C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3818,7 +3818,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_TIM9_H\n#define DRAL_STM32F411_TIM9_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim9\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass tim9\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40014000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using ckd = FieldModel<address, 8, 2>;\n    using arpe =\
@@ -3927,7 +3927,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_USART1_H\n#define DRAL_STM32F411_USART1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40011000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class SrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using cts = FieldModel<address, 9, 1>;\n    using lbd = FieldModel<address,\
@@ -4015,7 +4015,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_USART2_H\n#define DRAL_STM32F411_USART2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart2\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40004400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class SrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using cts = FieldModel<address, 9, 1>;\n    using lbd = FieldModel<address,\
@@ -4103,7 +4103,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_USART6_H\n#define DRAL_STM32F411_USART6_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart6\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass usart6\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40011400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class SrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using cts = FieldModel<address, 9, 1>;\n    using lbd = FieldModel<address,\
@@ -4191,7 +4191,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_WWDG_H\n#define DRAL_STM32F411_WWDG_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass wwdg\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass wwdg\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40002C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using wdga = FieldModel<address, 7, 1>;\n    using t = FieldModel<address,\
@@ -4227,7 +4227,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_DMA2_H\n#define DRAL_STM32F411_DMA2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dma2\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dma2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40026400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class LisrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using tcif3 = FieldModel<address, 27, 1>;\n    using htif3\
@@ -4723,7 +4723,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_DMA1_H\n#define DRAL_STM32F411_DMA1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dma1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass dma1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40026000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class LisrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using tcif3 = FieldModel<address, 27, 1>;\n    using htif3\
@@ -5219,7 +5219,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOH_H\n#define DRAL_STM32F411_GPIOH_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioh\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioh\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40021C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -5424,7 +5424,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOE_H\n#define DRAL_STM32F411_GPIOE_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioe\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioe\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40021000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -5629,7 +5629,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOD_H\n#define DRAL_STM32F411_GPIOD_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpiod\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpiod\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40020C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -5834,7 +5834,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOC_H\n#define DRAL_STM32F411_GPIOC_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioc\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioc\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40020800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -6039,7 +6039,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOB_H\n#define DRAL_STM32F411_GPIOB_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpiob\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpiob\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40020400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -6244,7 +6244,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_GPIOA_H\n#define DRAL_STM32F411_GPIOA_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioa\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass gpioa\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40020000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ModerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using moder15 = FieldModel<address, 30, 2>;\n    using moder14\
@@ -6449,7 +6449,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_I2C3_H\n#define DRAL_STM32F411_I2C3_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c3\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c3\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40005C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using swrst = FieldModel<address, 15, 1>;\n    using alert\
@@ -6546,7 +6546,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_I2C2_H\n#define DRAL_STM32F411_I2C2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c2\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40005800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using swrst = FieldModel<address, 15, 1>;\n    using alert\
@@ -6643,7 +6643,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_I2C1_H\n#define DRAL_STM32F411_I2C1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2c1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40005400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using swrst = FieldModel<address, 15, 1>;\n    using alert\
@@ -6740,7 +6740,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_I2S2EXT_H\n#define DRAL_STM32F411_I2S2EXT_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2s2ext\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2s2ext\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40003400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -6831,7 +6831,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_I2S3EXT_H\n#define DRAL_STM32F411_I2S3EXT_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2s3ext\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass i2s3ext\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40004000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -6922,7 +6922,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SPI1_H\n#define DRAL_STM32F411_SPI1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi1\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi1\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40013000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -7013,7 +7013,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SPI2_H\n#define DRAL_STM32F411_SPI2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi2\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi2\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40003800;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -7104,7 +7104,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SPI3_H\n#define DRAL_STM32F411_SPI3_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi3\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi3\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40003C00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -7195,7 +7195,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SPI4_H\n#define DRAL_STM32F411_SPI4_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi4\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi4\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40013400;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -7286,7 +7286,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SPI5_H\n#define DRAL_STM32F411_SPI5_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi5\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass spi5\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0x40015000;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Cr1Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using bidimode = FieldModel<address, 15, 1>;\n    using bidioe\
@@ -7377,7 +7377,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_NVIC_H\n#define DRAL_STM32F411_NVIC_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass nvic\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass nvic\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000E100;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Iser0Reg : public RegisterModel<address>\n\
     \  {\n  public:\n    using setena = FieldModel<address, 0, 32>;\n\n  public:\n\
@@ -7613,7 +7613,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_FPU_H\n#define DRAL_STM32F411_FPU_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass fpu\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass fpu\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000EF34;\n\nprivate:\n\
     \  template<uint32_t address>\n  class FpccrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using lspact = FieldModel<address, 0, 1>;\n    using user\
@@ -7665,7 +7665,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_MPU_H\n#define DRAL_STM32F411_MPU_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass mpu\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass mpu\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000ED90;\n\nprivate:\n\
     \  template<uint32_t address>\n  class Mpu_typerReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using separate = FieldModel<address, 0, 1>;\n    using dregion\
@@ -7720,7 +7720,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_STK_H\n#define DRAL_STM32F411_STK_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass stk\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass stk\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000E010;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CtrlReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using enable = FieldModel<address, 0, 1>;\n    using tickint\
@@ -7762,7 +7762,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SCB_H\n#define DRAL_STM32F411_SCB_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass scb\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass scb\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000ED00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CpuidReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using revision = FieldModel<address, 0, 4>;\n    using partno\
@@ -7910,7 +7910,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_NVIC_STIR_H\n#define DRAL_STM32F411_NVIC_STIR_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass nvic_stir\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass nvic_stir\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000EF00;\n\nprivate:\n\
     \  template<uint32_t address>\n  class StirReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using intid = FieldModel<address, 0, 9>;\n\n  public:\n \
@@ -7935,7 +7935,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_FPU_CPACR_H\n#define DRAL_STM32F411_FPU_CPACR_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass fpu_cpacr\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass fpu_cpacr\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000ED88;\n\nprivate:\n\
     \  template<uint32_t address>\n  class CpacrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using cp = FieldModel<address, 20, 4>;\n\n  public:\n   \
@@ -7960,7 +7960,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F411_SCB_ACTRL_H\n#define DRAL_STM32F411_SCB_ACTRL_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass scb_actrl\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f411 {\n\nclass scb_actrl\n\
     {\npublic:\n  static constexpr uint32_t BaseAddress = 0xE000E008;\n\nprivate:\n\
     \  template<uint32_t address>\n  class ActrlReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using dismcycint = FieldModel<address, 0, 1>;\n    using\

@@ -307,7 +307,7 @@ class DralTemplate:
                 substitution = self.readlines(marker.template)
                 substitution.reverse()
                 content.append(substitution[0].rstrip("\n") + string[i][marker.end :])
-                content += substitution[1:-1]
-                content.append(string[i][: marker.start] + substitution[-1])
+                content += substitution[1:]
+                content.append(string[i][: marker.start])
         content.reverse()
         return content

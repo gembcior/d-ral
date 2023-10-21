@@ -15,7 +15,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
     \ timer0\n{\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010000;\n\n\
     private:\n  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using en = FieldModel<address, 0, 1>;\n    using rst = FieldModel<address,\
@@ -93,7 +93,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
     \ timer1\n{\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010100;\n\n\
     private:\n  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using en = FieldModel<address, 0, 1>;\n    using rst = FieldModel<address,\
@@ -171,7 +171,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
-    \n#include \"dral/register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass\
     \ timer2\n{\npublic:\n  static constexpr uint32_t BaseAddress = 0x40010200;\n\n\
     private:\n  template<uint32_t address>\n  class CrReg : public RegisterModel<address>\n\
     \  {\n  public:\n    using en = FieldModel<address, 0, 1>;\n    using rst = FieldModel<address,\

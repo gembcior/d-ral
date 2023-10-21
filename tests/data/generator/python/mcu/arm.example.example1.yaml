@@ -14,62 +14,62 @@
     \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
     \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
     \ file. Do not modify!\n\"\"\"\n\n\nfrom ..register_model import Field, Peripheral,\
-    \ Register\nfrom ..register_model import Field, Peripheral, Register\n\nclass\
-    \ CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n    \"\"\"\
-    \n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n        self._rst\
-    \ = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode\
-    \ = Field(\"mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
-    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
-    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
-    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
-    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n        super().__init__(\"\
-    CR\", 0x40010000 + 0x0)\n    @property\n    def en(self) -> Field:\n        \"\
-    \"\"\n        EN\n    \n        Enable\n        \"\"\"\n        return self._en\n\
-    \    \n    @en.setter\n    def en(self, value: int) -> None:\n        self._en.value\
-    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
-    \        RST\n    \n        Reset Timer\n        \"\"\"\n        return self._rst\n\
-    \    \n    @rst.setter\n    def rst(self, value: int) -> None:\n        self._rst.value\
-    \ = value\n    \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n\
-    \        CNT\n    \n        Counting direction\n        \"\"\"\n        return\
-    \ self._cnt\n    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n \
-    \       self._cnt.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
-    \        \"\"\"\n        MODE\n    \n        Operation Mode\n        \"\"\"\n\
-    \        return self._mode\n    \n    @mode.setter\n    def mode(self, value:\
-    \ int) -> None:\n        self._mode.value = value\n    \n    @property\n    def\
-    \ psc(self) -> Field:\n        \"\"\"\n        PSC\n    \n        Use Prescaler\n\
-    \        \"\"\"\n        return self._psc\n    \n    @psc.setter\n    def psc(self,\
-    \ value: int) -> None:\n        self._psc.value = value\n    \n    @property\n\
-    \    def cntsrc(self) -> Field:\n        \"\"\"\n        CNTSRC\n    \n      \
-    \  Timer / Counter Source Divider\n        \"\"\"\n        return self._cntsrc\n\
-    \    \n    @cntsrc.setter\n    def cntsrc(self, value: int) -> None:\n       \
-    \ self._cntsrc.value = value\n    \n    @property\n    def capsrc(self) -> Field:\n\
-    \        \"\"\"\n        CAPSRC\n    \n        Timer / Counter Capture Source\n\
-    \        \"\"\"\n        return self._capsrc\n    \n    @capsrc.setter\n    def\
-    \ capsrc(self, value: int) -> None:\n        self._capsrc.value = value\n    \n\
-    \    @property\n    def capedge(self) -> Field:\n        \"\"\"\n        CAPEDGE\n\
-    \    \n        Capture Edge, select which Edge should result in a counter increment\
-    \ or decrement\n        \"\"\"\n        return self._capedge\n    \n    @capedge.setter\n\
-    \    def capedge(self, value: int) -> None:\n        self._capedge.value = value\n\
-    \    \n    @property\n    def trgext(self) -> Field:\n        \"\"\"\n       \
-    \ TRGEXT\n    \n        Triggers an other Peripheral\n        \"\"\"\n       \
-    \ return self._trgext\n    \n    @trgext.setter\n    def trgext(self, value: int)\
-    \ -> None:\n        self._trgext.value = value\n    \n    @property\n    def reload(self)\
-    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Select RELOAD Register\
-    \ n to reload Timer on condition\n        \"\"\"\n        return self._reload\n\
-    \    \n    @reload.setter\n    def reload(self, value: int) -> None:\n       \
-    \ self._reload.value = value\n    \n    @property\n    def idr(self) -> Field:\n\
-    \        \"\"\"\n        IDR\n    \n        Selects, if Reload Register number\
-    \ is incremented, decremented or not modified\n        \"\"\"\n        return\
-    \ self._idr\n    \n    @idr.setter\n    def idr(self, value: int) -> None:\n \
-    \       self._idr.value = value\n    \n    @property\n    def s(self) -> Field:\n\
-    \        \"\"\"\n        S\n    \n        Starts and Stops the Timer / Counter\n\
-    \        \"\"\"\n        return self._s\n    \n    @s.setter\n    def s(self,\
-    \ value: int) -> None:\n        self._s.value = value\n    \nclass SrRegister(Register):\n\
-    \    \"\"\"\n    SR\n\n    Status Register\n    \"\"\"\n    def __init__(self):\n\
-    \        self._run = Field(\"run\", 0, 1)\n        self._match = Field(\"match\"\
-    , 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\"\
-    , 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"\
-    reload\", 14, 2)\n\n        super().__init__(\"SR\", 0x40010000 + 0x4)\n    @property\n\
+    \ Register\n\nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n\
+    \    \"\"\"\n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n\
+    \        self._rst = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\",\
+    \ 2, 2)\n        self._mode = Field(\"mode\", 4, 3)\n        self._psc = Field(\"\
+    psc\", 7, 1)\n        self._cntsrc = Field(\"cntsrc\", 8, 4)\n        self._capsrc\
+    \ = Field(\"capsrc\", 12, 4)\n        self._capedge = Field(\"capedge\", 16, 2)\n\
+    \        self._trgext = Field(\"trgext\", 20, 2)\n        self._reload = Field(\"\
+    reload\", 24, 2)\n        self._idr = Field(\"idr\", 26, 2)\n        self._s =\
+    \ Field(\"s\", 31, 1)\n\n        super().__init__(\"CR\", 0x40010000 + 0x0)\n\
+    \    @property\n    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n\
+    \        Enable\n        \"\"\"\n        return self._en\n    \n    @en.setter\n\
+    \    def en(self, value: int) -> None:\n        self._en.value = value\n    \n\
+    \    @property\n    def rst(self) -> Field:\n        \"\"\"\n        RST\n   \
+    \ \n        Reset Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n\
+    \    def rst(self, value: int) -> None:\n        self._rst.value = value\n   \
+    \ \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n\
+    \    \n        Counting direction\n        \"\"\"\n        return self._cnt\n\
+    \    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        self._run\
+    \ = Field(\"run\", 0, 1)\n        self._match = Field(\"match\", 8, 1)\n     \
+    \   self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\", 10, 1)\n\
+    \        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"reload\"\
+    , 14, 2)\n\n        super().__init__(\"SR\", 0x40010000 + 0x4)\n    @property\n\
     \    def run(self) -> Field:\n        \"\"\"\n        RUN\n    \n        Shows\
     \ if Timer is running or not\n        \"\"\"\n        return self._run\n    \n\
     \    @run.setter\n    def run(self, value: int) -> None:\n        self._run.value\
@@ -181,62 +181,62 @@
     \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
     \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
     \ file. Do not modify!\n\"\"\"\n\n\nfrom ..register_model import Field, Peripheral,\
-    \ Register\nfrom ..register_model import Field, Peripheral, Register\n\nclass\
-    \ CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n    \"\"\"\
-    \n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n        self._rst\
-    \ = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode\
-    \ = Field(\"mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
-    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
-    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
-    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
-    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n        super().__init__(\"\
-    CR\", 0x40010100 + 0x0)\n    @property\n    def en(self) -> Field:\n        \"\
-    \"\"\n        EN\n    \n        Enable\n        \"\"\"\n        return self._en\n\
-    \    \n    @en.setter\n    def en(self, value: int) -> None:\n        self._en.value\
-    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
-    \        RST\n    \n        Reset Timer\n        \"\"\"\n        return self._rst\n\
-    \    \n    @rst.setter\n    def rst(self, value: int) -> None:\n        self._rst.value\
-    \ = value\n    \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n\
-    \        CNT\n    \n        Counting direction\n        \"\"\"\n        return\
-    \ self._cnt\n    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n \
-    \       self._cnt.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
-    \        \"\"\"\n        MODE\n    \n        Operation Mode\n        \"\"\"\n\
-    \        return self._mode\n    \n    @mode.setter\n    def mode(self, value:\
-    \ int) -> None:\n        self._mode.value = value\n    \n    @property\n    def\
-    \ psc(self) -> Field:\n        \"\"\"\n        PSC\n    \n        Use Prescaler\n\
-    \        \"\"\"\n        return self._psc\n    \n    @psc.setter\n    def psc(self,\
-    \ value: int) -> None:\n        self._psc.value = value\n    \n    @property\n\
-    \    def cntsrc(self) -> Field:\n        \"\"\"\n        CNTSRC\n    \n      \
-    \  Timer / Counter Source Divider\n        \"\"\"\n        return self._cntsrc\n\
-    \    \n    @cntsrc.setter\n    def cntsrc(self, value: int) -> None:\n       \
-    \ self._cntsrc.value = value\n    \n    @property\n    def capsrc(self) -> Field:\n\
-    \        \"\"\"\n        CAPSRC\n    \n        Timer / Counter Capture Source\n\
-    \        \"\"\"\n        return self._capsrc\n    \n    @capsrc.setter\n    def\
-    \ capsrc(self, value: int) -> None:\n        self._capsrc.value = value\n    \n\
-    \    @property\n    def capedge(self) -> Field:\n        \"\"\"\n        CAPEDGE\n\
-    \    \n        Capture Edge, select which Edge should result in a counter increment\
-    \ or decrement\n        \"\"\"\n        return self._capedge\n    \n    @capedge.setter\n\
-    \    def capedge(self, value: int) -> None:\n        self._capedge.value = value\n\
-    \    \n    @property\n    def trgext(self) -> Field:\n        \"\"\"\n       \
-    \ TRGEXT\n    \n        Triggers an other Peripheral\n        \"\"\"\n       \
-    \ return self._trgext\n    \n    @trgext.setter\n    def trgext(self, value: int)\
-    \ -> None:\n        self._trgext.value = value\n    \n    @property\n    def reload(self)\
-    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Select RELOAD Register\
-    \ n to reload Timer on condition\n        \"\"\"\n        return self._reload\n\
-    \    \n    @reload.setter\n    def reload(self, value: int) -> None:\n       \
-    \ self._reload.value = value\n    \n    @property\n    def idr(self) -> Field:\n\
-    \        \"\"\"\n        IDR\n    \n        Selects, if Reload Register number\
-    \ is incremented, decremented or not modified\n        \"\"\"\n        return\
-    \ self._idr\n    \n    @idr.setter\n    def idr(self, value: int) -> None:\n \
-    \       self._idr.value = value\n    \n    @property\n    def s(self) -> Field:\n\
-    \        \"\"\"\n        S\n    \n        Starts and Stops the Timer / Counter\n\
-    \        \"\"\"\n        return self._s\n    \n    @s.setter\n    def s(self,\
-    \ value: int) -> None:\n        self._s.value = value\n    \nclass SrRegister(Register):\n\
-    \    \"\"\"\n    SR\n\n    Status Register\n    \"\"\"\n    def __init__(self):\n\
-    \        self._run = Field(\"run\", 0, 1)\n        self._match = Field(\"match\"\
-    , 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\"\
-    , 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"\
-    reload\", 14, 2)\n\n        super().__init__(\"SR\", 0x40010100 + 0x4)\n    @property\n\
+    \ Register\n\nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n\
+    \    \"\"\"\n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n\
+    \        self._rst = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\",\
+    \ 2, 2)\n        self._mode = Field(\"mode\", 4, 3)\n        self._psc = Field(\"\
+    psc\", 7, 1)\n        self._cntsrc = Field(\"cntsrc\", 8, 4)\n        self._capsrc\
+    \ = Field(\"capsrc\", 12, 4)\n        self._capedge = Field(\"capedge\", 16, 2)\n\
+    \        self._trgext = Field(\"trgext\", 20, 2)\n        self._reload = Field(\"\
+    reload\", 24, 2)\n        self._idr = Field(\"idr\", 26, 2)\n        self._s =\
+    \ Field(\"s\", 31, 1)\n\n        super().__init__(\"CR\", 0x40010100 + 0x0)\n\
+    \    @property\n    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n\
+    \        Enable\n        \"\"\"\n        return self._en\n    \n    @en.setter\n\
+    \    def en(self, value: int) -> None:\n        self._en.value = value\n    \n\
+    \    @property\n    def rst(self) -> Field:\n        \"\"\"\n        RST\n   \
+    \ \n        Reset Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n\
+    \    def rst(self, value: int) -> None:\n        self._rst.value = value\n   \
+    \ \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n\
+    \    \n        Counting direction\n        \"\"\"\n        return self._cnt\n\
+    \    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        self._run\
+    \ = Field(\"run\", 0, 1)\n        self._match = Field(\"match\", 8, 1)\n     \
+    \   self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\", 10, 1)\n\
+    \        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"reload\"\
+    , 14, 2)\n\n        super().__init__(\"SR\", 0x40010100 + 0x4)\n    @property\n\
     \    def run(self) -> Field:\n        \"\"\"\n        RUN\n    \n        Shows\
     \ if Timer is running or not\n        \"\"\"\n        return self._run\n    \n\
     \    @run.setter\n    def run(self, value: int) -> None:\n        self._run.value\
@@ -348,62 +348,62 @@
     \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
     \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
     \ file. Do not modify!\n\"\"\"\n\n\nfrom ..register_model import Field, Peripheral,\
-    \ Register\nfrom ..register_model import Field, Peripheral, Register\n\nclass\
-    \ CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n    \"\"\"\
-    \n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n        self._rst\
-    \ = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\", 2, 2)\n        self._mode\
-    \ = Field(\"mode\", 4, 3)\n        self._psc = Field(\"psc\", 7, 1)\n        self._cntsrc\
-    \ = Field(\"cntsrc\", 8, 4)\n        self._capsrc = Field(\"capsrc\", 12, 4)\n\
-    \        self._capedge = Field(\"capedge\", 16, 2)\n        self._trgext = Field(\"\
-    trgext\", 20, 2)\n        self._reload = Field(\"reload\", 24, 2)\n        self._idr\
-    \ = Field(\"idr\", 26, 2)\n        self._s = Field(\"s\", 31, 1)\n\n        super().__init__(\"\
-    CR\", 0x40010200 + 0x0)\n    @property\n    def en(self) -> Field:\n        \"\
-    \"\"\n        EN\n    \n        Enable\n        \"\"\"\n        return self._en\n\
-    \    \n    @en.setter\n    def en(self, value: int) -> None:\n        self._en.value\
-    \ = value\n    \n    @property\n    def rst(self) -> Field:\n        \"\"\"\n\
-    \        RST\n    \n        Reset Timer\n        \"\"\"\n        return self._rst\n\
-    \    \n    @rst.setter\n    def rst(self, value: int) -> None:\n        self._rst.value\
-    \ = value\n    \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n\
-    \        CNT\n    \n        Counting direction\n        \"\"\"\n        return\
-    \ self._cnt\n    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n \
-    \       self._cnt.value = value\n    \n    @property\n    def mode(self) -> Field:\n\
-    \        \"\"\"\n        MODE\n    \n        Operation Mode\n        \"\"\"\n\
-    \        return self._mode\n    \n    @mode.setter\n    def mode(self, value:\
-    \ int) -> None:\n        self._mode.value = value\n    \n    @property\n    def\
-    \ psc(self) -> Field:\n        \"\"\"\n        PSC\n    \n        Use Prescaler\n\
-    \        \"\"\"\n        return self._psc\n    \n    @psc.setter\n    def psc(self,\
-    \ value: int) -> None:\n        self._psc.value = value\n    \n    @property\n\
-    \    def cntsrc(self) -> Field:\n        \"\"\"\n        CNTSRC\n    \n      \
-    \  Timer / Counter Source Divider\n        \"\"\"\n        return self._cntsrc\n\
-    \    \n    @cntsrc.setter\n    def cntsrc(self, value: int) -> None:\n       \
-    \ self._cntsrc.value = value\n    \n    @property\n    def capsrc(self) -> Field:\n\
-    \        \"\"\"\n        CAPSRC\n    \n        Timer / Counter Capture Source\n\
-    \        \"\"\"\n        return self._capsrc\n    \n    @capsrc.setter\n    def\
-    \ capsrc(self, value: int) -> None:\n        self._capsrc.value = value\n    \n\
-    \    @property\n    def capedge(self) -> Field:\n        \"\"\"\n        CAPEDGE\n\
-    \    \n        Capture Edge, select which Edge should result in a counter increment\
-    \ or decrement\n        \"\"\"\n        return self._capedge\n    \n    @capedge.setter\n\
-    \    def capedge(self, value: int) -> None:\n        self._capedge.value = value\n\
-    \    \n    @property\n    def trgext(self) -> Field:\n        \"\"\"\n       \
-    \ TRGEXT\n    \n        Triggers an other Peripheral\n        \"\"\"\n       \
-    \ return self._trgext\n    \n    @trgext.setter\n    def trgext(self, value: int)\
-    \ -> None:\n        self._trgext.value = value\n    \n    @property\n    def reload(self)\
-    \ -> Field:\n        \"\"\"\n        RELOAD\n    \n        Select RELOAD Register\
-    \ n to reload Timer on condition\n        \"\"\"\n        return self._reload\n\
-    \    \n    @reload.setter\n    def reload(self, value: int) -> None:\n       \
-    \ self._reload.value = value\n    \n    @property\n    def idr(self) -> Field:\n\
-    \        \"\"\"\n        IDR\n    \n        Selects, if Reload Register number\
-    \ is incremented, decremented or not modified\n        \"\"\"\n        return\
-    \ self._idr\n    \n    @idr.setter\n    def idr(self, value: int) -> None:\n \
-    \       self._idr.value = value\n    \n    @property\n    def s(self) -> Field:\n\
-    \        \"\"\"\n        S\n    \n        Starts and Stops the Timer / Counter\n\
-    \        \"\"\"\n        return self._s\n    \n    @s.setter\n    def s(self,\
-    \ value: int) -> None:\n        self._s.value = value\n    \nclass SrRegister(Register):\n\
-    \    \"\"\"\n    SR\n\n    Status Register\n    \"\"\"\n    def __init__(self):\n\
-    \        self._run = Field(\"run\", 0, 1)\n        self._match = Field(\"match\"\
-    , 8, 1)\n        self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\"\
-    , 10, 1)\n        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"\
-    reload\", 14, 2)\n\n        super().__init__(\"SR\", 0x40010200 + 0x4)\n    @property\n\
+    \ Register\n\nclass CrRegister(Register):\n    \"\"\"\n    CR\n\n    Control Register\n\
+    \    \"\"\"\n    def __init__(self):\n        self._en = Field(\"en\", 0, 1)\n\
+    \        self._rst = Field(\"rst\", 1, 1)\n        self._cnt = Field(\"cnt\",\
+    \ 2, 2)\n        self._mode = Field(\"mode\", 4, 3)\n        self._psc = Field(\"\
+    psc\", 7, 1)\n        self._cntsrc = Field(\"cntsrc\", 8, 4)\n        self._capsrc\
+    \ = Field(\"capsrc\", 12, 4)\n        self._capedge = Field(\"capedge\", 16, 2)\n\
+    \        self._trgext = Field(\"trgext\", 20, 2)\n        self._reload = Field(\"\
+    reload\", 24, 2)\n        self._idr = Field(\"idr\", 26, 2)\n        self._s =\
+    \ Field(\"s\", 31, 1)\n\n        super().__init__(\"CR\", 0x40010200 + 0x0)\n\
+    \    @property\n    def en(self) -> Field:\n        \"\"\"\n        EN\n    \n\
+    \        Enable\n        \"\"\"\n        return self._en\n    \n    @en.setter\n\
+    \    def en(self, value: int) -> None:\n        self._en.value = value\n    \n\
+    \    @property\n    def rst(self) -> Field:\n        \"\"\"\n        RST\n   \
+    \ \n        Reset Timer\n        \"\"\"\n        return self._rst\n    \n    @rst.setter\n\
+    \    def rst(self, value: int) -> None:\n        self._rst.value = value\n   \
+    \ \n    @property\n    def cnt(self) -> Field:\n        \"\"\"\n        CNT\n\
+    \    \n        Counting direction\n        \"\"\"\n        return self._cnt\n\
+    \    \n    @cnt.setter\n    def cnt(self, value: int) -> None:\n        self._cnt.value\
+    \ = value\n    \n    @property\n    def mode(self) -> Field:\n        \"\"\"\n\
+    \        MODE\n    \n        Operation Mode\n        \"\"\"\n        return self._mode\n\
+    \    \n    @mode.setter\n    def mode(self, value: int) -> None:\n        self._mode.value\
+    \ = value\n    \n    @property\n    def psc(self) -> Field:\n        \"\"\"\n\
+    \        PSC\n    \n        Use Prescaler\n        \"\"\"\n        return self._psc\n\
+    \    \n    @psc.setter\n    def psc(self, value: int) -> None:\n        self._psc.value\
+    \ = value\n    \n    @property\n    def cntsrc(self) -> Field:\n        \"\"\"\
+    \n        CNTSRC\n    \n        Timer / Counter Source Divider\n        \"\"\"\
+    \n        return self._cntsrc\n    \n    @cntsrc.setter\n    def cntsrc(self,\
+    \ value: int) -> None:\n        self._cntsrc.value = value\n    \n    @property\n\
+    \    def capsrc(self) -> Field:\n        \"\"\"\n        CAPSRC\n    \n      \
+    \  Timer / Counter Capture Source\n        \"\"\"\n        return self._capsrc\n\
+    \    \n    @capsrc.setter\n    def capsrc(self, value: int) -> None:\n       \
+    \ self._capsrc.value = value\n    \n    @property\n    def capedge(self) -> Field:\n\
+    \        \"\"\"\n        CAPEDGE\n    \n        Capture Edge, select which Edge\
+    \ should result in a counter increment or decrement\n        \"\"\"\n        return\
+    \ self._capedge\n    \n    @capedge.setter\n    def capedge(self, value: int)\
+    \ -> None:\n        self._capedge.value = value\n    \n    @property\n    def\
+    \ trgext(self) -> Field:\n        \"\"\"\n        TRGEXT\n    \n        Triggers\
+    \ an other Peripheral\n        \"\"\"\n        return self._trgext\n    \n   \
+    \ @trgext.setter\n    def trgext(self, value: int) -> None:\n        self._trgext.value\
+    \ = value\n    \n    @property\n    def reload(self) -> Field:\n        \"\"\"\
+    \n        RELOAD\n    \n        Select RELOAD Register n to reload Timer on condition\n\
+    \        \"\"\"\n        return self._reload\n    \n    @reload.setter\n    def\
+    \ reload(self, value: int) -> None:\n        self._reload.value = value\n    \n\
+    \    @property\n    def idr(self) -> Field:\n        \"\"\"\n        IDR\n   \
+    \ \n        Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n        \"\"\"\n        return self._idr\n    \n    @idr.setter\n\
+    \    def idr(self, value: int) -> None:\n        self._idr.value = value\n   \
+    \ \n    @property\n    def s(self) -> Field:\n        \"\"\"\n        S\n    \n\
+    \        Starts and Stops the Timer / Counter\n        \"\"\"\n        return\
+    \ self._s\n    \n    @s.setter\n    def s(self, value: int) -> None:\n       \
+    \ self._s.value = value\n    \nclass SrRegister(Register):\n    \"\"\"\n    SR\n\
+    \n    Status Register\n    \"\"\"\n    def __init__(self):\n        self._run\
+    \ = Field(\"run\", 0, 1)\n        self._match = Field(\"match\", 8, 1)\n     \
+    \   self._un = Field(\"un\", 9, 1)\n        self._ov = Field(\"ov\", 10, 1)\n\
+    \        self._rst = Field(\"rst\", 12, 1)\n        self._reload = Field(\"reload\"\
+    , 14, 2)\n\n        super().__init__(\"SR\", 0x40010200 + 0x4)\n    @property\n\
     \    def run(self) -> Field:\n        \"\"\"\n        RUN\n    \n        Shows\
     \ if Timer is running or not\n        \"\"\"\n        return self._run\n    \n\
     \    @run.setter\n    def run(self, value: int) -> None:\n        self._run.value\

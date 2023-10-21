@@ -21,7 +21,7 @@ class BaseAdapter(ABC):
         Returns data structure used by d-ral generator
     """
 
-    def __init__(self, _ = Path) -> None:
+    def __init__(self, _=Path) -> None:  # type: ignore[no-untyped-def]
         pass
 
     @abstractmethod
