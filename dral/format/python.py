@@ -28,6 +28,3 @@ class PythonFormat(BaseFormat):
             self._create_file(f"{item.name.lower()}.py", directory, item.content)
         if model is not None:
             self._create_file(f"{model.name.lower()}.py", self._directory, model.content)
-
-    def _make_single(self, objects: List[DralOutputFile]) -> None:
-        raise NotImplementedError
