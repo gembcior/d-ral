@@ -57,13 +57,11 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Specify mapping file to overwrite values with constants.",
 )
 @click.option(
-    "-e",
-    "--exclude",
-    multiple=True,
-    type=click.Choice(["peripherals", "registers", "banks", "fields"], case_sensitive=False),
-    help="Exclude items from generation.",
+    "-s",
+    "--skip_banks",
+    is_flag=True,
+    help="Skip automatic registers banks detection.",
 )
-@click.option("-s", "--single", is_flag=True, help="Generate output as a single file.")
 @click.option(
     "-w",
     "--white-list",
@@ -77,7 +75,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(input, output, language, template_type, template_path, mapping, exclude, single, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
+def cli(input, output, language, template_type, template_path, mapping, skip_banks, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from INPUT.
@@ -103,8 +101,6 @@ def cli(input, output, language, template_type, template_path, mapping, exclude,
     else:
         black_list = None
 
-    exclude = exclude if exclude else []
-
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
         template_dir_list.insert(0, template_path)
@@ -126,9 +122,8 @@ def cli(input, output, language, template_type, template_path, mapping, exclude,
             filters.append(BlackListFilter(black_list))
         if white_list is not None:
             filters.append(WhiteListFilter(white_list))
-        filters.append(BanksFilter())
-        if exclude:
-            filters.append(ExcludeFilter(exclude))
+        if not skip_banks:
+            filters.append(BanksFilter())
         for item in filters:
             device = item.apply(device)
 
@@ -151,7 +146,7 @@ def cli(input, output, language, template_type, template_path, mapping, exclude,
             output_format = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
-        output_format.make(objects, model=dral_model_file, single=single)
+        output_format.make(objects, model=dral_model_file)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 

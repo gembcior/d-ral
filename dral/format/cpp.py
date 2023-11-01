@@ -29,6 +29,3 @@ class CppFormat(BaseFormat):
             self._create_file(f"{item.name.lower()}.h", directory, item.content)
         if model is not None:
             self._create_file(f"{model.name.lower()}.h", self._directory, model.content)
-
-    def _make_single(self, objects: List[DralOutputFile]) -> None:
-        raise NotImplementedError
