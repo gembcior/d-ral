@@ -15,8 +15,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
-    \ cr\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example::timer0 {\n\n\
+    struct cr\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
     \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
     \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\
@@ -60,8 +60,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
-    \ cr\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example::timer1 {\n\n\
+    struct cr\n{\n  constexpr static uint32_t Address = 0x40010100 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
     \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
     \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\
@@ -105,8 +105,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nstruct\
-    \ cr\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example::timer2 {\n\n\
+    struct cr\n{\n  constexpr static uint32_t Address = 0x40010200 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> en;\n    BitFieldModel<1, 1>\
     \ rst;\n    BitFieldModel<2, 2> cnt;\n    BitFieldModel<4, 3> mode;\n    BitFieldModel<7,\
     \ 1> psc;\n    BitFieldModel<8, 4> cntsrc;\n    BitFieldModel<12, 4> capsrc;\n\

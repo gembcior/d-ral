@@ -15,7 +15,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_DCMI_H\n#define DRAL_STM32F446_DCMI_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::dcmi {\n\nstruct\
     \ cr\n{\n  constexpr static uint32_t Address = 0x50050000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> capture;\n    BitFieldModel<1,\
     \ 1> cm;\n    BitFieldModel<2, 1> crop;\n    BitFieldModel<3, 1> jpeg;\n    BitFieldModel<4,\
@@ -74,7 +74,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_FMC_H\n#define DRAL_STM32F446_FMC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::fmc {\n\nstruct\
     \ bcr1\n{\n  constexpr static uint32_t Address = 0xA0000000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<20, 1> cclken;\n    BitFieldModel<19,\
     \ 1> cburstrw;\n    BitFieldModel<15, 1> asyncwait;\n    BitFieldModel<14, 1>\
@@ -238,7 +238,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_DBG_H\n#define DRAL_STM32F446_DBG_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::dbg {\n\nstruct\
     \ dbgmcu_idcode\n{\n  constexpr static uint32_t Address = 0xE0042000 + 0x0000;\n\
     \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 12> dev_id;\n    BitFieldModel<16,\
     \ 16> rev_id;\n  };\n};\n\nstruct dbgmcu_cr\n{\n  constexpr static uint32_t Address\
@@ -279,7 +279,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_DMA2_H\n#define DRAL_STM32F446_DMA2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::dma2 {\n\nstruct\
     \ lisr\n{\n  constexpr static uint32_t Address = 0x40026400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<27, 1> tcif3;\n    BitFieldModel<26,\
     \ 1> htif3;\n    BitFieldModel<25, 1> teif3;\n    BitFieldModel<24, 1> dmeif3;\n\
@@ -498,7 +498,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_DMA1_H\n#define DRAL_STM32F446_DMA1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::dma1 {\n\nstruct\
     \ lisr\n{\n  constexpr static uint32_t Address = 0x40026000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<27, 1> tcif3;\n    BitFieldModel<26,\
     \ 1> htif3;\n    BitFieldModel<25, 1> teif3;\n    BitFieldModel<24, 1> dmeif3;\n\
@@ -717,7 +717,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_RCC_H\n#define DRAL_STM32F446_RCC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::rcc {\n\nstruct\
     \ cr\n{\n  constexpr static uint32_t Address = 0x40023800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<27, 1> plli2srdy;\n    BitFieldModel<26,\
     \ 1> plli2son;\n    BitFieldModel<25, 1> pllrdy;\n    BitFieldModel<24, 1> pllon;\n\
@@ -903,7 +903,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOH_H\n#define DRAL_STM32F446_GPIOH_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpioh {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40021C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1002,7 +1002,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOG_H\n#define DRAL_STM32F446_GPIOG_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpiog {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40021800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1101,7 +1101,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOF_H\n#define DRAL_STM32F446_GPIOF_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpiof {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40021400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1200,7 +1200,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOE_H\n#define DRAL_STM32F446_GPIOE_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpioe {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40021000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1299,7 +1299,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOD_H\n#define DRAL_STM32F446_GPIOD_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpiod {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40020C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1398,7 +1398,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOC_H\n#define DRAL_STM32F446_GPIOC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpioc {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40020800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1497,7 +1497,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOB_H\n#define DRAL_STM32F446_GPIOB_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpiob {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40020400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1596,7 +1596,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_GPIOA_H\n#define DRAL_STM32F446_GPIOA_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::gpioa {\n\nstruct\
     \ moder\n{\n  constexpr static uint32_t Address = 0x40020000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<30, 2> moder15;\n    BitFieldModel<28,\
     \ 2> moder14;\n    BitFieldModel<26, 2> moder13;\n    BitFieldModel<24, 2> moder12;\n\
@@ -1695,9 +1695,9 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SYSCFG_H\n#define DRAL_STM32F446_SYSCFG_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ memrm\n{\n  constexpr static uint32_t Address = 0x40013800 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<0, 3> mem_mode;\n    BitFieldModel<8,\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::syscfg {\n\n\
+    struct memrm\n{\n  constexpr static uint32_t Address = 0x40013800 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 3> mem_mode;\n    BitFieldModel<8,\
     \ 1> fb_mode;\n    BitFieldModel<10, 2> swp_fmc;\n  };\n};\n\nstruct pmc\n{\n\
     \  constexpr static uint32_t Address = 0x40013800 + 0x0004;\n  union\n  {\n  \
     \  uint32_t value;\n    BitFieldModel<23, 1> mii_rmii_sel;\n    BitFieldModel<16,\
@@ -1736,7 +1736,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SPI1_H\n#define DRAL_STM32F446_SPI1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::spi1 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40013000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> bidimode;\n    BitFieldModel<14,\
     \ 1> bidioe;\n    BitFieldModel<13, 1> crcen;\n    BitFieldModel<12, 1> crcnext;\n\
@@ -1788,7 +1788,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SPI2_H\n#define DRAL_STM32F446_SPI2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::spi2 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40003800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> bidimode;\n    BitFieldModel<14,\
     \ 1> bidioe;\n    BitFieldModel<13, 1> crcen;\n    BitFieldModel<12, 1> crcnext;\n\
@@ -1840,7 +1840,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SPI3_H\n#define DRAL_STM32F446_SPI3_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::spi3 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40003C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> bidimode;\n    BitFieldModel<14,\
     \ 1> bidioe;\n    BitFieldModel<13, 1> crcen;\n    BitFieldModel<12, 1> crcnext;\n\
@@ -1892,7 +1892,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SPI4_H\n#define DRAL_STM32F446_SPI4_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::spi4 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40013400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> bidimode;\n    BitFieldModel<14,\
     \ 1> bidioe;\n    BitFieldModel<13, 1> crcen;\n    BitFieldModel<12, 1> crcnext;\n\
@@ -1944,7 +1944,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_ADC1_H\n#define DRAL_STM32F446_ADC1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::adc1 {\n\nstruct\
     \ sr\n{\n  constexpr static uint32_t Address = 0x40012000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<5, 1> ovr;\n    BitFieldModel<4,\
     \ 1> strt;\n    BitFieldModel<3, 1> jstrt;\n    BitFieldModel<2, 1> jeoc;\n  \
@@ -2021,7 +2021,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_ADC2_H\n#define DRAL_STM32F446_ADC2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::adc2 {\n\nstruct\
     \ sr\n{\n  constexpr static uint32_t Address = 0x40012100 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<5, 1> ovr;\n    BitFieldModel<4,\
     \ 1> strt;\n    BitFieldModel<3, 1> jstrt;\n    BitFieldModel<2, 1> jeoc;\n  \
@@ -2098,7 +2098,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_ADC3_H\n#define DRAL_STM32F446_ADC3_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::adc3 {\n\nstruct\
     \ sr\n{\n  constexpr static uint32_t Address = 0x40012200 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<5, 1> ovr;\n    BitFieldModel<4,\
     \ 1> strt;\n    BitFieldModel<3, 1> jstrt;\n    BitFieldModel<2, 1> jeoc;\n  \
@@ -2175,8 +2175,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_USART6_H\n#define DRAL_STM32F446_USART6_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ sr\n{\n  constexpr static uint32_t Address = 0x40011400 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::usart6 {\n\n\
+    struct sr\n{\n  constexpr static uint32_t Address = 0x40011400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<9, 1> cts;\n    BitFieldModel<8,\
     \ 1> lbd;\n    BitFieldModel<7, 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5,\
     \ 1> rxne;\n    BitFieldModel<4, 1> idle;\n    BitFieldModel<3, 1> ore;\n    BitFieldModel<2,\
@@ -2225,8 +2225,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_USART1_H\n#define DRAL_STM32F446_USART1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ sr\n{\n  constexpr static uint32_t Address = 0x40011000 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::usart1 {\n\n\
+    struct sr\n{\n  constexpr static uint32_t Address = 0x40011000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<9, 1> cts;\n    BitFieldModel<8,\
     \ 1> lbd;\n    BitFieldModel<7, 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5,\
     \ 1> rxne;\n    BitFieldModel<4, 1> idle;\n    BitFieldModel<3, 1> ore;\n    BitFieldModel<2,\
@@ -2275,8 +2275,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_USART2_H\n#define DRAL_STM32F446_USART2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ sr\n{\n  constexpr static uint32_t Address = 0x40004400 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::usart2 {\n\n\
+    struct sr\n{\n  constexpr static uint32_t Address = 0x40004400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<9, 1> cts;\n    BitFieldModel<8,\
     \ 1> lbd;\n    BitFieldModel<7, 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5,\
     \ 1> rxne;\n    BitFieldModel<4, 1> idle;\n    BitFieldModel<3, 1> ore;\n    BitFieldModel<2,\
@@ -2325,8 +2325,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_USART3_H\n#define DRAL_STM32F446_USART3_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ sr\n{\n  constexpr static uint32_t Address = 0x40004800 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::usart3 {\n\n\
+    struct sr\n{\n  constexpr static uint32_t Address = 0x40004800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<9, 1> cts;\n    BitFieldModel<8,\
     \ 1> lbd;\n    BitFieldModel<7, 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5,\
     \ 1> rxne;\n    BitFieldModel<4, 1> idle;\n    BitFieldModel<3, 1> ore;\n    BitFieldModel<2,\
@@ -2375,7 +2375,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_DAC_H\n#define DRAL_STM32F446_DAC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::dac {\n\nstruct\
     \ cr\n{\n  constexpr static uint32_t Address = 0x40007400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<29, 1> dmaudrie2;\n    BitFieldModel<28,\
     \ 1> dmaen2;\n    BitFieldModel<24, 4> mamp2;\n    BitFieldModel<22, 2> wave2;\n\
@@ -2431,8 +2431,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_FMPI2C_H\n#define DRAL_STM32F446_FMPI2C_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ cr1\n{\n  constexpr static uint32_t Address = 0x40006000 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::fmpi2c {\n\n\
+    struct cr1\n{\n  constexpr static uint32_t Address = 0x40006000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<23, 1> pecen;\n    BitFieldModel<22,\
     \ 1> alerten;\n    BitFieldModel<21, 1> smbden;\n    BitFieldModel<20, 1> smbhen;\n\
     \    BitFieldModel<19, 1> gcen;\n    BitFieldModel<17, 1> nostretch;\n    BitFieldModel<16,\
@@ -2500,7 +2500,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_I2C3_H\n#define DRAL_STM32F446_I2C3_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::i2c3 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40005C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> swrst;\n    BitFieldModel<13,\
     \ 1> alert;\n    BitFieldModel<12, 1> pec;\n    BitFieldModel<11, 1> pos;\n  \
@@ -2557,7 +2557,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_I2C2_H\n#define DRAL_STM32F446_I2C2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::i2c2 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40005800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> swrst;\n    BitFieldModel<13,\
     \ 1> alert;\n    BitFieldModel<12, 1> pec;\n    BitFieldModel<11, 1> pos;\n  \
@@ -2614,7 +2614,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_I2C1_H\n#define DRAL_STM32F446_I2C1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::i2c1 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40005400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<15, 1> swrst;\n    BitFieldModel<13,\
     \ 1> alert;\n    BitFieldModel<12, 1> pec;\n    BitFieldModel<11, 1> pos;\n  \
@@ -2671,7 +2671,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_IWDG_H\n#define DRAL_STM32F446_IWDG_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::iwdg {\n\nstruct\
     \ kr\n{\n  constexpr static uint32_t Address = 0x40003000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 16> key;\n  };\n};\n\nstruct pr\n\
     {\n  constexpr static uint32_t Address = 0x40003000 + 0x0004;\n  union\n  {\n\
@@ -2699,7 +2699,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_WWDG_H\n#define DRAL_STM32F446_WWDG_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::wwdg {\n\nstruct\
     \ cr\n{\n  constexpr static uint32_t Address = 0x40002C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<7, 1> wdga;\n    BitFieldModel<0,\
     \ 7> t;\n  };\n};\n\nstruct cfr\n{\n  constexpr static uint32_t Address = 0x40002C00\
@@ -2726,7 +2726,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_RTC_H\n#define DRAL_STM32F446_RTC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::rtc {\n\nstruct\
     \ tr\n{\n  constexpr static uint32_t Address = 0x40002800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<22, 1> pm;\n    BitFieldModel<20,\
     \ 2> ht;\n    BitFieldModel<16, 4> hu;\n    BitFieldModel<12, 3> mnt;\n    BitFieldModel<8,\
@@ -2862,7 +2862,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_UART4_H\n#define DRAL_STM32F446_UART4_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::uart4 {\n\nstruct\
     \ sr\n{\n  constexpr static uint32_t Address = 0x40004C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 1> lbd;\n    BitFieldModel<7,\
     \ 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5, 1> rxne;\n    BitFieldModel<4,\
@@ -2907,7 +2907,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_UART5_H\n#define DRAL_STM32F446_UART5_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::uart5 {\n\nstruct\
     \ sr\n{\n  constexpr static uint32_t Address = 0x40005000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 1> lbd;\n    BitFieldModel<7,\
     \ 1> txe;\n    BitFieldModel<6, 1> tc;\n    BitFieldModel<5, 1> rxne;\n    BitFieldModel<4,\
@@ -2952,7 +2952,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_C_ADC_H\n#define DRAL_STM32F446_C_ADC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::c_adc {\n\nstruct\
     \ csr\n{\n  constexpr static uint32_t Address = 0x40012300 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<21, 1> ovr3;\n    BitFieldModel<20,\
     \ 1> strt3;\n    BitFieldModel<19, 1> jstrt3;\n    BitFieldModel<18, 1> jeoc3;\n\
@@ -2987,7 +2987,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM1_H\n#define DRAL_STM32F446_TIM1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim1 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40010000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3091,7 +3091,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM8_H\n#define DRAL_STM32F446_TIM8_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim8 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40010400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3195,7 +3195,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM2_H\n#define DRAL_STM32F446_TIM2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim2 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40000000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3290,7 +3290,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM3_H\n#define DRAL_STM32F446_TIM3_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim3 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40000400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3383,7 +3383,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM4_H\n#define DRAL_STM32F446_TIM4_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim4 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40000800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3476,7 +3476,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM5_H\n#define DRAL_STM32F446_TIM5_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim5 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40000C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<5, 2> cms;\n    BitFieldModel<4, 1> dir;\n    BitFieldModel<3,\
@@ -3571,7 +3571,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM9_H\n#define DRAL_STM32F446_TIM9_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim9 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40014000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<3, 1> opm;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1,\
@@ -3632,7 +3632,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM12_H\n#define DRAL_STM32F446_TIM12_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim12 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40001800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<3, 1> opm;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1,\
@@ -3693,7 +3693,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM10_H\n#define DRAL_STM32F446_TIM10_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim10 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40014400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3740,7 +3740,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM13_H\n#define DRAL_STM32F446_TIM13_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim13 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40001C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3787,7 +3787,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM14_H\n#define DRAL_STM32F446_TIM14_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim14 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40002000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3834,7 +3834,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM11_H\n#define DRAL_STM32F446_TIM11_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim11 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40014800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<8, 2> ckd;\n    BitFieldModel<7,\
     \ 1> arpe;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3883,7 +3883,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM6_H\n#define DRAL_STM32F446_TIM6_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim6 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40001000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<7, 1> arpe;\n    BitFieldModel<3,\
     \ 1> opm;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3920,7 +3920,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_TIM7_H\n#define DRAL_STM32F446_TIM7_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::tim7 {\n\nstruct\
     \ cr1\n{\n  constexpr static uint32_t Address = 0x40001400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<7, 1> arpe;\n    BitFieldModel<3,\
     \ 1> opm;\n    BitFieldModel<2, 1> urs;\n    BitFieldModel<1, 1> udis;\n    BitFieldModel<0,\
@@ -3957,7 +3957,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_CRC_H\n#define DRAL_STM32F446_CRC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::crc {\n\nstruct\
     \ dr\n{\n  constexpr static uint32_t Address = 0x40023000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 32> dr;\n  };\n};\n\nstruct idr\n\
     {\n  constexpr static uint32_t Address = 0x40023000 + 0x0004;\n  union\n  {\n\
@@ -3983,17 +3983,17 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_FS_GLOBAL_H\n#define DRAL_STM32F446_OTG_FS_GLOBAL_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ fs_gotgctl\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0000;\n\
-    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> srqscs;\n    BitFieldModel<1,\
-    \ 1> srq;\n    BitFieldModel<4, 1> avaloen;\n    BitFieldModel<6, 1> bvaloen;\n\
-    \    BitFieldModel<7, 1> bvaloval;\n    BitFieldModel<8, 1> hngscs;\n    BitFieldModel<9,\
-    \ 1> hnprq;\n    BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11, 1> dhnpen;\n\
-    \    BitFieldModel<16, 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n    BitFieldModel<18,\
-    \ 1> asvld;\n    BitFieldModel<19, 1> bsvld;\n  };\n};\n\nstruct fs_gotgint\n\
-    {\n  constexpr static uint32_t Address = 0x50000000 + 0x0004;\n  union\n  {\n\
-    \    uint32_t value;\n    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8, 1>\
-    \ srsschg;\n    BitFieldModel<9, 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_fs_global\
+    \ {\n\nstruct fs_gotgctl\n{\n  constexpr static uint32_t Address = 0x50000000\
+    \ + 0x0000;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> srqscs;\n\
+    \    BitFieldModel<1, 1> srq;\n    BitFieldModel<4, 1> avaloen;\n    BitFieldModel<6,\
+    \ 1> bvaloen;\n    BitFieldModel<7, 1> bvaloval;\n    BitFieldModel<8, 1> hngscs;\n\
+    \    BitFieldModel<9, 1> hnprq;\n    BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11,\
+    \ 1> dhnpen;\n    BitFieldModel<16, 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n\
+    \    BitFieldModel<18, 1> asvld;\n    BitFieldModel<19, 1> bsvld;\n  };\n};\n\n\
+    struct fs_gotgint\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0004;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8,\
+    \ 1> srsschg;\n    BitFieldModel<9, 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n\
     \    BitFieldModel<18, 1> adtochg;\n    BitFieldModel<19, 1> dbcdne;\n  };\n};\n\
     \nstruct fs_gahbcfg\n{\n  constexpr static uint32_t Address = 0x50000000 + 0x0008;\n\
     \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> gint;\n    BitFieldModel<7,\
@@ -4090,9 +4090,9 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_FS_HOST_H\n#define DRAL_STM32F446_OTG_FS_HOST_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ fs_hcfg\n{\n  constexpr static uint32_t Address = 0x50000400 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<0, 2> fslspcs;\n    BitFieldModel<2,\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_fs_host {\n\
+    \nstruct fs_hcfg\n{\n  constexpr static uint32_t Address = 0x50000400 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 2> fslspcs;\n    BitFieldModel<2,\
     \ 1> fslss;\n  };\n};\n\nstruct hfir\n{\n  constexpr static uint32_t Address =\
     \ 0x50000400 + 0x0004;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
     \ 16> frivl;\n  };\n};\n\nstruct fs_hfnum\n{\n  constexpr static uint32_t Address\
@@ -4285,9 +4285,9 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_FS_DEVICE_H\n#define DRAL_STM32F446_OTG_FS_DEVICE_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ fs_dcfg\n{\n  constexpr static uint32_t Address = 0x50000800 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<0, 2> dspd;\n    BitFieldModel<2,\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_fs_device\
+    \ {\n\nstruct fs_dcfg\n{\n  constexpr static uint32_t Address = 0x50000800 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 2> dspd;\n    BitFieldModel<2,\
     \ 1> nzlsohsk;\n    BitFieldModel<4, 7> dad;\n    BitFieldModel<11, 2> pfivl;\n\
     \    BitFieldModel<15, 1> erratim;\n  };\n};\n\nstruct fs_dctl\n{\n  constexpr\
     \ static uint32_t Address = 0x50000800 + 0x0004;\n  union\n  {\n    uint32_t value;\n\
@@ -4450,11 +4450,11 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_FS_PWRCLK_H\n#define DRAL_STM32F446_OTG_FS_PWRCLK_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ fs_pcgcctl\n{\n  constexpr static uint32_t Address = 0x50000E00 + 0x0000;\n\
-    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> stppclk;\n    BitFieldModel<1,\
-    \ 1> gatehclk;\n    BitFieldModel<4, 1> physusp;\n  };\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H\
-    \ */\n"
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_fs_pwrclk\
+    \ {\n\nstruct fs_pcgcctl\n{\n  constexpr static uint32_t Address = 0x50000E00\
+    \ + 0x0000;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> stppclk;\n\
+    \    BitFieldModel<1, 1> gatehclk;\n    BitFieldModel<4, 1> physusp;\n  };\n};\n\
+    \n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
   name: OTG_FS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4473,7 +4473,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_CAN1_H\n#define DRAL_STM32F446_CAN1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::can1 {\n\nstruct\
     \ mcr\n{\n  constexpr static uint32_t Address = 0x40006400 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<16, 1> dbf;\n    BitFieldModel<15,\
     \ 1> reset;\n    BitFieldModel<7, 1> ttcm;\n    BitFieldModel<6, 1> abom;\n  \
@@ -5431,7 +5431,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_CAN2_H\n#define DRAL_STM32F446_CAN2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::can2 {\n\nstruct\
     \ mcr\n{\n  constexpr static uint32_t Address = 0x40006800 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<16, 1> dbf;\n    BitFieldModel<15,\
     \ 1> reset;\n    BitFieldModel<7, 1> ttcm;\n    BitFieldModel<6, 1> abom;\n  \
@@ -6389,7 +6389,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_NVIC_H\n#define DRAL_STM32F446_NVIC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::nvic {\n\nstruct\
     \ iser0\n{\n  constexpr static uint32_t Address = 0xE000E100 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 32> setena;\n  };\n};\n\nstruct\
     \ iser1\n{\n  constexpr static uint32_t Address = 0xE000E100 + 0x0004;\n  union\n\
@@ -6514,7 +6514,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_FLASH_H\n#define DRAL_STM32F446_FLASH_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::flash {\n\nstruct\
     \ acr\n{\n  constexpr static uint32_t Address = 0x40023C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 3> latency;\n    BitFieldModel<8,\
     \ 1> prften;\n    BitFieldModel<9, 1> icen;\n    BitFieldModel<10, 1> dcen;\n\
@@ -6557,7 +6557,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_EXTI_H\n#define DRAL_STM32F446_EXTI_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::exti {\n\nstruct\
     \ imr\n{\n  constexpr static uint32_t Address = 0x40013C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> mr0;\n    BitFieldModel<1,\
     \ 1> mr1;\n    BitFieldModel<2, 1> mr2;\n    BitFieldModel<3, 1> mr3;\n    BitFieldModel<4,\
@@ -6639,31 +6639,32 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_HS_GLOBAL_H\n#define DRAL_STM32F446_OTG_HS_GLOBAL_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ otg_hs_gotgctl\n{\n  constexpr static uint32_t Address = 0x40040000 + 0x0000;\n\
-    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> srqscs;\n    BitFieldModel<1,\
-    \ 1> srq;\n    BitFieldModel<8, 1> hngscs;\n    BitFieldModel<9, 1> hnprq;\n \
-    \   BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11, 1> dhnpen;\n    BitFieldModel<16,\
-    \ 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n    BitFieldModel<18, 1> asvld;\n\
-    \    BitFieldModel<19, 1> bsvld;\n  };\n};\n\nstruct otg_hs_gotgint\n{\n  constexpr\
-    \ static uint32_t Address = 0x40040000 + 0x0004;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8, 1> srsschg;\n    BitFieldModel<9,\
-    \ 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n    BitFieldModel<18, 1> adtochg;\n\
-    \    BitFieldModel<19, 1> dbcdne;\n  };\n};\n\nstruct otg_hs_gahbcfg\n{\n  constexpr\
-    \ static uint32_t Address = 0x40040000 + 0x0008;\n  union\n  {\n    uint32_t value;\n\
-    \    BitFieldModel<0, 1> gint;\n    BitFieldModel<1, 4> hbstlen;\n    BitFieldModel<5,\
-    \ 1> dmaen;\n    BitFieldModel<7, 1> txfelvl;\n    BitFieldModel<8, 1> ptxfelvl;\n\
-    \  };\n};\n\nstruct otg_hs_gusbcfg\n{\n  constexpr static uint32_t Address = 0x40040000\
-    \ + 0x000C;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 3> tocal;\n\
-    \    BitFieldModel<6, 1> physel;\n    BitFieldModel<8, 1> srpcap;\n    BitFieldModel<9,\
-    \ 1> hnpcap;\n    BitFieldModel<10, 4> trdt;\n    BitFieldModel<15, 1> phylpcs;\n\
-    \    BitFieldModel<17, 1> ulpifsls;\n    BitFieldModel<18, 1> ulpiar;\n    BitFieldModel<19,\
-    \ 1> ulpicsm;\n    BitFieldModel<20, 1> ulpievbusd;\n    BitFieldModel<21, 1>\
-    \ ulpievbusi;\n    BitFieldModel<22, 1> tsdps;\n    BitFieldModel<23, 1> pcci;\n\
-    \    BitFieldModel<24, 1> ptci;\n    BitFieldModel<25, 1> ulpiipd;\n    BitFieldModel<29,\
-    \ 1> fhmod;\n    BitFieldModel<30, 1> fdmod;\n    BitFieldModel<31, 1> ctxpkt;\n\
-    \  };\n};\n\nstruct otg_hs_grstctl\n{\n  constexpr static uint32_t Address = 0x40040000\
-    \ + 0x0010;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> csrst;\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_hs_global\
+    \ {\n\nstruct otg_hs_gotgctl\n{\n  constexpr static uint32_t Address = 0x40040000\
+    \ + 0x0000;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> srqscs;\n\
+    \    BitFieldModel<1, 1> srq;\n    BitFieldModel<8, 1> hngscs;\n    BitFieldModel<9,\
+    \ 1> hnprq;\n    BitFieldModel<10, 1> hshnpen;\n    BitFieldModel<11, 1> dhnpen;\n\
+    \    BitFieldModel<16, 1> cidsts;\n    BitFieldModel<17, 1> dbct;\n    BitFieldModel<18,\
+    \ 1> asvld;\n    BitFieldModel<19, 1> bsvld;\n  };\n};\n\nstruct otg_hs_gotgint\n\
+    {\n  constexpr static uint32_t Address = 0x40040000 + 0x0004;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<2, 1> sedet;\n    BitFieldModel<8, 1>\
+    \ srsschg;\n    BitFieldModel<9, 1> hnsschg;\n    BitFieldModel<17, 1> hngdet;\n\
+    \    BitFieldModel<18, 1> adtochg;\n    BitFieldModel<19, 1> dbcdne;\n  };\n};\n\
+    \nstruct otg_hs_gahbcfg\n{\n  constexpr static uint32_t Address = 0x40040000 +\
+    \ 0x0008;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> gint;\n\
+    \    BitFieldModel<1, 4> hbstlen;\n    BitFieldModel<5, 1> dmaen;\n    BitFieldModel<7,\
+    \ 1> txfelvl;\n    BitFieldModel<8, 1> ptxfelvl;\n  };\n};\n\nstruct otg_hs_gusbcfg\n\
+    {\n  constexpr static uint32_t Address = 0x40040000 + 0x000C;\n  union\n  {\n\
+    \    uint32_t value;\n    BitFieldModel<0, 3> tocal;\n    BitFieldModel<6, 1>\
+    \ physel;\n    BitFieldModel<8, 1> srpcap;\n    BitFieldModel<9, 1> hnpcap;\n\
+    \    BitFieldModel<10, 4> trdt;\n    BitFieldModel<15, 1> phylpcs;\n    BitFieldModel<17,\
+    \ 1> ulpifsls;\n    BitFieldModel<18, 1> ulpiar;\n    BitFieldModel<19, 1> ulpicsm;\n\
+    \    BitFieldModel<20, 1> ulpievbusd;\n    BitFieldModel<21, 1> ulpievbusi;\n\
+    \    BitFieldModel<22, 1> tsdps;\n    BitFieldModel<23, 1> pcci;\n    BitFieldModel<24,\
+    \ 1> ptci;\n    BitFieldModel<25, 1> ulpiipd;\n    BitFieldModel<29, 1> fhmod;\n\
+    \    BitFieldModel<30, 1> fdmod;\n    BitFieldModel<31, 1> ctxpkt;\n  };\n};\n\
+    \nstruct otg_hs_grstctl\n{\n  constexpr static uint32_t Address = 0x40040000 +\
+    \ 0x0010;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> csrst;\n\
     \    BitFieldModel<1, 1> hsrst;\n    BitFieldModel<2, 1> fcrst;\n    BitFieldModel<4,\
     \ 1> rxfflsh;\n    BitFieldModel<5, 1> txfflsh;\n    BitFieldModel<6, 5> txfnum;\n\
     \    BitFieldModel<30, 1> dmareq;\n    BitFieldModel<31, 1> ahbidl;\n  };\n};\n\
@@ -6761,8 +6762,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_HS_HOST_H\n#define DRAL_STM32F446_OTG_HS_HOST_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ otg_hs_hcfg\n{\n  constexpr static uint32_t Address = 0x40040400 + 0x0000;\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_hs_host {\n\
+    \nstruct otg_hs_hcfg\n{\n  constexpr static uint32_t Address = 0x40040400 + 0x0000;\n\
     \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 2> fslspcs;\n    BitFieldModel<2,\
     \ 1> fslss;\n  };\n};\n\nstruct otg_hs_hfir\n{\n  constexpr static uint32_t Address\
     \ = 0x40040400 + 0x0004;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
@@ -7118,18 +7119,18 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_HS_DEVICE_H\n#define DRAL_STM32F446_OTG_HS_DEVICE_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ otg_hs_dcfg\n{\n  constexpr static uint32_t Address = 0x40040800 + 0x0000;\n\
-    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 2> dspd;\n    BitFieldModel<2,\
-    \ 1> nzlsohsk;\n    BitFieldModel<4, 7> dad;\n    BitFieldModel<11, 2> pfivl;\n\
-    \    BitFieldModel<24, 2> perschivl;\n    BitFieldModel<14, 1> xcvrdly;\n    BitFieldModel<15,\
-    \ 1> erratim;\n  };\n};\n\nstruct otg_hs_dctl\n{\n  constexpr static uint32_t\
-    \ Address = 0x40040800 + 0x0004;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0,\
-    \ 1> rwusig;\n    BitFieldModel<1, 1> sdis;\n    BitFieldModel<2, 1> ginsts;\n\
-    \    BitFieldModel<3, 1> gonsts;\n    BitFieldModel<4, 3> tctl;\n    BitFieldModel<7,\
-    \ 1> sginak;\n    BitFieldModel<8, 1> cginak;\n    BitFieldModel<9, 1> sgonak;\n\
-    \    BitFieldModel<10, 1> cgonak;\n    BitFieldModel<11, 1> poprgdne;\n  };\n\
-    };\n\nstruct otg_hs_dsts\n{\n  constexpr static uint32_t Address = 0x40040800\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_hs_device\
+    \ {\n\nstruct otg_hs_dcfg\n{\n  constexpr static uint32_t Address = 0x40040800\
+    \ + 0x0000;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 2> dspd;\n\
+    \    BitFieldModel<2, 1> nzlsohsk;\n    BitFieldModel<4, 7> dad;\n    BitFieldModel<11,\
+    \ 2> pfivl;\n    BitFieldModel<24, 2> perschivl;\n    BitFieldModel<14, 1> xcvrdly;\n\
+    \    BitFieldModel<15, 1> erratim;\n  };\n};\n\nstruct otg_hs_dctl\n{\n  constexpr\
+    \ static uint32_t Address = 0x40040800 + 0x0004;\n  union\n  {\n    uint32_t value;\n\
+    \    BitFieldModel<0, 1> rwusig;\n    BitFieldModel<1, 1> sdis;\n    BitFieldModel<2,\
+    \ 1> ginsts;\n    BitFieldModel<3, 1> gonsts;\n    BitFieldModel<4, 3> tctl;\n\
+    \    BitFieldModel<7, 1> sginak;\n    BitFieldModel<8, 1> cginak;\n    BitFieldModel<9,\
+    \ 1> sgonak;\n    BitFieldModel<10, 1> cgonak;\n    BitFieldModel<11, 1> poprgdne;\n\
+    \  };\n};\n\nstruct otg_hs_dsts\n{\n  constexpr static uint32_t Address = 0x40040800\
     \ + 0x0008;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> suspsts;\n\
     \    BitFieldModel<1, 2> enumspd;\n    BitFieldModel<3, 1> eerr;\n    BitFieldModel<8,\
     \ 14> fnsof;\n  };\n};\n\nstruct otg_hs_diepmsk\n{\n  constexpr static uint32_t\
@@ -7411,11 +7412,11 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_OTG_HS_PWRCLK_H\n#define DRAL_STM32F446_OTG_HS_PWRCLK_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ otg_hs_pcgcr\n{\n  constexpr static uint32_t Address = 0x40040E00 + 0x0000;\n\
-    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> stppclk;\n    BitFieldModel<1,\
-    \ 1> gatehclk;\n    BitFieldModel<4, 1> physusp;\n  };\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H\
-    \ */\n"
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::otg_hs_pwrclk\
+    \ {\n\nstruct otg_hs_pcgcr\n{\n  constexpr static uint32_t Address = 0x40040E00\
+    \ + 0x0000;\n  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> stppclk;\n\
+    \    BitFieldModel<1, 1> gatehclk;\n    BitFieldModel<4, 1> physusp;\n  };\n};\n\
+    \n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
   name: OTG_HS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7434,7 +7435,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SAI1_H\n#define DRAL_STM32F446_SAI1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::sai1 {\n\nstruct\
     \ bcr1\n{\n  constexpr static uint32_t Address = 0x40015800 + 0x0024;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<20, 4> mcjdiv;\n    BitFieldModel<19,\
     \ 1> nodiv;\n    BitFieldModel<17, 1> dmaen;\n    BitFieldModel<16, 1> saiben;\n\
@@ -7522,7 +7523,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SAI2_H\n#define DRAL_STM32F446_SAI2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::sai2 {\n\nstruct\
     \ bcr1\n{\n  constexpr static uint32_t Address = 0x40015C00 + 0x0024;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<20, 4> mcjdiv;\n    BitFieldModel<19,\
     \ 1> nodiv;\n    BitFieldModel<17, 1> dmaen;\n    BitFieldModel<16, 1> saiben;\n\
@@ -7610,7 +7611,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_PWR_H\n#define DRAL_STM32F446_PWR_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::pwr {\n\nstruct\
     \ cr\n{\n  constexpr static uint32_t Address = 0x40007000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> lpds;\n    BitFieldModel<1,\
     \ 1> pdds;\n    BitFieldModel<2, 1> cwuf;\n    BitFieldModel<3, 1> csbf;\n   \
@@ -7644,8 +7645,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_QUADSPI_H\n#define DRAL_STM32F446_QUADSPI_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ cr\n{\n  constexpr static uint32_t Address = 0xA0001000 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::quadspi {\n\n\
+    struct cr\n{\n  constexpr static uint32_t Address = 0xA0001000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<24, 8> prescaler;\n    BitFieldModel<23,\
     \ 1> pmm;\n    BitFieldModel<22, 1> apms;\n    BitFieldModel<20, 1> toie;\n  \
     \  BitFieldModel<19, 1> smie;\n    BitFieldModel<18, 1> ftie;\n    BitFieldModel<17,\
@@ -7704,8 +7705,8 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SPDIF_RX_H\n#define DRAL_STM32F446_SPDIF_RX_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ cr\n{\n  constexpr static uint32_t Address = 0x40004000 + 0x0000;\n  union\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::spdif_rx {\n\n\
+    struct cr\n{\n  constexpr static uint32_t Address = 0x40004000 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 2> spdifen;\n    BitFieldModel<2,\
     \ 1> rxdmaen;\n    BitFieldModel<3, 1> rxsteo;\n    BitFieldModel<4, 2> drfmt;\n\
     \    BitFieldModel<6, 1> pmsk;\n    BitFieldModel<7, 1> vmsk;\n    BitFieldModel<8,\
@@ -7752,9 +7753,9 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_HDMI_CEC_H\n#define DRAL_STM32F446_HDMI_CEC_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ cec_cr\n{\n  constexpr static uint32_t Address = 0x40006C00 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<2, 1> txeom;\n    BitFieldModel<1,\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::hdmi_cec {\n\n\
+    struct cec_cr\n{\n  constexpr static uint32_t Address = 0x40006C00 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<2, 1> txeom;\n    BitFieldModel<1,\
     \ 1> txsom;\n    BitFieldModel<0, 1> cecen;\n  };\n};\n\nstruct cec_cfgr\n{\n\
     \  constexpr static uint32_t Address = 0x40006C00 + 0x0004;\n  union\n  {\n  \
     \  uint32_t value;\n    BitFieldModel<31, 1> lstn;\n    BitFieldModel<16, 15>\
@@ -7798,7 +7799,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_FPU_H\n#define DRAL_STM32F446_FPU_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::fpu {\n\nstruct\
     \ fpccr\n{\n  constexpr static uint32_t Address = 0xE000EF34 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> lspact;\n    BitFieldModel<1,\
     \ 1> user;\n    BitFieldModel<3, 1> thread;\n    BitFieldModel<4, 1> hfrdy;\n\
@@ -7832,7 +7833,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_MPU_H\n#define DRAL_STM32F446_MPU_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::mpu {\n\nstruct\
     \ mpu_typer\n{\n  constexpr static uint32_t Address = 0xE000ED90 + 0x0000;\n \
     \ union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> separate;\n    BitFieldModel<8,\
     \ 8> dregion;\n    BitFieldModel<16, 8> iregion;\n  };\n};\n\nstruct mpu_ctrl\n\
@@ -7867,7 +7868,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_STK_H\n#define DRAL_STM32F446_STK_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::stk {\n\nstruct\
     \ ctrl\n{\n  constexpr static uint32_t Address = 0xE000E010 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 1> enable;\n    BitFieldModel<1,\
     \ 1> tickint;\n    BitFieldModel<2, 1> clksource;\n    BitFieldModel<16, 1> countflag;\n\
@@ -7897,7 +7898,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SCB_H\n#define DRAL_STM32F446_SCB_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::scb {\n\nstruct\
     \ cpuid\n{\n  constexpr static uint32_t Address = 0xE000ED00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 4> revision;\n    BitFieldModel<4,\
     \ 12> partno;\n    BitFieldModel<16, 4> constant;\n    BitFieldModel<20, 4> variant;\n\
@@ -7974,10 +7975,10 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_NVIC_STIR_H\n#define DRAL_STM32F446_NVIC_STIR_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ stir\n{\n  constexpr static uint32_t Address = 0xE000EF00 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<0, 9> intid;\n  };\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_NVIC_STIR_H */\n"
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::nvic_stir {\n\
+    \nstruct stir\n{\n  constexpr static uint32_t Address = 0xE000EF00 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 9> intid;\n  };\n};\n\
+    \n}\n\n#endif /* DRAL_STM32F446_NVIC_STIR_H */\n"
   name: NVIC_STIR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7996,10 +7997,10 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_FPU_CPACR_H\n#define DRAL_STM32F446_FPU_CPACR_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ cpacr\n{\n  constexpr static uint32_t Address = 0xE000ED88 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<20, 4> cp;\n  };\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_FPU_CPACR_H */\n"
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::fpu_cpacr {\n\
+    \nstruct cpacr\n{\n  constexpr static uint32_t Address = 0xE000ED88 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<20, 4> cp;\n  };\n};\n\n\
+    }\n\n#endif /* DRAL_STM32F446_FPU_CPACR_H */\n"
   name: FPU_CPACR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8018,9 +8019,9 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SCB_ACTRL_H\n#define DRAL_STM32F446_SCB_ACTRL_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
-    \ actrl\n{\n  constexpr static uint32_t Address = 0xE000E008 + 0x0000;\n  union\n\
-    \  {\n    uint32_t value;\n    BitFieldModel<0, 1> dismcycint;\n    BitFieldModel<1,\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::scb_actrl {\n\
+    \nstruct actrl\n{\n  constexpr static uint32_t Address = 0xE000E008 + 0x0000;\n\
+    \  union\n  {\n    uint32_t value;\n    BitFieldModel<0, 1> dismcycint;\n    BitFieldModel<1,\
     \ 1> disdefwbuf;\n    BitFieldModel<2, 1> disfold;\n    BitFieldModel<8, 1> disfpca;\n\
     \    BitFieldModel<9, 1> disoofp;\n  };\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_ACTRL_H\
     \ */\n"
@@ -8042,7 +8043,7 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_STM32F446_SDIO_H\n#define DRAL_STM32F446_SDIO_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446 {\n\nstruct\
+    \n#include \"../register_model.h\"\n\nnamespace dral::stm32f446::sdio {\n\nstruct\
     \ power\n{\n  constexpr static uint32_t Address = 0x40012C00 + 0x0000;\n  union\n\
     \  {\n    uint32_t value;\n    BitFieldModel<0, 2> pwrctrl;\n  };\n};\n\nstruct\
     \ clkcr\n{\n  constexpr static uint32_t Address = 0x40012C00 + 0x0004;\n  union\n\
