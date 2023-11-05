@@ -5737,6 +5737,18 @@
     \    using bkp = FieldModel<address, 0, 32>;\n\n  public:\n    union reg\n   \
     \ {\n      uint32_t value;\n      BitFieldModel<0, 32> bkp;\n    };\n  };\n\n\
     public:\n  using bkp19r = Bkp19rReg<BaseAddress + 0x009C>;\nprivate:\n  template<uint32_t\
+    \ address, uint32_t bankOffset>\n  class AlrmxrBankReg : public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using msk4 = FieldModel<address, 31, 1, bankOffset>;\n\
+    \    using wdsel = FieldModel<address, 30, 1, bankOffset>;\n    using dt = FieldModel<address,\
+    \ 28, 2, bankOffset>;\n    using du = FieldModel<address, 24, 4, bankOffset>;\n\
+    \    using msk3 = FieldModel<address, 23, 1, bankOffset>;\n    using pm = FieldModel<address,\
+    \ 22, 1, bankOffset>;\n    using ht = FieldModel<address, 20, 2, bankOffset>;\n\
+    \    using hu = FieldModel<address, 16, 4, bankOffset>;\n    using msk2 = FieldModel<address,\
+    \ 15, 1, bankOffset>;\n    using mnt = FieldModel<address, 12, 3, bankOffset>;\n\
+    \    using mnu = FieldModel<address, 8, 4, bankOffset>;\n    using msk1 = FieldModel<address,\
+    \ 7, 1, bankOffset>;\n    using st = FieldModel<address, 4, 3, bankOffset>;\n\
+    \    using su = FieldModel<address, 0, 4, bankOffset>;\n  };\n\npublic:\n  using\
+    \ alrmxr = AlrmxrBankReg<BaseAddress + 0x001C, 0x0004>;\n\nprivate:\n  template<uint32_t\
     \ address, uint32_t bankOffset>\n  class AlrmxssrBankReg : public RegisterBankModel<address,\
     \ bankOffset>\n  {\n  public:\n    using maskss = FieldModel<address, 24, 4, bankOffset>;\n\
     \    using ss = FieldModel<address, 0, 15, bankOffset>;\n  };\n\npublic:\n  using\
@@ -8015,8 +8027,12 @@
     \ 4, 11, bankOffset>;\n    using dpid = FieldModel<address, 15, 2, bankOffset>;\n\
     \    using pktsts = FieldModel<address, 17, 4, bankOffset>;\n    using frmnum\
     \ = FieldModel<address, 21, 4, bankOffset>;\n  };\n\npublic:\n  using fs_grxstsx_host\
-    \ = Fs_grxstsx_hostBankReg<BaseAddress + 0x001C, 0x0004>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_OTG_FS_GLOBAL_H */\n"
+    \ = Fs_grxstsx_hostBankReg<BaseAddress + 0x001C, 0x0004>;\n\nprivate:\n  template<uint32_t\
+    \ address, uint32_t bankOffset>\n  class Fs_dieptxfxBankReg : public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using ineptxsa = FieldModel<address, 0, 16,\
+    \ bankOffset>;\n    using ineptxfd = FieldModel<address, 16, 16, bankOffset>;\n\
+    \  };\n\npublic:\n  using fs_dieptxfx = Fs_dieptxfxBankReg<BaseAddress + 0x0104,\
+    \ 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_GLOBAL_H */\n"
   name: OTG_FS_GLOBAL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -11070,7 +11086,7 @@
     \ = FieldModel<address, 16, 16, bankOffset>;\n    using fmi = FieldModel<address,\
     \ 8, 8, bankOffset>;\n    using dlc = FieldModel<address, 0, 4, bankOffset>;\n\
     \  };\n\npublic:\n  using rdtxr = RdtxrBankReg<BaseAddress + 0x01B4, 0x0010>;\n\
-    \nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n  class F0rxBankReg\
+    \nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n  class Fxr2BankReg\
     \ : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using fb0\
     \ = FieldModel<address, 0, 1, bankOffset>;\n    using fb1 = FieldModel<address,\
     \ 1, 1, bankOffset>;\n    using fb2 = FieldModel<address, 2, 1, bankOffset>;\n\
@@ -11093,8 +11109,8 @@
     \    using fb27 = FieldModel<address, 27, 1, bankOffset>;\n    using fb28 = FieldModel<address,\
     \ 28, 1, bankOffset>;\n    using fb29 = FieldModel<address, 29, 1, bankOffset>;\n\
     \    using fb30 = FieldModel<address, 30, 1, bankOffset>;\n    using fb31 = FieldModel<address,\
-    \ 31, 1, bankOffset>;\n  };\n\npublic:\n  using f0rx = F0rxBankReg<BaseAddress\
-    \ + 0x0240, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_CAN1_H */\n"
+    \ 31, 1, bankOffset>;\n  };\n\npublic:\n  using fxr2 = Fxr2BankReg<BaseAddress\
+    \ + 0x024C, 0x0008>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_CAN1_H */\n"
   name: CAN1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -13288,7 +13304,7 @@
     \ = FieldModel<address, 16, 16, bankOffset>;\n    using fmi = FieldModel<address,\
     \ 8, 8, bankOffset>;\n    using dlc = FieldModel<address, 0, 4, bankOffset>;\n\
     \  };\n\npublic:\n  using rdtxr = RdtxrBankReg<BaseAddress + 0x01B4, 0x0010>;\n\
-    \nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n  class F0rxBankReg\
+    \nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n  class Fxr2BankReg\
     \ : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using fb0\
     \ = FieldModel<address, 0, 1, bankOffset>;\n    using fb1 = FieldModel<address,\
     \ 1, 1, bankOffset>;\n    using fb2 = FieldModel<address, 2, 1, bankOffset>;\n\
@@ -13311,8 +13327,8 @@
     \    using fb27 = FieldModel<address, 27, 1, bankOffset>;\n    using fb28 = FieldModel<address,\
     \ 28, 1, bankOffset>;\n    using fb29 = FieldModel<address, 29, 1, bankOffset>;\n\
     \    using fb30 = FieldModel<address, 30, 1, bankOffset>;\n    using fb31 = FieldModel<address,\
-    \ 31, 1, bankOffset>;\n  };\n\npublic:\n  using f0rx = F0rxBankReg<BaseAddress\
-    \ + 0x0240, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_CAN2_H */\n"
+    \ 31, 1, bankOffset>;\n  };\n\npublic:\n  using fxr2 = Fxr2BankReg<BaseAddress\
+    \ + 0x024C, 0x0008>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_CAN2_H */\n"
   name: CAN2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -13819,8 +13835,44 @@
     \ 1> pr16;\n      BitFieldModel<17, 1> pr17;\n      BitFieldModel<18, 1> pr18;\n\
     \      BitFieldModel<19, 1> pr19;\n      BitFieldModel<20, 1> pr20;\n      BitFieldModel<21,\
     \ 1> pr21;\n      BitFieldModel<22, 1> pr22;\n    };\n  };\n\npublic:\n  using\
-    \ pr = PrReg<BaseAddress + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H\
-    \ */\n"
+    \ pr = PrReg<BaseAddress + 0x0014>;\nprivate:\n  template<uint32_t address, uint32_t\
+    \ bankOffset>\n  class XmrBankReg : public RegisterBankModel<address, bankOffset>\n\
+    \  {\n  public:\n    using mr0 = FieldModel<address, 0, 1, bankOffset>;\n    using\
+    \ mr1 = FieldModel<address, 1, 1, bankOffset>;\n    using mr2 = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using mr3 = FieldModel<address, 3, 1, bankOffset>;\n\
+    \    using mr4 = FieldModel<address, 4, 1, bankOffset>;\n    using mr5 = FieldModel<address,\
+    \ 5, 1, bankOffset>;\n    using mr6 = FieldModel<address, 6, 1, bankOffset>;\n\
+    \    using mr7 = FieldModel<address, 7, 1, bankOffset>;\n    using mr8 = FieldModel<address,\
+    \ 8, 1, bankOffset>;\n    using mr9 = FieldModel<address, 9, 1, bankOffset>;\n\
+    \    using mr10 = FieldModel<address, 10, 1, bankOffset>;\n    using mr11 = FieldModel<address,\
+    \ 11, 1, bankOffset>;\n    using mr12 = FieldModel<address, 12, 1, bankOffset>;\n\
+    \    using mr13 = FieldModel<address, 13, 1, bankOffset>;\n    using mr14 = FieldModel<address,\
+    \ 14, 1, bankOffset>;\n    using mr15 = FieldModel<address, 15, 1, bankOffset>;\n\
+    \    using mr16 = FieldModel<address, 16, 1, bankOffset>;\n    using mr17 = FieldModel<address,\
+    \ 17, 1, bankOffset>;\n    using mr18 = FieldModel<address, 18, 1, bankOffset>;\n\
+    \    using mr19 = FieldModel<address, 19, 1, bankOffset>;\n    using mr20 = FieldModel<address,\
+    \ 20, 1, bankOffset>;\n    using mr21 = FieldModel<address, 21, 1, bankOffset>;\n\
+    \    using mr22 = FieldModel<address, 22, 1, bankOffset>;\n  };\n\npublic:\n \
+    \ using xmr = XmrBankReg<BaseAddress + 0x0000, 0x0004>;\n\nprivate:\n  template<uint32_t\
+    \ address, uint32_t bankOffset>\n  class XtsrBankReg : public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using tr0 = FieldModel<address, 0, 1, bankOffset>;\n\
+    \    using tr1 = FieldModel<address, 1, 1, bankOffset>;\n    using tr2 = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using tr3 = FieldModel<address, 3, 1, bankOffset>;\n\
+    \    using tr4 = FieldModel<address, 4, 1, bankOffset>;\n    using tr5 = FieldModel<address,\
+    \ 5, 1, bankOffset>;\n    using tr6 = FieldModel<address, 6, 1, bankOffset>;\n\
+    \    using tr7 = FieldModel<address, 7, 1, bankOffset>;\n    using tr8 = FieldModel<address,\
+    \ 8, 1, bankOffset>;\n    using tr9 = FieldModel<address, 9, 1, bankOffset>;\n\
+    \    using tr10 = FieldModel<address, 10, 1, bankOffset>;\n    using tr11 = FieldModel<address,\
+    \ 11, 1, bankOffset>;\n    using tr12 = FieldModel<address, 12, 1, bankOffset>;\n\
+    \    using tr13 = FieldModel<address, 13, 1, bankOffset>;\n    using tr14 = FieldModel<address,\
+    \ 14, 1, bankOffset>;\n    using tr15 = FieldModel<address, 15, 1, bankOffset>;\n\
+    \    using tr16 = FieldModel<address, 16, 1, bankOffset>;\n    using tr17 = FieldModel<address,\
+    \ 17, 1, bankOffset>;\n    using tr18 = FieldModel<address, 18, 1, bankOffset>;\n\
+    \    using tr19 = FieldModel<address, 19, 1, bankOffset>;\n    using tr20 = FieldModel<address,\
+    \ 20, 1, bankOffset>;\n    using tr21 = FieldModel<address, 21, 1, bankOffset>;\n\
+    \    using tr22 = FieldModel<address, 22, 1, bankOffset>;\n  };\n\npublic:\n \
+    \ using xtsr = XtsrBankReg<BaseAddress + 0x0008, 0x0004>;\n};\n\n}\n\n#endif /*\
+    \ DRAL_STM32F446_EXTI_H */\n"
   name: EXTI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -15803,10 +15855,25 @@
     \  using slotsz = FieldModel<address, 6, 2, bankOffset>;\n    using fboff = FieldModel<address,\
     \ 0, 5, bankOffset>;\n  };\n\npublic:\n  using xslotr = XslotrBankReg<BaseAddress\
     \ + 0x0010, 0x0020>;\n\nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n\
-    \  class XdrBankReg : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
-    \    using data = FieldModel<address, 0, 32, bankOffset>;\n  };\n\npublic:\n \
-    \ using xdr = XdrBankReg<BaseAddress + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_SAI1_H */\n"
+    \  class XsrBankReg : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
+    \    using flvl = FieldModel<address, 16, 3, bankOffset>;\n    using lfsdet =\
+    \ FieldModel<address, 6, 1, bankOffset>;\n    using afsdet = FieldModel<address,\
+    \ 5, 1, bankOffset>;\n    using cnrdy = FieldModel<address, 4, 1, bankOffset>;\n\
+    \    using freq = FieldModel<address, 3, 1, bankOffset>;\n    using wckcfg = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using mutedet = FieldModel<address, 1, 1, bankOffset>;\n\
+    \    using ovrudr = FieldModel<address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
+    \  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n  template<uint32_t\
+    \ address, uint32_t bankOffset>\n  class XclrfrBankReg : public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using lfsdet = FieldModel<address, 6, 1, bankOffset>;\n\
+    \    using cafsdet = FieldModel<address, 5, 1, bankOffset>;\n    using cnrdy =\
+    \ FieldModel<address, 4, 1, bankOffset>;\n    using wckcfg = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using mutedet = FieldModel<address, 1, 1, bankOffset>;\n\
+    \    using ovrudr = FieldModel<address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
+    \  using xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n \
+    \ template<uint32_t address, uint32_t bankOffset>\n  class XdrBankReg : public\
+    \ RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using data = FieldModel<address,\
+    \ 0, 32, bankOffset>;\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress +\
+    \ 0x0020, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI1_H */\n"
   name: SAI1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -15999,10 +16066,25 @@
     \  using slotsz = FieldModel<address, 6, 2, bankOffset>;\n    using fboff = FieldModel<address,\
     \ 0, 5, bankOffset>;\n  };\n\npublic:\n  using xslotr = XslotrBankReg<BaseAddress\
     \ + 0x0010, 0x0020>;\n\nprivate:\n  template<uint32_t address, uint32_t bankOffset>\n\
-    \  class XdrBankReg : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
-    \    using data = FieldModel<address, 0, 32, bankOffset>;\n  };\n\npublic:\n \
-    \ using xdr = XdrBankReg<BaseAddress + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_SAI2_H */\n"
+    \  class XsrBankReg : public RegisterBankModel<address, bankOffset>\n  {\n  public:\n\
+    \    using flvl = FieldModel<address, 16, 3, bankOffset>;\n    using lfsdet =\
+    \ FieldModel<address, 6, 1, bankOffset>;\n    using afsdet = FieldModel<address,\
+    \ 5, 1, bankOffset>;\n    using cnrdy = FieldModel<address, 4, 1, bankOffset>;\n\
+    \    using freq = FieldModel<address, 3, 1, bankOffset>;\n    using wckcfg = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using mutedet = FieldModel<address, 1, 1, bankOffset>;\n\
+    \    using ovrudr = FieldModel<address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
+    \  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n  template<uint32_t\
+    \ address, uint32_t bankOffset>\n  class XclrfrBankReg : public RegisterBankModel<address,\
+    \ bankOffset>\n  {\n  public:\n    using lfsdet = FieldModel<address, 6, 1, bankOffset>;\n\
+    \    using cafsdet = FieldModel<address, 5, 1, bankOffset>;\n    using cnrdy =\
+    \ FieldModel<address, 4, 1, bankOffset>;\n    using wckcfg = FieldModel<address,\
+    \ 2, 1, bankOffset>;\n    using mutedet = FieldModel<address, 1, 1, bankOffset>;\n\
+    \    using ovrudr = FieldModel<address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
+    \  using xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n \
+    \ template<uint32_t address, uint32_t bankOffset>\n  class XdrBankReg : public\
+    \ RegisterBankModel<address, bankOffset>\n  {\n  public:\n    using data = FieldModel<address,\
+    \ 0, 32, bankOffset>;\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress +\
+    \ 0x0020, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI2_H */\n"
   name: SAI2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\

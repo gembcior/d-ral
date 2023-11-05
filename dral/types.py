@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 
 
 class DralBaseType(ABC):
-    def __init__(self, name: str, description: Optional[str] = None):
+    def __init__(self, name: str, description: str = ""):
         self._name = name
         self._description = description
 
@@ -22,7 +22,7 @@ class DralBaseType(ABC):
         return self._name
 
     @property
-    def description(self) -> Optional[str]:
+    def description(self) -> str:
         return self._description
 
     @abstractmethod
@@ -31,11 +31,11 @@ class DralBaseType(ABC):
 
 
 class Field(DralBaseType):
-    def __init__(self, name: str, description: Optional[str] = None, position: Optional[int] = None, width: Optional[int] = None) -> None:
+    def __init__(self, name: str, position: int, width: int, description: str = "") -> None:
         super().__init__(name, description)
         self._position = position
         self._width = width
-        self._mask = (1 << width) - 1 if width is not None else None
+        self._mask = (1 << width) - 1
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -49,15 +49,15 @@ class Field(DralBaseType):
         }
 
     @property
-    def position(self) -> Optional[int]:
+    def position(self) -> int:
         return self._position
 
     @property
-    def mask(self) -> Optional[int]:
+    def mask(self) -> int:
         return self._mask
 
     @property
-    def width(self) -> Optional[int]:
+    def width(self) -> int:
         return self._width
 
 
@@ -65,17 +65,17 @@ class Register(DralBaseType):
     def __init__(
         self,
         name: str,
-        description: Optional[str] = None,
-        offset: Optional[int] = None,
-        size: Optional[int] = None,
-        access: Optional[str] = None,
+        offset: int,
+        size: int = 32,
+        description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
     ):
         super().__init__(name, description)
         self._offset = offset
+        if size not in [8, 16, 32, 64]:
+            raise ValueError
         self._size = size
-        self._access = access
         self._reset_value = reset_value
         if fields is None:
             fields = []
@@ -88,23 +88,18 @@ class Register(DralBaseType):
                 "description": self._description,
                 "offset": self._offset,
                 "size": self._size,
-                "access": self._access,
                 "reset_value": self._reset_value,
                 "fields": [field.asdict() for field in self._fields],
             }
         }
 
     @property
-    def offset(self) -> Optional[int]:
+    def offset(self) -> int:
         return self._offset
 
     @property
-    def size(self) -> Optional[int]:
+    def size(self) -> int:
         return self._size
-
-    @property
-    def access(self) -> Optional[str]:
-        return self._access
 
     @property
     def reset_value(self) -> Optional[int]:
@@ -119,15 +114,14 @@ class Bank(Register):
     def __init__(
         self,
         name: str,
-        description: Optional[str] = None,
-        offset: Optional[int] = None,
-        size: Optional[int] = None,
-        access: Optional[str] = None,
+        offset: int,
+        bank_offset: int,
+        size: int = 32,
+        description: str = "",
         reset_value: Optional[int] = None,
-        bank_offset: Optional[int] = None,
         fields: Optional[List[Field]] = None,
     ):
-        super().__init__(name, description, offset, size, access, reset_value, fields)
+        super().__init__(name, offset, size, description, reset_value, fields)
         self._bank_offset = bank_offset
 
     def asdict(self) -> Dict[str, Any]:
@@ -137,7 +131,6 @@ class Bank(Register):
                 "description": self._description,
                 "offset": self._offset,
                 "size": self._size,
-                "access": self._access,
                 "reset_value": self._reset_value,
                 "bank_offset": self._bank_offset,
                 "fields": [field.asdict() for field in self._fields],
@@ -145,7 +138,7 @@ class Bank(Register):
         }
 
     @property
-    def bank_offset(self) -> Optional[int]:
+    def bank_offset(self) -> int:
         return self._bank_offset
 
 
@@ -153,8 +146,8 @@ class Peripheral(DralBaseType):
     def __init__(
         self,
         name: str,
-        description: Optional[str] = None,
-        address: Optional[int] = None,
+        address: int,
+        description: str = "",
         registers: Optional[List[Register]] = None,
         banks: Optional[List[Bank]] = None,
     ):
@@ -179,7 +172,7 @@ class Peripheral(DralBaseType):
         }
 
     @property
-    def address(self) -> Optional[int]:
+    def address(self) -> int:
         return self._address
 
     @property
@@ -192,7 +185,7 @@ class Peripheral(DralBaseType):
 
 
 class Device(DralBaseType):
-    def __init__(self, name: str, description: Optional[str] = None, peripherals: Optional[List[Peripheral]] = None):
+    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None):
         super().__init__(name, description)
         if peripherals is None:
             peripherals = []

@@ -42,7 +42,6 @@ class TestDralFilters:
             description=data["description"],
             offset=data["offset"],
             size=data["size"],
-            access=data["access"],
             reset_value=data["reset_value"],
             fields=[self.create_field_object(field) for field in data["fields"]],
         )

@@ -53,7 +53,6 @@ class SvdAdapter(BaseAdapter):
                 description=register["description"],
                 offset=register["addressOffset"],
                 size=register["size"],
-                access=register["access"] if "access" in register else "",
                 reset_value=register["resetValue"],
                 fields=fields,
             )

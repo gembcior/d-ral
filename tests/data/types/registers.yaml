@@ -3,7 +3,6 @@ register0:
   description: description for register0
   offset: 0
   size: 32
-  access: rw
   reset_value: 0
   fields:
     - name: field0
@@ -32,7 +31,6 @@ register1:
   description: description for register1
   offset: 4
   size: 32
-  access: rw
   reset_value: 0xF
   fields:
     - name: field0

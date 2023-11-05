@@ -78,7 +78,6 @@ class TestDralTypes:
         assert register.description == test_register["description"]
         assert register.offset == test_register["offset"]
         assert register.size == test_register["size"]
-        assert register.access == test_register["access"]
         assert register.reset_value == test_register["reset_value"]
 
     @pytest.mark.parametrize(
