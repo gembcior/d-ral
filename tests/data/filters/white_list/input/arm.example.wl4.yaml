@@ -1,8 +1,14 @@
 peripherals:
   - name: TIMER2
+    address: 0
     registers:
       - name: INT
+        offset: 0
       - name: INT
+        offset: 0
       - name: SR
+        offset: 0
       - name: COUNT
+        offset: 0
       - name: SR
+        offset: 0

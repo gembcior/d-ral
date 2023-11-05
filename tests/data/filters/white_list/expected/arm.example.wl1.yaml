@@ -5,8 +5,7 @@ peripherals:
     description: 32 Timer / Counter, counting up or down from different sources
     name: TIMER0
     registers:
-    - access: read-write
-      description: Control Register
+    - description: Control Register
       fields:
       - description: Enable
         mask: 1
@@ -75,8 +74,7 @@ peripherals:
       reset_value: 0
       size: 32
 
-    - access: read-write
-      description: Status Register
+    - description: Status Register
       fields:
       - description: Shows if Timer is running or not
         mask: 1
@@ -113,8 +111,7 @@ peripherals:
       reset_value: 0
       size: 16
 
-    - access: read-write
-      description: Interrupt Register
+    - description: Interrupt Register
       fields:
       - description: Interrupt Enable
         mask: 1
