@@ -96,6 +96,9 @@ public:
     volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     return (*reg >> position) & Mask;
   }
+
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
 template<typename SizeType, SizeType address, SizeType position, SizeType width, SizeType bankOffset>
@@ -118,6 +121,9 @@ public:
     volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     return (*reg >> position) & Mask;
   }
+
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
 template<typename SizeType, SizeType position, SizeType width = 1, typename = void>
@@ -172,10 +178,13 @@ public:
 
 private:
   SizeType m_value;
+
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
 template<typename SizeType, SizeType position, SizeType width>
-class BitFieldModel<SizeType, position, width, std::enable_if_t<width == 0>>
+class BitFieldModel<SizeType, position, width, std::enable_if_t<width == 1>>
 {
 public:
   static constexpr SizeType Width = 1U;
@@ -196,6 +205,9 @@ public:
 
 private:
   SizeType m_value;
+
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
 }  // namespace
