@@ -6,6 +6,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
+import yaml
+
 
 class DralMarkerError(Exception):
     pass
@@ -50,6 +52,8 @@ class DralTemplate:
     ----------
     root : Path
         a Path object pointing to the root directory with template files
+    forbidden_words : Path
+        a Path object pointing to the yaml file with forbidden_words
 
     Methods
     -------
@@ -57,10 +61,11 @@ class DralTemplate:
         Get parsed string
     """
 
-    def __init__(self, root: Optional[Union[Path, List[Path]]] = None):
+    def __init__(self, root: Optional[Union[Path, List[Path]]] = None, forbidden_words: Optional[Path] = None):
         self._root = root
         if isinstance(root, Path):
             self._root = [root]
+        self._forbidden_words = forbidden_words
 
     def readlines(self, template: str) -> List[str]:
         """
@@ -226,6 +231,15 @@ class DralTemplate:
             output = str(datetime.now().year)
         return output
 
+    def _is_forbidden(self, word: str) -> bool:
+        if self._forbidden_words is None:
+            return False
+        with open(self._forbidden_words, "r", encoding="UTF-8") as forbidden_words_file:
+            forbidden_words_list = yaml.load(forbidden_words_file, Loader=yaml.FullLoader)
+        if word in forbidden_words_list:
+            return True
+        return False
+
     def _get_replacement(self, marker: DralMarker, mapping: Dict[str, Any]) -> str:
         try:
             replacement = mapping[marker.item.key][marker.item.parameter]
@@ -244,7 +258,7 @@ class DralTemplate:
             output = self._apply_style(output, marker.attributes.style)
         if marker.attributes.extras is not None:
             output = self._apply_extras(output, marker.attributes.extras)
-        if output in ["or", "and"]:
+        if self._is_forbidden(output):
             output = output + "_"
         return output
 

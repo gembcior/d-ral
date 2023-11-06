@@ -104,7 +104,8 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
         template_dir_list.insert(0, template_path)
-    template_object = DralTemplate(template_dir_list)
+    forbidden_words = Utils.get_forbidden_words(language)
+    template_object = DralTemplate(template_dir_list, forbidden_words)
 
     if mapping:
         with open(mapping, "r", encoding="utf-8") as mapping_file:
