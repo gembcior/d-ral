@@ -20,8 +20,15 @@ class TestDralGenerator:
 
     def get_template_dir(self, language: str) -> Optional[Path]:
         try:
-            with resources.path(f"dral.templates.{language}", "__init__.py") as svd:
-                return Path(svd).parent
+            with resources.path(f"dral.templates.{language}", "__init__.py") as template_dir:
+                return Path(template_dir).parent
+        except ModuleNotFoundError:
+            return None
+
+    def get_forbidden_words(self, language: str) -> Optional[Path]:
+        try:
+            with resources.path(f"dral.templates.{language}", "__init__.py") as template_dir:
+                return Path(template_dir).parent / "forbidden.yaml"
         except ModuleNotFoundError:
             return None
 
@@ -49,7 +56,8 @@ class TestDralGenerator:
         adapter = dral.adapter.SvdAdapter(svd_path)
         device_data = adapter.convert()
         device_data = dral.filter.BanksFilter().apply(device_data)
-        template_object = dral.DralTemplate(template_dir)
+        forbidden_words = self.get_forbidden_words(language)
+        template_object = dral.DralTemplate(template_dir, forbidden_words)
 
         with open(datadir / "generator" / language / template / "mapping.yaml", "r", encoding="utf-8") as mapping_file:
             mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
