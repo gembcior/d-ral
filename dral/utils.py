@@ -40,3 +40,10 @@ class Utils:
     def get_model_dir(language: str) -> Path:
         model_path = Path(__file__).parent / "templates" / "model" / language
         return model_path
+
+    @staticmethod
+    def get_forbidden_words(language: str) -> Optional[Path]:
+        forbidden_words_path = Path(__file__).parent / "templates" / language / "forbidden.yaml"
+        if forbidden_words_path.exists():
+            return forbidden_words_path
+        return None
