@@ -96,9 +96,6 @@ public:
     volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     return (*reg >> position) & Mask;
   }
-
-  static_assert(position >= 0 && position <= 31, "Field position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "Field width must be between 1 and 32");
 };
 
 template<typename SizeType, SizeType address, SizeType position, SizeType width, SizeType bankOffset>
@@ -121,9 +118,6 @@ public:
     volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     return (*reg >> position) & Mask;
   }
-
-  static_assert(position >= 0 && position <= 31, "Field position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "Field width must be between 1 and 32");
 };
 
 template<typename SizeType, SizeType position, SizeType width = 1, typename = void>
@@ -178,9 +172,6 @@ public:
 
 private:
   SizeType m_value;
-
-  static_assert(position >= 0 && position <= 31, "BitFiled position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "BitFiled width must be between 1 and 32");
 };
 
 template<typename SizeType, SizeType position, SizeType width>
@@ -205,8 +196,6 @@ public:
 
 private:
   SizeType m_value;
-
-  static_assert(position >= 0 && position <= 31, "BitFiled position must be between 0 and 31");
 };
 
 }  // namespace

@@ -1,6 +1,6 @@
 private:
-  template<uint32_t address>
-  class [dral style="capitalize"]register.name[#dral]Reg : public RegisterModel<address>
+  template<uint[dral]register.size[#dral]_t address>
+  class [dral style="capitalize"]register.name[#dral]Reg : public RegisterModel<uint[dral]register.size[#dral]_t, address>
   {
   public:
     [dral template="field.dral"]register.fields[#dral]
@@ -8,7 +8,7 @@ private:
   public:
     union reg
     {
-      uint32_t value;
+      uint[dral]register.size[#dral]_t value;
       [dral template="bitfield.dral"]register.fields[#dral]
     };
   };
