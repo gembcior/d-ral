@@ -5,3 +5,4 @@
 class [dral]device.name[#dral]():
     def __init__(self):
         [dral template="peripheral.constructor.dral"]device.peripherals[#dral]
+        super().__init__()
