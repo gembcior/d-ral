@@ -1,5 +1,5 @@
 private:
-  template<uint[dral]bank.size[#dral]_t address, uint[dral]bank.size[#dral]_t bankOffset>
+  template<unsigned int address, unsigned int bankOffset>
   class [dral style="capitalize"]bank.name[#dral]BankReg : public RegisterBankModel<uint[dral]bank.size[#dral]_t, address, bankOffset>
   {
   public:

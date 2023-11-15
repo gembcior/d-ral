@@ -1,5 +1,5 @@
 private:
-  template<uint[dral]register.size[#dral]_t address>
+  template<unsigned int address>
   class [dral style="capitalize"]register.name[#dral]Reg : public RegisterModel<uint[dral]register.size[#dral]_t, address>
   {
   public:

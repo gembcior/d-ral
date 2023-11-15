@@ -1,6 +1,6 @@
 struct [dral style="lowercase"]register.name[#dral]
 {
-  constexpr static uint[dral]register.size[#dral]_t Address = [dral format="{:#010X}"]peripheral.address[#dral] + [dral format="{:#06X}"]register.offset[#dral];
+  constexpr static unsigned int Address = [dral format="{:#010X}"]peripheral.address[#dral] + [dral format="{:#06X}"]register.offset[#dral];
   union
   {
     uint[dral]register.size[#dral]_t value;
