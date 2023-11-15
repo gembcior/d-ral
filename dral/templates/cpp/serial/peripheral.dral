@@ -5,9 +5,12 @@
 
 [dral]include model.import.dral[#dral]
 
-namespace dral::[dral style="lowercase"]device.name[#dral]::[dral style="lowercase"]peripheral.name[#dral] {
+namespace dral::[dral style="lowercase"]device.name[#dral] {
 
-[dral template="register.dral"]peripheral.registers[#dral]
+struct [dral style="lowercase"]peripheral.name[#dral]
+{
+  [dral template="register.dral"]peripheral.registers[#dral]
+};
 
 }
 

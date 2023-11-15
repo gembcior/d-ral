@@ -10,7 +10,7 @@ namespace dral::[dral style="lowercase"]device.name[#dral] {
 class [dral style="lowercase"]peripheral.name[#dral]
 {
 public:
-  static constexpr uint32_t BaseAddress = [dral format="{:#010X}"]peripheral.address[#dral];
+  static constexpr unsigned int BaseAddress = [dral format="{:#010X}"]peripheral.address[#dral];
 
 [dral template="register.dral"]peripheral.registers[#dral]
 [dral template="bank.dral"]peripheral.banks[#dral]

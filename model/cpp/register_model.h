@@ -31,107 +31,108 @@
 #define DRAL_REGISTER_MODEL_H
 
 #include <cstdint>
+#include <type_traits>
 
 namespace dral {
 
-template<uint32_t address>
+template<typename SizeType, unsigned int address>
 class RegisterModel
 {
 public:
-  static constexpr uint32_t Address = address;
+  static constexpr unsigned int Address = address;
 
 public:
-  static uint32_t read()
+  static SizeType read()
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address);
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     return *reg;
   }
 
-  static void write(uint32_t value)
+  static void write(SizeType value)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address);
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     *reg = value;
   }
 };
 
-template<uint32_t address, uint32_t bankOffset>
+template<typename SizeType, unsigned int address, unsigned int bankOffset>
 class RegisterBankModel
 {
 public:
-  static constexpr uint32_t Address = address;
-  static constexpr uint32_t BankOffset = bankOffset;
+  static constexpr unsigned int Address = address;
+  static constexpr unsigned int BankOffset = bankOffset;
 
 public:
-  static uint32_t read(uint32_t bank)
+  static SizeType read(unsigned int bank)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     return *reg;
   }
 
-  static void write(uint32_t bank, uint32_t value)
+  static void write(unsigned int bank, SizeType value)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     *reg = value;
   }
 };
 
-template<uint32_t address, uint32_t position, uint32_t width, uint32_t bankOffset = 0>
+template<typename SizeType, unsigned int address, unsigned int position, unsigned int width, unsigned int bankOffset = 0>
 class FieldModel
 {
 public:
-  static constexpr uint32_t Width = width;
-  static constexpr uint32_t Mask = (1U << width) - 1U;
-  static constexpr uint32_t Position = position;
+  static constexpr unsigned int Width = width;
+  static constexpr unsigned int Mask = (1U << width) - 1U;
+  static constexpr unsigned int Position = position;
 
 public:
-  static void write(uint32_t bank, uint32_t value)
+  static void write(unsigned int bank, SizeType value)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     *reg = (*reg & ~(Mask << position)) | ((value & Mask) << position);
   }
 
-  static uint32_t read(uint32_t bank)
+  static SizeType read(unsigned int bank)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address + (bankOffset * bank));
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
     return (*reg >> position) & Mask;
   }
 
-  static_assert(position >= 0 && position <= 31, "Field position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "Field width must be between 1 and 32");
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
-template<uint32_t address, uint32_t position, uint32_t width>
-class FieldModel<address, position, width, 0>
+template<typename SizeType, unsigned int address, unsigned int position, unsigned int width>
+class FieldModel<SizeType, address, position, width>
 {
 public:
-  static constexpr uint32_t Width = width;
-  static constexpr uint32_t Mask = (1U << width) - 1U;
-  static constexpr uint32_t Position = position;
+  static constexpr unsigned int Width = width;
+  static constexpr unsigned int Mask = (1U << width) - 1U;
+  static constexpr unsigned int Position = position;
 
 public:
-  static void write(uint32_t value)
+  static void write(SizeType value)
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address);
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     *reg = (*reg & ~(Mask << position)) | ((value & Mask) << position);
   }
 
-  static uint32_t read()
+  static SizeType read()
   {
-    volatile uint32_t* reg = reinterpret_cast<volatile uint32_t*>(address);
+    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
     return (*reg >> position) & Mask;
   }
 
-  static_assert(position >= 0 && position <= 31, "Field position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "Field width must be between 1 and 32");
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
-template<uint32_t position, uint32_t width = 1>
+template<typename SizeType, unsigned int position, unsigned int width = 1>
 class BitFieldModel
 {
 public:
-  static constexpr uint32_t Width = width;
-  static constexpr uint32_t Mask = (1U << width) - 1U;
-  static constexpr uint32_t Position = position;
+  static constexpr unsigned int Width = width;
+  static constexpr unsigned int Mask = (1U << width) - 1U;
+  static constexpr unsigned int Position = position;
 
 public:
   template<typename T>
@@ -141,7 +142,7 @@ public:
     return *this;
   }
 
-  operator uint32_t() const
+  operator SizeType() const
   {
     return (m_value >> position) & Mask;
   }
@@ -156,9 +157,9 @@ public:
     return *this = *this + 1U;
   }
 
-  uint32_t operator++(int)
+  SizeType operator++(int)
   {
-    const uint32_t result = *this;
+    const SizeType result = *this;
     ++*this;
     return result;
   }
@@ -168,27 +169,27 @@ public:
     return *this = *this - 1U;
   }
 
-  uint32_t operator--(int)
+  SizeType operator--(int)
   {
-    const uint32_t result = *this;
+    const SizeType result = *this;
     --*this;
     return result;
   }
 
 private:
-  uint32_t m_value;
+  SizeType m_value;
 
-  static_assert(position >= 0 && position <= 31, "BitFiled position must be between 0 and 31");
-  static_assert(width >= 1 && width <= 32, "BitFiled width must be between 1 and 32");
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
-template<uint32_t position>
-class BitFieldModel<position, 1U>
+template<typename SizeType, unsigned int position>
+class BitFieldModel<SizeType, position>
 {
 public:
-  static constexpr uint32_t Width = 1U;
-  static constexpr uint32_t Mask = (1U << Width) - 1U;
-  static constexpr uint32_t Position = position;
+  static constexpr unsigned int Width = 1U;
+  static constexpr unsigned int Mask = (1U << Width) - 1U;
+  static constexpr unsigned int Position = position;
 
 public:
   BitFieldModel& operator=(bool value)
@@ -203,9 +204,9 @@ public:
   }
 
 private:
-  uint32_t m_value;
+  SizeType m_value;
 
-  static_assert(position >= 0 && position <= 31, "BitFiled position must be between 0 and 31");
+  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
 };
 
 }  // namespace

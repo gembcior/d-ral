@@ -16,7 +16,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>GCONF</displayName>
           <description>GENERAL CONFIGURATION REGISTERS</description>
           <addressOffset>0x00</addressOffset>
-          <size>10</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -96,7 +96,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>GSTAT</displayName>
           <description>Global status flags</description>
           <addressOffset>0x01</addressOffset>
-          <size>3</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -127,7 +127,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>IFCNT</displayName>
           <description>Interface transmission counte</description>
           <addressOffset>0x02</addressOffset>
-          <size>8</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -144,7 +144,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>SLAVECONF</displayName>
           <description>SENDDELAY for read access (time until reply is sent)</description>
           <addressOffset>0x03</addressOffset>
-          <size>4</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -161,7 +161,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTP_PROG</displayName>
           <description>OTP_PROGRAM – OTP programming</description>
           <addressOffset>0x04</addressOffset>
-          <size>16</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -192,7 +192,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTP_READ</displayName>
           <description>OTP_READ (Access to OTP memory result and update)</description>
           <addressOffset>0x05</addressOffset>
-          <size>24</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -321,7 +321,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>IOIN</displayName>
           <description>INPUT (Reads the state of all input pins available)</description>
           <addressOffset>0x06</addressOffset>
-          <size>18</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -394,7 +394,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>FACTORY_CONF</displayName>
           <description>Factory config</description>
           <addressOffset>0x07</addressOffset>
-          <size>7</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -425,7 +425,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>IHOLD_IRUN</displayName>
           <description>Driver current control</description>
           <addressOffset>0x00</addressOffset>
-          <size>14</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -456,7 +456,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>TPOWER_DOWN</displayName>
           <description>Sets the delay time from stand still (stst) detection to motor current power down.</description>
           <addressOffset>0x01</addressOffset>
-          <size>8</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -473,7 +473,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>TSTEP</displayName>
           <description>Actual measured time between two 1/256 microsteps derived from the step input frequency in units of 1/fCLK.</description>
           <addressOffset>0x02</addressOffset>
-          <size>20</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -490,7 +490,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>TPWMTHRS</displayName>
           <description>Sets the upper velocity for StealthChop voltage PWM mode.</description>
           <addressOffset>0x03</addressOffset>
-          <size>20</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -507,7 +507,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>VACTUAL</displayName>
           <description>VACTUAL allows moving the motor by UART control.</description>
           <addressOffset>0x12</addressOffset>
-          <size>24</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -531,7 +531,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>TCOOLTHRS</displayName>
           <description>This is the lower threshold velocity for switching on smart energy CoolStep and StallGuard to DIAG output.</description>
           <addressOffset>0x00</addressOffset>
-          <size>20</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -548,7 +548,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>SGTHRS</displayName>
           <description>Detection threshold for stall.</description>
           <addressOffset>0x2C</addressOffset>
-          <size>8</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -565,7 +565,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>SG_RESULT</displayName>
           <description>StallGuard result.</description>
           <addressOffset>0x2D</addressOffset>
-          <size>10</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -582,7 +582,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>COOLCONF</displayName>
           <description>CoolStep configuration</description>
           <addressOffset>0x2E</addressOffset>
-          <size>16</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -634,7 +634,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>MSCNT</displayName>
           <description>Microstep counter</description>
           <addressOffset>0x0A</addressOffset>
-          <size>10</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -651,7 +651,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>MSCURACT</displayName>
           <description>Actual microstep current</description>
           <addressOffset>0x0B</addressOffset>
-          <size>18</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -878,7 +878,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>PWMCONF</displayName>
           <description>StealthChop PWM chopper configuration</description>
           <addressOffset>0x04</addressOffset>
-          <size>22</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -944,7 +944,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>PWM_SCALE</displayName>
           <description>Results of StealthChop amplitude regulator.</description>
           <addressOffset>0x05</addressOffset>
-          <size>17</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
@@ -968,7 +968,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>PWM_AUTO</displayName>
           <description>These automatically generated values can be read out in order to determine a default / power up setting for PWM_GRAD and PWM_OFS.</description>
           <addressOffset>0x06</addressOffset>
-          <size>16</size>
+          <size>32</size>
           <resetValue>0</resetValue>
           <fields>
             <field>
