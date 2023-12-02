@@ -117,7 +117,7 @@
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24, 8> byte3;\n\
     \      BitFieldModel<uint32_t, 16, 8> byte2;\n      BitFieldModel<uint32_t, 8,\
     \ 8> byte1;\n      BitFieldModel<uint32_t, 0, 8> byte0;\n    };\n  };\n\npublic:\n\
-    \  using dr = DrReg<BaseAddress + 0x0028>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
+    \  using dr = DrReg<BaseAddress + 0x0028>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
     \ */\n"
   name: DCMI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -522,7 +522,7 @@
     \ public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 1> re;\n      BitFieldModel<uint32_t, 1, 2> modes1;\n      BitFieldModel<uint32_t,\
     \ 3, 2> modes2;\n      BitFieldModel<uint32_t, 5, 1> busy;\n    };\n  };\n\npublic:\n\
-    \  using sdsr = SdsrReg<BaseAddress + 0x0158>;\nprivate:\n  template<unsigned\
+    \  using sdsr = SdsrReg<BaseAddress + 0x0158>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class BtrxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using accmod = FieldModel<uint32_t,\
     \ address, 28, 2, bankOffset>;\n    using datlat = FieldModel<uint32_t, address,\
@@ -530,22 +530,35 @@
     \ bankOffset>;\n    using busturn = FieldModel<uint32_t, address, 16, 4, bankOffset>;\n\
     \    using datast = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using\
     \ addhld = FieldModel<uint32_t, address, 4, 4, bankOffset>;\n    using addset\
-    \ = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n  };\n\npublic:\n  using\
-    \ btrx = BtrxBankReg<BaseAddress + 0x0004, 0x0008>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class BcrxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using cburstrw = FieldModel<uint32_t,\
-    \ address, 19, 1, bankOffset>;\n    using asyncwait = FieldModel<uint32_t, address,\
-    \ 15, 1, bankOffset>;\n    using extmod = FieldModel<uint32_t, address, 14, 1,\
-    \ bankOffset>;\n    using waiten = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n\
-    \    using wren = FieldModel<uint32_t, address, 12, 1, bankOffset>;\n    using\
-    \ waitcfg = FieldModel<uint32_t, address, 11, 1, bankOffset>;\n    using wrapmod\
-    \ = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n    using waitpol = FieldModel<uint32_t,\
-    \ address, 9, 1, bankOffset>;\n    using bursten = FieldModel<uint32_t, address,\
-    \ 8, 1, bankOffset>;\n    using faccen = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n\
+    \ = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 28, 2> accmod;\n\
+    \      BitFieldModel<uint32_t, 24, 4> datlat;\n      BitFieldModel<uint32_t, 20,\
+    \ 4> clkdiv;\n      BitFieldModel<uint32_t, 16, 4> busturn;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> datast;\n      BitFieldModel<uint32_t, 4, 4> addhld;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> addset;\n    };\n  };\n\npublic:\n  using btrx = BtrxBankReg<BaseAddress\
+    \ + 0x0004, 0x0008>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class BcrxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using cburstrw = FieldModel<uint32_t, address,\
+    \ 19, 1, bankOffset>;\n    using asyncwait = FieldModel<uint32_t, address, 15,\
+    \ 1, bankOffset>;\n    using extmod = FieldModel<uint32_t, address, 14, 1, bankOffset>;\n\
+    \    using waiten = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n    using\
+    \ wren = FieldModel<uint32_t, address, 12, 1, bankOffset>;\n    using waitcfg\
+    \ = FieldModel<uint32_t, address, 11, 1, bankOffset>;\n    using wrapmod = FieldModel<uint32_t,\
+    \ address, 10, 1, bankOffset>;\n    using waitpol = FieldModel<uint32_t, address,\
+    \ 9, 1, bankOffset>;\n    using bursten = FieldModel<uint32_t, address, 8, 1,\
+    \ bankOffset>;\n    using faccen = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n\
     \    using mwid = FieldModel<uint32_t, address, 4, 2, bankOffset>;\n    using\
     \ mtyp = FieldModel<uint32_t, address, 2, 2, bankOffset>;\n    using muxen = FieldModel<uint32_t,\
     \ address, 1, 1, bankOffset>;\n    using mbken = FieldModel<uint32_t, address,\
-    \ 0, 1, bankOffset>;\n  };\n\npublic:\n  using bcrx = BcrxBankReg<BaseAddress\
+    \ 0, 1, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 19, 1> cburstrw;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> asyncwait;\n      BitFieldModel<uint32_t, 14, 1> extmod;\n      BitFieldModel<uint32_t,\
+    \ 13, 1> waiten;\n      BitFieldModel<uint32_t, 12, 1> wren;\n      BitFieldModel<uint32_t,\
+    \ 11, 1> waitcfg;\n      BitFieldModel<uint32_t, 10, 1> wrapmod;\n      BitFieldModel<uint32_t,\
+    \ 9, 1> waitpol;\n      BitFieldModel<uint32_t, 8, 1> bursten;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> faccen;\n      BitFieldModel<uint32_t, 4, 2> mwid;\n      BitFieldModel<uint32_t,\
+    \ 2, 2> mtyp;\n      BitFieldModel<uint32_t, 1, 1> muxen;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> mbken;\n    };\n  };\n\npublic:\n  using bcrx = BcrxBankReg<BaseAddress\
     \ + 0x0008, 0x0008>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class PcrxBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using eccps = FieldModel<uint32_t, address,\
@@ -554,7 +567,12 @@
     \ eccen = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using pwid = FieldModel<uint32_t,\
     \ address, 4, 2, bankOffset>;\n    using ptyp = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using pbken = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
-    \    using pwaiten = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n  };\n\n\
+    \    using pwaiten = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 17,\
+    \ 3> eccps;\n      BitFieldModel<uint32_t, 13, 4> tar;\n      BitFieldModel<uint32_t,\
+    \ 9, 4> tclr;\n      BitFieldModel<uint32_t, 6, 1> eccen;\n      BitFieldModel<uint32_t,\
+    \ 4, 2> pwid;\n      BitFieldModel<uint32_t, 3, 1> ptyp;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> pbken;\n      BitFieldModel<uint32_t, 1, 1> pwaiten;\n    };\n  };\n\n\
     public:\n  using pcrx = PcrxBankReg<BaseAddress + 0x0060, 0x0020>;\n\nprivate:\n\
     \  template<unsigned int address, unsigned int bankOffset>\n  class SrxBankReg\
     \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
@@ -563,51 +581,78 @@
     \ address, 4, 1, bankOffset>;\n    using iren = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using ifs = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using ils = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using irs\
-    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ srx = SrxBankReg<BaseAddress + 0x0064, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class PmemxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using memhizx = FieldModel<uint32_t,\
-    \ address, 24, 8, bankOffset>;\n    using memholdx = FieldModel<uint32_t, address,\
-    \ 16, 8, bankOffset>;\n    using memwaitx = FieldModel<uint32_t, address, 8, 8,\
-    \ bankOffset>;\n    using memsetx = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\
-    \  };\n\npublic:\n  using pmemx = PmemxBankReg<BaseAddress + 0x0068, 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ PattxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using atthizx = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n\
-    \    using attholdx = FieldModel<uint32_t, address, 16, 8, bankOffset>;\n    using\
-    \ attwaitx = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using attsetx\
-    \ = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\npublic:\n  using\
-    \ pattx = PattxBankReg<BaseAddress + 0x006C, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class EccrxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using eccx = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using eccrx = EccrxBankReg<BaseAddress\
-    \ + 0x0074, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class BwtrxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using accmod = FieldModel<uint32_t, address,\
-    \ 28, 2, bankOffset>;\n    using datlat = FieldModel<uint32_t, address, 24, 4,\
-    \ bankOffset>;\n    using clkdiv = FieldModel<uint32_t, address, 20, 4, bankOffset>;\n\
-    \    using datast = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using\
-    \ addhld = FieldModel<uint32_t, address, 4, 4, bankOffset>;\n    using addset\
-    \ = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n  };\n\npublic:\n  using\
-    \ bwtrx = BwtrxBankReg<BaseAddress + 0x0104, 0x0008>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class SdcrxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using nc = FieldModel<uint32_t, address,\
-    \ 0, 2, bankOffset>;\n    using nr = FieldModel<uint32_t, address, 2, 2, bankOffset>;\n\
-    \    using mwid = FieldModel<uint32_t, address, 4, 2, bankOffset>;\n    using\
-    \ nb = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using cas = FieldModel<uint32_t,\
-    \ address, 7, 2, bankOffset>;\n    using wp = FieldModel<uint32_t, address, 9,\
-    \ 1, bankOffset>;\n    using sdclk = FieldModel<uint32_t, address, 10, 2, bankOffset>;\n\
-    \    using rburst = FieldModel<uint32_t, address, 12, 1, bankOffset>;\n    using\
-    \ rpipe = FieldModel<uint32_t, address, 13, 2, bankOffset>;\n  };\n\npublic:\n\
-    \  using sdcrx = SdcrxBankReg<BaseAddress + 0x0140, 0x0004>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class SdtrxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using tmrd = FieldModel<uint32_t,\
-    \ address, 0, 4, bankOffset>;\n    using txsr = FieldModel<uint32_t, address,\
-    \ 4, 4, bankOffset>;\n    using tras = FieldModel<uint32_t, address, 8, 4, bankOffset>;\n\
-    \    using trc = FieldModel<uint32_t, address, 12, 4, bankOffset>;\n    using\
-    \ twr = FieldModel<uint32_t, address, 16, 4, bankOffset>;\n    using trp = FieldModel<uint32_t,\
-    \ address, 20, 4, bankOffset>;\n    using trcd = FieldModel<uint32_t, address,\
-    \ 24, 4, bankOffset>;\n  };\n\npublic:\n  using sdtrx = SdtrxBankReg<BaseAddress\
+    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 6, 1> fempt;\n  \
+    \    BitFieldModel<uint32_t, 5, 1> ifen;\n      BitFieldModel<uint32_t, 4, 1>\
+    \ ilen;\n      BitFieldModel<uint32_t, 3, 1> iren;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> ifs;\n      BitFieldModel<uint32_t, 1, 1> ils;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> irs;\n    };\n  };\n\npublic:\n  using srx = SrxBankReg<BaseAddress +\
+    \ 0x0064, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class PmemxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using memhizx = FieldModel<uint32_t, address,\
+    \ 24, 8, bankOffset>;\n    using memholdx = FieldModel<uint32_t, address, 16,\
+    \ 8, bankOffset>;\n    using memwaitx = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
+    \    using memsetx = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24,\
+    \ 8> memhizx;\n      BitFieldModel<uint32_t, 16, 8> memholdx;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> memwaitx;\n      BitFieldModel<uint32_t, 0, 8> memsetx;\n    };\n  };\n\
+    \npublic:\n  using pmemx = PmemxBankReg<BaseAddress + 0x0068, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class PattxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using atthizx = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n    using\
+    \ attholdx = FieldModel<uint32_t, address, 16, 8, bankOffset>;\n    using attwaitx\
+    \ = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using attsetx = FieldModel<uint32_t,\
+    \ address, 0, 8, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 24, 8> atthizx;\n      BitFieldModel<uint32_t,\
+    \ 16, 8> attholdx;\n      BitFieldModel<uint32_t, 8, 8> attwaitx;\n      BitFieldModel<uint32_t,\
+    \ 0, 8> attsetx;\n    };\n  };\n\npublic:\n  using pattx = PattxBankReg<BaseAddress\
+    \ + 0x006C, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class EccrxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using eccx = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> eccx;\n    };\n  };\n\npublic:\n  using\
+    \ eccrx = EccrxBankReg<BaseAddress + 0x0074, 0x0020>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class BwtrxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using accmod = FieldModel<uint32_t,\
+    \ address, 28, 2, bankOffset>;\n    using datlat = FieldModel<uint32_t, address,\
+    \ 24, 4, bankOffset>;\n    using clkdiv = FieldModel<uint32_t, address, 20, 4,\
+    \ bankOffset>;\n    using datast = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
+    \    using addhld = FieldModel<uint32_t, address, 4, 4, bankOffset>;\n    using\
+    \ addset = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 28, 2>\
+    \ accmod;\n      BitFieldModel<uint32_t, 24, 4> datlat;\n      BitFieldModel<uint32_t,\
+    \ 20, 4> clkdiv;\n      BitFieldModel<uint32_t, 8, 8> datast;\n      BitFieldModel<uint32_t,\
+    \ 4, 4> addhld;\n      BitFieldModel<uint32_t, 0, 4> addset;\n    };\n  };\n\n\
+    public:\n  using bwtrx = BwtrxBankReg<BaseAddress + 0x0104, 0x0008>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class SdcrxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using nc = FieldModel<uint32_t, address, 0, 2, bankOffset>;\n    using nr\
+    \ = FieldModel<uint32_t, address, 2, 2, bankOffset>;\n    using mwid = FieldModel<uint32_t,\
+    \ address, 4, 2, bankOffset>;\n    using nb = FieldModel<uint32_t, address, 6,\
+    \ 1, bankOffset>;\n    using cas = FieldModel<uint32_t, address, 7, 2, bankOffset>;\n\
+    \    using wp = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using sdclk\
+    \ = FieldModel<uint32_t, address, 10, 2, bankOffset>;\n    using rburst = FieldModel<uint32_t,\
+    \ address, 12, 1, bankOffset>;\n    using rpipe = FieldModel<uint32_t, address,\
+    \ 13, 2, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 2> nc;\n      BitFieldModel<uint32_t, 2, 2>\
+    \ nr;\n      BitFieldModel<uint32_t, 4, 2> mwid;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> nb;\n      BitFieldModel<uint32_t, 7, 2> cas;\n      BitFieldModel<uint32_t,\
+    \ 9, 1> wp;\n      BitFieldModel<uint32_t, 10, 2> sdclk;\n      BitFieldModel<uint32_t,\
+    \ 12, 1> rburst;\n      BitFieldModel<uint32_t, 13, 2> rpipe;\n    };\n  };\n\n\
+    public:\n  using sdcrx = SdcrxBankReg<BaseAddress + 0x0140, 0x0004>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class SdtrxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using tmrd = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n    using\
+    \ txsr = FieldModel<uint32_t, address, 4, 4, bankOffset>;\n    using tras = FieldModel<uint32_t,\
+    \ address, 8, 4, bankOffset>;\n    using trc = FieldModel<uint32_t, address, 12,\
+    \ 4, bankOffset>;\n    using twr = FieldModel<uint32_t, address, 16, 4, bankOffset>;\n\
+    \    using trp = FieldModel<uint32_t, address, 20, 4, bankOffset>;\n    using\
+    \ trcd = FieldModel<uint32_t, address, 24, 4, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> tmrd;\n\
+    \      BitFieldModel<uint32_t, 4, 4> txsr;\n      BitFieldModel<uint32_t, 8, 4>\
+    \ tras;\n      BitFieldModel<uint32_t, 12, 4> trc;\n      BitFieldModel<uint32_t,\
+    \ 16, 4> twr;\n      BitFieldModel<uint32_t, 20, 4> trp;\n      BitFieldModel<uint32_t,\
+    \ 24, 4> trcd;\n    };\n  };\n\npublic:\n  using sdtrx = SdtrxBankReg<BaseAddress\
     \ + 0x0148, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMC_H */\n"
   name: FMC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -684,8 +729,8 @@
     \      BitFieldModel<uint32_t, 1, 1> dbg_tim8_stop;\n      BitFieldModel<uint32_t,\
     \ 16, 1> dbg_tim9_stop;\n      BitFieldModel<uint32_t, 17, 1> dbg_tim10_stop;\n\
     \      BitFieldModel<uint32_t, 18, 1> dbg_tim11_stop;\n    };\n  };\n\npublic:\n\
-    \  using dbgmcu_apb2_fz = Dbgmcu_apb2_fzReg<BaseAddress + 0x000C>;\n\n};\n\n}\n\
-    \n#endif /* DRAL_STM32F446_DBG_H */\n"
+    \  using dbgmcu_apb2_fz = Dbgmcu_apb2_fzReg<BaseAddress + 0x000C>;\n\n\n};\n\n\
+    }\n\n#endif /* DRAL_STM32F446_DBG_H */\n"
   name: DBG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -1223,7 +1268,7 @@
     \      BitFieldModel<uint32_t, 7, 1> feie;\n      BitFieldModel<uint32_t, 3, 3>\
     \ fs;\n      BitFieldModel<uint32_t, 2, 1> dmdis;\n      BitFieldModel<uint32_t,\
     \ 0, 2> fth;\n    };\n  };\n\npublic:\n  using s7fcr = S7fcrReg<BaseAddress +\
-    \ 0x00CC>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ 0x00CC>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class SxcrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using chsel = FieldModel<uint32_t, address, 25, 3, bankOffset>;\n\
     \    using mburst = FieldModel<uint32_t, address, 23, 2, bankOffset>;\n    using\
@@ -1240,31 +1285,49 @@
     \ address, 4, 1, bankOffset>;\n    using htie = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using teie = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using dmeie = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using\
-    \ en = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ sxcr = SxcrBankReg<BaseAddress + 0x0010, 0x0018>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class SxndtrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using ndt = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n  };\n\npublic:\n  using sxndtr = SxndtrBankReg<BaseAddress\
-    \ + 0x0014, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class SxparBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using pa = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxpar = SxparBankReg<BaseAddress\
-    \ + 0x0018, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Sxm0arBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using m0a = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxm0ar = Sxm0arBankReg<BaseAddress\
-    \ + 0x001C, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Sxm1arBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using m1a = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxm1ar = Sxm1arBankReg<BaseAddress\
-    \ + 0x0020, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class SxfcrBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using feie = FieldModel<uint32_t, address,\
-    \ 7, 1, bankOffset>;\n    using fs = FieldModel<uint32_t, address, 3, 3, bankOffset>;\n\
-    \    using dmdis = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using\
-    \ fth = FieldModel<uint32_t, address, 0, 2, bankOffset>;\n  };\n\npublic:\n  using\
-    \ sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_DMA2_H\
-    \ */\n"
+    \ en = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 25, 3> chsel;\n\
+    \      BitFieldModel<uint32_t, 23, 2> mburst;\n      BitFieldModel<uint32_t, 21,\
+    \ 2> pburst;\n      BitFieldModel<uint32_t, 19, 1> ct;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> dbm;\n      BitFieldModel<uint32_t, 16, 2> pl;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> pincos;\n      BitFieldModel<uint32_t, 13, 2> msize;\n      BitFieldModel<uint32_t,\
+    \ 11, 2> psize;\n      BitFieldModel<uint32_t, 10, 1> minc;\n      BitFieldModel<uint32_t,\
+    \ 9, 1> pinc;\n      BitFieldModel<uint32_t, 8, 1> circ;\n      BitFieldModel<uint32_t,\
+    \ 6, 2> dir;\n      BitFieldModel<uint32_t, 5, 1> pfctrl;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> tcie;\n      BitFieldModel<uint32_t, 3, 1> htie;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> teie;\n      BitFieldModel<uint32_t, 1, 1> dmeie;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> en;\n    };\n  };\n\npublic:\n  using sxcr = SxcrBankReg<BaseAddress +\
+    \ 0x0010, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class SxndtrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using ndt = FieldModel<uint32_t, address, 0,\
+    \ 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 16> ndt;\n    };\n  };\n\npublic:\n  using sxndtr\
+    \ = SxndtrBankReg<BaseAddress + 0x0014, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class SxparBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using pa = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> pa;\n    };\n  };\n\npublic:\n  using sxpar\
+    \ = SxparBankReg<BaseAddress + 0x0018, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class Sxm0arBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using m0a = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> m0a;\n    };\n  };\n\npublic:\n  using sxm0ar\
+    \ = Sxm0arBankReg<BaseAddress + 0x001C, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class Sxm1arBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using m1a = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> m1a;\n    };\n  };\n\npublic:\n  using sxm1ar\
+    \ = Sxm1arBankReg<BaseAddress + 0x0020, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class SxfcrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using feie = FieldModel<uint32_t,\
+    \ address, 7, 1, bankOffset>;\n    using fs = FieldModel<uint32_t, address, 3,\
+    \ 3, bankOffset>;\n    using dmdis = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
+    \    using fth = FieldModel<uint32_t, address, 0, 2, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 7,\
+    \ 1> feie;\n      BitFieldModel<uint32_t, 3, 3> fs;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> dmdis;\n      BitFieldModel<uint32_t, 0, 2> fth;\n    };\n  };\n\npublic:\n\
+    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_DMA2_H */\n"
   name: DMA2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -1802,7 +1865,7 @@
     \      BitFieldModel<uint32_t, 7, 1> feie;\n      BitFieldModel<uint32_t, 3, 3>\
     \ fs;\n      BitFieldModel<uint32_t, 2, 1> dmdis;\n      BitFieldModel<uint32_t,\
     \ 0, 2> fth;\n    };\n  };\n\npublic:\n  using s7fcr = S7fcrReg<BaseAddress +\
-    \ 0x00CC>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ 0x00CC>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class SxcrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using chsel = FieldModel<uint32_t, address, 25, 3, bankOffset>;\n\
     \    using mburst = FieldModel<uint32_t, address, 23, 2, bankOffset>;\n    using\
@@ -1819,31 +1882,49 @@
     \ address, 4, 1, bankOffset>;\n    using htie = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using teie = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using dmeie = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using\
-    \ en = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ sxcr = SxcrBankReg<BaseAddress + 0x0010, 0x0018>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class SxndtrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using ndt = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n  };\n\npublic:\n  using sxndtr = SxndtrBankReg<BaseAddress\
-    \ + 0x0014, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class SxparBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using pa = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxpar = SxparBankReg<BaseAddress\
-    \ + 0x0018, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Sxm0arBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using m0a = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxm0ar = Sxm0arBankReg<BaseAddress\
-    \ + 0x001C, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Sxm1arBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using m1a = FieldModel<uint32_t, address, 0,\
-    \ 32, bankOffset>;\n  };\n\npublic:\n  using sxm1ar = Sxm1arBankReg<BaseAddress\
-    \ + 0x0020, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class SxfcrBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using feie = FieldModel<uint32_t, address,\
-    \ 7, 1, bankOffset>;\n    using fs = FieldModel<uint32_t, address, 3, 3, bankOffset>;\n\
-    \    using dmdis = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using\
-    \ fth = FieldModel<uint32_t, address, 0, 2, bankOffset>;\n  };\n\npublic:\n  using\
-    \ sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_DMA1_H\
-    \ */\n"
+    \ en = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 25, 3> chsel;\n\
+    \      BitFieldModel<uint32_t, 23, 2> mburst;\n      BitFieldModel<uint32_t, 21,\
+    \ 2> pburst;\n      BitFieldModel<uint32_t, 19, 1> ct;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> dbm;\n      BitFieldModel<uint32_t, 16, 2> pl;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> pincos;\n      BitFieldModel<uint32_t, 13, 2> msize;\n      BitFieldModel<uint32_t,\
+    \ 11, 2> psize;\n      BitFieldModel<uint32_t, 10, 1> minc;\n      BitFieldModel<uint32_t,\
+    \ 9, 1> pinc;\n      BitFieldModel<uint32_t, 8, 1> circ;\n      BitFieldModel<uint32_t,\
+    \ 6, 2> dir;\n      BitFieldModel<uint32_t, 5, 1> pfctrl;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> tcie;\n      BitFieldModel<uint32_t, 3, 1> htie;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> teie;\n      BitFieldModel<uint32_t, 1, 1> dmeie;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> en;\n    };\n  };\n\npublic:\n  using sxcr = SxcrBankReg<BaseAddress +\
+    \ 0x0010, 0x0018>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class SxndtrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using ndt = FieldModel<uint32_t, address, 0,\
+    \ 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 16> ndt;\n    };\n  };\n\npublic:\n  using sxndtr\
+    \ = SxndtrBankReg<BaseAddress + 0x0014, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class SxparBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using pa = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> pa;\n    };\n  };\n\npublic:\n  using sxpar\
+    \ = SxparBankReg<BaseAddress + 0x0018, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class Sxm0arBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using m0a = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> m0a;\n    };\n  };\n\npublic:\n  using sxm0ar\
+    \ = Sxm0arBankReg<BaseAddress + 0x001C, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class Sxm1arBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using m1a = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> m1a;\n    };\n  };\n\npublic:\n  using sxm1ar\
+    \ = Sxm1arBankReg<BaseAddress + 0x0020, 0x0018>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class SxfcrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using feie = FieldModel<uint32_t,\
+    \ address, 7, 1, bankOffset>;\n    using fs = FieldModel<uint32_t, address, 3,\
+    \ 3, bankOffset>;\n    using dmdis = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
+    \    using fth = FieldModel<uint32_t, address, 0, 2, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 7,\
+    \ 1> feie;\n      BitFieldModel<uint32_t, 3, 3> fs;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> dmdis;\n      BitFieldModel<uint32_t, 0, 2> fth;\n    };\n  };\n\npublic:\n\
+    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_DMA1_H */\n"
   name: DMA1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -2323,7 +2404,7 @@
     \ 22, 2> fmpi2c1sel;\n      BitFieldModel<uint32_t, 26, 1> cecsel;\n      BitFieldModel<uint32_t,\
     \ 27, 1> ck48msel;\n      BitFieldModel<uint32_t, 28, 1> sdiosel;\n      BitFieldModel<uint32_t,\
     \ 29, 1> spdifsel;\n    };\n  };\n\npublic:\n  using dckcfgr2 = Dckcfgr2Reg<BaseAddress\
-    \ + 0x0094>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_RCC_H */\n"
+    \ + 0x0094>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_RCC_H */\n"
   name: RCC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -2568,7 +2649,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H\
     \ */\n"
   name: GPIOH
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -2814,7 +2895,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H\
     \ */\n"
   name: GPIOG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -3060,7 +3141,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H\
     \ */\n"
   name: GPIOF
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -3306,7 +3387,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H\
     \ */\n"
   name: GPIOE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -3552,7 +3633,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H\
     \ */\n"
   name: GPIOD
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -3798,7 +3879,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H\
     \ */\n"
   name: GPIOC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4044,7 +4125,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H\
     \ */\n"
   name: GPIOB
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4290,7 +4371,7 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H\
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H\
     \ */\n"
   name: GPIOA
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4365,7 +4446,7 @@
     \ cmp_pd = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union reg\n\
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 1> ready;\n  \
     \    BitFieldModel<uint32_t, 0, 1> cmp_pd;\n    };\n  };\n\npublic:\n  using cmpcr\
-    \ = CmpcrReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
+    \ = CmpcrReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
     \ */\n"
   name: SYSCFG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4469,7 +4550,7 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI1_H\
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI1_H\
     \ */\n"
   name: SPI1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4573,7 +4654,7 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI2_H\
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI2_H\
     \ */\n"
   name: SPI2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4677,7 +4758,7 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI3_H\
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI3_H\
     \ */\n"
   name: SPI3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4781,7 +4862,7 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI4_H\
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI4_H\
     \ */\n"
   name: SPI4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -4946,15 +5027,18 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using data = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> data;\n    };\n  };\n\npublic:\n  using\
-    \ dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template<unsigned int address,\
+    \ dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template<unsigned int address,\
     \ unsigned int bankOffset>\n  class SmprxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress\
-    \ + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n  };\n\npublic:\n  using jdrx = JdrxBankReg<BaseAddress\
-    \ + 0x003C, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_ADC1_H */\n"
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> smpx_x;\n    };\n  };\n\npublic:\n\
+    \  using smprx = SmprxBankReg<BaseAddress + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
+    \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC1_H */\n"
   name: ADC1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5118,15 +5202,18 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using data = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> data;\n    };\n  };\n\npublic:\n  using\
-    \ dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template<unsigned int address,\
+    \ dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template<unsigned int address,\
     \ unsigned int bankOffset>\n  class SmprxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress\
-    \ + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n  };\n\npublic:\n  using jdrx = JdrxBankReg<BaseAddress\
-    \ + 0x003C, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_ADC2_H */\n"
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> smpx_x;\n    };\n  };\n\npublic:\n\
+    \  using smprx = SmprxBankReg<BaseAddress + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
+    \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC2_H */\n"
   name: ADC2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5290,15 +5377,18 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using data = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> data;\n    };\n  };\n\npublic:\n  using\
-    \ dr = DrReg<BaseAddress + 0x004C>;\nprivate:\n  template<unsigned int address,\
+    \ dr = DrReg<BaseAddress + 0x004C>;\n\nprivate:\n  template<unsigned int address,\
     \ unsigned int bankOffset>\n  class SmprxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using smpx_x = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using smprx = SmprxBankReg<BaseAddress\
-    \ + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n  };\n\npublic:\n  using jdrx = JdrxBankReg<BaseAddress\
-    \ + 0x003C, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_ADC3_H */\n"
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> smpx_x;\n    };\n  };\n\npublic:\n\
+    \  using smprx = SmprxBankReg<BaseAddress + 0x000C, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class JdrxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
+    \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC3_H */\n"
   name: ADC3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5401,7 +5491,7 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H\
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H\
     \ */\n"
   name: USART6
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -5505,7 +5595,7 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H\
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H\
     \ */\n"
   name: USART1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -5609,7 +5699,7 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H\
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H\
     \ */\n"
   name: USART2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -5713,7 +5803,7 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H\
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H\
     \ */\n"
   name: USART3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -5823,7 +5913,7 @@
     \ address, 13, 1>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 29, 1> dmaudr2;\n      BitFieldModel<uint32_t,\
     \ 13, 1> dmaudr1;\n    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0034>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */\n"
   name: DAC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5975,7 +6065,7 @@
     \ address>\n  {\n  public:\n    using txdata = FieldModel<uint32_t, address, 0,\
     \ 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 8> txdata;\n    };\n  };\n\npublic:\n  using txdr = TxdrReg<BaseAddress +\
-    \ 0x0028>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */\n"
+    \ 0x0028>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */\n"
   name: FMPI2C
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6093,7 +6183,7 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H\
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H\
     \ */\n"
   name: I2C3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -6212,7 +6302,7 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H\
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H\
     \ */\n"
   name: I2C2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -6331,7 +6421,7 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H\
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H\
     \ */\n"
   name: I2C1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -6370,7 +6460,7 @@
     \    using pvu = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 1, 1> rvu;\n\
     \      BitFieldModel<uint32_t, 0, 1> pvu;\n    };\n  };\n\npublic:\n  using sr\
-    \ = SrReg<BaseAddress + 0x000C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H\
+    \ = SrReg<BaseAddress + 0x000C>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H\
     \ */\n"
   name: IWDG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -6409,7 +6499,7 @@
     \ address>\n  class SrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
     \    using ewif = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> ewif;\n\
-    \    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0008>;\n\n};\n\n\
+    \    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0008>;\n\n\n};\n\n\
     }\n\n#endif /* DRAL_STM32F446_WWDG_H */\n"
   name: WWDG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -6719,7 +6809,7 @@
     \  class Bkp19rReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
     \    using bkp = FieldModel<uint32_t, address, 0, 32>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 32> bkp;\n\
-    \    };\n  };\n\npublic:\n  using bkp19r = Bkp19rReg<BaseAddress + 0x009C>;\n\
+    \    };\n  };\n\npublic:\n  using bkp19r = Bkp19rReg<BaseAddress + 0x009C>;\n\n\
     private:\n  template<unsigned int address, unsigned int bankOffset>\n  class AlrmxrBankReg\
     \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
     \    using msk4 = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n    using\
@@ -6733,17 +6823,28 @@
     \    using mnu = FieldModel<uint32_t, address, 8, 4, bankOffset>;\n    using msk1\
     \ = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using st = FieldModel<uint32_t,\
     \ address, 4, 3, bankOffset>;\n    using su = FieldModel<uint32_t, address, 0,\
-    \ 4, bankOffset>;\n  };\n\npublic:\n  using alrmxr = AlrmxrBankReg<BaseAddress\
+    \ 4, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 31, 1> msk4;\n      BitFieldModel<uint32_t, 30,\
+    \ 1> wdsel;\n      BitFieldModel<uint32_t, 28, 2> dt;\n      BitFieldModel<uint32_t,\
+    \ 24, 4> du;\n      BitFieldModel<uint32_t, 23, 1> msk3;\n      BitFieldModel<uint32_t,\
+    \ 22, 1> pm;\n      BitFieldModel<uint32_t, 20, 2> ht;\n      BitFieldModel<uint32_t,\
+    \ 16, 4> hu;\n      BitFieldModel<uint32_t, 15, 1> msk2;\n      BitFieldModel<uint32_t,\
+    \ 12, 3> mnt;\n      BitFieldModel<uint32_t, 8, 4> mnu;\n      BitFieldModel<uint32_t,\
+    \ 7, 1> msk1;\n      BitFieldModel<uint32_t, 4, 3> st;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> su;\n    };\n  };\n\npublic:\n  using alrmxr = AlrmxrBankReg<BaseAddress\
     \ + 0x001C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class AlrmxssrBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using maskss = FieldModel<uint32_t, address,\
     \ 24, 4, bankOffset>;\n    using ss = FieldModel<uint32_t, address, 0, 15, bankOffset>;\n\
-    \  };\n\npublic:\n  using alrmxssr = AlrmxssrBankReg<BaseAddress + 0x0044, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ BkpxrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using bkp = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using bkpxr = BkpxrBankReg<BaseAddress + 0x0050, 0x0004>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_RTC_H */\n"
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 24, 4> maskss;\n      BitFieldModel<uint32_t, 0, 15> ss;\n    };\n  };\n\npublic:\n\
+    \  using alrmxssr = AlrmxssrBankReg<BaseAddress + 0x0044, 0x0004>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class BkpxrBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using bkp = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
+    \ 32> bkp;\n    };\n  };\n\npublic:\n  using bkpxr = BkpxrBankReg<BaseAddress\
+    \ + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_RTC_H */\n"
   name: RTC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6833,7 +6934,7 @@
     \ 6, 1> dmar;\n      BitFieldModel<uint32_t, 3, 1> hdsel;\n      BitFieldModel<uint32_t,\
     \ 2, 1> irlp;\n      BitFieldModel<uint32_t, 1, 1> iren;\n      BitFieldModel<uint32_t,\
     \ 0, 1> eie;\n    };\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */\n"
   name: UART4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6923,7 +7024,7 @@
     \ 6, 1> dmar;\n      BitFieldModel<uint32_t, 3, 1> hdsel;\n      BitFieldModel<uint32_t,\
     \ 2, 1> irlp;\n      BitFieldModel<uint32_t, 1, 1> iren;\n      BitFieldModel<uint32_t,\
     \ 0, 1> eie;\n    };\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */\n"
   name: UART5
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6985,7 +7086,7 @@
     \ 16>;\n    using data1 = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
     \ 16> data2;\n      BitFieldModel<uint32_t, 0, 16> data1;\n    };\n  };\n\npublic:\n\
-    \  using cdr = CdrReg<BaseAddress + 0x0008>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H\
+    \  using cdr = CdrReg<BaseAddress + 0x0008>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H\
     \ */\n"
   name: C_ADC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -7227,7 +7328,7 @@
     \ 13, 1> bkp;\n      BitFieldModel<uint32_t, 12, 1> bke;\n      BitFieldModel<uint32_t,\
     \ 11, 1> ossr;\n      BitFieldModel<uint32_t, 10, 1> ossi;\n      BitFieldModel<uint32_t,\
     \ 8, 2> lock;\n      BitFieldModel<uint32_t, 0, 8> dtg;\n    };\n  };\n\npublic:\n\
-    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM1_H\
+    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM1_H\
     \ */\n"
   name: TIM1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -7469,7 +7570,7 @@
     \ 13, 1> bkp;\n      BitFieldModel<uint32_t, 12, 1> bke;\n      BitFieldModel<uint32_t,\
     \ 11, 1> ossr;\n      BitFieldModel<uint32_t, 10, 1> ossi;\n      BitFieldModel<uint32_t,\
     \ 8, 2> lock;\n      BitFieldModel<uint32_t, 0, 8> dtg;\n    };\n  };\n\npublic:\n\
-    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM8_H\
+    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM8_H\
     \ */\n"
   name: TIM8
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -7687,7 +7788,7 @@
     \ address>\n  {\n  public:\n    using itr1_rmp = FieldModel<uint32_t, address,\
     \ 10, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 10, 2> itr1_rmp;\n    };\n  };\n\npublic:\n  using _or = _orReg<BaseAddress\
-    \ + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM2_H */\n"
+    \ + 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM2_H */\n"
   name: TIM2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7900,7 +8001,7 @@
     \  public:\n    using dmab = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 16> dmab;\n    };\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */\n"
   name: TIM3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8113,7 +8214,7 @@
     \  public:\n    using dmab = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 16> dmab;\n    };\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */\n"
   name: TIM4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8330,7 +8431,7 @@
     \ address>\n  {\n  public:\n    using it4_rmp = FieldModel<uint32_t, address,\
     \ 6, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 6, 2> it4_rmp;\n    };\n  };\n\npublic:\n  using _or = _orReg<BaseAddress +\
-    \ 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H */\n"
+    \ 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H */\n"
   name: TIM5
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8451,7 +8552,7 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using ccr2 = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ccr2;\n    };\n  };\n\npublic:\n  using\
-    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H\
+    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H\
     \ */\n"
   name: TIM9
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -8573,7 +8674,7 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using ccr2 = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ccr2;\n    };\n  };\n\npublic:\n  using\
-    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H\
+    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H\
     \ */\n"
   name: TIM12
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -8660,7 +8761,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H */\n"
+    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H */\n"
   name: TIM10
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8746,7 +8847,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H */\n"
+    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H */\n"
   name: TIM13
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8832,7 +8933,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H */\n"
+    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H */\n"
   name: TIM14
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8922,7 +9023,7 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using rmp = FieldModel<uint32_t,\
     \ address, 0, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 2> rmp;\n    };\n  };\n\npublic:\n  using or_\
-    \ = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H\
+    \ = OrReg<BaseAddress + 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H\
     \ */\n"
   name: TIM11
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -8983,7 +9084,7 @@
     \ address>\n  {\n  public:\n    using arr = FieldModel<uint32_t, address, 0, 16>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> arr;\n    };\n  };\n\npublic:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H */\n"
   name: TIM6
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9043,7 +9144,7 @@
     \ address>\n  {\n  public:\n    using arr = FieldModel<uint32_t, address, 0, 16>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> arr;\n    };\n  };\n\npublic:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H */\n"
   name: TIM7
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9076,7 +9177,7 @@
     \ address>\n  {\n  public:\n    using cr = FieldModel<uint32_t, address, 0, 1>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 1> cr;\n    };\n  };\n\npublic:\n  using cr = CrReg<BaseAddress + 0x0008>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_CRC_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_CRC_H */\n"
   name: CRC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9327,26 +9428,35 @@
     \ address, 16, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ineptxsa;\n      BitFieldModel<uint32_t,\
     \ 16, 16> ineptxfd;\n    };\n  };\n\npublic:\n  using fs_dieptxf3 = Fs_dieptxf3Reg<BaseAddress\
-    \ + 0x010C>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x010C>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class Fs_grxstsx_deviceBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using epnum = FieldModel<uint32_t, address,\
     \ 0, 4, bankOffset>;\n    using bcnt = FieldModel<uint32_t, address, 4, 11, bankOffset>;\n\
     \    using dpid = FieldModel<uint32_t, address, 15, 2, bankOffset>;\n    using\
     \ pktsts = FieldModel<uint32_t, address, 17, 4, bankOffset>;\n    using frmnum\
-    \ = FieldModel<uint32_t, address, 21, 4, bankOffset>;\n  };\n\npublic:\n  using\
-    \ fs_grxstsx_device = Fs_grxstsx_deviceBankReg<BaseAddress + 0x001C, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ Fs_grxstsx_hostBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using epnum = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\
-    \    using bcnt = FieldModel<uint32_t, address, 4, 11, bankOffset>;\n    using\
-    \ dpid = FieldModel<uint32_t, address, 15, 2, bankOffset>;\n    using pktsts =\
-    \ FieldModel<uint32_t, address, 17, 4, bankOffset>;\n    using frmnum = FieldModel<uint32_t,\
-    \ address, 21, 4, bankOffset>;\n  };\n\npublic:\n  using fs_grxstsx_host = Fs_grxstsx_hostBankReg<BaseAddress\
+    \ = FieldModel<uint32_t, address, 21, 4, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> epnum;\n\
+    \      BitFieldModel<uint32_t, 4, 11> bcnt;\n      BitFieldModel<uint32_t, 15,\
+    \ 2> dpid;\n      BitFieldModel<uint32_t, 17, 4> pktsts;\n      BitFieldModel<uint32_t,\
+    \ 21, 4> frmnum;\n    };\n  };\n\npublic:\n  using fs_grxstsx_device = Fs_grxstsx_deviceBankReg<BaseAddress\
+    \ + 0x001C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Fs_grxstsx_hostBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using epnum = FieldModel<uint32_t,\
+    \ address, 0, 4, bankOffset>;\n    using bcnt = FieldModel<uint32_t, address,\
+    \ 4, 11, bankOffset>;\n    using dpid = FieldModel<uint32_t, address, 15, 2, bankOffset>;\n\
+    \    using pktsts = FieldModel<uint32_t, address, 17, 4, bankOffset>;\n    using\
+    \ frmnum = FieldModel<uint32_t, address, 21, 4, bankOffset>;\n\n  public:\n  \
+    \  union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4>\
+    \ epnum;\n      BitFieldModel<uint32_t, 4, 11> bcnt;\n      BitFieldModel<uint32_t,\
+    \ 15, 2> dpid;\n      BitFieldModel<uint32_t, 17, 4> pktsts;\n      BitFieldModel<uint32_t,\
+    \ 21, 4> frmnum;\n    };\n  };\n\npublic:\n  using fs_grxstsx_host = Fs_grxstsx_hostBankReg<BaseAddress\
     \ + 0x001C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Fs_dieptxfxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using ineptxsa = FieldModel<uint32_t,\
     \ address, 0, 16, bankOffset>;\n    using ineptxfd = FieldModel<uint32_t, address,\
-    \ 16, 16, bankOffset>;\n  };\n\npublic:\n  using fs_dieptxfx = Fs_dieptxfxBankReg<BaseAddress\
+    \ 16, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 16> ineptxsa;\n      BitFieldModel<uint32_t,\
+    \ 16, 16> ineptxfd;\n    };\n  };\n\npublic:\n  using fs_dieptxfx = Fs_dieptxfxBankReg<BaseAddress\
     \ + 0x0104, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_GLOBAL_H */\n"
   name: OTG_FS_GLOBAL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -9835,7 +9945,7 @@
     \  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 19> xfrsiz;\n      BitFieldModel<uint32_t, 19, 10> pktcnt;\n      BitFieldModel<uint32_t,\
     \ 29, 2> dpid;\n    };\n  };\n\npublic:\n  using fs_hctsiz7 = Fs_hctsiz7Reg<BaseAddress\
-    \ + 0x01F0>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x01F0>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class Fs_hccharxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using mpsiz = FieldModel<uint32_t, address, 0, 11, bankOffset>;\n\
     \    using epnum = FieldModel<uint32_t, address, 11, 4, bankOffset>;\n    using\
@@ -9845,18 +9955,30 @@
     \ 20, 2, bankOffset>;\n    using dad = FieldModel<uint32_t, address, 22, 7, bankOffset>;\n\
     \    using oddfrm = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n    using\
     \ chdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using chena =\
-    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ fs_hccharx = Fs_hccharxBankReg<BaseAddress + 0x0100, 0x0020>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class Fs_hcintxBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using xfrc = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n    using\
-    \ chh = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using stall = FieldModel<uint32_t,\
-    \ address, 3, 1, bankOffset>;\n    using nak = FieldModel<uint32_t, address, 4,\
-    \ 1, bankOffset>;\n    using ack = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n\
-    \    using txerr = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using\
-    \ bberr = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using frmor =\
-    \ FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using dterr = FieldModel<uint32_t,\
-    \ address, 10, 1, bankOffset>;\n  };\n\npublic:\n  using fs_hcintx = Fs_hcintxBankReg<BaseAddress\
+    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n \
+    \     BitFieldModel<uint32_t, 11, 4> epnum;\n      BitFieldModel<uint32_t, 15,\
+    \ 1> epdir;\n      BitFieldModel<uint32_t, 17, 1> lsdev;\n      BitFieldModel<uint32_t,\
+    \ 18, 2> eptyp;\n      BitFieldModel<uint32_t, 20, 2> mcnt;\n      BitFieldModel<uint32_t,\
+    \ 22, 7> dad;\n      BitFieldModel<uint32_t, 29, 1> oddfrm;\n      BitFieldModel<uint32_t,\
+    \ 30, 1> chdis;\n      BitFieldModel<uint32_t, 31, 1> chena;\n    };\n  };\n\n\
+    public:\n  using fs_hccharx = Fs_hccharxBankReg<BaseAddress + 0x0100, 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Fs_hcintxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using xfrc = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\
+    \    using chh = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using stall\
+    \ = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using nak = FieldModel<uint32_t,\
+    \ address, 4, 1, bankOffset>;\n    using ack = FieldModel<uint32_t, address, 5,\
+    \ 1, bankOffset>;\n    using txerr = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n\
+    \    using bberr = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using\
+    \ frmor = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using dterr =\
+    \ FieldModel<uint32_t, address, 10, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> xfrc;\n   \
+    \   BitFieldModel<uint32_t, 1, 1> chh;\n      BitFieldModel<uint32_t, 3, 1> stall;\n\
+    \      BitFieldModel<uint32_t, 4, 1> nak;\n      BitFieldModel<uint32_t, 5, 1>\
+    \ ack;\n      BitFieldModel<uint32_t, 7, 1> txerr;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> bberr;\n      BitFieldModel<uint32_t, 9, 1> frmor;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> dterr;\n    };\n  };\n\npublic:\n  using fs_hcintx = Fs_hcintxBankReg<BaseAddress\
     \ + 0x0108, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Fs_hcintmskxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using xfrcm = FieldModel<uint32_t,\
@@ -9867,15 +9989,23 @@
     \ address, 6, 1, bankOffset>;\n    using txerrm = FieldModel<uint32_t, address,\
     \ 7, 1, bankOffset>;\n    using bberrm = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n\
     \    using frmorm = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using\
-    \ dterrm = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n  };\n\npublic:\n\
-    \  using fs_hcintmskx = Fs_hcintmskxBankReg<BaseAddress + 0x010C, 0x0020>;\n\n\
-    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Fs_hctsizxBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using xfrsiz = FieldModel<uint32_t, address, 0, 19, bankOffset>;\n    using\
-    \ pktcnt = FieldModel<uint32_t, address, 19, 10, bankOffset>;\n    using dpid\
-    \ = FieldModel<uint32_t, address, 29, 2, bankOffset>;\n  };\n\npublic:\n  using\
-    \ fs_hctsizx = Fs_hctsizxBankReg<BaseAddress + 0x0110, 0x0020>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_OTG_FS_HOST_H */\n"
+    \ dterrm = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n\n  public:\n  \
+    \  union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1>\
+    \ xfrcm;\n      BitFieldModel<uint32_t, 1, 1> chhm;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> stallm;\n      BitFieldModel<uint32_t, 4, 1> nakm;\n      BitFieldModel<uint32_t,\
+    \ 5, 1> ackm;\n      BitFieldModel<uint32_t, 6, 1> nyet;\n      BitFieldModel<uint32_t,\
+    \ 7, 1> txerrm;\n      BitFieldModel<uint32_t, 8, 1> bberrm;\n      BitFieldModel<uint32_t,\
+    \ 9, 1> frmorm;\n      BitFieldModel<uint32_t, 10, 1> dterrm;\n    };\n  };\n\n\
+    public:\n  using fs_hcintmskx = Fs_hcintmskxBankReg<BaseAddress + 0x010C, 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Fs_hctsizxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using xfrsiz = FieldModel<uint32_t, address, 0, 19, bankOffset>;\n\
+    \    using pktcnt = FieldModel<uint32_t, address, 19, 10, bankOffset>;\n    using\
+    \ dpid = FieldModel<uint32_t, address, 29, 2, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 19> xfrsiz;\n\
+    \      BitFieldModel<uint32_t, 19, 10> pktcnt;\n      BitFieldModel<uint32_t,\
+    \ 29, 2> dpid;\n    };\n  };\n\npublic:\n  using fs_hctsizx = Fs_hctsizxBankReg<BaseAddress\
+    \ + 0x0110, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_HOST_H */\n"
   name: OTG_FS_HOST
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -10274,7 +10404,7 @@
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n\
     \      BitFieldModel<uint32_t, 19, 10> pktcnt;\n      BitFieldModel<uint32_t,\
     \ 0, 19> xfrsiz;\n    };\n  };\n\npublic:\n  using doeptsiz3 = Doeptsiz3Reg<BaseAddress\
-    \ + 0x0370>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x0370>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class DiepctlxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using epena = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\
     \    using epdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using\
@@ -10287,53 +10417,82 @@
     \ naksts = FieldModel<uint32_t, address, 17, 1, bankOffset>;\n    using eonum_dpid\
     \ = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using usbaep = FieldModel<uint32_t,\
     \ address, 15, 1, bankOffset>;\n    using mpsiz = FieldModel<uint32_t, address,\
-    \ 0, 11, bankOffset>;\n  };\n\npublic:\n  using diepctlx = DiepctlxBankReg<BaseAddress\
-    \ + 0x0140, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class DoepctlxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using epena = FieldModel<uint32_t, address,\
-    \ 31, 1, bankOffset>;\n    using epdis = FieldModel<uint32_t, address, 30, 1,\
-    \ bankOffset>;\n    using soddfrm = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n\
-    \    using sd0pid_sevnfrm = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n\
-    \    using snak = FieldModel<uint32_t, address, 27, 1, bankOffset>;\n    using\
-    \ cnak = FieldModel<uint32_t, address, 26, 1, bankOffset>;\n    using stall =\
-    \ FieldModel<uint32_t, address, 21, 1, bankOffset>;\n    using snpm = FieldModel<uint32_t,\
-    \ address, 20, 1, bankOffset>;\n    using eptyp = FieldModel<uint32_t, address,\
-    \ 18, 2, bankOffset>;\n    using naksts = FieldModel<uint32_t, address, 17, 1,\
-    \ bankOffset>;\n    using eonum_dpid = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n\
-    \    using usbaep = FieldModel<uint32_t, address, 15, 1, bankOffset>;\n    using\
-    \ mpsiz = FieldModel<uint32_t, address, 0, 11, bankOffset>;\n  };\n\npublic:\n\
-    \  using doepctlx = DoepctlxBankReg<BaseAddress + 0x0320, 0x0020>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class DiepintxBankReg\
+    \ 0, 11, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 31, 1> epena;\n      BitFieldModel<uint32_t, 30,\
+    \ 1> epdis;\n      BitFieldModel<uint32_t, 29, 1> soddfrm;\n      BitFieldModel<uint32_t,\
+    \ 28, 1> sd0pid_sevnfrm;\n      BitFieldModel<uint32_t, 27, 1> snak;\n      BitFieldModel<uint32_t,\
+    \ 26, 1> cnak;\n      BitFieldModel<uint32_t, 22, 4> txfnum;\n      BitFieldModel<uint32_t,\
+    \ 21, 1> stall;\n      BitFieldModel<uint32_t, 18, 2> eptyp;\n      BitFieldModel<uint32_t,\
+    \ 17, 1> naksts;\n      BitFieldModel<uint32_t, 16, 1> eonum_dpid;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> usbaep;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n    };\n  };\n\n\
+    public:\n  using diepctlx = DiepctlxBankReg<BaseAddress + 0x0140, 0x0020>;\n\n\
+    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class DoepctlxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using epena = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n    using\
+    \ epdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using soddfrm\
+    \ = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n    using sd0pid_sevnfrm\
+    \ = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n    using snak = FieldModel<uint32_t,\
+    \ address, 27, 1, bankOffset>;\n    using cnak = FieldModel<uint32_t, address,\
+    \ 26, 1, bankOffset>;\n    using stall = FieldModel<uint32_t, address, 21, 1,\
+    \ bankOffset>;\n    using snpm = FieldModel<uint32_t, address, 20, 1, bankOffset>;\n\
+    \    using eptyp = FieldModel<uint32_t, address, 18, 2, bankOffset>;\n    using\
+    \ naksts = FieldModel<uint32_t, address, 17, 1, bankOffset>;\n    using eonum_dpid\
+    \ = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using usbaep = FieldModel<uint32_t,\
+    \ address, 15, 1, bankOffset>;\n    using mpsiz = FieldModel<uint32_t, address,\
+    \ 0, 11, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 31, 1> epena;\n      BitFieldModel<uint32_t, 30,\
+    \ 1> epdis;\n      BitFieldModel<uint32_t, 29, 1> soddfrm;\n      BitFieldModel<uint32_t,\
+    \ 28, 1> sd0pid_sevnfrm;\n      BitFieldModel<uint32_t, 27, 1> snak;\n      BitFieldModel<uint32_t,\
+    \ 26, 1> cnak;\n      BitFieldModel<uint32_t, 21, 1> stall;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> snpm;\n      BitFieldModel<uint32_t, 18, 2> eptyp;\n      BitFieldModel<uint32_t,\
+    \ 17, 1> naksts;\n      BitFieldModel<uint32_t, 16, 1> eonum_dpid;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> usbaep;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n    };\n  };\n\n\
+    public:\n  using doepctlx = DoepctlxBankReg<BaseAddress + 0x0320, 0x0020>;\n\n\
+    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class DiepintxBankReg\
     \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
     \    using txfe = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using\
     \ inepne = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using ittxfe\
     \ = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using toc = FieldModel<uint32_t,\
     \ address, 3, 1, bankOffset>;\n    using epdisd = FieldModel<uint32_t, address,\
     \ 1, 1, bankOffset>;\n    using xfrc = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\
-    \  };\n\npublic:\n  using diepintx = DiepintxBankReg<BaseAddress + 0x0108, 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ DoepintxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using b2bstup = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n\
-    \    using otepdis = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using\
-    \ stup = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using epdisd =\
-    \ FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using xfrc = FieldModel<uint32_t,\
-    \ address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using doepintx = DoepintxBankReg<BaseAddress\
-    \ + 0x0308, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class DieptsizxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using mcnt = FieldModel<uint32_t, address,\
-    \ 29, 2, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address, 19, 10,\
-    \ bankOffset>;\n    using xfrsiz = FieldModel<uint32_t, address, 0, 19, bankOffset>;\n\
-    \  };\n\npublic:\n  using dieptsizx = DieptsizxBankReg<BaseAddress + 0x0130, 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ DtxfstsxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using ineptfsav = FieldModel<uint32_t, address, 0, 16, bankOffset>;\n\
-    \  };\n\npublic:\n  using dtxfstsx = DtxfstsxBankReg<BaseAddress + 0x0118, 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ DoeptsizxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using rxdpid_stupcnt = FieldModel<uint32_t, address, 29,\
-    \ 2, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address, 19, 10, bankOffset>;\n\
-    \    using xfrsiz = FieldModel<uint32_t, address, 0, 19, bankOffset>;\n  };\n\n\
-    public:\n  using doeptsizx = DoeptsizxBankReg<BaseAddress + 0x0330, 0x0020>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 7, 1> txfe;\n      BitFieldModel<uint32_t, 6, 1> inepne;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> ittxfe;\n      BitFieldModel<uint32_t, 3, 1> toc;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> epdisd;\n      BitFieldModel<uint32_t, 0, 1> xfrc;\n    };\n  };\n\npublic:\n\
+    \  using diepintx = DiepintxBankReg<BaseAddress + 0x0108, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class DoepintxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using b2bstup = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using\
+    \ otepdis = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using stup =\
+    \ FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using epdisd = FieldModel<uint32_t,\
+    \ address, 1, 1, bankOffset>;\n    using xfrc = FieldModel<uint32_t, address,\
+    \ 0, 1, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 6, 1> b2bstup;\n      BitFieldModel<uint32_t, 4,\
+    \ 1> otepdis;\n      BitFieldModel<uint32_t, 3, 1> stup;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> epdisd;\n      BitFieldModel<uint32_t, 0, 1> xfrc;\n    };\n  };\n\npublic:\n\
+    \  using doepintx = DoepintxBankReg<BaseAddress + 0x0308, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class DieptsizxBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using mcnt = FieldModel<uint32_t, address, 29, 2, bankOffset>;\n    using\
+    \ pktcnt = FieldModel<uint32_t, address, 19, 10, bankOffset>;\n    using xfrsiz\
+    \ = FieldModel<uint32_t, address, 0, 19, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 29, 2> mcnt;\n\
+    \      BitFieldModel<uint32_t, 19, 10> pktcnt;\n      BitFieldModel<uint32_t,\
+    \ 0, 19> xfrsiz;\n    };\n  };\n\npublic:\n  using dieptsizx = DieptsizxBankReg<BaseAddress\
+    \ + 0x0130, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class DtxfstsxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using ineptfsav = FieldModel<uint32_t, address,\
+    \ 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 16> ineptfsav;\n    };\n  };\n\npublic:\n  using\
+    \ dtxfstsx = DtxfstsxBankReg<BaseAddress + 0x0118, 0x0020>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class DoeptsizxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using rxdpid_stupcnt = FieldModel<uint32_t,\
+    \ address, 29, 2, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address,\
+    \ 19, 10, bankOffset>;\n    using xfrsiz = FieldModel<uint32_t, address, 0, 19,\
+    \ bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n   \
+    \   BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n      BitFieldModel<uint32_t,\
+    \ 19, 10> pktcnt;\n      BitFieldModel<uint32_t, 0, 19> xfrsiz;\n    };\n  };\n\
+    \npublic:\n  using doeptsizx = DoeptsizxBankReg<BaseAddress + 0x0330, 0x0020>;\n\
     };\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_DEVICE_H */\n"
   name: OTG_FS_DEVICE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -10362,7 +10521,7 @@
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> stppclk;\n\
     \      BitFieldModel<uint32_t, 1, 1> gatehclk;\n      BitFieldModel<uint32_t,\
     \ 4, 1> physusp;\n    };\n  };\n\npublic:\n  using fs_pcgcctl = Fs_pcgcctlReg<BaseAddress\
-    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
   name: OTG_FS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -13102,47 +13261,64 @@
     \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
     \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
     \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
-    \  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\nprivate:\n  template<unsigned\
+    \  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class TixrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using stid = FieldModel<uint32_t,\
     \ address, 21, 11, bankOffset>;\n    using exid = FieldModel<uint32_t, address,\
     \ 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using rtr = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using txrq\
-    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ tixr = TixrBankReg<BaseAddress + 0x0180, 0x0010>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class TdtxrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t,\
-    \ address, 16, 16, bankOffset>;\n    using tgt = FieldModel<uint32_t, address,\
-    \ 8, 1, bankOffset>;\n    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\
-    \  };\n\npublic:\n  using tdtxr = TdtxrBankReg<BaseAddress + 0x0184, 0x0010>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ TdlxrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using data3 = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n\
-    \    using data2 = FieldModel<uint32_t, address, 16, 8, bankOffset>;\n    using\
-    \ data1 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using data0 =\
-    \ FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\npublic:\n  using tdlxr\
-    \ = TdlxrBankReg<BaseAddress + 0x0188, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 21, 11> stid;\n \
+    \     BitFieldModel<uint32_t, 3, 18> exid;\n      BitFieldModel<uint32_t, 2, 1>\
+    \ ide;\n      BitFieldModel<uint32_t, 1, 1> rtr;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> txrq;\n    };\n  };\n\npublic:\n  using tixr = TixrBankReg<BaseAddress\
+    \ + 0x0180, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class TdtxrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t, address,\
+    \ 16, 16, bankOffset>;\n    using tgt = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n\
+    \    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
+    \ 16> time;\n      BitFieldModel<uint32_t, 8, 1> tgt;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> dlc;\n    };\n  };\n\npublic:\n  using tdtxr = TdtxrBankReg<BaseAddress\
+    \ + 0x0184, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class TdlxrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using data3 = FieldModel<uint32_t, address,\
+    \ 24, 8, bankOffset>;\n    using data2 = FieldModel<uint32_t, address, 16, 8,\
+    \ bankOffset>;\n    using data1 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
+    \    using data0 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24,\
+    \ 8> data3;\n      BitFieldModel<uint32_t, 16, 8> data2;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> data1;\n      BitFieldModel<uint32_t, 0, 8> data0;\n    };\n  };\n\npublic:\n\
+    \  using tdlxr = TdlxrBankReg<BaseAddress + 0x0188, 0x0010>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class TdhxrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using data7 = FieldModel<uint32_t,\
     \ address, 24, 8, bankOffset>;\n    using data6 = FieldModel<uint32_t, address,\
     \ 16, 8, bankOffset>;\n    using data5 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
-    \    using data4 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\n\
-    public:\n  using tdhxr = TdhxrBankReg<BaseAddress + 0x018C, 0x0010>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class RixrBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using stid = FieldModel<uint32_t, address, 21, 11, bankOffset>;\n    using\
-    \ exid = FieldModel<uint32_t, address, 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t,\
-    \ address, 2, 1, bankOffset>;\n    using rtr = FieldModel<uint32_t, address, 1,\
-    \ 1, bankOffset>;\n  };\n\npublic:\n  using rixr = RixrBankReg<BaseAddress + 0x01B0,\
-    \ 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
-    \  class RdtxrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using time = FieldModel<uint32_t, address, 16, 16, bankOffset>;\n\
-    \    using fmi = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using dlc\
-    \ = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n  };\n\npublic:\n  using\
-    \ rdtxr = RdtxrBankReg<BaseAddress + 0x01B4, 0x0010>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Fxr2BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using fb0 = FieldModel<uint32_t, address,\
-    \ 0, 1, bankOffset>;\n    using fb1 = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\
+    \    using data4 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24,\
+    \ 8> data7;\n      BitFieldModel<uint32_t, 16, 8> data6;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> data5;\n      BitFieldModel<uint32_t, 0, 8> data4;\n    };\n  };\n\npublic:\n\
+    \  using tdhxr = TdhxrBankReg<BaseAddress + 0x018C, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class RixrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using stid = FieldModel<uint32_t,\
+    \ address, 21, 11, bankOffset>;\n    using exid = FieldModel<uint32_t, address,\
+    \ 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
+    \    using rtr = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 21,\
+    \ 11> stid;\n      BitFieldModel<uint32_t, 3, 18> exid;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> ide;\n      BitFieldModel<uint32_t, 1, 1> rtr;\n    };\n  };\n\npublic:\n\
+    \  using rixr = RixrBankReg<BaseAddress + 0x01B0, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class RdtxrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t,\
+    \ address, 16, 16, bankOffset>;\n    using fmi = FieldModel<uint32_t, address,\
+    \ 8, 8, bankOffset>;\n    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 16, 16> time;\n      BitFieldModel<uint32_t, 8, 8> fmi;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> dlc;\n    };\n  };\n\npublic:\n  using rdtxr = RdtxrBankReg<BaseAddress\
+    \ + 0x01B4, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Fxr2BankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using fb0 = FieldModel<uint32_t, address, 0,\
+    \ 1, bankOffset>;\n    using fb1 = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\
     \    using fb2 = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using fb3\
     \ = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using fb4 = FieldModel<uint32_t,\
     \ address, 4, 1, bankOffset>;\n    using fb5 = FieldModel<uint32_t, address, 5,\
@@ -13167,8 +13343,25 @@
     \ fb28 = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n    using fb29 = FieldModel<uint32_t,\
     \ address, 29, 1, bankOffset>;\n    using fb30 = FieldModel<uint32_t, address,\
     \ 30, 1, bankOffset>;\n    using fb31 = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\
-    \  };\n\npublic:\n  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_CAN1_H */\n"
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> fb0;\n      BitFieldModel<uint32_t, 1, 1> fb1;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> fb2;\n      BitFieldModel<uint32_t, 3, 1> fb3;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> fb4;\n      BitFieldModel<uint32_t, 5, 1> fb5;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> fb6;\n      BitFieldModel<uint32_t, 7, 1> fb7;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> fb8;\n      BitFieldModel<uint32_t, 9, 1> fb9;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> fb10;\n      BitFieldModel<uint32_t, 11, 1> fb11;\n      BitFieldModel<uint32_t,\
+    \ 12, 1> fb12;\n      BitFieldModel<uint32_t, 13, 1> fb13;\n      BitFieldModel<uint32_t,\
+    \ 14, 1> fb14;\n      BitFieldModel<uint32_t, 15, 1> fb15;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> fb16;\n      BitFieldModel<uint32_t, 17, 1> fb17;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> fb18;\n      BitFieldModel<uint32_t, 19, 1> fb19;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> fb20;\n      BitFieldModel<uint32_t, 21, 1> fb21;\n      BitFieldModel<uint32_t,\
+    \ 22, 1> fb22;\n      BitFieldModel<uint32_t, 23, 1> fb23;\n      BitFieldModel<uint32_t,\
+    \ 24, 1> fb24;\n      BitFieldModel<uint32_t, 25, 1> fb25;\n      BitFieldModel<uint32_t,\
+    \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
+    \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
+    \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
+    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_CAN1_H */\n"
   name: CAN1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -15908,47 +16101,64 @@
     \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
     \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
     \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
-    \  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\nprivate:\n  template<unsigned\
+    \  using f27r2 = F27r2Reg<BaseAddress + 0x031C>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class TixrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using stid = FieldModel<uint32_t,\
     \ address, 21, 11, bankOffset>;\n    using exid = FieldModel<uint32_t, address,\
     \ 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using rtr = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using txrq\
-    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ tixr = TixrBankReg<BaseAddress + 0x0180, 0x0010>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class TdtxrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t,\
-    \ address, 16, 16, bankOffset>;\n    using tgt = FieldModel<uint32_t, address,\
-    \ 8, 1, bankOffset>;\n    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\
-    \  };\n\npublic:\n  using tdtxr = TdtxrBankReg<BaseAddress + 0x0184, 0x0010>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ TdlxrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using data3 = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n\
-    \    using data2 = FieldModel<uint32_t, address, 16, 8, bankOffset>;\n    using\
-    \ data1 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using data0 =\
-    \ FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\npublic:\n  using tdlxr\
-    \ = TdlxrBankReg<BaseAddress + 0x0188, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 21, 11> stid;\n \
+    \     BitFieldModel<uint32_t, 3, 18> exid;\n      BitFieldModel<uint32_t, 2, 1>\
+    \ ide;\n      BitFieldModel<uint32_t, 1, 1> rtr;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> txrq;\n    };\n  };\n\npublic:\n  using tixr = TixrBankReg<BaseAddress\
+    \ + 0x0180, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class TdtxrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t, address,\
+    \ 16, 16, bankOffset>;\n    using tgt = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n\
+    \    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
+    \ 16> time;\n      BitFieldModel<uint32_t, 8, 1> tgt;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> dlc;\n    };\n  };\n\npublic:\n  using tdtxr = TdtxrBankReg<BaseAddress\
+    \ + 0x0184, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class TdlxrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using data3 = FieldModel<uint32_t, address,\
+    \ 24, 8, bankOffset>;\n    using data2 = FieldModel<uint32_t, address, 16, 8,\
+    \ bankOffset>;\n    using data1 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
+    \    using data0 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24,\
+    \ 8> data3;\n      BitFieldModel<uint32_t, 16, 8> data2;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> data1;\n      BitFieldModel<uint32_t, 0, 8> data0;\n    };\n  };\n\npublic:\n\
+    \  using tdlxr = TdlxrBankReg<BaseAddress + 0x0188, 0x0010>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class TdhxrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using data7 = FieldModel<uint32_t,\
     \ address, 24, 8, bankOffset>;\n    using data6 = FieldModel<uint32_t, address,\
     \ 16, 8, bankOffset>;\n    using data5 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n\
-    \    using data4 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\n\
-    public:\n  using tdhxr = TdhxrBankReg<BaseAddress + 0x018C, 0x0010>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class RixrBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using stid = FieldModel<uint32_t, address, 21, 11, bankOffset>;\n    using\
-    \ exid = FieldModel<uint32_t, address, 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t,\
-    \ address, 2, 1, bankOffset>;\n    using rtr = FieldModel<uint32_t, address, 1,\
-    \ 1, bankOffset>;\n  };\n\npublic:\n  using rixr = RixrBankReg<BaseAddress + 0x01B0,\
-    \ 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
-    \  class RdtxrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using time = FieldModel<uint32_t, address, 16, 16, bankOffset>;\n\
-    \    using fmi = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using dlc\
-    \ = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n  };\n\npublic:\n  using\
-    \ rdtxr = RdtxrBankReg<BaseAddress + 0x01B4, 0x0010>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Fxr2BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using fb0 = FieldModel<uint32_t, address,\
-    \ 0, 1, bankOffset>;\n    using fb1 = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\
+    \    using data4 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24,\
+    \ 8> data7;\n      BitFieldModel<uint32_t, 16, 8> data6;\n      BitFieldModel<uint32_t,\
+    \ 8, 8> data5;\n      BitFieldModel<uint32_t, 0, 8> data4;\n    };\n  };\n\npublic:\n\
+    \  using tdhxr = TdhxrBankReg<BaseAddress + 0x018C, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class RixrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using stid = FieldModel<uint32_t,\
+    \ address, 21, 11, bankOffset>;\n    using exid = FieldModel<uint32_t, address,\
+    \ 3, 18, bankOffset>;\n    using ide = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
+    \    using rtr = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 21,\
+    \ 11> stid;\n      BitFieldModel<uint32_t, 3, 18> exid;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> ide;\n      BitFieldModel<uint32_t, 1, 1> rtr;\n    };\n  };\n\npublic:\n\
+    \  using rixr = RixrBankReg<BaseAddress + 0x01B0, 0x0010>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class RdtxrBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using time = FieldModel<uint32_t,\
+    \ address, 16, 16, bankOffset>;\n    using fmi = FieldModel<uint32_t, address,\
+    \ 8, 8, bankOffset>;\n    using dlc = FieldModel<uint32_t, address, 0, 4, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 16, 16> time;\n      BitFieldModel<uint32_t, 8, 8> fmi;\n      BitFieldModel<uint32_t,\
+    \ 0, 4> dlc;\n    };\n  };\n\npublic:\n  using rdtxr = RdtxrBankReg<BaseAddress\
+    \ + 0x01B4, 0x0010>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Fxr2BankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using fb0 = FieldModel<uint32_t, address, 0,\
+    \ 1, bankOffset>;\n    using fb1 = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\
     \    using fb2 = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using fb3\
     \ = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using fb4 = FieldModel<uint32_t,\
     \ address, 4, 1, bankOffset>;\n    using fb5 = FieldModel<uint32_t, address, 5,\
@@ -15973,8 +16183,25 @@
     \ fb28 = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n    using fb29 = FieldModel<uint32_t,\
     \ address, 29, 1, bankOffset>;\n    using fb30 = FieldModel<uint32_t, address,\
     \ 30, 1, bankOffset>;\n    using fb31 = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\
-    \  };\n\npublic:\n  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_CAN2_H */\n"
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 1> fb0;\n      BitFieldModel<uint32_t, 1, 1> fb1;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> fb2;\n      BitFieldModel<uint32_t, 3, 1> fb3;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> fb4;\n      BitFieldModel<uint32_t, 5, 1> fb5;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> fb6;\n      BitFieldModel<uint32_t, 7, 1> fb7;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> fb8;\n      BitFieldModel<uint32_t, 9, 1> fb9;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> fb10;\n      BitFieldModel<uint32_t, 11, 1> fb11;\n      BitFieldModel<uint32_t,\
+    \ 12, 1> fb12;\n      BitFieldModel<uint32_t, 13, 1> fb13;\n      BitFieldModel<uint32_t,\
+    \ 14, 1> fb14;\n      BitFieldModel<uint32_t, 15, 1> fb15;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> fb16;\n      BitFieldModel<uint32_t, 17, 1> fb17;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> fb18;\n      BitFieldModel<uint32_t, 19, 1> fb19;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> fb20;\n      BitFieldModel<uint32_t, 21, 1> fb21;\n      BitFieldModel<uint32_t,\
+    \ 22, 1> fb22;\n      BitFieldModel<uint32_t, 23, 1> fb23;\n      BitFieldModel<uint32_t,\
+    \ 24, 1> fb24;\n      BitFieldModel<uint32_t, 25, 1> fb25;\n      BitFieldModel<uint32_t,\
+    \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
+    \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
+    \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
+    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_CAN2_H */\n"
   name: CAN2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16247,37 +16474,46 @@
     \nprivate:\n  template<unsigned int address>\n  class Ipr25Reg : public RegisterModel<uint32_t,\
     \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      \n    };\n  };\n\npublic:\n  using ipr25 = Ipr25Reg<BaseAddress\
-    \ + 0x0364>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x0364>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class IserxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using setena = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using iserx = IserxBankReg<BaseAddress + 0x0000, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ IcerxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using clrena = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using icerx = IcerxBankReg<BaseAddress + 0x0080, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ IsprxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using setpend = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using isprx = IsprxBankReg<BaseAddress + 0x0100, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ IcprxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using clrpend = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using icprx = IcprxBankReg<BaseAddress + 0x0180, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ IabrxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using active = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
-    \  };\n\npublic:\n  using iabrx = IabrxBankReg<BaseAddress + 0x0200, 0x0004>;\n\
-    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
-    \ IprxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
-    \  public:\n    using ipr_n0 = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\
-    \    using ipr_n1 = FieldModel<uint32_t, address, 8, 8, bankOffset>;\n    using\
-    \ ipr_n2 = FieldModel<uint32_t, address, 16, 8, bankOffset>;\n    using ipr_n3\
-    \ = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n  };\n\npublic:\n  using\
-    \ iprx = IprxBankReg<BaseAddress + 0x0300, 0x0004>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Ipr2xBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n  };\n\npublic:\n  using ipr2x =\
-    \ Ipr2xBankReg<BaseAddress + 0x0354, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_H\
-    \ */\n"
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 32> setena;\n    };\n  };\n\npublic:\n  using iserx = IserxBankReg<BaseAddress\
+    \ + 0x0000, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class IcerxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using clrena = FieldModel<uint32_t, address,\
+    \ 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 32> clrena;\n    };\n  };\n\npublic:\n  using\
+    \ icerx = IcerxBankReg<BaseAddress + 0x0080, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class IsprxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using setpend = FieldModel<uint32_t,\
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> setpend;\n    };\n  };\n\npublic:\n\
+    \  using isprx = IsprxBankReg<BaseAddress + 0x0100, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class IcprxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using clrpend = FieldModel<uint32_t,\
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> clrpend;\n    };\n  };\n\npublic:\n\
+    \  using icprx = IcprxBankReg<BaseAddress + 0x0180, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class IabrxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using active = FieldModel<uint32_t,\
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> active;\n    };\n  };\n\npublic:\n\
+    \  using iabrx = IabrxBankReg<BaseAddress + 0x0200, 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ int address, unsigned int bankOffset>\n  class IprxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using ipr_n0 = FieldModel<uint32_t,\
+    \ address, 0, 8, bankOffset>;\n    using ipr_n1 = FieldModel<uint32_t, address,\
+    \ 8, 8, bankOffset>;\n    using ipr_n2 = FieldModel<uint32_t, address, 16, 8,\
+    \ bankOffset>;\n    using ipr_n3 = FieldModel<uint32_t, address, 24, 8, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 8> ipr_n0;\n      BitFieldModel<uint32_t, 8, 8> ipr_n1;\n      BitFieldModel<uint32_t,\
+    \ 16, 8> ipr_n2;\n      BitFieldModel<uint32_t, 24, 8> ipr_n3;\n    };\n  };\n\
+    \npublic:\n  using iprx = IprxBankReg<BaseAddress + 0x0300, 0x0004>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class Ipr2xBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n      \n    };\n\
+    \  };\n\npublic:\n  using ipr2x = Ipr2xBankReg<BaseAddress + 0x0354, 0x0004>;\n\
+    };\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_H */\n"
   name: NVIC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16357,7 +16593,7 @@
     \ 6, 1> nrst_stop;\n      BitFieldModel<uint32_t, 7, 1> nrst_stdby;\n      BitFieldModel<uint32_t,\
     \ 8, 8> rdp;\n      BitFieldModel<uint32_t, 16, 8> nwrp;\n      BitFieldModel<uint32_t,\
     \ 31, 1> sprmod;\n    };\n  };\n\npublic:\n  using optcr = OptcrReg<BaseAddress\
-    \ + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H */\n"
+    \ + 0x0014>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H */\n"
   name: FLASH
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16559,27 +16795,40 @@
     \ 18, 1> pr18;\n      BitFieldModel<uint32_t, 19, 1> pr19;\n      BitFieldModel<uint32_t,\
     \ 20, 1> pr20;\n      BitFieldModel<uint32_t, 21, 1> pr21;\n      BitFieldModel<uint32_t,\
     \ 22, 1> pr22;\n    };\n  };\n\npublic:\n  using pr = PrReg<BaseAddress + 0x0014>;\n\
-    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class XmrBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using mr0 = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n    using mr1\
-    \ = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using mr2 = FieldModel<uint32_t,\
-    \ address, 2, 1, bankOffset>;\n    using mr3 = FieldModel<uint32_t, address, 3,\
-    \ 1, bankOffset>;\n    using mr4 = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n\
-    \    using mr5 = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n    using mr6\
-    \ = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using mr7 = FieldModel<uint32_t,\
-    \ address, 7, 1, bankOffset>;\n    using mr8 = FieldModel<uint32_t, address, 8,\
-    \ 1, bankOffset>;\n    using mr9 = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n\
-    \    using mr10 = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n    using\
-    \ mr11 = FieldModel<uint32_t, address, 11, 1, bankOffset>;\n    using mr12 = FieldModel<uint32_t,\
-    \ address, 12, 1, bankOffset>;\n    using mr13 = FieldModel<uint32_t, address,\
-    \ 13, 1, bankOffset>;\n    using mr14 = FieldModel<uint32_t, address, 14, 1, bankOffset>;\n\
-    \    using mr15 = FieldModel<uint32_t, address, 15, 1, bankOffset>;\n    using\
-    \ mr16 = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using mr17 = FieldModel<uint32_t,\
-    \ address, 17, 1, bankOffset>;\n    using mr18 = FieldModel<uint32_t, address,\
-    \ 18, 1, bankOffset>;\n    using mr19 = FieldModel<uint32_t, address, 19, 1, bankOffset>;\n\
-    \    using mr20 = FieldModel<uint32_t, address, 20, 1, bankOffset>;\n    using\
-    \ mr21 = FieldModel<uint32_t, address, 21, 1, bankOffset>;\n    using mr22 = FieldModel<uint32_t,\
-    \ address, 22, 1, bankOffset>;\n  };\n\npublic:\n  using xmr = XmrBankReg<BaseAddress\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ XmrBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
+    \  public:\n    using mr0 = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\
+    \    using mr1 = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using mr2\
+    \ = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using mr3 = FieldModel<uint32_t,\
+    \ address, 3, 1, bankOffset>;\n    using mr4 = FieldModel<uint32_t, address, 4,\
+    \ 1, bankOffset>;\n    using mr5 = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n\
+    \    using mr6 = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using mr7\
+    \ = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using mr8 = FieldModel<uint32_t,\
+    \ address, 8, 1, bankOffset>;\n    using mr9 = FieldModel<uint32_t, address, 9,\
+    \ 1, bankOffset>;\n    using mr10 = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n\
+    \    using mr11 = FieldModel<uint32_t, address, 11, 1, bankOffset>;\n    using\
+    \ mr12 = FieldModel<uint32_t, address, 12, 1, bankOffset>;\n    using mr13 = FieldModel<uint32_t,\
+    \ address, 13, 1, bankOffset>;\n    using mr14 = FieldModel<uint32_t, address,\
+    \ 14, 1, bankOffset>;\n    using mr15 = FieldModel<uint32_t, address, 15, 1, bankOffset>;\n\
+    \    using mr16 = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using\
+    \ mr17 = FieldModel<uint32_t, address, 17, 1, bankOffset>;\n    using mr18 = FieldModel<uint32_t,\
+    \ address, 18, 1, bankOffset>;\n    using mr19 = FieldModel<uint32_t, address,\
+    \ 19, 1, bankOffset>;\n    using mr20 = FieldModel<uint32_t, address, 20, 1, bankOffset>;\n\
+    \    using mr21 = FieldModel<uint32_t, address, 21, 1, bankOffset>;\n    using\
+    \ mr22 = FieldModel<uint32_t, address, 22, 1, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> mr0;\n\
+    \      BitFieldModel<uint32_t, 1, 1> mr1;\n      BitFieldModel<uint32_t, 2, 1>\
+    \ mr2;\n      BitFieldModel<uint32_t, 3, 1> mr3;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> mr4;\n      BitFieldModel<uint32_t, 5, 1> mr5;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> mr6;\n      BitFieldModel<uint32_t, 7, 1> mr7;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> mr8;\n      BitFieldModel<uint32_t, 9, 1> mr9;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> mr10;\n      BitFieldModel<uint32_t, 11, 1> mr11;\n      BitFieldModel<uint32_t,\
+    \ 12, 1> mr12;\n      BitFieldModel<uint32_t, 13, 1> mr13;\n      BitFieldModel<uint32_t,\
+    \ 14, 1> mr14;\n      BitFieldModel<uint32_t, 15, 1> mr15;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> mr16;\n      BitFieldModel<uint32_t, 17, 1> mr17;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> mr18;\n      BitFieldModel<uint32_t, 19, 1> mr19;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> mr20;\n      BitFieldModel<uint32_t, 21, 1> mr21;\n      BitFieldModel<uint32_t,\
+    \ 22, 1> mr22;\n    };\n  };\n\npublic:\n  using xmr = XmrBankReg<BaseAddress\
     \ + 0x0000, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class XtsrBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using tr0 = FieldModel<uint32_t, address, 0,\
@@ -16600,9 +16849,21 @@
     \ tr18 = FieldModel<uint32_t, address, 18, 1, bankOffset>;\n    using tr19 = FieldModel<uint32_t,\
     \ address, 19, 1, bankOffset>;\n    using tr20 = FieldModel<uint32_t, address,\
     \ 20, 1, bankOffset>;\n    using tr21 = FieldModel<uint32_t, address, 21, 1, bankOffset>;\n\
-    \    using tr22 = FieldModel<uint32_t, address, 22, 1, bankOffset>;\n  };\n\n\
-    public:\n  using xtsr = XtsrBankReg<BaseAddress + 0x0008, 0x0004>;\n};\n\n}\n\n\
-    #endif /* DRAL_STM32F446_EXTI_H */\n"
+    \    using tr22 = FieldModel<uint32_t, address, 22, 1, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
+    \ 1> tr0;\n      BitFieldModel<uint32_t, 1, 1> tr1;\n      BitFieldModel<uint32_t,\
+    \ 2, 1> tr2;\n      BitFieldModel<uint32_t, 3, 1> tr3;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> tr4;\n      BitFieldModel<uint32_t, 5, 1> tr5;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> tr6;\n      BitFieldModel<uint32_t, 7, 1> tr7;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> tr8;\n      BitFieldModel<uint32_t, 9, 1> tr9;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> tr10;\n      BitFieldModel<uint32_t, 11, 1> tr11;\n      BitFieldModel<uint32_t,\
+    \ 12, 1> tr12;\n      BitFieldModel<uint32_t, 13, 1> tr13;\n      BitFieldModel<uint32_t,\
+    \ 14, 1> tr14;\n      BitFieldModel<uint32_t, 15, 1> tr15;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> tr16;\n      BitFieldModel<uint32_t, 17, 1> tr17;\n      BitFieldModel<uint32_t,\
+    \ 18, 1> tr18;\n      BitFieldModel<uint32_t, 19, 1> tr19;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> tr20;\n      BitFieldModel<uint32_t, 21, 1> tr21;\n      BitFieldModel<uint32_t,\
+    \ 22, 1> tr22;\n    };\n  };\n\npublic:\n  using xtsr = XtsrBankReg<BaseAddress\
+    \ + 0x0008, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H */\n"
   name: EXTI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16895,27 +17156,36 @@
     \ 11> bcnt;\n      BitFieldModel<uint32_t, 15, 2> dpid;\n      BitFieldModel<uint32_t,\
     \ 17, 4> pktsts;\n      BitFieldModel<uint32_t, 21, 4> frmnum;\n    };\n  };\n\
     \npublic:\n  using otg_hs_grxstsp_peripheral = Otg_hs_grxstsp_peripheralReg<BaseAddress\
-    \ + 0x0020>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class Otg_hs_grxstsx_hostBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using chnum = FieldModel<uint32_t, address,\
     \ 0, 4, bankOffset>;\n    using bcnt = FieldModel<uint32_t, address, 4, 11, bankOffset>;\n\
     \    using dpid = FieldModel<uint32_t, address, 15, 2, bankOffset>;\n    using\
-    \ pktsts = FieldModel<uint32_t, address, 17, 4, bankOffset>;\n  };\n\npublic:\n\
-    \  using otg_hs_grxstsx_host = Otg_hs_grxstsx_hostBankReg<BaseAddress + 0x001C,\
-    \ 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
-    \  class Otg_hs_dieptxfxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using ineptxsa = FieldModel<uint32_t, address,\
-    \ 0, 16, bankOffset>;\n    using ineptxfd = FieldModel<uint32_t, address, 16,\
-    \ 16, bankOffset>;\n  };\n\npublic:\n  using otg_hs_dieptxfx = Otg_hs_dieptxfxBankReg<BaseAddress\
+    \ pktsts = FieldModel<uint32_t, address, 17, 4, bankOffset>;\n\n  public:\n  \
+    \  union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4>\
+    \ chnum;\n      BitFieldModel<uint32_t, 4, 11> bcnt;\n      BitFieldModel<uint32_t,\
+    \ 15, 2> dpid;\n      BitFieldModel<uint32_t, 17, 4> pktsts;\n    };\n  };\n\n\
+    public:\n  using otg_hs_grxstsx_host = Otg_hs_grxstsx_hostBankReg<BaseAddress\
+    \ + 0x001C, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Otg_hs_dieptxfxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using ineptxsa = FieldModel<uint32_t,\
+    \ address, 0, 16, bankOffset>;\n    using ineptxfd = FieldModel<uint32_t, address,\
+    \ 16, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
+    \      BitFieldModel<uint32_t, 0, 16> ineptxsa;\n      BitFieldModel<uint32_t,\
+    \ 16, 16> ineptxfd;\n    };\n  };\n\npublic:\n  using otg_hs_dieptxfx = Otg_hs_dieptxfxBankReg<BaseAddress\
     \ + 0x0104, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Otg_hs_grxstsx_peripheralBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using epnum = FieldModel<uint32_t,\
     \ address, 0, 4, bankOffset>;\n    using bcnt = FieldModel<uint32_t, address,\
     \ 4, 11, bankOffset>;\n    using dpid = FieldModel<uint32_t, address, 15, 2, bankOffset>;\n\
     \    using pktsts = FieldModel<uint32_t, address, 17, 4, bankOffset>;\n    using\
-    \ frmnum = FieldModel<uint32_t, address, 21, 4, bankOffset>;\n  };\n\npublic:\n\
-    \  using otg_hs_grxstsx_peripheral = Otg_hs_grxstsx_peripheralBankReg<BaseAddress\
-    \ + 0x001C, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_GLOBAL_H */\n"
+    \ frmnum = FieldModel<uint32_t, address, 21, 4, bankOffset>;\n\n  public:\n  \
+    \  union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4>\
+    \ epnum;\n      BitFieldModel<uint32_t, 4, 11> bcnt;\n      BitFieldModel<uint32_t,\
+    \ 15, 2> dpid;\n      BitFieldModel<uint32_t, 17, 4> pktsts;\n      BitFieldModel<uint32_t,\
+    \ 21, 4> frmnum;\n    };\n  };\n\npublic:\n  using otg_hs_grxstsx_peripheral =\
+    \ Otg_hs_grxstsx_peripheralBankReg<BaseAddress + 0x001C, 0x0004>;\n};\n\n}\n\n\
+    #endif /* DRAL_STM32F446_OTG_HS_GLOBAL_H */\n"
   name: OTG_HS_GLOBAL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -17829,7 +18099,7 @@
     \  {\n  public:\n    using dmaaddr = FieldModel<uint32_t, address, 0, 32>;\n\n\
     \  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> dmaaddr;\n    };\n  };\n\npublic:\n  using otg_hs_hcdma11 = Otg_hs_hcdma11Reg<BaseAddress\
-    \ + 0x0274>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ + 0x0274>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class Otg_hs_hccharxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
     \  {\n  public:\n    using mpsiz = FieldModel<uint32_t, address, 0, 11, bankOffset>;\n\
     \    using epnum = FieldModel<uint32_t, address, 11, 4, bankOffset>;\n    using\
@@ -17839,16 +18109,26 @@
     \ 2, bankOffset>;\n    using dad = FieldModel<uint32_t, address, 22, 7, bankOffset>;\n\
     \    using oddfrm = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n    using\
     \ chdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using chena =\
-    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ otg_hs_hccharx = Otg_hs_hccharxBankReg<BaseAddress + 0x0100, 0x0020>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class Otg_hs_hcspltxBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using prtaddr = FieldModel<uint32_t, address, 0, 7, bankOffset>;\n    using\
-    \ hubaddr = FieldModel<uint32_t, address, 7, 7, bankOffset>;\n    using xactpos\
-    \ = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n    using complsplt = FieldModel<uint32_t,\
-    \ address, 16, 1, bankOffset>;\n    using spliten = FieldModel<uint32_t, address,\
-    \ 31, 1, bankOffset>;\n  };\n\npublic:\n  using otg_hs_hcspltx = Otg_hs_hcspltxBankReg<BaseAddress\
-    \ + 0x0104, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n \
+    \     BitFieldModel<uint32_t, 11, 4> epnum;\n      BitFieldModel<uint32_t, 15,\
+    \ 1> epdir;\n      BitFieldModel<uint32_t, 17, 1> lsdev;\n      BitFieldModel<uint32_t,\
+    \ 18, 2> eptyp;\n      BitFieldModel<uint32_t, 20, 2> mc;\n      BitFieldModel<uint32_t,\
+    \ 22, 7> dad;\n      BitFieldModel<uint32_t, 29, 1> oddfrm;\n      BitFieldModel<uint32_t,\
+    \ 30, 1> chdis;\n      BitFieldModel<uint32_t, 31, 1> chena;\n    };\n  };\n\n\
+    public:\n  using otg_hs_hccharx = Otg_hs_hccharxBankReg<BaseAddress + 0x0100,\
+    \ 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \  class Otg_hs_hcspltxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using prtaddr = FieldModel<uint32_t, address, 0, 7, bankOffset>;\n\
+    \    using hubaddr = FieldModel<uint32_t, address, 7, 7, bankOffset>;\n    using\
+    \ xactpos = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n    using complsplt\
+    \ = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using spliten = FieldModel<uint32_t,\
+    \ address, 31, 1, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 7> prtaddr;\n      BitFieldModel<uint32_t,\
+    \ 7, 7> hubaddr;\n      BitFieldModel<uint32_t, 14, 2> xactpos;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> complsplt;\n      BitFieldModel<uint32_t, 31, 1> spliten;\n    };\n \
+    \ };\n\npublic:\n  using otg_hs_hcspltx = Otg_hs_hcspltxBankReg<BaseAddress +\
+    \ 0x0104, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Otg_hs_hcintxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using xfrc = FieldModel<uint32_t,\
     \ address, 0, 1, bankOffset>;\n    using chh = FieldModel<uint32_t, address, 1,\
@@ -17859,30 +18139,47 @@
     \ 6, 1, bankOffset>;\n    using txerr = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n\
     \    using bberr = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using\
     \ frmor = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using dterr =\
-    \ FieldModel<uint32_t, address, 10, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ otg_hs_hcintx = Otg_hs_hcintxBankReg<BaseAddress + 0x0108, 0x0020>;\n\nprivate:\n\
-    \  template<unsigned int address, unsigned int bankOffset>\n  class Otg_hs_hcintmskxBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using xfrcm = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n    using\
-    \ chhm = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using ahberr =\
-    \ FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using stallm = FieldModel<uint32_t,\
-    \ address, 3, 1, bankOffset>;\n    using nakm = FieldModel<uint32_t, address,\
-    \ 4, 1, bankOffset>;\n    using ackm = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n\
-    \    using nyet = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using\
-    \ txerrm = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using bberrm\
-    \ = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using frmorm = FieldModel<uint32_t,\
-    \ address, 9, 1, bankOffset>;\n    using dterrm = FieldModel<uint32_t, address,\
-    \ 10, 1, bankOffset>;\n  };\n\npublic:\n  using otg_hs_hcintmskx = Otg_hs_hcintmskxBankReg<BaseAddress\
+    \ FieldModel<uint32_t, address, 10, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> xfrc;\n   \
+    \   BitFieldModel<uint32_t, 1, 1> chh;\n      BitFieldModel<uint32_t, 2, 1> ahberr;\n\
+    \      BitFieldModel<uint32_t, 3, 1> stall;\n      BitFieldModel<uint32_t, 4,\
+    \ 1> nak;\n      BitFieldModel<uint32_t, 5, 1> ack;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> nyet;\n      BitFieldModel<uint32_t, 7, 1> txerr;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> bberr;\n      BitFieldModel<uint32_t, 9, 1> frmor;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> dterr;\n    };\n  };\n\npublic:\n  using otg_hs_hcintx = Otg_hs_hcintxBankReg<BaseAddress\
+    \ + 0x0108, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Otg_hs_hcintmskxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using xfrcm = FieldModel<uint32_t,\
+    \ address, 0, 1, bankOffset>;\n    using chhm = FieldModel<uint32_t, address,\
+    \ 1, 1, bankOffset>;\n    using ahberr = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
+    \    using stallm = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using\
+    \ nakm = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using ackm = FieldModel<uint32_t,\
+    \ address, 5, 1, bankOffset>;\n    using nyet = FieldModel<uint32_t, address,\
+    \ 6, 1, bankOffset>;\n    using txerrm = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n\
+    \    using bberrm = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using\
+    \ frmorm = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using dterrm\
+    \ = FieldModel<uint32_t, address, 10, 1, bankOffset>;\n\n  public:\n    union\
+    \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> xfrcm;\n\
+    \      BitFieldModel<uint32_t, 1, 1> chhm;\n      BitFieldModel<uint32_t, 2, 1>\
+    \ ahberr;\n      BitFieldModel<uint32_t, 3, 1> stallm;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> nakm;\n      BitFieldModel<uint32_t, 5, 1> ackm;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> nyet;\n      BitFieldModel<uint32_t, 7, 1> txerrm;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> bberrm;\n      BitFieldModel<uint32_t, 9, 1> frmorm;\n      BitFieldModel<uint32_t,\
+    \ 10, 1> dterrm;\n    };\n  };\n\npublic:\n  using otg_hs_hcintmskx = Otg_hs_hcintmskxBankReg<BaseAddress\
     \ + 0x010C, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Otg_hs_hctsizxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using xfrsiz = FieldModel<uint32_t,\
     \ address, 0, 19, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address,\
     \ 19, 10, bankOffset>;\n    using dpid = FieldModel<uint32_t, address, 29, 2,\
-    \ bankOffset>;\n  };\n\npublic:\n  using otg_hs_hctsizx = Otg_hs_hctsizxBankReg<BaseAddress\
-    \ + 0x0110, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Otg_hs_hcdmaxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using dmaaddr = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using otg_hs_hcdmax = Otg_hs_hcdmaxBankReg<BaseAddress\
+    \ bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n   \
+    \   BitFieldModel<uint32_t, 0, 19> xfrsiz;\n      BitFieldModel<uint32_t, 19,\
+    \ 10> pktcnt;\n      BitFieldModel<uint32_t, 29, 2> dpid;\n    };\n  };\n\npublic:\n\
+    \  using otg_hs_hctsizx = Otg_hs_hctsizxBankReg<BaseAddress + 0x0110, 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Otg_hs_hcdmaxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using dmaaddr = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 32> dmaaddr;\n    };\n  };\n\npublic:\n  using otg_hs_hcdmax = Otg_hs_hcdmaxBankReg<BaseAddress\
     \ + 0x0114, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_HOST_H */\n"
   name: OTG_HS_HOST
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -18623,7 +18920,7 @@
     \      uint32_t value;\n      BitFieldModel<uint32_t, 0, 19> xfrsiz;\n      BitFieldModel<uint32_t,\
     \ 19, 10> pktcnt;\n      BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n    };\n\
     \  };\n\npublic:\n  using otg_hs_doeptsiz4 = Otg_hs_doeptsiz4Reg<BaseAddress +\
-    \ 0x0390>;\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
+    \ 0x0390>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
     \  class Otg_hs_diepctlxBankReg : public RegisterBankModel<uint32_t, address,\
     \ bankOffset>\n  {\n  public:\n    using mpsiz = FieldModel<uint32_t, address,\
     \ 0, 11, bankOffset>;\n    using usbaep = FieldModel<uint32_t, address, 15, 1,\
@@ -18636,63 +18933,98 @@
     \    using sd0pid_sevnfrm = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n\
     \    using soddfrm = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n    using\
     \ epdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using epena =\
-    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ otg_hs_diepctlx = Otg_hs_diepctlxBankReg<BaseAddress + 0x0100, 0x0020>;\n\n\
-    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Otg_hs_diepintxBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using xfrc = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n    using\
-    \ epdisd = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using toc = FieldModel<uint32_t,\
-    \ address, 3, 1, bankOffset>;\n    using ittxfe = FieldModel<uint32_t, address,\
-    \ 4, 1, bankOffset>;\n    using inepne = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n\
-    \    using txfe = FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using\
-    \ txfifoudrn = FieldModel<uint32_t, address, 8, 1, bankOffset>;\n    using bna\
-    \ = FieldModel<uint32_t, address, 9, 1, bankOffset>;\n    using pktdrpsts = FieldModel<uint32_t,\
-    \ address, 11, 1, bankOffset>;\n    using berr = FieldModel<uint32_t, address,\
-    \ 12, 1, bankOffset>;\n    using nak = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n\
-    \  };\n\npublic:\n  using otg_hs_diepintx = Otg_hs_diepintxBankReg<BaseAddress\
+    \ FieldModel<uint32_t, address, 31, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n \
+    \     BitFieldModel<uint32_t, 15, 1> usbaep;\n      BitFieldModel<uint32_t, 16,\
+    \ 1> eonum_dpid;\n      BitFieldModel<uint32_t, 17, 1> naksts;\n      BitFieldModel<uint32_t,\
+    \ 18, 2> eptyp;\n      BitFieldModel<uint32_t, 21, 1> stall;\n      BitFieldModel<uint32_t,\
+    \ 22, 4> txfnum;\n      BitFieldModel<uint32_t, 26, 1> cnak;\n      BitFieldModel<uint32_t,\
+    \ 27, 1> snak;\n      BitFieldModel<uint32_t, 28, 1> sd0pid_sevnfrm;\n      BitFieldModel<uint32_t,\
+    \ 29, 1> soddfrm;\n      BitFieldModel<uint32_t, 30, 1> epdis;\n      BitFieldModel<uint32_t,\
+    \ 31, 1> epena;\n    };\n  };\n\npublic:\n  using otg_hs_diepctlx = Otg_hs_diepctlxBankReg<BaseAddress\
+    \ + 0x0100, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Otg_hs_diepintxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using xfrc = FieldModel<uint32_t,\
+    \ address, 0, 1, bankOffset>;\n    using epdisd = FieldModel<uint32_t, address,\
+    \ 1, 1, bankOffset>;\n    using toc = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n\
+    \    using ittxfe = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using\
+    \ inepne = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using txfe =\
+    \ FieldModel<uint32_t, address, 7, 1, bankOffset>;\n    using txfifoudrn = FieldModel<uint32_t,\
+    \ address, 8, 1, bankOffset>;\n    using bna = FieldModel<uint32_t, address, 9,\
+    \ 1, bankOffset>;\n    using pktdrpsts = FieldModel<uint32_t, address, 11, 1,\
+    \ bankOffset>;\n    using berr = FieldModel<uint32_t, address, 12, 1, bankOffset>;\n\
+    \    using nak = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
+    \ 1> xfrc;\n      BitFieldModel<uint32_t, 1, 1> epdisd;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> toc;\n      BitFieldModel<uint32_t, 4, 1> ittxfe;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> inepne;\n      BitFieldModel<uint32_t, 7, 1> txfe;\n      BitFieldModel<uint32_t,\
+    \ 8, 1> txfifoudrn;\n      BitFieldModel<uint32_t, 9, 1> bna;\n      BitFieldModel<uint32_t,\
+    \ 11, 1> pktdrpsts;\n      BitFieldModel<uint32_t, 12, 1> berr;\n      BitFieldModel<uint32_t,\
+    \ 13, 1> nak;\n    };\n  };\n\npublic:\n  using otg_hs_diepintx = Otg_hs_diepintxBankReg<BaseAddress\
     \ + 0x0108, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Otg_hs_diepdmaxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using dmaaddr = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using otg_hs_diepdmax = Otg_hs_diepdmaxBankReg<BaseAddress\
-    \ + 0x0114, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Otg_hs_dtxfstsxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using ineptfsav = FieldModel<uint32_t,\
-    \ address, 0, 16, bankOffset>;\n  };\n\npublic:\n  using otg_hs_dtxfstsx = Otg_hs_dtxfstsxBankReg<BaseAddress\
+    \ address, 0, 32, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 32> dmaaddr;\n    };\n  };\n\npublic:\n\
+    \  using otg_hs_diepdmax = Otg_hs_diepdmaxBankReg<BaseAddress + 0x0114, 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Otg_hs_dtxfstsxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using ineptfsav = FieldModel<uint32_t, address, 0, 16, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 0, 16> ineptfsav;\n    };\n  };\n\npublic:\n  using otg_hs_dtxfstsx = Otg_hs_dtxfstsxBankReg<BaseAddress\
     \ + 0x0118, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
     \ bankOffset>\n  class Otg_hs_dieptsizxBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using xfrsiz = FieldModel<uint32_t,\
     \ address, 0, 19, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address,\
     \ 19, 10, bankOffset>;\n    using mcnt = FieldModel<uint32_t, address, 29, 2,\
-    \ bankOffset>;\n  };\n\npublic:\n  using otg_hs_dieptsizx = Otg_hs_dieptsizxBankReg<BaseAddress\
-    \ + 0x0130, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Otg_hs_doepctlxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using mpsiz = FieldModel<uint32_t,\
-    \ address, 0, 11, bankOffset>;\n    using usbaep = FieldModel<uint32_t, address,\
-    \ 15, 1, bankOffset>;\n    using eonum_dpid = FieldModel<uint32_t, address, 16,\
-    \ 1, bankOffset>;\n    using naksts = FieldModel<uint32_t, address, 17, 1, bankOffset>;\n\
-    \    using eptyp = FieldModel<uint32_t, address, 18, 2, bankOffset>;\n    using\
-    \ snpm = FieldModel<uint32_t, address, 20, 1, bankOffset>;\n    using stall =\
-    \ FieldModel<uint32_t, address, 21, 1, bankOffset>;\n    using cnak = FieldModel<uint32_t,\
-    \ address, 26, 1, bankOffset>;\n    using snak = FieldModel<uint32_t, address,\
-    \ 27, 1, bankOffset>;\n    using sd0pid_sevnfrm = FieldModel<uint32_t, address,\
-    \ 28, 1, bankOffset>;\n    using soddfrm = FieldModel<uint32_t, address, 29, 1,\
-    \ bankOffset>;\n    using epdis = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n\
-    \    using epena = FieldModel<uint32_t, address, 31, 1, bankOffset>;\n  };\n\n\
-    public:\n  using otg_hs_doepctlx = Otg_hs_doepctlxBankReg<BaseAddress + 0x0320,\
+    \ bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n   \
+    \   BitFieldModel<uint32_t, 0, 19> xfrsiz;\n      BitFieldModel<uint32_t, 19,\
+    \ 10> pktcnt;\n      BitFieldModel<uint32_t, 29, 2> mcnt;\n    };\n  };\n\npublic:\n\
+    \  using otg_hs_dieptsizx = Otg_hs_dieptsizxBankReg<BaseAddress + 0x0130, 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Otg_hs_doepctlxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
+    \  {\n  public:\n    using mpsiz = FieldModel<uint32_t, address, 0, 11, bankOffset>;\n\
+    \    using usbaep = FieldModel<uint32_t, address, 15, 1, bankOffset>;\n    using\
+    \ eonum_dpid = FieldModel<uint32_t, address, 16, 1, bankOffset>;\n    using naksts\
+    \ = FieldModel<uint32_t, address, 17, 1, bankOffset>;\n    using eptyp = FieldModel<uint32_t,\
+    \ address, 18, 2, bankOffset>;\n    using snpm = FieldModel<uint32_t, address,\
+    \ 20, 1, bankOffset>;\n    using stall = FieldModel<uint32_t, address, 21, 1,\
+    \ bankOffset>;\n    using cnak = FieldModel<uint32_t, address, 26, 1, bankOffset>;\n\
+    \    using snak = FieldModel<uint32_t, address, 27, 1, bankOffset>;\n    using\
+    \ sd0pid_sevnfrm = FieldModel<uint32_t, address, 28, 1, bankOffset>;\n    using\
+    \ soddfrm = FieldModel<uint32_t, address, 29, 1, bankOffset>;\n    using epdis\
+    \ = FieldModel<uint32_t, address, 30, 1, bankOffset>;\n    using epena = FieldModel<uint32_t,\
+    \ address, 31, 1, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n      BitFieldModel<uint32_t, 0, 11> mpsiz;\n      BitFieldModel<uint32_t,\
+    \ 15, 1> usbaep;\n      BitFieldModel<uint32_t, 16, 1> eonum_dpid;\n      BitFieldModel<uint32_t,\
+    \ 17, 1> naksts;\n      BitFieldModel<uint32_t, 18, 2> eptyp;\n      BitFieldModel<uint32_t,\
+    \ 20, 1> snpm;\n      BitFieldModel<uint32_t, 21, 1> stall;\n      BitFieldModel<uint32_t,\
+    \ 26, 1> cnak;\n      BitFieldModel<uint32_t, 27, 1> snak;\n      BitFieldModel<uint32_t,\
+    \ 28, 1> sd0pid_sevnfrm;\n      BitFieldModel<uint32_t, 29, 1> soddfrm;\n    \
+    \  BitFieldModel<uint32_t, 30, 1> epdis;\n      BitFieldModel<uint32_t, 31, 1>\
+    \ epena;\n    };\n  };\n\npublic:\n  using otg_hs_doepctlx = Otg_hs_doepctlxBankReg<BaseAddress\
+    \ + 0x0320, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class Otg_hs_doepintxBankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n    using xfrc = FieldModel<uint32_t,\
+    \ address, 0, 1, bankOffset>;\n    using epdisd = FieldModel<uint32_t, address,\
+    \ 1, 1, bankOffset>;\n    using stup = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n\
+    \    using otepdis = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using\
+    \ b2bstup = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using nyet =\
+    \ FieldModel<uint32_t, address, 14, 1, bankOffset>;\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> xfrc;\n   \
+    \   BitFieldModel<uint32_t, 1, 1> epdisd;\n      BitFieldModel<uint32_t, 3, 1>\
+    \ stup;\n      BitFieldModel<uint32_t, 4, 1> otepdis;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> b2bstup;\n      BitFieldModel<uint32_t, 14, 1> nyet;\n    };\n  };\n\n\
+    public:\n  using otg_hs_doepintx = Otg_hs_doepintxBankReg<BaseAddress + 0x0308,\
     \ 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
-    \  class Otg_hs_doepintxBankReg : public RegisterBankModel<uint32_t, address,\
-    \ bankOffset>\n  {\n  public:\n    using xfrc = FieldModel<uint32_t, address,\
-    \ 0, 1, bankOffset>;\n    using epdisd = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n\
-    \    using stup = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using\
-    \ otepdis = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using b2bstup\
-    \ = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using nyet = FieldModel<uint32_t,\
-    \ address, 14, 1, bankOffset>;\n  };\n\npublic:\n  using otg_hs_doepintx = Otg_hs_doepintxBankReg<BaseAddress\
-    \ + 0x0308, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
-    \ bankOffset>\n  class Otg_hs_doeptsizxBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using xfrsiz = FieldModel<uint32_t,\
-    \ address, 0, 19, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address,\
-    \ 19, 10, bankOffset>;\n    using rxdpid_stupcnt = FieldModel<uint32_t, address,\
-    \ 29, 2, bankOffset>;\n  };\n\npublic:\n  using otg_hs_doeptsizx = Otg_hs_doeptsizxBankReg<BaseAddress\
+    \  class Otg_hs_doeptsizxBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using xfrsiz = FieldModel<uint32_t, address,\
+    \ 0, 19, bankOffset>;\n    using pktcnt = FieldModel<uint32_t, address, 19, 10,\
+    \ bankOffset>;\n    using rxdpid_stupcnt = FieldModel<uint32_t, address, 29, 2,\
+    \ bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n   \
+    \   BitFieldModel<uint32_t, 0, 19> xfrsiz;\n      BitFieldModel<uint32_t, 19,\
+    \ 10> pktcnt;\n      BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n    };\n\
+    \  };\n\npublic:\n  using otg_hs_doeptsizx = Otg_hs_doeptsizxBankReg<BaseAddress\
     \ + 0x0330, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_DEVICE_H */\n"
   name: OTG_HS_DEVICE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
@@ -18721,7 +19053,7 @@
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> stppclk;\n\
     \      BitFieldModel<uint32_t, 1, 1> gatehclk;\n      BitFieldModel<uint32_t,\
     \ 4, 1> physusp;\n    };\n  };\n\npublic:\n  using otg_hs_pcgcr = Otg_hs_pcgcrReg<BaseAddress\
-    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
   name: OTG_HS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -18922,28 +19254,40 @@
     \ address, 4, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 2> syncin;\n      BitFieldModel<uint32_t, 4,\
     \ 2> syncout;\n    };\n  };\n\npublic:\n  using gcr = GcrReg<BaseAddress + 0x0000>;\n\
-    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Xcr2BankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using comp = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n    using\
-    \ cpl = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n    using mutecn =\
-    \ FieldModel<uint32_t, address, 7, 6, bankOffset>;\n    using muteval = FieldModel<uint32_t,\
-    \ address, 6, 1, bankOffset>;\n    using mute = FieldModel<uint32_t, address,\
-    \ 5, 1, bankOffset>;\n    using tris = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n\
-    \    using fflus = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using\
-    \ fth = FieldModel<uint32_t, address, 0, 3, bankOffset>;\n  };\n\npublic:\n  using\
-    \ xcr2 = Xcr2BankReg<BaseAddress + 0x0008, 0x0020>;\n\nprivate:\n  template<unsigned\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Xcr2BankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
+    \  public:\n    using comp = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n\
+    \    using cpl = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n    using\
+    \ mutecn = FieldModel<uint32_t, address, 7, 6, bankOffset>;\n    using muteval\
+    \ = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using mute = FieldModel<uint32_t,\
+    \ address, 5, 1, bankOffset>;\n    using tris = FieldModel<uint32_t, address,\
+    \ 4, 1, bankOffset>;\n    using fflus = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n\
+    \    using fth = FieldModel<uint32_t, address, 0, 3, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 14,\
+    \ 2> comp;\n      BitFieldModel<uint32_t, 13, 1> cpl;\n      BitFieldModel<uint32_t,\
+    \ 7, 6> mutecn;\n      BitFieldModel<uint32_t, 6, 1> muteval;\n      BitFieldModel<uint32_t,\
+    \ 5, 1> mute;\n      BitFieldModel<uint32_t, 4, 1> tris;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> fflus;\n      BitFieldModel<uint32_t, 0, 3> fth;\n    };\n  };\n\npublic:\n\
+    \  using xcr2 = Xcr2BankReg<BaseAddress + 0x0008, 0x0020>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class XfrcrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using fsoff = FieldModel<uint32_t,\
     \ address, 18, 1, bankOffset>;\n    using fspol = FieldModel<uint32_t, address,\
     \ 17, 1, bankOffset>;\n    using fsdef = FieldModel<uint32_t, address, 16, 1,\
     \ bankOffset>;\n    using fsall = FieldModel<uint32_t, address, 8, 7, bankOffset>;\n\
-    \    using frl = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\npublic:\n\
-    \  using xfrcr = XfrcrBankReg<BaseAddress + 0x000C, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XslotrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using sloten = FieldModel<uint32_t,\
-    \ address, 16, 16, bankOffset>;\n    using nbslot = FieldModel<uint32_t, address,\
-    \ 8, 4, bankOffset>;\n    using slotsz = FieldModel<uint32_t, address, 6, 2, bankOffset>;\n\
-    \    using fboff = FieldModel<uint32_t, address, 0, 5, bankOffset>;\n  };\n\n\
+    \    using frl = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 18,\
+    \ 1> fsoff;\n      BitFieldModel<uint32_t, 17, 1> fspol;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> fsdef;\n      BitFieldModel<uint32_t, 8, 7> fsall;\n      BitFieldModel<uint32_t,\
+    \ 0, 8> frl;\n    };\n  };\n\npublic:\n  using xfrcr = XfrcrBankReg<BaseAddress\
+    \ + 0x000C, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class XslotrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using sloten = FieldModel<uint32_t, address,\
+    \ 16, 16, bankOffset>;\n    using nbslot = FieldModel<uint32_t, address, 8, 4,\
+    \ bankOffset>;\n    using slotsz = FieldModel<uint32_t, address, 6, 2, bankOffset>;\n\
+    \    using fboff = FieldModel<uint32_t, address, 0, 5, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
+    \ 16> sloten;\n      BitFieldModel<uint32_t, 8, 4> nbslot;\n      BitFieldModel<uint32_t,\
+    \ 6, 2> slotsz;\n      BitFieldModel<uint32_t, 0, 5> fboff;\n    };\n  };\n\n\
     public:\n  using xslotr = XslotrBankReg<BaseAddress + 0x0010, 0x0020>;\n\nprivate:\n\
     \  template<unsigned int address, unsigned int bankOffset>\n  class XsrBankReg\
     \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
@@ -18953,20 +19297,31 @@
     \ address, 4, 1, bankOffset>;\n    using freq = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using wckcfg = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using mutedet = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using\
-    \ ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
-    \  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XclrfrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using lfsdet = FieldModel<uint32_t,\
-    \ address, 6, 1, bankOffset>;\n    using cafsdet = FieldModel<uint32_t, address,\
-    \ 5, 1, bankOffset>;\n    using cnrdy = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n\
-    \    using wckcfg = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using\
-    \ mutedet = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using ovrudr\
-    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XdrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using data = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress\
-    \ + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI1_H */\n"
+    \ ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16, 3>\
+    \ flvl;\n      BitFieldModel<uint32_t, 6, 1> lfsdet;\n      BitFieldModel<uint32_t,\
+    \ 5, 1> afsdet;\n      BitFieldModel<uint32_t, 4, 1> cnrdy;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> freq;\n      BitFieldModel<uint32_t, 2, 1> wckcfg;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> mutedet;\n      BitFieldModel<uint32_t, 0, 1> ovrudr;\n    };\n  };\n\n\
+    public:\n  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class XclrfrBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using lfsdet = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using\
+    \ cafsdet = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n    using cnrdy\
+    \ = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using wckcfg = FieldModel<uint32_t,\
+    \ address, 2, 1, bankOffset>;\n    using mutedet = FieldModel<uint32_t, address,\
+    \ 1, 1, bankOffset>;\n    using ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> lfsdet;\n      BitFieldModel<uint32_t, 5, 1> cafsdet;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> cnrdy;\n      BitFieldModel<uint32_t, 2, 1> wckcfg;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> mutedet;\n      BitFieldModel<uint32_t, 0, 1> ovrudr;\n    };\n  };\n\n\
+    public:\n  using xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class XdrBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using data = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
+    \ 32> data;\n    };\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress + 0x0020,\
+    \ 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI1_H */\n"
   name: SAI1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19167,28 +19522,40 @@
     \ address, 4, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 2> syncin;\n      BitFieldModel<uint32_t, 4,\
     \ 2> syncout;\n    };\n  };\n\npublic:\n  using gcr = GcrReg<BaseAddress + 0x0000>;\n\
-    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Xcr2BankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    using comp = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n    using\
-    \ cpl = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n    using mutecn =\
-    \ FieldModel<uint32_t, address, 7, 6, bankOffset>;\n    using muteval = FieldModel<uint32_t,\
-    \ address, 6, 1, bankOffset>;\n    using mute = FieldModel<uint32_t, address,\
-    \ 5, 1, bankOffset>;\n    using tris = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n\
-    \    using fflus = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n    using\
-    \ fth = FieldModel<uint32_t, address, 0, 3, bankOffset>;\n  };\n\npublic:\n  using\
-    \ xcr2 = Xcr2BankReg<BaseAddress + 0x0008, 0x0020>;\n\nprivate:\n  template<unsigned\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ Xcr2BankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
+    \  public:\n    using comp = FieldModel<uint32_t, address, 14, 2, bankOffset>;\n\
+    \    using cpl = FieldModel<uint32_t, address, 13, 1, bankOffset>;\n    using\
+    \ mutecn = FieldModel<uint32_t, address, 7, 6, bankOffset>;\n    using muteval\
+    \ = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using mute = FieldModel<uint32_t,\
+    \ address, 5, 1, bankOffset>;\n    using tris = FieldModel<uint32_t, address,\
+    \ 4, 1, bankOffset>;\n    using fflus = FieldModel<uint32_t, address, 3, 1, bankOffset>;\n\
+    \    using fth = FieldModel<uint32_t, address, 0, 3, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 14,\
+    \ 2> comp;\n      BitFieldModel<uint32_t, 13, 1> cpl;\n      BitFieldModel<uint32_t,\
+    \ 7, 6> mutecn;\n      BitFieldModel<uint32_t, 6, 1> muteval;\n      BitFieldModel<uint32_t,\
+    \ 5, 1> mute;\n      BitFieldModel<uint32_t, 4, 1> tris;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> fflus;\n      BitFieldModel<uint32_t, 0, 3> fth;\n    };\n  };\n\npublic:\n\
+    \  using xcr2 = Xcr2BankReg<BaseAddress + 0x0008, 0x0020>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class XfrcrBankReg : public RegisterBankModel<uint32_t,\
     \ address, bankOffset>\n  {\n  public:\n    using fsoff = FieldModel<uint32_t,\
     \ address, 18, 1, bankOffset>;\n    using fspol = FieldModel<uint32_t, address,\
     \ 17, 1, bankOffset>;\n    using fsdef = FieldModel<uint32_t, address, 16, 1,\
     \ bankOffset>;\n    using fsall = FieldModel<uint32_t, address, 8, 7, bankOffset>;\n\
-    \    using frl = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n  };\n\npublic:\n\
-    \  using xfrcr = XfrcrBankReg<BaseAddress + 0x000C, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XslotrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using sloten = FieldModel<uint32_t,\
-    \ address, 16, 16, bankOffset>;\n    using nbslot = FieldModel<uint32_t, address,\
-    \ 8, 4, bankOffset>;\n    using slotsz = FieldModel<uint32_t, address, 6, 2, bankOffset>;\n\
-    \    using fboff = FieldModel<uint32_t, address, 0, 5, bankOffset>;\n  };\n\n\
+    \    using frl = FieldModel<uint32_t, address, 0, 8, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 18,\
+    \ 1> fsoff;\n      BitFieldModel<uint32_t, 17, 1> fspol;\n      BitFieldModel<uint32_t,\
+    \ 16, 1> fsdef;\n      BitFieldModel<uint32_t, 8, 7> fsall;\n      BitFieldModel<uint32_t,\
+    \ 0, 8> frl;\n    };\n  };\n\npublic:\n  using xfrcr = XfrcrBankReg<BaseAddress\
+    \ + 0x000C, 0x0020>;\n\nprivate:\n  template<unsigned int address, unsigned int\
+    \ bankOffset>\n  class XslotrBankReg : public RegisterBankModel<uint32_t, address,\
+    \ bankOffset>\n  {\n  public:\n    using sloten = FieldModel<uint32_t, address,\
+    \ 16, 16, bankOffset>;\n    using nbslot = FieldModel<uint32_t, address, 8, 4,\
+    \ bankOffset>;\n    using slotsz = FieldModel<uint32_t, address, 6, 2, bankOffset>;\n\
+    \    using fboff = FieldModel<uint32_t, address, 0, 5, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
+    \ 16> sloten;\n      BitFieldModel<uint32_t, 8, 4> nbslot;\n      BitFieldModel<uint32_t,\
+    \ 6, 2> slotsz;\n      BitFieldModel<uint32_t, 0, 5> fboff;\n    };\n  };\n\n\
     public:\n  using xslotr = XslotrBankReg<BaseAddress + 0x0010, 0x0020>;\n\nprivate:\n\
     \  template<unsigned int address, unsigned int bankOffset>\n  class XsrBankReg\
     \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
@@ -19198,20 +19565,31 @@
     \ address, 4, 1, bankOffset>;\n    using freq = FieldModel<uint32_t, address,\
     \ 3, 1, bankOffset>;\n    using wckcfg = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n\
     \    using mutedet = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using\
-    \ ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n\
-    \  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XclrfrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using lfsdet = FieldModel<uint32_t,\
-    \ address, 6, 1, bankOffset>;\n    using cafsdet = FieldModel<uint32_t, address,\
-    \ 5, 1, bankOffset>;\n    using cnrdy = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n\
-    \    using wckcfg = FieldModel<uint32_t, address, 2, 1, bankOffset>;\n    using\
-    \ mutedet = FieldModel<uint32_t, address, 1, 1, bankOffset>;\n    using ovrudr\
-    \ = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n  };\n\npublic:\n  using\
-    \ xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class XdrBankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    using data = FieldModel<uint32_t,\
-    \ address, 0, 32, bankOffset>;\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress\
-    \ + 0x0020, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI2_H */\n"
+    \ ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16, 3>\
+    \ flvl;\n      BitFieldModel<uint32_t, 6, 1> lfsdet;\n      BitFieldModel<uint32_t,\
+    \ 5, 1> afsdet;\n      BitFieldModel<uint32_t, 4, 1> cnrdy;\n      BitFieldModel<uint32_t,\
+    \ 3, 1> freq;\n      BitFieldModel<uint32_t, 2, 1> wckcfg;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> mutedet;\n      BitFieldModel<uint32_t, 0, 1> ovrudr;\n    };\n  };\n\n\
+    public:\n  using xsr = XsrBankReg<BaseAddress + 0x0018, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class XclrfrBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using lfsdet = FieldModel<uint32_t, address, 6, 1, bankOffset>;\n    using\
+    \ cafsdet = FieldModel<uint32_t, address, 5, 1, bankOffset>;\n    using cnrdy\
+    \ = FieldModel<uint32_t, address, 4, 1, bankOffset>;\n    using wckcfg = FieldModel<uint32_t,\
+    \ address, 2, 1, bankOffset>;\n    using mutedet = FieldModel<uint32_t, address,\
+    \ 1, 1, bankOffset>;\n    using ovrudr = FieldModel<uint32_t, address, 0, 1, bankOffset>;\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
+    \ 6, 1> lfsdet;\n      BitFieldModel<uint32_t, 5, 1> cafsdet;\n      BitFieldModel<uint32_t,\
+    \ 4, 1> cnrdy;\n      BitFieldModel<uint32_t, 2, 1> wckcfg;\n      BitFieldModel<uint32_t,\
+    \ 1, 1> mutedet;\n      BitFieldModel<uint32_t, 0, 1> ovrudr;\n    };\n  };\n\n\
+    public:\n  using xclrfr = XclrfrBankReg<BaseAddress + 0x001C, 0x0020>;\n\nprivate:\n\
+    \  template<unsigned int address, unsigned int bankOffset>\n  class XdrBankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
+    \    using data = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
+    \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
+    \ 32> data;\n    };\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress + 0x0020,\
+    \ 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI2_H */\n"
   name: SAI2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19271,7 +19649,7 @@
     \ 9, 1> bre;\n      BitFieldModel<uint32_t, 14, 1> vosrdy;\n      BitFieldModel<uint32_t,\
     \ 16, 1> odrdy;\n      BitFieldModel<uint32_t, 17, 1> odswrdy;\n      BitFieldModel<uint32_t,\
     \ 18, 2> udrdy;\n    };\n  };\n\npublic:\n  using csr = CsrReg<BaseAddress + 0x0004>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H */\n"
   name: PWR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19391,8 +19769,8 @@
     \  class LptrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n \
     \   using timeout = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 16> timeout;\n\
-    \    };\n  };\n\npublic:\n  using lptr = LptrReg<BaseAddress + 0x0030>;\n\n};\n\
-    \n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */\n"
+    \    };\n  };\n\npublic:\n  using lptr = LptrReg<BaseAddress + 0x0030>;\n\n\n\
+    };\n\n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */\n"
   name: QUADSPI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19488,7 +19866,7 @@
     \ = FieldModel<uint32_t, address, 16, 13>;\n\n  public:\n    union reg\n    {\n\
     \      uint32_t value;\n      BitFieldModel<uint32_t, 0, 13> thi;\n      BitFieldModel<uint32_t,\
     \ 16, 13> tlo;\n    };\n  };\n\npublic:\n  using dir = DirReg<BaseAddress + 0x0018>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */\n"
   name: SPDIF_RX
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19577,7 +19955,7 @@
     \ 4, 1> sbpeie;\n      BitFieldModel<uint32_t, 3, 1> breie;\n      BitFieldModel<uint32_t,\
     \ 2, 1> rxovrie;\n      BitFieldModel<uint32_t, 1, 1> rxendie;\n      BitFieldModel<uint32_t,\
     \ 0, 1> rxbrie;\n    };\n  };\n\npublic:\n  using cec_ier = Cec_ierReg<BaseAddress\
-    \ + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H */\n"
+    \ + 0x0014>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H */\n"
   name: HDMI_CEC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19636,7 +20014,7 @@
     \ 26, 1> ahp;\n      BitFieldModel<uint32_t, 28, 1> v;\n      BitFieldModel<uint32_t,\
     \ 29, 1> c;\n      BitFieldModel<uint32_t, 30, 1> z;\n      BitFieldModel<uint32_t,\
     \ 31, 1> n;\n    };\n  };\n\npublic:\n  using fpscr = FpscrReg<BaseAddress + 0x0008>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */\n"
   name: FPU
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19696,8 +20074,8 @@
     \ 16, 1> b;\n      BitFieldModel<uint32_t, 17, 1> c;\n      BitFieldModel<uint32_t,\
     \ 18, 1> s;\n      BitFieldModel<uint32_t, 19, 3> tex;\n      BitFieldModel<uint32_t,\
     \ 24, 3> ap;\n      BitFieldModel<uint32_t, 28, 1> xn;\n    };\n  };\n\npublic:\n\
-    \  using mpu_rasr = Mpu_rasrReg<BaseAddress + 0x0010>;\n\n};\n\n}\n\n#endif /*\
-    \ DRAL_STM32F446_MPU_H */\n"
+    \  using mpu_rasr = Mpu_rasrReg<BaseAddress + 0x0010>;\n\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_MPU_H */\n"
   name: MPU
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19742,7 +20120,7 @@
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 24> tenms;\n\
     \      BitFieldModel<uint32_t, 30, 1> skew;\n      BitFieldModel<uint32_t, 31,\
     \ 1> noref;\n    };\n  };\n\npublic:\n  using calib = CalibReg<BaseAddress + 0x000C>;\n\
-    \n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H */\n"
+    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H */\n"
   name: STK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19908,7 +20286,7 @@
     \ address>\n  {\n  public:\n    using impdef = FieldModel<uint32_t, address, 0,\
     \ 32>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> impdef;\n    };\n  };\n\npublic:\n  using afsr = AfsrReg<BaseAddress\
-    \ + 0x003C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */\n"
+    \ + 0x003C>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */\n"
   name: SCB
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19933,7 +20311,7 @@
     \ address>\n  {\n  public:\n    using intid = FieldModel<uint32_t, address, 0,\
     \ 9>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 9> intid;\n    };\n  };\n\npublic:\n  using stir = StirReg<BaseAddress +\
-    \ 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_STIR_H */\n"
+    \ 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_STIR_H */\n"
   name: NVIC_STIR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19958,7 +20336,7 @@
     \ address>\n  {\n  public:\n    using cp = FieldModel<uint32_t, address, 20, 4>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 20, 4> cp;\n    };\n  };\n\npublic:\n  using cpacr = CpacrReg<BaseAddress +\
-    \ 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_CPACR_H */\n"
+    \ 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_CPACR_H */\n"
   name: FPU_CPACR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19988,7 +20366,7 @@
     \ 0, 1> dismcycint;\n      BitFieldModel<uint32_t, 1, 1> disdefwbuf;\n      BitFieldModel<uint32_t,\
     \ 2, 1> disfold;\n      BitFieldModel<uint32_t, 8, 1> disfpca;\n      BitFieldModel<uint32_t,\
     \ 9, 1> disoofp;\n    };\n  };\n\npublic:\n  using actrl = ActrlReg<BaseAddress\
-    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_ACTRL_H */\n"
+    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_ACTRL_H */\n"
   name: SCB_ACTRL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20190,5 +20568,5 @@
     \ address>\n  {\n  public:\n    using fifodata = FieldModel<uint32_t, address,\
     \ 0, 32>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> fifodata;\n    };\n  };\n\npublic:\n  using fifo = FifoReg<BaseAddress\
-    \ + 0x0080>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SDIO_H */\n"
+    \ + 0x0080>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SDIO_H */\n"
   name: SDIO
