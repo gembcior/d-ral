@@ -104,8 +104,9 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
         template_dir_list.insert(0, template_path)
-    forbidden_words = Utils.get_forbidden_words(language)
-    template_object = DralTemplate(template_dir_list, forbidden_words)
+    # TODO add support for forbidden words
+    # forbidden_words = Utils.get_forbidden_words(language)
+    # template_object = DralTemplate(template_dir_list, forbidden_words)
 
     if mapping:
         with open(mapping, "r", encoding="utf-8") as mapping_file:
@@ -129,8 +130,11 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
             device = item.apply(device)
 
         # Generate D-RAL data
-        generator = DralGenerator(template_object)
+        generator = DralGenerator(template_dir_list)
         objects = generator.generate(device, mapping=mapping)
+        print(objects[0].name)
+        print(objects[0].content)
+        return
 
         # Get D-RAL register model file
         model_dir = Utils.get_model_dir(language)
@@ -157,4 +161,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    # import rich
+    # from jinja2 import Environment, PackageLoader, select_autoescape
+
+    # env = Environment(loader=PackageLoader("dral"), autoescape=select_autoescape())
+    # template = env.get_template("test.txt")
+    # foo = {"users": [{"username": "Tomasz"}, {"username": "Iza"}]}
+    # print(template.render(**foo))
     main()

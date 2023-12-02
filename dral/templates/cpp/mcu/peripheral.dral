@@ -1,22 +1,68 @@
-[dral]include header.dral[#dral]
+{% include 'header.dral' %}
 
-#ifndef DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
-#define DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
+#ifndef DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
+#define DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
 
-[dral]include model.import.dral[#dral]
+{% include 'model.import.dral' %}
 
-namespace dral::[dral style="lowercase"]device.name[#dral] {
+namespace dral::{{ device.name | lower }} {
 
-class [dral style="lowercase"]peripheral.name[#dral]
+class {{ peripheral.name | lower }}
 {
 public:
-  static constexpr unsigned int BaseAddress = [dral format="{:#010X}"]peripheral.address[#dral];
+  static constexpr unsigned int BaseAddress = {{ "0x{:08X}".format(peripheral.address) }};
 
-[dral template="register.dral"]peripheral.registers[#dral]
+{% for register in peripheral.registers -%}
+private:
+  template<unsigned int address>
+  class {{ register.name | title }}Reg : public RegisterModel<uint{{ register.size }}_t, address>
+  {
+  public:
+    {%- for field in register.fields %}
+    using {{ field.name | lower }} = FieldModel<uint{{ register.size }}_t, address, {{ field.position }}, {{ field.width }}>;
+    {%- endfor %}
 
-[dral template="bank.dral"]peripheral.banks[#dral]
+  public:
+    union reg
+    {
+      uint{{ register.size }}_t value;
+      {%- for field in register.fields %}
+      BitFieldModel<uint{{ register.size }}_t, {{ field.position }}, {{ field.width }}> {{ field.name | lower }};
+      {%- endfor %}
+    };
+  };
+
+public:
+  using {{ register.name | lower }} = {{ register.name | upper }}Reg<BaseAddress + {{ "0x{:04X}".format(register.offset) }}>;
+
+{% endfor -%}
+
+{% for bank in peripheral.banks -%}
+private:
+  template<unsigned int address, unsigned int bankOffset>
+  class {{ bank.name | title }}BankReg : public RegisterBankModel<uint{{ bank.size }}_t, address, bankOffset>
+  {
+  public:
+    {%- for field in bank.fields %}
+    using {{ field.name | lower }} = FieldModel<uint{{ bank.size }}_t, address, {{ field.position }}, {{ field.width }}, bankOffset>;
+    {%- endfor %}
+
+  public:
+    union reg
+    {
+      uint{{ bank.size }}_t value;
+      {%- for field in bank.fields %}
+      BitFieldModel<uint{{ bank.size }}_t, {{ field.position }}, {{ field.width }}> {{ field.name | lower }};
+      {%- endfor %}
+    };
+  };
+
+public:
+  using {{ bank.name | lower }} = {{ bank.name | title }}BankReg<BaseAddress + {{ "0x{:04X}".format(bank.offset) }}, {{ "0x{:04X}".format(bank.bank_offset) }}>;
+
+{% endfor -%}
 };
 
 }
 
-#endif /* DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H */
+#endif /* DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H */

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
 
-from .template import DralTemplate
+from jinja2 import Environment, FileSystemLoader, TemplateNotFound
+
 from .types import Device
 
 
@@ -13,24 +16,41 @@ class DralOutputFile:
     content: str
 
 
+def get_system_mapping() -> Dict[str, Any]:
+    output = {
+        "year": str(datetime.now().year),
+    }
+    return output
+
+
 class DralGenerator:
-    def __init__(self, template: DralTemplate) -> None:
+    def __init__(self, template: Union[Path, List[Path]]) -> None:
         self._template = template
 
     def generate(self, device: Device, mapping: Optional[Dict[str, Any]] = None) -> List[DralOutputFile]:
         device_mapping = device.asdict()
         del device_mapping["device"]["peripherals"]
-        peripheral_file_content = []
+        variables = {
+            **device_mapping,
+            "system": get_system_mapping(),
+            "peripheral": {},
+        }
+        loader = FileSystemLoader(self._template)
+        env = Environment(loader=loader)
+        output = []
         for peripheral in device.peripherals:
-            peripheral_mapping = peripheral.asdict()
-            peripheral_mapping.update(device_mapping)
+            variables["peripheral"] = peripheral.asdict()
             if mapping is not None:
-                peripheral_mapping.update(mapping)
-            content = self._template.parse_from_template("peripheral.dral", peripheral_mapping)
-            dral_output_file = DralOutputFile(peripheral.name, "".join(content))
-            peripheral_file_content.append(dral_output_file)
-        if self._template.exists("device.dral"):
-            content = self._template.parse_from_template("device.dral", device.asdict())
-            dral_output_file = DralOutputFile(device.name, "".join(content))
-            peripheral_file_content.append(dral_output_file)
-        return peripheral_file_content
+                variables.update(mapping)
+            template = env.get_template("peripheral.dral")
+            content = template.render(**variables)
+            dral_output_file = DralOutputFile(peripheral.name, content)
+            output.append(dral_output_file)
+        try:
+            template = env.get_template("device.dral")
+        except TemplateNotFound:
+            return output
+        content = template.render(**variables)
+        dral_output_file = DralOutputFile(device.name, content)
+        output.append(dral_output_file)
+        return output
