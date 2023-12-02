@@ -515,7 +515,8 @@
     \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
     \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
     \ file. Do not modify!\n\"\"\"\n\n\nfrom .timer0 import Timer0\nfrom .timer1 import\
-    \ Timer1\nfrom .timer2 import Timer2\n\nclass ARM_Example():\n    def __init__(self):\n\
-    \        self.timer0 = Timer0()\n        self.timer1 = Timer1()\n        self.timer2\
-    \ = Timer2()\n"
+    \ Timer1\nfrom .timer2 import Timer2\nfrom ..register_model import DralDevice\n\
+    \nclass ARM_Example(DralDevice):\n    def __init__(self):\n        self.timer0\
+    \ = Timer0()\n        self.timer1 = Timer1()\n        self.timer2 = Timer2()\n\
+    \        super().__init__()\n"
   name: ARM_Example

@@ -77,9 +77,10 @@
     \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\nprivate:\n  template<unsigned\
+    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n  };\n\npublic:\n  using reload[x]\
+    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
+    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
     \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H\
     \ */\n"
   name: TIMER0
@@ -162,9 +163,10 @@
     \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\nprivate:\n  template<unsigned\
+    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n  };\n\npublic:\n  using reload[x]\
+    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
+    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
     \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H\
     \ */\n"
   name: TIMER1
@@ -247,9 +249,10 @@
     \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\nprivate:\n  template<unsigned\
+    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
     \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n  };\n\npublic:\n  using reload[x]\
+    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
+    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
     \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H\
     \ */\n"
   name: TIMER2

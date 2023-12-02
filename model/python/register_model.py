@@ -72,7 +72,7 @@ class Register:
         self._fields = self._get_all_fields()
         self._index = 0
 
-    def _get_all_fields(self) -> tuple[Field]:
+    def _get_all_fields(self) -> tuple[Field, ...]:
         fields = list(filter(lambda x: isinstance(x, Field), self.__dict__.values()))
         sorted_fields = sorted(fields, key=lambda x: x.position)
         return tuple(sorted_fields)
@@ -97,6 +97,9 @@ class Register:
 
     def __str__(self) -> str:
         return self._name
+
+    def __len__(self) -> int:
+        return len(self._fields)
 
     @property
     def name(self) -> str:
@@ -125,7 +128,7 @@ class Peripheral:
         self._registers = self._get_all_registers()
         self._index = 0
 
-    def _get_all_registers(self) -> tuple[Register]:
+    def _get_all_registers(self) -> tuple[Register, ...]:
         registers = list(filter(lambda x: isinstance(x, Register), self.__dict__.values()))
         sorted_registers = sorted(registers, key=lambda x: x.address)
         return tuple(sorted_registers)
@@ -151,6 +154,9 @@ class Peripheral:
     def __str__(self) -> str:
         return self._name
 
+    def __len__(self) -> int:
+        return len(self._registers)
+
     @property
     def name(self) -> str:
         return self._name
@@ -165,7 +171,7 @@ class DralDevice:
         self._index = 0
         self._peripherals = self._get_all_peripherals()
 
-    def _get_all_peripherals(self) -> tuple[Peripheral]:
+    def _get_all_peripherals(self) -> tuple[Peripheral, ...]:
         peripheral = list(filter(lambda x: isinstance(x, Peripheral), self.__dict__.values()))
         sorted_peripheral = sorted(peripheral, key=lambda x: x.address)
         return tuple(sorted_peripheral)
@@ -182,4 +188,8 @@ class DralDevice:
             self._index += 1
             return item
         else:
+            self._index = 0
             raise StopIteration
+
+    def __len__(self) -> int:
+        return len(self._peripherals)

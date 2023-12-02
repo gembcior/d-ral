@@ -23735,11 +23735,12 @@
     \ .spi3 import Spi3\nfrom .spi4 import Spi4\nfrom .spi5 import Spi5\nfrom .nvic\
     \ import Nvic\nfrom .fpu import Fpu\nfrom .mpu import Mpu\nfrom .stk import Stk\n\
     from .scb import Scb\nfrom .nvic_stir import Nvic_stir\nfrom .fpu_cpacr import\
-    \ Fpu_cpacr\nfrom .scb_actrl import Scb_actrl\n\nclass STM32F411():\n    def __init__(self):\n\
-    \        self.adc_common = Adc_common()\n        self.adc1 = Adc1()\n        self.crc\
-    \ = Crc()\n        self.dbg = Dbg()\n        self.exti = Exti()\n        self.flash\
-    \ = Flash()\n        self.iwdg = Iwdg()\n        self.otg_fs_device = Otg_fs_device()\n\
-    \        self.otg_fs_global = Otg_fs_global()\n        self.otg_fs_host = Otg_fs_host()\n\
+    \ Fpu_cpacr\nfrom .scb_actrl import Scb_actrl\nfrom ..register_model import DralDevice\n\
+    \nclass STM32F411(DralDevice):\n    def __init__(self):\n        self.adc_common\
+    \ = Adc_common()\n        self.adc1 = Adc1()\n        self.crc = Crc()\n     \
+    \   self.dbg = Dbg()\n        self.exti = Exti()\n        self.flash = Flash()\n\
+    \        self.iwdg = Iwdg()\n        self.otg_fs_device = Otg_fs_device()\n  \
+    \      self.otg_fs_global = Otg_fs_global()\n        self.otg_fs_host = Otg_fs_host()\n\
     \        self.otg_fs_pwrclk = Otg_fs_pwrclk()\n        self.pwr = Pwr()\n    \
     \    self.rcc = Rcc()\n        self.rtc = Rtc()\n        self.sdio = Sdio()\n\
     \        self.syscfg = Syscfg()\n        self.tim1 = Tim1()\n        self.tim8\
@@ -23757,5 +23758,5 @@
     \        self.nvic = Nvic()\n        self.fpu = Fpu()\n        self.mpu = Mpu()\n\
     \        self.stk = Stk()\n        self.scb = Scb()\n        self.nvic_stir =\
     \ Nvic_stir()\n        self.fpu_cpacr = Fpu_cpacr()\n        self.scb_actrl =\
-    \ Scb_actrl()\n"
+    \ Scb_actrl()\n        super().__init__()\n"
   name: STM32F411
