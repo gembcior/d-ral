@@ -4,6 +4,13 @@ private:
   {
   public:
     [dral template="bank.field.dral"]bank.fields[#dral]
+
+  public:
+    union reg
+    {
+      uint[dral]bank.size[#dral]_t value;
+      [dral template="bank.bitfield.dral"]bank.fields[#dral]
+    };
   };
 
 public:

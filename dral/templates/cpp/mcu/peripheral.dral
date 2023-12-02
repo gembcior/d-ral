@@ -13,6 +13,7 @@ public:
   static constexpr unsigned int BaseAddress = [dral format="{:#010X}"]peripheral.address[#dral];
 
 [dral template="register.dral"]peripheral.registers[#dral]
+
 [dral template="bank.dral"]peripheral.banks[#dral]
 };
 
