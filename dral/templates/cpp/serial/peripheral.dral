@@ -9,7 +9,7 @@ namespace dral::{{ device.name | lower }} {
 
 struct {{ peripheral.name | lower }}
 {
-{% for register in peripheral.registers -%}
+{%- for register in peripheral.registers %}
   struct {{ register.name | lower | isforbidden }}
   {
     constexpr static unsigned int Address = {{ "0x{:08X}".format(peripheral.address) }} + {{ "0x{:04X}".format(register.offset) }};
@@ -21,7 +21,7 @@ struct {{ peripheral.name | lower }}
       {%- endfor %}
     };
   };
-{% endfor -%}
+{% endfor %}
 };
 
 }
