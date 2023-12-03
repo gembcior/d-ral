@@ -1,17 +1,29 @@
-[dral]include header.dral[#dral]
+{% include 'header.dral' %}
 
-#ifndef DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
-#define DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H
+#ifndef DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
+#define DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
 
-[dral]include model.import.dral[#dral]
+{% include 'model.import.dral' %}
 
-namespace dral::[dral style="lowercase"]device.name[#dral] {
+namespace dral::{{ device.name | lower }} {
 
-struct [dral style="lowercase"]peripheral.name[#dral]
+struct {{ peripheral.name | lower }}
 {
-  [dral template="register.dral"]peripheral.registers[#dral]
+{% for register in peripheral.registers -%}
+  struct {{ register.name | lower | isforbidden }}
+  {
+    constexpr static unsigned int Address = {{ "0x{:08X}".format(peripheral.address) }} + {{ "0x{:04X}".format(register.offset) }};
+    union
+    {
+      uint{{ register.size }}_t value;
+      {%- for field in register.fields %}
+      BitFieldModel<uint{{ register.size }}_t, {{ field.position }}, {{ field.width }}> {{ field.name | lower | isforbidden }};
+      {%- endfor %}
+    };
+  };
+{% endfor -%}
 };
 
 }
 
-#endif /* DRAL_[dral style="uppercase"]device.name[#dral]_[dral style="uppercase"]peripheral.name[#dral]_H */
+#endif /* DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H */

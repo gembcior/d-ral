@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Any, Type
 
 import click
-import yaml
 from rich.console import Console
 from rich.traceback import install as traceback
 
@@ -13,8 +12,7 @@ from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import CppFormat, PythonFormat
-from .generator import DralGenerator, DralOutputFile
-from .template import DralTemplate
+from .generator import DralGenerator
 from .utils import Utils
 
 DRAL_CUSTOM_ADAPTER = SvdAdapter
@@ -104,13 +102,7 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
         template_dir_list.insert(0, template_path)
-    # TODO add support for forbidden words
-    # forbidden_words = Utils.get_forbidden_words(language)
-    # template_object = DralTemplate(template_dir_list, forbidden_words)
-
-    if mapping:
-        with open(mapping, "r", encoding="utf-8") as mapping_file:
-            mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
+    forbidden_words = Utils.get_forbidden_words(language)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
@@ -130,17 +122,12 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
             device = item.apply(device)
 
         # Generate D-RAL data
-        generator = DralGenerator(template_dir_list)
-        objects = generator.generate(device, mapping=mapping)
-        print(objects[0].name)
-        print(objects[0].content)
-        return
+        generator = DralGenerator(forbidden_words, mapping)
+        peripherals_object = generator.get_peripherals(device, template_dir_list)
 
         # Get D-RAL register model file
         model_dir = Utils.get_model_dir(language)
-        model_template = DralTemplate(model_dir)
-        model_content = model_template.parse_from_template("model.dral", mapping={})
-        dral_model_file = DralOutputFile("register_model", "".join(model_content))
+        model_object = generator.get_model(model_dir)
 
         # Make output
         output = output / "dralOutput"
@@ -151,7 +138,7 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
             output_format = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
-        output_format.make(objects, model=dral_model_file)
+        output_format.make(peripherals_object, model=model_object)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
@@ -161,11 +148,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # import rich
-    # from jinja2 import Environment, PackageLoader, select_autoescape
-
-    # env = Environment(loader=PackageLoader("dral"), autoescape=select_autoescape())
-    # template = env.get_template("test.txt")
-    # foo = {"users": [{"username": "Tomasz"}, {"username": "Iza"}]}
-    # print(template.render(**foo))
     main()

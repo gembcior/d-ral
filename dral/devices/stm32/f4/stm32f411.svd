@@ -3043,7 +3043,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -3138,14 +3138,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>SODDFRM</name>
+              <name>SODDFRM_SD1PID</name>
               <description>SODDFRM</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -3240,14 +3240,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>SODDFRM</name>
+              <name>SODDFRM_SD1PID</name>
               <description>SODDFRM</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -3423,14 +3423,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>SODDFRM</name>
+              <name>SODDFRM_SD1PID</name>
               <description>SODDFRM</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -3525,14 +3525,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>SODDFRM</name>
+              <name>SODDFRM_SD1PID</name>
               <description>SODDFRM</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -3627,14 +3627,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>SODDFRM</name>
+              <name>SODDFRM_SD1PID</name>
               <description>SODDFRM</description>
               <bitOffset>29</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
-              <name>SD0PID_SEVNFRM</name>
+              <name>SEVNFRM_SD0PID</name>
               <description>SD0PID/SEVNFRM</description>
               <bitOffset>28</bitOffset>
               <bitWidth>1</bitWidth>
@@ -5439,6 +5439,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>SOFOUTEN</name>
               <description>SOF output enable</description>
               <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NOVBUSSENS</name>
+              <description>No VBUS sensing</description>
+              <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
           </fields>

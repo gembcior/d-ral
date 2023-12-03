@@ -56,12 +56,11 @@ class TestDralGenerator:
         adapter = dral.adapter.SvdAdapter(svd_path)
         device_data = adapter.convert()
         device_data = dral.filter.BanksFilter().apply(device_data)
-        forbidden_words = self.get_forbidden_words(language)
-        template_object = dral.DralTemplate(template_dir, forbidden_words)
+        # forbidden_words = self.get_forbidden_words(language)
 
         with open(datadir / "generator" / language / template / "mapping.yaml", "r", encoding="utf-8") as mapping_file:
             mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
-        generator = dral.DralGenerator(template=template_object)
+        generator = dral.DralGenerator(template_dir)
         objects = generator.generate(device_data, mapping=mapping)
 
         with open(datadir / "generator" / language / template / f"{device}.yaml") as data:

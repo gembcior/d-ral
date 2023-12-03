@@ -1,9 +1,15 @@
-[dral]include header.dral[#dral]
+{% include 'header.dral' %}
 
-[dral template="peripheral.import.dral"]device.peripherals[#dral]
-[dral]include device.import.dral[#dral]
 
-class [dral]device.name[#dral](DralDevice):
+{% for peripheral in device.peripherals -%}
+from .{{ peripheral.name | lower }} import {{ peripheral.name | title }}
+{% endfor -%}
+{% include 'device.import.dral' %}
+
+
+class {{ device.name }}(DralDevice):
     def __init__(self):
-        [dral template="peripheral.constructor.dral"]device.peripherals[#dral]
+        {%- for peripheral in device.peripherals %}
+        self.{{ peripheral.name | lower }} = {{ peripheral.name | title }}()
+        {%- endfor %}
         super().__init__()
