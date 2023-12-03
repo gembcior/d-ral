@@ -1,17 +1,57 @@
-[dral]include header.dral[#dral]
+{% include 'header.dral' %}
 
-[dral]include model.import.dral[#dral]
 
-[dral template="register.dral"]peripheral.registers[#dral]
+{% include 'model.import.dral' %}
 
-class [dral style="capitalize"]peripheral.name[#dral](Peripheral):
+
+{% for register in peripheral.registers -%}
+class {{ register.name | title }}Register(Register):
     """
-    [dral style="uppercase"]peripheral.name[#dral]
+    {{ register.name | upper }}
 
-    [dral style="strip"]peripheral.description[#dral]
+    {{ register.description | trim(" \n\r") | wordwrap(160, wrapstring="\n    ") }}
     """
+
     def __init__(self):
-        [dral template="register.constructor.dral"]peripheral.registers[#dral]
-        super().__init__("[dral style="lowercase"]peripheral.name[#dral]", [dral format="{:#010X}"]peripheral.address[#dral])
+        {%- for field in register.fields %}
+        self._{{ field.name | lower }} = Field("{{ field.name | lower }}", {{ field.position }}, {{ field.width }})
+        {%- endfor %}
+        super().__init__("{{register.name}}", {{ "0x{:08X}".format(peripheral.address) }} + {{ "0x{:X}".format(register.offset) }})
+{% for field in register.fields %}
+    @property
+    def {{ field.name | lower }}(self) -> Field:
+        """
+        {{ field.name | upper }}
 
-    [dral template="register.property.dral"]peripheral.registers[#dral]
+        {{ field.description | trim(" \n\r") | wordwrap(160, wrapstring="\n    ") }}
+        """
+        return self._{{ field.name | lower }}
+
+    @{{ field.name | lower }}.setter
+    def {{ field.name | lower }}(self, value: int) -> None:
+        self._{{ field.name | lower }}.value = value
+{% endfor %}
+
+{% endfor -%}
+
+class {{ peripheral.name | title }}(Peripheral):
+    """
+    {{ peripheral.name | upper }}
+
+    {{ peripheral.description | trim(" \n\r") | wordwrap(160, wrapstring="\n    ") }}
+    """
+
+    def __init__(self):
+        {%- for register in peripheral.registers %}
+        self._{{ register.name | lower }} = {{ register.name | title }}Register()
+        {%- endfor %}
+        super().__init__("{{ peripheral.name | lower }}", {{ "0x{:08X}".format(peripheral.address) }})
+{% for register in peripheral.registers %}
+    @property
+    def {{ register.name | lower }}(self) -> {{ register.name | title }}Register:
+        return self._{{ register.name | lower }}
+
+    @{{ register.name | lower }}.setter
+    def {{ register.name | lower }}(self, value: int) -> None:
+        self._{{ register.name | lower }}.value = value
+{% endfor %}

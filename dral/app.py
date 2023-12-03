@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Type
+from typing import Any, Type, Optional
 
 import click
-import yaml
 from rich.console import Console
 from rich.traceback import install as traceback
 
@@ -13,8 +12,7 @@ from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .format import CppFormat, PythonFormat
-from .generator import DralGenerator, DralOutputFile
-from .template import DralTemplate
+from .generator import DralGenerator
 from .utils import Utils
 
 DRAL_CUSTOM_ADAPTER = SvdAdapter
@@ -25,7 +23,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     DRAL_CUSTOM_ADAPTER = adapter  # type: ignore[assignment]
 
 
-@click.command()  # type: ignore[arg-type] # noqa
+@click.command()
 @click.argument("input", type=click.Path(resolve_path=True, path_type=Path))
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
@@ -75,7 +73,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(input, output, language, template_type, template_path, mapping, skip_banks, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
+def cli(input: Path, output: Path, language: str, template_type: str, template_path: Optional[Path], mapping: Path, skip_banks: bool, white_list: Optional[Path], black_list: Optional[Path]) -> None:  # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from INPUT.
@@ -91,25 +89,20 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
 
     if white_list:
         white_list_adapter = WhiteBlackListAdapter(white_list)
-        white_list = white_list_adapter.convert()
+        white_list_objects = white_list_adapter.convert()
     else:
-        white_list = None
+        white_list_objects = None
 
     if black_list:
         black_list_adapter = WhiteBlackListAdapter(black_list)
-        black_list = black_list_adapter.convert()
+        black_list_objects = black_list_adapter.convert()
     else:
-        black_list = None
+        black_list_objects = None
 
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
         template_dir_list.insert(0, template_path)
     forbidden_words = Utils.get_forbidden_words(language)
-    template_object = DralTemplate(template_dir_list, forbidden_words)
-
-    if mapping:
-        with open(mapping, "r", encoding="utf-8") as mapping_file:
-            mapping = yaml.load(mapping_file, Loader=yaml.FullLoader)
 
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
@@ -119,24 +112,22 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
 
         # Apply filters
         filters: Any = []
-        if black_list is not None:
-            filters.append(BlackListFilter(black_list))
-        if white_list is not None:
-            filters.append(WhiteListFilter(white_list))
+        if black_list_objects is not None:
+            filters.append(BlackListFilter(black_list_objects))
+        if white_list_objects is not None:
+            filters.append(WhiteListFilter(white_list_objects))
         if not skip_banks:
             filters.append(BanksFilter())
         for item in filters:
             device = item.apply(device)
 
         # Generate D-RAL data
-        generator = DralGenerator(template_object)
-        objects = generator.generate(device, mapping=mapping)
+        generator = DralGenerator(forbidden_words, mapping)
+        peripherals_object = generator.get_peripherals(device, template_dir_list)
 
         # Get D-RAL register model file
         model_dir = Utils.get_model_dir(language)
-        model_template = DralTemplate(model_dir)
-        model_content = model_template.parse_from_template("model.dral", mapping={})
-        dral_model_file = DralOutputFile("register_model", "".join(model_content))
+        model_object = generator.get_model(model_dir)
 
         # Make output
         output = output / "dralOutput"
@@ -147,13 +138,13 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
             output_format = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
-        output_format.make(objects, model=dral_model_file)
+        output_format.make(peripherals_object, model=model_object)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
 def main() -> None:
-    cli()  # type: ignore[misc] # noqa
+    cli()  # noqa: E1120
 
 
 if __name__ == "__main__":

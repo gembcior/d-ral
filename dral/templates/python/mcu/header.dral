@@ -4,7 +4,7 @@ https://github.com/gembcior/d-ral
 
 MIT License
 
-Copyright (c) [dral]system.year[#dral] Gembcior
+Copyright (c) {{ system.year }} Gembcior
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,4 +26,3 @@ SOFTWARE.
 
 This is an auto generated file. Do not modify!
 """
-

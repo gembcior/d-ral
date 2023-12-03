@@ -39,13 +39,11 @@ class Field(DralBaseType):
 
     def asdict(self) -> Dict[str, Any]:
         return {
-            "field": {
-                "name": self._name,
-                "description": self._description,
-                "position": self._position,
-                "width": self._width,
-                "mask": self._mask,
-            }
+            "name": self._name,
+            "description": self._description,
+            "position": self._position,
+            "width": self._width,
+            "mask": self._mask,
         }
 
     @property
@@ -83,14 +81,12 @@ class Register(DralBaseType):
 
     def asdict(self) -> Dict[str, Any]:
         return {
-            "register": {
-                "name": self._name,
-                "description": self._description,
-                "offset": self._offset,
-                "size": self._size,
-                "reset_value": self._reset_value,
-                "fields": [field.asdict() for field in self._fields],
-            }
+            "name": self._name,
+            "description": self._description,
+            "offset": self._offset,
+            "size": self._size,
+            "reset_value": self._reset_value,
+            "fields": [field.asdict() for field in self._fields],
         }
 
     @property
@@ -126,15 +122,13 @@ class Bank(Register):
 
     def asdict(self) -> Dict[str, Any]:
         return {
-            "bank": {
-                "name": self._name,
-                "description": self._description,
-                "offset": self._offset,
-                "size": self._size,
-                "reset_value": self._reset_value,
-                "bank_offset": self._bank_offset,
-                "fields": [field.asdict() for field in self._fields],
-            }
+            "name": self._name,
+            "description": self._description,
+            "offset": self._offset,
+            "size": self._size,
+            "reset_value": self._reset_value,
+            "bank_offset": self._bank_offset,
+            "fields": [field.asdict() for field in self._fields],
         }
 
     @property
@@ -162,13 +156,11 @@ class Peripheral(DralBaseType):
 
     def asdict(self) -> Dict[str, Any]:
         return {
-            "peripheral": {
-                "name": self._name,
-                "description": self._description,
-                "address": self._address,
-                "registers": [register.asdict() for register in self._registers],
-                "banks": [bank.asdict() for bank in self._banks],
-            }
+            "name": self._name,
+            "description": self._description,
+            "address": self._address,
+            "registers": [register.asdict() for register in self._registers],
+            "banks": [bank.asdict() for bank in self._banks],
         }
 
     @property

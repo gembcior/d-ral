@@ -23,32 +23,31 @@
     \ 7, 1> psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
     \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
     \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n  \n  struct\
+    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\n  struct\
     \ sr\n  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0004;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
     \ run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
     \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n  \n\
+    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
     \  struct int\n  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0010;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
-    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n  \n  struct count\n\
+    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\n  struct count\n\
     \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0020;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct match\n  {\n\
-    \    constexpr static unsigned int Address = 0x40010000 + 0x0024;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_rd\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_wr\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[0]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0050;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[1]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0054;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[2]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0058;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[3]\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\n  struct match\n  {\n    constexpr\
+    \ static unsigned int Address = 0x40010000 + 0x0024;\n    union\n    {\n     \
+    \ uint32_t value;\n    };\n  };\n\n  struct prescale_rd\n  {\n    constexpr static\
+    \ unsigned int Address = 0x40010000 + 0x0028;\n    union\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\n  struct prescale_wr\n  {\n    constexpr static unsigned\
+    \ int Address = 0x40010000 + 0x0028;\n    union\n    {\n      uint32_t value;\n\
+    \    };\n  };\n\n  struct reload[0]\n  {\n    constexpr static unsigned int Address\
+    \ = 0x40010000 + 0x0050;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\
+    \n  struct reload[1]\n  {\n    constexpr static unsigned int Address = 0x40010000\
+    \ + 0x0054;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct\
+    \ reload[2]\n  {\n    constexpr static unsigned int Address = 0x40010000 + 0x0058;\n\
+    \    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct reload[3]\n\
     \  {\n    constexpr static unsigned int Address = 0x40010000 + 0x005C;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n};\n\n}\n\n#endif /*\
-    \ DRAL_ARM_EXAMPLE_TIMER0_H */\n"
+    \    {\n      uint32_t value;\n    };\n  };\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H\
+    \ */"
   name: TIMER0
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -75,32 +74,31 @@
     \ 7, 1> psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
     \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
     \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n  \n  struct\
+    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\n  struct\
     \ sr\n  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0004;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
     \ run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
     \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n  \n\
+    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
     \  struct int\n  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0010;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
-    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n  \n  struct count\n\
+    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\n  struct count\n\
     \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0020;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct match\n  {\n\
-    \    constexpr static unsigned int Address = 0x40010100 + 0x0024;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_rd\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_wr\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[0]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0050;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[1]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0054;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[2]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0058;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[3]\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\n  struct match\n  {\n    constexpr\
+    \ static unsigned int Address = 0x40010100 + 0x0024;\n    union\n    {\n     \
+    \ uint32_t value;\n    };\n  };\n\n  struct prescale_rd\n  {\n    constexpr static\
+    \ unsigned int Address = 0x40010100 + 0x0028;\n    union\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\n  struct prescale_wr\n  {\n    constexpr static unsigned\
+    \ int Address = 0x40010100 + 0x0028;\n    union\n    {\n      uint32_t value;\n\
+    \    };\n  };\n\n  struct reload[0]\n  {\n    constexpr static unsigned int Address\
+    \ = 0x40010100 + 0x0050;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\
+    \n  struct reload[1]\n  {\n    constexpr static unsigned int Address = 0x40010100\
+    \ + 0x0054;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct\
+    \ reload[2]\n  {\n    constexpr static unsigned int Address = 0x40010100 + 0x0058;\n\
+    \    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct reload[3]\n\
     \  {\n    constexpr static unsigned int Address = 0x40010100 + 0x005C;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n};\n\n}\n\n#endif /*\
-    \ DRAL_ARM_EXAMPLE_TIMER1_H */\n"
+    \    {\n      uint32_t value;\n    };\n  };\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H\
+    \ */"
   name: TIMER1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -127,30 +125,29 @@
     \ 7, 1> psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
     \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
     \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n  \n  struct\
+    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\n  struct\
     \ sr\n  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0004;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
     \ run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
     \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n  \n\
+    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
     \  struct int\n  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0010;\n\
     \    union\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1>\
-    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n  \n  struct count\n\
+    \ en;\n      BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\n  struct count\n\
     \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0020;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct match\n  {\n\
-    \    constexpr static unsigned int Address = 0x40010200 + 0x0024;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_rd\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct prescale_wr\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0028;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[0]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0050;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[1]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0054;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[2]\n\
-    \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0058;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n  struct reload[3]\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\n  struct match\n  {\n    constexpr\
+    \ static unsigned int Address = 0x40010200 + 0x0024;\n    union\n    {\n     \
+    \ uint32_t value;\n    };\n  };\n\n  struct prescale_rd\n  {\n    constexpr static\
+    \ unsigned int Address = 0x40010200 + 0x0028;\n    union\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\n  struct prescale_wr\n  {\n    constexpr static unsigned\
+    \ int Address = 0x40010200 + 0x0028;\n    union\n    {\n      uint32_t value;\n\
+    \    };\n  };\n\n  struct reload[0]\n  {\n    constexpr static unsigned int Address\
+    \ = 0x40010200 + 0x0050;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\
+    \n  struct reload[1]\n  {\n    constexpr static unsigned int Address = 0x40010200\
+    \ + 0x0054;\n    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct\
+    \ reload[2]\n  {\n    constexpr static unsigned int Address = 0x40010200 + 0x0058;\n\
+    \    union\n    {\n      uint32_t value;\n    };\n  };\n\n  struct reload[3]\n\
     \  {\n    constexpr static unsigned int Address = 0x40010200 + 0x005C;\n    union\n\
-    \    {\n      uint32_t value;\n      \n    };\n  };\n  \n};\n\n}\n\n#endif /*\
-    \ DRAL_ARM_EXAMPLE_TIMER2_H */\n"
+    \    {\n      uint32_t value;\n    };\n  };\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H\
+    \ */"
   name: TIMER2

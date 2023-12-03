@@ -1,0 +1,72 @@
+- content: "\"\"\"\nD-RAL - Device Register Access Layer\nhttps://github.com/gembcior/d-ral\n\
+    \nMIT License\n\nCopyright (c) 2023 Gembcior\n\nPermission is hereby granted,\
+    \ free of charge, to any person obtaining a copy\nof this software and associated\
+    \ documentation files (the \"Software\"), to deal\nin the Software without restriction,\
+    \ including without limitation the rights\nto use, copy, modify, merge, publish,\
+    \ distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons\
+    \ to whom the Software is\nfurnished to do so, subject to the following conditions:\n\
+    \nThe above copyright notice and this permission notice shall be included in all\n\
+    copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"\
+    AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT\
+    \ LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE\
+    \ AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE\
+    \ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+    \ TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE\
+    \ OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis is an auto generated\
+    \ file. Do not modify!\n\"\"\"\n\n\nclass Field:\n    def __init__(self, name:\
+    \ str, position: int, width: int) -> None:\n        self._name = name\n      \
+    \  self._position = position\n        self._width = width\n        self._mask\
+    \ = (1 << width) - 1\n        self._value = 0\n\n    def __str__(self) -> str:\n\
+    \        return self._name\n\n    @property\n    def name(self) -> str:\n    \
+    \    return self._name\n\n    @property\n    def position(self) -> int:\n    \
+    \    return self._position\n\n    @property\n    def mask(self) -> int:\n    \
+    \    return self._mask\n\n    @property\n    def width(self) -> int:\n       \
+    \ return self._width\n\n    @property\n    def value(self) -> int:\n        return\
+    \ self._value\n\n    @value.setter\n    def value(self, value: int) -> None:\n\
+    \        self._value = value & self._mask\n\n\nclass Register:\n    def __init__(self,\
+    \ name: str, address: int) -> None:\n        self._name = name\n        self._address\
+    \ = address\n        self._value = 0\n        self._fields = self._get_all_fields()\n\
+    \        self._index = 0\n\n    def _get_all_fields(self) -> tuple[Field, ...]:\n\
+    \        fields = list(filter(lambda x: isinstance(x, Field), self.__dict__.values()))\n\
+    \        sorted_fields = sorted(fields, key=lambda x: x.position)\n        return\
+    \ tuple(sorted_fields)\n\n    def __setitem__(self, key: int, value: int) -> None:\n\
+    \        self._fields[key].value = value\n\n    def __getitem__(self, key: int)\
+    \ -> Field:\n        return self._fields[key]\n\n    def __iter__(self):\n   \
+    \     return self\n\n    def __next__(self):\n        if self._index < len(self._fields):\n\
+    \            item = self._fields[self._index]\n            self._index += 1\n\
+    \            return item\n        else:\n            self._index = 0\n       \
+    \     raise StopIteration\n\n    def __str__(self) -> str:\n        return self._name\n\
+    \n    def __len__(self) -> int:\n        return len(self._fields)\n\n    @property\n\
+    \    def name(self) -> str:\n        return self._name\n\n    @property\n    def\
+    \ address(self) -> int:\n        return self._address\n\n    @property\n    def\
+    \ value(self) -> int:\n        return self._value\n\n    @value.setter\n    def\
+    \ value(self, value: int) -> None:\n        for _, field in self.__dict__.items():\n\
+    \            if isinstance(field, Field):\n                field.value = (value\
+    \ >> field.position) & field.mask\n        self._value = value\n\n\nclass Peripheral:\n\
+    \    def __init__(self, name: str, address: int) -> None:\n        self._name\
+    \ = name\n        self._address = address\n        self._registers = self._get_all_registers()\n\
+    \        self._index = 0\n\n    def _get_all_registers(self) -> tuple[Register,\
+    \ ...]:\n        registers = list(filter(lambda x: isinstance(x, Register), self.__dict__.values()))\n\
+    \        sorted_registers = sorted(registers, key=lambda x: x.address)\n     \
+    \   return tuple(sorted_registers)\n\n    def __setitem__(self, key: int, value:\
+    \ int) -> None:\n        self._registers[key].value = value\n\n    def __getitem__(self,\
+    \ key: int) -> Register:\n        return self._registers[key]\n\n    def __iter__(self):\n\
+    \        return self\n\n    def __next__(self):\n        if self._index < len(self._registers):\n\
+    \            item = self._registers[self._index]\n            self._index += 1\n\
+    \            return item\n        else:\n            self._index = 0\n       \
+    \     raise StopIteration\n\n    def __str__(self) -> str:\n        return self._name\n\
+    \n    def __len__(self) -> int:\n        return len(self._registers)\n\n    @property\n\
+    \    def name(self) -> str:\n        return self._name\n\n    @property\n    def\
+    \ address(self) -> int:\n        return self._address\n\n\nclass DralDevice:\n\
+    \    def __init__(self) -> None:\n        self._index = 0\n        self._peripherals\
+    \ = self._get_all_peripherals()\n\n    def _get_all_peripherals(self) -> tuple[Peripheral,\
+    \ ...]:\n        peripheral = list(filter(lambda x: isinstance(x, Peripheral),\
+    \ self.__dict__.values()))\n        sorted_peripheral = sorted(peripheral, key=lambda\
+    \ x: x.address)\n        return tuple(sorted_peripheral)\n\n    def __getitem__(self,\
+    \ key: int) -> Peripheral:\n        return self._peripherals[key]\n\n    def __iter__(self):\n\
+    \        return self\n\n    def __next__(self):\n        if self._index < len(self._peripherals):\n\
+    \            item = self._peripherals[self._index]\n            self._index +=\
+    \ 1\n            return item\n        else:\n            self._index = 0\n   \
+    \         raise StopIteration\n\n    def __len__(self) -> int:\n        return\
+    \ len(self._peripherals)"
+  name: register_model

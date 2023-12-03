@@ -9,7 +9,6 @@ device:
       name: ADC_Common
       registers:
       - register:
-          access: read-only
           description: ADC Common status register
           fields:
           - field:
@@ -128,7 +127,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: ADC common control register
           fields:
           - field:
@@ -179,7 +177,6 @@ device:
       name: ADC1
       registers:
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -223,7 +220,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -316,7 +312,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -397,7 +392,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: sample time register 1
           fields:
           - field:
@@ -411,7 +405,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: sample time register 2
           fields:
           - field:
@@ -425,7 +418,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "injected channel data offset register\n          x"
           fields:
           - field:
@@ -439,7 +431,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "injected channel data offset register\n          x"
           fields:
           - field:
@@ -453,7 +444,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "injected channel data offset register\n          x"
           fields:
           - field:
@@ -467,7 +457,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "injected channel data offset register\n          x"
           fields:
           - field:
@@ -481,7 +470,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "watchdog higher threshold\n          register"
           fields:
           - field:
@@ -495,7 +483,6 @@ device:
           reset_value: 4095
           size: 32
       - register:
-          access: read-write
           description: "watchdog lower threshold\n          register"
           fields:
           - field:
@@ -509,7 +496,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: regular sequence register 1
           fields:
           - field:
@@ -547,7 +533,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: regular sequence register 2
           fields:
           - field:
@@ -591,7 +576,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: regular sequence register 3
           fields:
           - field:
@@ -635,7 +619,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: injected sequence register
           fields:
           - field:
@@ -673,7 +656,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: injected data register x
           fields:
           - field:
@@ -687,7 +669,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: injected data register x
           fields:
           - field:
@@ -701,7 +682,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: injected data register x
           fields:
           - field:
@@ -715,7 +695,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: injected data register x
           fields:
           - field:
@@ -729,7 +708,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: regular data register
           fields:
           - field:
@@ -749,7 +727,6 @@ device:
       name: CRC
       registers:
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -763,7 +740,6 @@ device:
           reset_value: 4294967295
           size: 32
       - register:
-          access: read-write
           description: Independent Data register
           fields:
           - field:
@@ -777,7 +753,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: Control register
           fields:
           - field:
@@ -797,7 +772,6 @@ device:
       name: DBG
       registers:
       - register:
-          access: read-only
           description: IDCODE
           fields:
           - field:
@@ -817,7 +791,6 @@ device:
           reset_value: 268461073
           size: 32
       - register:
-          access: read-write
           description: Control Register
           fields:
           - field:
@@ -855,7 +828,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Debug MCU APB1 Freeze registe
           fields:
           - field:
@@ -923,7 +895,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Debug MCU APB2 Freeze registe
           fields:
           - field:
@@ -961,7 +932,6 @@ device:
       name: EXTI
       registers:
       - register:
-          access: read-write
           description: "Interrupt mask register\n          (EXTI_IMR)"
           fields:
           - field:
@@ -1107,7 +1077,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Event mask register (EXTI_EMR)
           fields:
           - field:
@@ -1253,7 +1222,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Rising Trigger selection register\n          (EXTI_RTSR)"
           fields:
           - field:
@@ -1422,7 +1390,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Falling Trigger selection register\n          (EXTI_FTSR)"
           fields:
           - field:
@@ -1591,7 +1558,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Software interrupt event register\n          (EXTI_SWIER)"
           fields:
           - field:
@@ -1737,7 +1703,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Pending register (EXTI_PR)
           fields:
           - field:
@@ -1889,7 +1854,6 @@ device:
       name: FLASH
       registers:
       - register:
-          access: ''
           description: Flash access control register
           fields:
           - field:
@@ -1933,7 +1897,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: Flash key register
           fields:
           - field:
@@ -1947,7 +1910,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: Flash option key register
           fields:
           - field:
@@ -1961,7 +1923,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: Status register
           fields:
           - field:
@@ -2011,7 +1972,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register
           fields:
           - field:
@@ -2073,7 +2033,6 @@ device:
           reset_value: 2147483648
           size: 32
       - register:
-          access: read-write
           description: Flash option control register
           fields:
           - field:
@@ -2135,7 +2094,6 @@ device:
       name: IWDG
       registers:
       - register:
-          access: write-only
           description: Key register
           fields:
           - field:
@@ -2149,7 +2107,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Prescaler register
           fields:
           - field:
@@ -2163,7 +2120,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Reload register
           fields:
           - field:
@@ -2177,7 +2133,6 @@ device:
           reset_value: 4095
           size: 32
       - register:
-          access: read-only
           description: Status register
           fields:
           - field:
@@ -2203,7 +2158,6 @@ device:
       name: OTG_FS_DEVICE
       registers:
       - register:
-          access: read-write
           description: "OTG_FS device configuration register\n          (OTG_FS_DCFG)"
           fields:
           - field:
@@ -2235,7 +2189,6 @@ device:
           reset_value: 35651584
           size: 32
       - register:
-          access: ''
           description: "OTG_FS device control register\n          (OTG_FS_DCTL)"
           fields:
           - field:
@@ -2303,7 +2256,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device status register\n          (OTG_FS_DSTS)"
           fields:
           - field:
@@ -2335,7 +2287,6 @@ device:
           reset_value: 16
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device IN endpoint common interrupt\n          mask\
             \ register (OTG_FS_DIEPMSK)"
           fields:
@@ -2381,7 +2332,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device OUT endpoint common interrupt\n          mask\
             \ register (OTG_FS_DOEPMSK)"
           fields:
@@ -2415,7 +2365,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device all endpoints interrupt\n          register\
             \ (OTG_FS_DAINT)"
           fields:
@@ -2436,7 +2385,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS all endpoints interrupt mask register\n          (OTG_FS_DAINTMSK)"
           fields:
           - field:
@@ -2456,7 +2404,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device VBUS discharge time\n          register"
           fields:
           - field:
@@ -2470,7 +2417,6 @@ device:
           reset_value: 6103
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device VBUS pulsing time\n          register"
           fields:
           - field:
@@ -2484,7 +2430,6 @@ device:
           reset_value: 1464
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device IN endpoint FIFO empty\n          interrupt\
             \ mask register"
           fields:
@@ -2499,7 +2444,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG_FS device control IN endpoint 0 control\n          register\
             \ (OTG_FS_DIEPCTL0)"
           fields:
@@ -2568,7 +2512,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG device endpoint-1 control\n          register"
           fields:
           - field:
@@ -2592,7 +2535,7 @@ device:
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -2654,7 +2597,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG device endpoint-2 control\n          register"
           fields:
           - field:
@@ -2672,13 +2614,13 @@ device:
           - field:
               description: SODDFRM
               mask: 1
-              name: SODDFRM
+              name: SODDFRM_SD1PID
               position: 29
               width: 1
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -2740,7 +2682,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG device endpoint-3 control\n          register"
           fields:
           - field:
@@ -2758,13 +2699,13 @@ device:
           - field:
               description: SODDFRM
               mask: 1
-              name: SODDFRM
+              name: SODDFRM_SD1PID
               position: 29
               width: 1
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -2826,7 +2767,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "device endpoint-0 control\n          register"
           fields:
           - field:
@@ -2894,7 +2834,6 @@ device:
           reset_value: 32768
           size: 32
       - register:
-          access: ''
           description: "device endpoint-1 control\n          register"
           fields:
           - field:
@@ -2912,13 +2851,13 @@ device:
           - field:
               description: SODDFRM
               mask: 1
-              name: SODDFRM
+              name: SODDFRM_SD1PID
               position: 29
               width: 1
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -2980,7 +2919,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "device endpoint-2 control\n          register"
           fields:
           - field:
@@ -2998,13 +2936,13 @@ device:
           - field:
               description: SODDFRM
               mask: 1
-              name: SODDFRM
+              name: SODDFRM_SD1PID
               position: 29
               width: 1
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -3066,7 +3004,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "device endpoint-3 control\n          register"
           fields:
           - field:
@@ -3084,13 +3021,13 @@ device:
           - field:
               description: SODDFRM
               mask: 1
-              name: SODDFRM
+              name: SODDFRM_SD1PID
               position: 29
               width: 1
           - field:
               description: SD0PID/SEVNFRM
               mask: 1
-              name: SD0PID_SEVNFRM
+              name: SEVNFRM_SD0PID
               position: 28
               width: 1
           - field:
@@ -3152,7 +3089,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "device endpoint-x interrupt\n          register"
           fields:
           - field:
@@ -3196,7 +3132,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: ''
           description: "device endpoint-1 interrupt\n          register"
           fields:
           - field:
@@ -3240,7 +3175,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: ''
           description: "device endpoint-2 interrupt\n          register"
           fields:
           - field:
@@ -3284,7 +3218,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: ''
           description: "device endpoint-3 interrupt\n          register"
           fields:
           - field:
@@ -3328,7 +3261,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-0 interrupt\n          register"
           fields:
           - field:
@@ -3366,7 +3298,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-1 interrupt\n          register"
           fields:
           - field:
@@ -3404,7 +3335,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-2 interrupt\n          register"
           fields:
           - field:
@@ -3442,7 +3372,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-3 interrupt\n          register"
           fields:
           - field:
@@ -3480,7 +3409,6 @@ device:
           reset_value: 128
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-0 transfer size\n          register"
           fields:
           - field:
@@ -3500,7 +3428,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device OUT endpoint-0 transfer size\n          register"
           fields:
           - field:
@@ -3526,7 +3453,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-1 transfer size\n          register"
           fields:
           - field:
@@ -3552,7 +3478,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-2 transfer size\n          register"
           fields:
           - field:
@@ -3578,7 +3503,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device endpoint-3 transfer size\n          register"
           fields:
           - field:
@@ -3604,7 +3528,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device IN endpoint transmit FIFO\n          status\
             \ register"
           fields:
@@ -3619,7 +3542,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device IN endpoint transmit FIFO\n          status\
             \ register"
           fields:
@@ -3634,7 +3556,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device IN endpoint transmit FIFO\n          status\
             \ register"
           fields:
@@ -3649,7 +3570,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS device IN endpoint transmit FIFO\n          status\
             \ register"
           fields:
@@ -3664,7 +3584,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device OUT endpoint-1 transfer size\n          register"
           fields:
           - field:
@@ -3690,7 +3609,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device OUT endpoint-2 transfer size\n          register"
           fields:
           - field:
@@ -3716,7 +3634,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "device OUT endpoint-3 transfer size\n          register"
           fields:
           - field:
@@ -3748,7 +3665,6 @@ device:
       name: OTG_FS_GLOBAL
       registers:
       - register:
-          access: ''
           description: "OTG_FS control and status register\n          (OTG_FS_GOTGCTL)"
           fields:
           - field:
@@ -3834,7 +3750,6 @@ device:
           reset_value: 2048
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS interrupt register\n          (OTG_FS_GOTGINT)"
           fields:
           - field:
@@ -3878,7 +3793,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS AHB configuration register\n          (OTG_FS_GAHBCFG)"
           fields:
           - field:
@@ -3904,7 +3818,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG_FS USB configuration register\n          (OTG_FS_GUSBCFG)"
           fields:
           - field:
@@ -3960,7 +3873,6 @@ device:
           reset_value: 2560
           size: 32
       - register:
-          access: ''
           description: "OTG_FS reset register\n          (OTG_FS_GRSTCTL)"
           fields:
           - field:
@@ -4010,7 +3922,6 @@ device:
           reset_value: 536870912
           size: 32
       - register:
-          access: ''
           description: "OTG_FS core interrupt register\n          (OTG_FS_GINTSTS)"
           fields:
           - field:
@@ -4169,7 +4080,6 @@ device:
           reset_value: 67108896
           size: 32
       - register:
-          access: ''
           description: "OTG_FS interrupt mask register\n          (OTG_FS_GINTMSK)"
           fields:
           - field:
@@ -4332,7 +4242,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS Receive status debug read(Device\n          mode)"
           fields:
           - field:
@@ -4370,7 +4279,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS Receive status debug read(Device\n          mode)"
           fields:
           - field:
@@ -4408,7 +4316,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS Receive status debug read(Host\n          mode)"
           fields:
           - field:
@@ -4446,7 +4353,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS Receive status debug read(Host\n          mode)"
           fields:
           - field:
@@ -4484,7 +4390,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS Receive FIFO size register\n          (OTG_FS_GRXFSIZ)"
           fields:
           - field:
@@ -4498,7 +4403,6 @@ device:
           reset_value: 512
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS non-periodic transmit FIFO size\n          register\
             \ (Device mode)"
           fields:
@@ -4519,7 +4423,6 @@ device:
           reset_value: 512
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS non-periodic transmit FIFO size\n          register\
             \ (Host mode)"
           fields:
@@ -4540,7 +4443,6 @@ device:
           reset_value: 512
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS non-periodic transmit FIFO/queue\n          status\
             \ register (OTG_FS_GNPTXSTS)"
           fields:
@@ -4569,7 +4471,6 @@ device:
           reset_value: 524800
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS general core configuration register\n          (OTG_FS_GCCFG)"
           fields:
           - field:
@@ -4596,12 +4497,17 @@ device:
               name: SOFOUTEN
               position: 20
               width: 1
+          - field:
+              description: No VBUS sensing
+              mask: 1
+              name: NOVBUSSENS
+              position: 21
+              width: 1
           name: FS_GCCFG
           offset: 56
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: core ID register
           fields:
           - field:
@@ -4615,7 +4521,6 @@ device:
           reset_value: 4096
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS Host periodic transmit FIFO size\n          register\
             \ (OTG_FS_HPTXFSIZ)"
           fields:
@@ -4636,7 +4541,6 @@ device:
           reset_value: 33555968
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device IN endpoint transmit FIFO size\n          register\
             \ (OTG_FS_DIEPTXF2)"
           fields:
@@ -4657,7 +4561,6 @@ device:
           reset_value: 33555456
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device IN endpoint transmit FIFO size\n          register\
             \ (OTG_FS_DIEPTXF3)"
           fields:
@@ -4678,7 +4581,6 @@ device:
           reset_value: 33555456
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS device IN endpoint transmit FIFO size\n          register\
             \ (OTG_FS_DIEPTXF4)"
           fields:
@@ -4705,7 +4607,6 @@ device:
       name: OTG_FS_HOST
       registers:
       - register:
-          access: ''
           description: "OTG_FS host configuration register\n          (OTG_FS_HCFG)"
           fields:
           - field:
@@ -4725,7 +4626,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS Host frame interval\n          register"
           fields:
           - field:
@@ -4739,7 +4639,6 @@ device:
           reset_value: 60000
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS host frame number/frame time\n          remaining register\
             \ (OTG_FS_HFNUM)"
           fields:
@@ -4760,7 +4659,6 @@ device:
           reset_value: 16383
           size: 32
       - register:
-          access: ''
           description: "OTG_FS_Host periodic transmit FIFO/queue\n          status\
             \ register (OTG_FS_HPTXSTS)"
           fields:
@@ -4787,7 +4685,6 @@ device:
           reset_value: 524544
           size: 32
       - register:
-          access: read-only
           description: "OTG_FS Host all channels interrupt\n          register"
           fields:
           - field:
@@ -4801,7 +4698,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host all channels interrupt mask\n          register"
           fields:
           - field:
@@ -4815,7 +4711,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "OTG_FS host port control and status register\n          (OTG_FS_HPRT)"
           fields:
           - field:
@@ -4901,7 +4796,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-0 characteristics\n          register\
             \ (OTG_FS_HCCHAR0)"
           fields:
@@ -4970,7 +4864,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-1 characteristics\n          register\
             \ (OTG_FS_HCCHAR1)"
           fields:
@@ -5039,7 +4932,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-2 characteristics\n          register\
             \ (OTG_FS_HCCHAR2)"
           fields:
@@ -5108,7 +5000,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-3 characteristics\n          register\
             \ (OTG_FS_HCCHAR3)"
           fields:
@@ -5177,7 +5068,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-4 characteristics\n          register\
             \ (OTG_FS_HCCHAR4)"
           fields:
@@ -5246,7 +5136,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-5 characteristics\n          register\
             \ (OTG_FS_HCCHAR5)"
           fields:
@@ -5315,7 +5204,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-6 characteristics\n          register\
             \ (OTG_FS_HCCHAR6)"
           fields:
@@ -5384,7 +5272,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-7 characteristics\n          register\
             \ (OTG_FS_HCCHAR7)"
           fields:
@@ -5453,7 +5340,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-0 interrupt register\n          (OTG_FS_HCINT0)"
           fields:
           - field:
@@ -5515,7 +5401,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-1 interrupt register\n          (OTG_FS_HCINT1)"
           fields:
           - field:
@@ -5577,7 +5462,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-2 interrupt register\n          (OTG_FS_HCINT2)"
           fields:
           - field:
@@ -5639,7 +5523,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-3 interrupt register\n          (OTG_FS_HCINT3)"
           fields:
           - field:
@@ -5701,7 +5584,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-4 interrupt register\n          (OTG_FS_HCINT4)"
           fields:
           - field:
@@ -5763,7 +5645,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-5 interrupt register\n          (OTG_FS_HCINT5)"
           fields:
           - field:
@@ -5825,7 +5706,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-6 interrupt register\n          (OTG_FS_HCINT6)"
           fields:
           - field:
@@ -5887,7 +5767,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-7 interrupt register\n          (OTG_FS_HCINT7)"
           fields:
           - field:
@@ -5949,7 +5828,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-0 mask register\n          (OTG_FS_HCINTMSK0)"
           fields:
           - field:
@@ -6018,7 +5896,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-1 mask register\n          (OTG_FS_HCINTMSK1)"
           fields:
           - field:
@@ -6087,7 +5964,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-2 mask register\n          (OTG_FS_HCINTMSK2)"
           fields:
           - field:
@@ -6156,7 +6032,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-3 mask register\n          (OTG_FS_HCINTMSK3)"
           fields:
           - field:
@@ -6225,7 +6100,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-4 mask register\n          (OTG_FS_HCINTMSK4)"
           fields:
           - field:
@@ -6294,7 +6168,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-5 mask register\n          (OTG_FS_HCINTMSK5)"
           fields:
           - field:
@@ -6363,7 +6236,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-6 mask register\n          (OTG_FS_HCINTMSK6)"
           fields:
           - field:
@@ -6432,7 +6304,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-7 mask register\n          (OTG_FS_HCINTMSK7)"
           fields:
           - field:
@@ -6501,7 +6372,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-0 transfer size\n          register"
           fields:
           - field:
@@ -6527,7 +6397,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-1 transfer size\n          register"
           fields:
           - field:
@@ -6553,7 +6422,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-2 transfer size\n          register"
           fields:
           - field:
@@ -6579,7 +6447,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-3 transfer size\n          register"
           fields:
           - field:
@@ -6605,7 +6472,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-x transfer size\n          register"
           fields:
           - field:
@@ -6631,7 +6497,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-5 transfer size\n          register"
           fields:
           - field:
@@ -6657,7 +6522,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-6 transfer size\n          register"
           fields:
           - field:
@@ -6683,7 +6547,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "OTG_FS host channel-7 transfer size\n          register"
           fields:
           - field:
@@ -6715,7 +6578,6 @@ device:
       name: OTG_FS_PWRCLK
       registers:
       - register:
-          access: read-write
           description: "OTG_FS power and clock gating control\n          register"
           fields:
           - field:
@@ -6747,7 +6609,6 @@ device:
       name: PWR
       registers:
       - register:
-          access: read-write
           description: power control register
           fields:
           - field:
@@ -6815,7 +6676,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: power control/status register
           fields:
           - field:
@@ -6872,7 +6732,6 @@ device:
       name: RCC
       registers:
       - register:
-          access: ''
           description: clock control register
           fields:
           - field:
@@ -6952,7 +6811,6 @@ device:
           reset_value: 131
           size: 32
       - register:
-          access: read-write
           description: PLL configuration register
           fields:
           - field:
@@ -7114,7 +6972,6 @@ device:
           reset_value: 603992080
           size: 32
       - register:
-          access: ''
           description: clock configuration register
           fields:
           - field:
@@ -7200,7 +7057,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: clock interrupt register
           fields:
           - field:
@@ -7328,7 +7184,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: AHB1 peripheral reset register
           fields:
           - field:
@@ -7390,7 +7245,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: AHB2 peripheral reset register
           fields:
           - field:
@@ -7404,7 +7258,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: APB1 peripheral reset register
           fields:
           - field:
@@ -7484,7 +7337,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: APB2 peripheral reset register
           fields:
           - field:
@@ -7552,7 +7404,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: AHB1 peripheral clock register
           fields:
           - field:
@@ -7614,7 +7465,6 @@ device:
           reset_value: 1048576
           size: 32
       - register:
-          access: read-write
           description: "AHB2 peripheral clock enable\n          register"
           fields:
           - field:
@@ -7628,7 +7478,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "APB1 peripheral clock enable\n          register"
           fields:
           - field:
@@ -7708,7 +7557,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "APB2 peripheral clock enable\n          register"
           fields:
           - field:
@@ -7782,7 +7630,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "AHB1 peripheral clock enable in low power\n          mode\
             \ register"
           fields:
@@ -7859,7 +7706,6 @@ device:
           reset_value: 2120716799
           size: 32
       - register:
-          access: read-write
           description: "AHB2 peripheral clock enable in low power\n          mode\
             \ register"
           fields:
@@ -7874,7 +7720,6 @@ device:
           reset_value: 241
           size: 32
       - register:
-          access: read-write
           description: "APB1 peripheral clock enable in low power\n          mode\
             \ register"
           fields:
@@ -7957,7 +7802,6 @@ device:
           reset_value: 922667519
           size: 32
       - register:
-          access: read-write
           description: "APB2 peripheral clock enabled in low power\n          mode\
             \ register"
           fields:
@@ -8033,7 +7877,6 @@ device:
           reset_value: 483123
           size: 32
       - register:
-          access: ''
           description: Backup domain control register
           fields:
           - field:
@@ -8083,7 +7926,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "clock control & status\n          register"
           fields:
           - field:
@@ -8151,7 +7993,6 @@ device:
           reset_value: 234881024
           size: 32
       - register:
-          access: read-write
           description: "spread spectrum clock generation\n          register"
           fields:
           - field:
@@ -8183,7 +8024,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: PLLI2S configuration register
           fields:
           - field:
@@ -8209,7 +8049,6 @@ device:
       name: RTC
       registers:
       - register:
-          access: read-write
           description: time register
           fields:
           - field:
@@ -8259,7 +8098,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: date register
           fields:
           - field:
@@ -8309,7 +8147,6 @@ device:
           reset_value: 8449
           size: 32
       - register:
-          access: read-write
           description: control register
           fields:
           - field:
@@ -8444,7 +8281,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: "initialization and status\n          register"
           fields:
           - field:
@@ -8548,7 +8384,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-write
           description: prescaler register
           fields:
           - field:
@@ -8568,7 +8403,6 @@ device:
           reset_value: 8323327
           size: 32
       - register:
-          access: read-write
           description: wakeup timer register
           fields:
           - field:
@@ -8582,7 +8416,6 @@ device:
           reset_value: 65535
           size: 32
       - register:
-          access: read-write
           description: calibration register
           fields:
           - field:
@@ -8602,7 +8435,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: alarm A register
           fields:
           - field:
@@ -8694,7 +8526,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: alarm B register
           fields:
           - field:
@@ -8786,7 +8617,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: write protection register
           fields:
           - field:
@@ -8800,7 +8630,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: sub second register
           fields:
           - field:
@@ -8814,7 +8643,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: shift control register
           fields:
           - field:
@@ -8834,7 +8662,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: time stamp time register
           fields:
           - field:
@@ -8884,7 +8711,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: time stamp date register
           fields:
           - field:
@@ -8922,7 +8748,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: timestamp sub second register
           fields:
           - field:
@@ -8936,7 +8761,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: calibration register
           fields:
           - field:
@@ -8968,7 +8792,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "tamper and alternate function configuration\n          register"
           fields:
           - field:
@@ -9055,7 +8878,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: alarm A sub second register
           fields:
           - field:
@@ -9076,7 +8898,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: alarm B sub second register
           fields:
           - field:
@@ -9097,7 +8918,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9111,7 +8931,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9125,7 +8944,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9139,7 +8957,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9153,7 +8970,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9167,7 +8983,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9181,7 +8996,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9195,7 +9009,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9209,7 +9022,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9223,7 +9035,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9237,7 +9048,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9251,7 +9061,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9265,7 +9074,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9279,7 +9087,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9293,7 +9100,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9307,7 +9113,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9321,7 +9126,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9335,7 +9139,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9349,7 +9152,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9363,7 +9165,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: backup register
           fields:
           - field:
@@ -9383,7 +9184,6 @@ device:
       name: SDIO
       registers:
       - register:
-          access: read-write
           description: power control register
           fields:
           - field:
@@ -9397,7 +9197,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: SDI clock control register
           fields:
           - field:
@@ -9447,7 +9246,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: argument register
           fields:
           - field:
@@ -9461,7 +9259,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: command register
           fields:
           - field:
@@ -9525,7 +9322,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: command response register
           fields:
           - field:
@@ -9539,7 +9335,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: response 1..4 register
           fields:
           - field:
@@ -9553,7 +9348,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: response 1..4 register
           fields:
           - field:
@@ -9567,7 +9361,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: response 1..4 register
           fields:
           - field:
@@ -9581,7 +9374,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: response 1..4 register
           fields:
           - field:
@@ -9595,7 +9387,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: data timer register
           fields:
           - field:
@@ -9609,7 +9400,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: data length register
           fields:
           - field:
@@ -9623,7 +9413,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: data control register
           fields:
           - field:
@@ -9686,7 +9475,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: data counter register
           fields:
           - field:
@@ -9700,7 +9488,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: status register
           fields:
           - field:
@@ -9856,7 +9643,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: interrupt clear register
           fields:
           - field:
@@ -9942,7 +9728,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: mask register
           fields:
           - field:
@@ -10096,7 +9881,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: FIFO counter register
           fields:
           - field:
@@ -10111,7 +9895,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: data FIFO register
           fields:
           - field:
@@ -10131,7 +9914,6 @@ device:
       name: SYSCFG
       registers:
       - register:
-          access: read-write
           description: memory remap register
           fields:
           - field:
@@ -10145,7 +9927,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "peripheral mode configuration\n          register"
           fields:
           - field:
@@ -10159,7 +9940,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "external interrupt configuration register\n          1"
           fields:
           - field:
@@ -10191,7 +9971,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "external interrupt configuration register\n          2"
           fields:
           - field:
@@ -10223,7 +10002,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "external interrupt configuration register\n          3"
           fields:
           - field:
@@ -10255,7 +10033,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "external interrupt configuration register\n          4"
           fields:
           - field:
@@ -10287,7 +10064,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: "Compensation cell control\n          register"
           fields:
           - field:
@@ -10313,7 +10089,6 @@ device:
       name: TIM1
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -10369,7 +10144,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -10449,7 +10223,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -10499,7 +10272,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -10597,7 +10369,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -10677,7 +10448,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -10733,7 +10503,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -10801,7 +10570,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -10845,7 +10613,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -10913,7 +10680,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -10957,7 +10723,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -11052,7 +10817,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -11066,7 +10830,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -11080,7 +10843,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -11094,7 +10856,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -11108,7 +10869,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -11122,7 +10882,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -11136,7 +10895,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -11150,7 +10908,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -11170,7 +10927,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -11184,7 +10940,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: repetition counter register
           fields:
           - field:
@@ -11198,7 +10953,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: break and dead-time register
           fields:
           - field:
@@ -11260,7 +11014,6 @@ device:
       name: TIM8
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -11316,7 +11069,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -11396,7 +11148,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -11446,7 +11197,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -11544,7 +11294,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -11624,7 +11373,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -11680,7 +11428,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -11748,7 +11495,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -11792,7 +11538,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -11860,7 +11605,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -11904,7 +11648,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -11999,7 +11742,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -12013,7 +11755,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -12027,7 +11768,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -12041,7 +11781,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -12055,7 +11794,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -12069,7 +11807,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -12083,7 +11820,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -12097,7 +11833,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -12117,7 +11852,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -12131,7 +11865,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: repetition counter register
           fields:
           - field:
@@ -12145,7 +11878,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: break and dead-time register
           fields:
           - field:
@@ -12207,7 +11939,6 @@ device:
       name: TIM10
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -12245,7 +11976,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -12265,7 +11995,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -12291,7 +12020,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -12311,7 +12039,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -12343,7 +12070,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -12369,7 +12095,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -12395,7 +12120,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -12409,7 +12133,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -12423,7 +12146,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -12437,7 +12159,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -12457,7 +12178,6 @@ device:
       name: TIM11
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -12495,7 +12215,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -12515,7 +12234,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -12541,7 +12259,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -12561,7 +12278,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -12593,7 +12309,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -12619,7 +12334,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -12645,7 +12359,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -12659,7 +12372,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -12673,7 +12385,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -12687,7 +12398,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -12701,7 +12411,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: option register
           fields:
           - field:
@@ -12721,7 +12430,6 @@ device:
       name: TIM2
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -12777,7 +12485,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -12803,7 +12510,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -12853,7 +12559,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -12933,7 +12638,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -13001,7 +12705,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -13045,7 +12748,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -13113,7 +12815,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -13157,7 +12858,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -13225,7 +12925,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -13269,7 +12968,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -13349,7 +13047,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -13369,7 +13066,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -13383,7 +13079,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -13403,7 +13098,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -13423,7 +13117,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -13443,7 +13136,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -13463,7 +13155,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -13483,7 +13174,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -13503,7 +13193,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -13517,7 +13206,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: TIM5 option register
           fields:
           - field:
@@ -13537,7 +13225,6 @@ device:
       name: TIM3
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -13593,7 +13280,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -13619,7 +13305,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -13669,7 +13354,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -13749,7 +13433,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -13817,7 +13500,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -13861,7 +13543,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -13929,7 +13610,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -13973,7 +13653,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -14041,7 +13720,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -14085,7 +13763,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -14165,7 +13842,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -14185,7 +13861,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -14199,7 +13874,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -14219,7 +13893,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -14239,7 +13912,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -14259,7 +13931,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -14279,7 +13950,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -14299,7 +13969,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -14319,7 +13988,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -14339,7 +14007,6 @@ device:
       name: TIM4
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -14395,7 +14062,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -14421,7 +14087,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -14471,7 +14136,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -14551,7 +14215,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -14619,7 +14282,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -14663,7 +14325,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -14731,7 +14392,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -14775,7 +14435,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -14843,7 +14502,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -14887,7 +14545,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -14967,7 +14624,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -14987,7 +14643,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -15001,7 +14656,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -15021,7 +14675,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -15041,7 +14694,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -15061,7 +14713,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -15081,7 +14732,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -15101,7 +14751,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -15121,7 +14770,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -15141,7 +14789,6 @@ device:
       name: TIM5
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -15197,7 +14844,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -15223,7 +14869,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -15273,7 +14918,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -15353,7 +14997,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -15421,7 +15064,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -15465,7 +15107,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -15533,7 +15174,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -15577,7 +15217,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (output\n          mode)"
           fields:
           - field:
@@ -15645,7 +15284,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 2 (input\n          mode)"
           fields:
           - field:
@@ -15689,7 +15327,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -15769,7 +15406,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -15789,7 +15425,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -15803,7 +15438,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -15823,7 +15457,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -15843,7 +15476,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -15863,7 +15495,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 3
           fields:
           - field:
@@ -15883,7 +15514,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 4
           fields:
           - field:
@@ -15903,7 +15533,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA control register
           fields:
           - field:
@@ -15923,7 +15552,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA address for full transfer
           fields:
           - field:
@@ -15937,7 +15565,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: TIM5 option register
           fields:
           - field:
@@ -15957,7 +15584,6 @@ device:
       name: TIM9
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -16001,7 +15627,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -16015,7 +15640,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: slave mode control register
           fields:
           - field:
@@ -16041,7 +15665,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: DMA/Interrupt enable register
           fields:
           - field:
@@ -16073,7 +15696,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: status register
           fields:
           - field:
@@ -16117,7 +15739,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: event generation register
           fields:
           - field:
@@ -16149,7 +15770,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (output\n          mode)"
           fields:
           - field:
@@ -16205,7 +15825,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare mode register 1 (input\n          mode)"
           fields:
           - field:
@@ -16249,7 +15868,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "capture/compare enable\n          register"
           fields:
           - field:
@@ -16293,7 +15911,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: counter
           fields:
           - field:
@@ -16307,7 +15924,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: prescaler
           fields:
           - field:
@@ -16321,7 +15937,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: auto-reload register
           fields:
           - field:
@@ -16335,7 +15950,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 1
           fields:
           - field:
@@ -16349,7 +15963,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: capture/compare register 2
           fields:
           - field:
@@ -16369,7 +15982,6 @@ device:
       name: USART1
       registers:
       - register:
-          access: ''
           description: Status register
           fields:
           - field:
@@ -16437,7 +16049,6 @@ device:
           reset_value: 12582912
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -16451,7 +16062,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Baud rate register
           fields:
           - field:
@@ -16471,7 +16081,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -16569,7 +16178,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -16631,7 +16239,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 3
           fields:
           - field:
@@ -16711,7 +16318,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Guard time and prescaler\n          register"
           fields:
           - field:
@@ -16737,7 +16343,6 @@ device:
       name: USART2
       registers:
       - register:
-          access: ''
           description: Status register
           fields:
           - field:
@@ -16805,7 +16410,6 @@ device:
           reset_value: 12582912
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -16819,7 +16423,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Baud rate register
           fields:
           - field:
@@ -16839,7 +16442,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -16937,7 +16539,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -16999,7 +16600,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 3
           fields:
           - field:
@@ -17079,7 +16679,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Guard time and prescaler\n          register"
           fields:
           - field:
@@ -17105,7 +16704,6 @@ device:
       name: USART6
       registers:
       - register:
-          access: ''
           description: Status register
           fields:
           - field:
@@ -17173,7 +16771,6 @@ device:
           reset_value: 12582912
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -17187,7 +16784,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Baud rate register
           fields:
           - field:
@@ -17207,7 +16803,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -17305,7 +16900,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -17367,7 +16961,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 3
           fields:
           - field:
@@ -17447,7 +17040,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Guard time and prescaler\n          register"
           fields:
           - field:
@@ -17473,7 +17065,6 @@ device:
       name: WWDG
       registers:
       - register:
-          access: read-write
           description: Control register
           fields:
           - field:
@@ -17493,7 +17084,6 @@ device:
           reset_value: 127
           size: 32
       - register:
-          access: read-write
           description: Configuration register
           fields:
           - field:
@@ -17525,7 +17115,6 @@ device:
           reset_value: 127
           size: 32
       - register:
-          access: read-write
           description: Status register
           fields:
           - field:
@@ -17545,7 +17134,6 @@ device:
       name: DMA2
       registers:
       - register:
-          access: read-only
           description: low interrupt status register
           fields:
           - field:
@@ -17685,7 +17273,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: high interrupt status register
           fields:
           - field:
@@ -17825,7 +17412,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "low interrupt flag clear\n          register"
           fields:
           - field:
@@ -17973,7 +17559,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "high interrupt flag clear\n          register"
           fields:
           - field:
@@ -18121,7 +17706,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -18244,7 +17828,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -18258,7 +17841,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -18272,7 +17854,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -18286,7 +17867,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -18301,7 +17881,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -18333,7 +17912,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -18462,7 +18040,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -18476,7 +18053,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -18490,7 +18066,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -18504,7 +18079,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -18519,7 +18093,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -18551,7 +18124,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -18680,7 +18252,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -18694,7 +18265,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -18708,7 +18278,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -18722,7 +18291,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -18737,7 +18305,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -18769,7 +18336,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -18898,7 +18464,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -18912,7 +18477,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -18926,7 +18490,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -18940,7 +18503,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -18955,7 +18517,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -18987,7 +18548,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -19116,7 +18676,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -19130,7 +18689,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -19144,7 +18702,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -19158,7 +18715,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -19173,7 +18729,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -19205,7 +18760,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -19334,7 +18888,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -19348,7 +18901,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -19362,7 +18914,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -19376,7 +18927,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -19391,7 +18941,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -19423,7 +18972,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -19552,7 +19100,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -19566,7 +19113,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -19580,7 +19126,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -19594,7 +19139,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -19609,7 +19153,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -19641,7 +19184,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -19770,7 +19312,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -19784,7 +19325,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -19798,7 +19338,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -19812,7 +19351,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -19827,7 +19365,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -19865,7 +19402,6 @@ device:
       name: DMA1
       registers:
       - register:
-          access: read-only
           description: low interrupt status register
           fields:
           - field:
@@ -20005,7 +19541,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: high interrupt status register
           fields:
           - field:
@@ -20145,7 +19680,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "low interrupt flag clear\n          register"
           fields:
           - field:
@@ -20293,7 +19827,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "high interrupt flag clear\n          register"
           fields:
           - field:
@@ -20441,7 +19974,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -20564,7 +20096,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -20578,7 +20109,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -20592,7 +20122,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -20606,7 +20135,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -20621,7 +20149,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -20653,7 +20180,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -20782,7 +20308,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -20796,7 +20321,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -20810,7 +20334,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -20824,7 +20347,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -20839,7 +20361,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -20871,7 +20392,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -21000,7 +20520,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -21014,7 +20533,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -21028,7 +20546,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -21042,7 +20559,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -21057,7 +20573,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -21089,7 +20604,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -21218,7 +20732,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -21232,7 +20745,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -21246,7 +20758,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -21260,7 +20771,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -21275,7 +20785,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -21307,7 +20816,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -21436,7 +20944,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -21450,7 +20957,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -21464,7 +20970,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -21478,7 +20983,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -21493,7 +20997,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -21525,7 +21028,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -21654,7 +21156,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -21668,7 +21169,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -21682,7 +21182,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -21696,7 +21195,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -21711,7 +21209,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -21743,7 +21240,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -21872,7 +21368,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -21886,7 +21381,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -21900,7 +21394,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -21914,7 +21407,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -21929,7 +21421,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -21961,7 +21452,6 @@ device:
           reset_value: 33
           size: 32
       - register:
-          access: read-write
           description: "stream x configuration\n          register"
           fields:
           - field:
@@ -22090,7 +21580,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x number of data\n          register"
           fields:
           - field:
@@ -22104,7 +21593,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x peripheral address\n          register"
           fields:
           - field:
@@ -22118,7 +21606,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 0 address\n          register"
           fields:
           - field:
@@ -22132,7 +21619,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "stream x memory 1 address\n          register"
           fields:
           - field:
@@ -22147,7 +21633,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: stream x FIFO control register
           fields:
           - field:
@@ -22185,7 +21670,6 @@ device:
       name: GPIOH
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -22289,7 +21773,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -22393,7 +21876,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -22497,7 +21979,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -22601,7 +22082,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -22705,7 +22185,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -22809,7 +22288,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -23009,7 +22487,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -23119,7 +22596,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -23183,7 +22659,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -23253,7 +22728,6 @@ device:
       name: GPIOE
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -23357,7 +22831,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -23461,7 +22934,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -23565,7 +23037,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -23669,7 +23140,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -23773,7 +23243,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -23877,7 +23346,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -24077,7 +23545,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -24187,7 +23654,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -24251,7 +23717,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -24321,7 +23786,6 @@ device:
       name: GPIOD
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -24425,7 +23889,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -24529,7 +23992,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -24633,7 +24095,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -24737,7 +24198,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -24841,7 +24301,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -24945,7 +24404,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -25145,7 +24603,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -25255,7 +24712,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -25319,7 +24775,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -25389,7 +24844,6 @@ device:
       name: GPIOC
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -25493,7 +24947,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -25597,7 +25050,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -25701,7 +25153,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -25805,7 +25256,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -25909,7 +25359,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -26013,7 +25462,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -26213,7 +25661,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -26323,7 +25770,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -26387,7 +25833,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -26457,7 +25902,6 @@ device:
       name: GPIOB
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -26561,7 +26005,6 @@ device:
           reset_value: 640
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -26665,7 +26108,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -26769,7 +26211,6 @@ device:
           reset_value: 192
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -26873,7 +26314,6 @@ device:
           reset_value: 256
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -26977,7 +26417,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -27081,7 +26520,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -27281,7 +26719,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -27391,7 +26828,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -27455,7 +26891,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -27525,7 +26960,6 @@ device:
       name: GPIOA
       registers:
       - register:
-          access: read-write
           description: GPIO port mode register
           fields:
           - field:
@@ -27629,7 +27063,6 @@ device:
           reset_value: 2818572288
           size: 32
       - register:
-          access: read-write
           description: GPIO port output type register
           fields:
           - field:
@@ -27733,7 +27166,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port output speed\n          register"
           fields:
           - field:
@@ -27837,7 +27269,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port pull-up/pull-down\n          register"
           fields:
           - field:
@@ -27941,7 +27372,6 @@ device:
           reset_value: 1677721600
           size: 32
       - register:
-          access: read-only
           description: GPIO port input data register
           fields:
           - field:
@@ -28045,7 +27475,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: GPIO port output data register
           fields:
           - field:
@@ -28149,7 +27578,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: write-only
           description: "GPIO port bit set/reset\n          register"
           fields:
           - field:
@@ -28349,7 +27777,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO port configuration lock\n          register"
           fields:
           - field:
@@ -28459,7 +27886,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function low\n          register"
           fields:
           - field:
@@ -28523,7 +27949,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "GPIO alternate function high\n          register"
           fields:
           - field:
@@ -28593,7 +28018,6 @@ device:
       name: I2C3
       registers:
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -28685,7 +28109,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -28729,7 +28152,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 1
           fields:
           - field:
@@ -28761,7 +28183,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 2
           fields:
           - field:
@@ -28781,7 +28202,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -28795,7 +28215,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: Status register 1
           fields:
           - field:
@@ -28888,7 +28307,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: Status register 2
           fields:
           - field:
@@ -28944,7 +28362,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Clock control register
           fields:
           - field:
@@ -28971,7 +28388,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: TRISE register
           fields:
           - field:
@@ -28992,7 +28408,6 @@ device:
       name: I2C2
       registers:
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -29084,7 +28499,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -29128,7 +28542,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 1
           fields:
           - field:
@@ -29160,7 +28573,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 2
           fields:
           - field:
@@ -29180,7 +28592,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -29194,7 +28605,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: Status register 1
           fields:
           - field:
@@ -29287,7 +28697,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: Status register 2
           fields:
           - field:
@@ -29343,7 +28752,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Clock control register
           fields:
           - field:
@@ -29370,7 +28778,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: TRISE register
           fields:
           - field:
@@ -29391,7 +28798,6 @@ device:
       name: I2C1
       registers:
       - register:
-          access: read-write
           description: Control register 1
           fields:
           - field:
@@ -29483,7 +28889,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Control register 2
           fields:
           - field:
@@ -29527,7 +28932,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 1
           fields:
           - field:
@@ -29559,7 +28963,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Own address register 2
           fields:
           - field:
@@ -29579,7 +28982,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Data register
           fields:
           - field:
@@ -29593,7 +28995,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: Status register 1
           fields:
           - field:
@@ -29686,7 +29087,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: Status register 2
           fields:
           - field:
@@ -29742,7 +29142,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Clock control register
           fields:
           - field:
@@ -29769,7 +29168,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: TRISE register
           fields:
           - field:
@@ -29790,7 +29188,6 @@ device:
       name: I2S2ext
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -29882,7 +29279,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -29932,7 +29328,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -29994,7 +29389,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -30008,7 +29402,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -30022,7 +29415,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -30036,7 +29428,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -30050,7 +29441,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -30107,7 +29497,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -30139,7 +29528,6 @@ device:
       name: I2S3ext
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -30231,7 +29619,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -30281,7 +29668,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -30343,7 +29729,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -30357,7 +29742,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -30371,7 +29755,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -30385,7 +29768,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -30399,7 +29781,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -30456,7 +29837,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -30488,7 +29868,6 @@ device:
       name: SPI1
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -30580,7 +29959,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -30630,7 +30008,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -30692,7 +30069,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -30706,7 +30082,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -30720,7 +30095,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -30734,7 +30108,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -30748,7 +30121,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -30805,7 +30177,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -30837,7 +30208,6 @@ device:
       name: SPI2
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -30929,7 +30299,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -30979,7 +30348,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -31041,7 +30409,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -31055,7 +30422,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -31069,7 +30435,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -31083,7 +30448,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -31097,7 +30461,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -31154,7 +30517,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -31186,7 +30548,6 @@ device:
       name: SPI3
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -31278,7 +30639,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -31328,7 +30688,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -31390,7 +30749,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -31404,7 +30762,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -31418,7 +30775,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -31432,7 +30788,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -31446,7 +30801,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -31503,7 +30857,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -31535,7 +30888,6 @@ device:
       name: SPI4
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -31627,7 +30979,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -31677,7 +31028,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -31739,7 +31089,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -31753,7 +31102,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -31767,7 +31115,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -31781,7 +31128,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -31795,7 +31141,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -31852,7 +31197,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -31884,7 +31228,6 @@ device:
       name: SPI5
       registers:
       - register:
-          access: read-write
           description: control register 1
           fields:
           - field:
@@ -31976,7 +31319,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: control register 2
           fields:
           - field:
@@ -32026,7 +31368,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: ''
           description: status register
           fields:
           - field:
@@ -32088,7 +31429,6 @@ device:
           reset_value: 2
           size: 32
       - register:
-          access: read-write
           description: data register
           fields:
           - field:
@@ -32102,7 +31442,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: CRC polynomial register
           fields:
           - field:
@@ -32116,7 +31455,6 @@ device:
           reset_value: 7
           size: 32
       - register:
-          access: read-only
           description: RX CRC register
           fields:
           - field:
@@ -32130,7 +31468,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: TX CRC register
           fields:
           - field:
@@ -32144,7 +31481,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S configuration register
           fields:
           - field:
@@ -32201,7 +31537,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: I2S prescaler register
           fields:
           - field:
@@ -32233,7 +31568,6 @@ device:
       name: NVIC
       registers:
       - register:
-          access: read-write
           description: Interrupt Set-Enable Register
           fields:
           - field:
@@ -32247,7 +31581,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Set-Enable Register
           fields:
           - field:
@@ -32261,7 +31594,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Interrupt Clear-Enable\n          Register"
           fields:
           - field:
@@ -32275,7 +31607,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Interrupt Clear-Enable\n          Register"
           fields:
           - field:
@@ -32289,7 +31620,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Set-Pending Register
           fields:
           - field:
@@ -32303,7 +31633,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Set-Pending Register
           fields:
           - field:
@@ -32317,7 +31646,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Interrupt Clear-Pending\n          Register"
           fields:
           - field:
@@ -32331,7 +31659,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Interrupt Clear-Pending\n          Register"
           fields:
           - field:
@@ -32345,7 +31672,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: Interrupt Active Bit Register
           fields:
           - field:
@@ -32359,7 +31685,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-only
           description: Interrupt Active Bit Register
           fields:
           - field:
@@ -32373,7 +31698,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32405,7 +31729,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32437,7 +31760,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32469,7 +31791,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32501,7 +31822,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32533,7 +31853,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32565,7 +31884,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32597,7 +31915,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32629,7 +31946,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32661,7 +31977,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32693,7 +32008,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32725,7 +32039,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32757,7 +32070,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32789,7 +32101,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32821,7 +32132,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32853,7 +32163,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32885,7 +32194,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32917,7 +32225,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32949,7 +32256,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -32981,7 +32287,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields:
           - field:
@@ -33013,7 +32318,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields: []
           name: IPR20
@@ -33021,7 +32325,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields: []
           name: IPR21
@@ -33029,7 +32332,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Interrupt Priority Register
           fields: []
           name: IPR22
@@ -33043,7 +32345,6 @@ device:
       name: FPU
       registers:
       - register:
-          access: read-write
           description: "Floating-point context control\n          register"
           fields:
           - field:
@@ -33105,7 +32406,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Floating-point context address\n          register"
           fields:
           - field:
@@ -33119,7 +32419,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Floating-point status control\n          register"
           fields:
           - field:
@@ -33218,7 +32517,6 @@ device:
       name: MPU
       registers:
       - register:
-          access: read-only
           description: MPU type register
           fields:
           - field:
@@ -33244,7 +32542,6 @@ device:
           reset_value: 2048
           size: 32
       - register:
-          access: read-write
           description: MPU control register
           fields:
           - field:
@@ -33272,7 +32569,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: MPU region number register
           fields:
           - field:
@@ -33286,7 +32582,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "MPU region base address\n          register"
           fields:
           - field:
@@ -33312,7 +32607,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "MPU region attribute and size\n          register"
           fields:
           - field:
@@ -33380,7 +32674,6 @@ device:
       name: STK
       registers:
       - register:
-          access: read-write
           description: "SysTick control and status\n          register"
           fields:
           - field:
@@ -33412,7 +32705,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: SysTick reload value register
           fields:
           - field:
@@ -33426,7 +32718,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: SysTick current value register
           fields:
           - field:
@@ -33440,7 +32731,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "SysTick calibration value\n          register"
           fields:
           - field:
@@ -33473,7 +32763,6 @@ device:
       name: SCB
       registers:
       - register:
-          access: read-only
           description: CPUID base register
           fields:
           - field:
@@ -33511,7 +32800,6 @@ device:
           reset_value: 1091551809
           size: 32
       - register:
-          access: read-write
           description: "Interrupt control and state\n          register"
           fields:
           - field:
@@ -33573,7 +32861,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Vector table offset register
           fields:
           - field:
@@ -33587,7 +32874,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Application interrupt and reset control\n          register"
           fields:
           - field:
@@ -33631,7 +32917,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: System control register
           fields:
           - field:
@@ -33657,7 +32942,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Configuration and control\n          register"
           fields:
           - field:
@@ -33702,7 +32986,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "System handler priority\n          registers"
           fields:
           - field:
@@ -33728,7 +33011,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "System handler priority\n          registers"
           fields:
           - field:
@@ -33742,7 +33024,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "System handler priority\n          registers"
           fields:
           - field:
@@ -33762,7 +33043,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "System handler control and state\n          register"
           fields:
           - field:
@@ -33856,7 +33136,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Configurable fault status\n          register"
           fields:
           - field:
@@ -33978,7 +33257,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Hard fault status register
           fields:
           - field:
@@ -34004,7 +33282,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Memory management fault address\n          register"
           fields:
           - field:
@@ -34018,7 +33295,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: Bus fault address register
           fields:
           - field:
@@ -34032,7 +33308,6 @@ device:
           reset_value: 0
           size: 32
       - register:
-          access: read-write
           description: "Auxiliary fault status\n          register"
           fields:
           - field:
@@ -34052,7 +33327,6 @@ device:
       name: NVIC_STIR
       registers:
       - register:
-          access: read-write
           description: "Software trigger interrupt\n          register"
           fields:
           - field:
@@ -34072,7 +33346,6 @@ device:
       name: FPU_CPACR
       registers:
       - register:
-          access: read-write
           description: "Coprocessor access control\n          register"
           fields:
           - field:
@@ -34092,7 +33365,6 @@ device:
       name: SCB_ACTRL
       registers:
       - register:
-          access: read-write
           description: Auxiliary control register
           fields:
           - field:
