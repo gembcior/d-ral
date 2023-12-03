@@ -51,38 +51,35 @@
     \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
     \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
     \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      \n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress\
-    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
-    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using match = MatchReg<BaseAddress + 0x0024>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Prescale_rdReg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using prescale_rd = Prescale_rdReg<BaseAddress\
-    \ + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
+    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress\
-    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[2] = Reload[2]Reg<BaseAddress\
-    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
+    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
+    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
+    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
-    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
-    \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H\
-    \ */\n"
+    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
+    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
+    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H */"
   name: TIMER0
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -137,38 +134,35 @@
     \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
     \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
     \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      \n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress\
-    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
-    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using match = MatchReg<BaseAddress + 0x0024>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Prescale_rdReg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using prescale_rd = Prescale_rdReg<BaseAddress\
-    \ + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
+    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress\
-    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[2] = Reload[2]Reg<BaseAddress\
-    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
+    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
+    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
+    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
-    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
-    \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H\
-    \ */\n"
+    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
+    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
+    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H */"
   name: TIMER1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -223,36 +217,33 @@
     \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
     \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
     \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      \n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress\
-    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
-    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using match = MatchReg<BaseAddress + 0x0024>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Prescale_rdReg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using prescale_rd = Prescale_rdReg<BaseAddress\
-    \ + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
+    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
+    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress\
-    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using reload[2] = Reload[2]Reg<BaseAddress\
-    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
-    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
+    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
+    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
+    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
+    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
+    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
+    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
     \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[x]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n    \n\n  public:\n    union reg\n   \
-    \ {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n  using reload[x]\
-    \ = Reload[x]BankReg<BaseAddress + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H\
-    \ */\n"
+    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
+    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
+    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
+    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H */"
   name: TIMER2

@@ -1,4 +1,4 @@
-[dral]include header.dral[#dral]
+{% include 'header.dral' %}
 
 #ifndef DRAL_REGISTER_MODEL_H
 #define DRAL_REGISTER_MODEL_H

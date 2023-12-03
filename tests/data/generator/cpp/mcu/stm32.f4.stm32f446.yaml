@@ -117,8 +117,8 @@
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 24, 8> byte3;\n\
     \      BitFieldModel<uint32_t, 16, 8> byte2;\n      BitFieldModel<uint32_t, 8,\
     \ 8> byte1;\n      BitFieldModel<uint32_t, 0, 8> byte0;\n    };\n  };\n\npublic:\n\
-    \  using dr = DrReg<BaseAddress + 0x0028>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
-    \ */\n"
+    \  using dr = DrReg<BaseAddress + 0x0028>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DCMI_H\
+    \ */"
   name: DCMI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -653,7 +653,7 @@
     \ tras;\n      BitFieldModel<uint32_t, 12, 4> trc;\n      BitFieldModel<uint32_t,\
     \ 16, 4> twr;\n      BitFieldModel<uint32_t, 20, 4> trp;\n      BitFieldModel<uint32_t,\
     \ 24, 4> trcd;\n    };\n  };\n\npublic:\n  using sdtrx = SdtrxBankReg<BaseAddress\
-    \ + 0x0148, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMC_H */\n"
+    \ + 0x0148, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMC_H */"
   name: FMC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -729,8 +729,8 @@
     \      BitFieldModel<uint32_t, 1, 1> dbg_tim8_stop;\n      BitFieldModel<uint32_t,\
     \ 16, 1> dbg_tim9_stop;\n      BitFieldModel<uint32_t, 17, 1> dbg_tim10_stop;\n\
     \      BitFieldModel<uint32_t, 18, 1> dbg_tim11_stop;\n    };\n  };\n\npublic:\n\
-    \  using dbgmcu_apb2_fz = Dbgmcu_apb2_fzReg<BaseAddress + 0x000C>;\n\n\n};\n\n\
-    }\n\n#endif /* DRAL_STM32F446_DBG_H */\n"
+    \  using dbgmcu_apb2_fz = Dbgmcu_apb2_fzReg<BaseAddress + 0x000C>;\n\n};\n\n}\n\
+    \n#endif /* DRAL_STM32F446_DBG_H */"
   name: DBG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -1326,8 +1326,8 @@
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 7,\
     \ 1> feie;\n      BitFieldModel<uint32_t, 3, 3> fs;\n      BitFieldModel<uint32_t,\
     \ 2, 1> dmdis;\n      BitFieldModel<uint32_t, 0, 2> fth;\n    };\n  };\n\npublic:\n\
-    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_DMA2_H */\n"
+    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_DMA2_H */"
   name: DMA2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -1923,8 +1923,8 @@
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 7,\
     \ 1> feie;\n      BitFieldModel<uint32_t, 3, 3> fs;\n      BitFieldModel<uint32_t,\
     \ 2, 1> dmdis;\n      BitFieldModel<uint32_t, 0, 2> fth;\n    };\n  };\n\npublic:\n\
-    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_DMA1_H */\n"
+    \  using sxfcr = SxfcrBankReg<BaseAddress + 0x0024, 0x0018>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_DMA1_H */"
   name: DMA1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -2404,7 +2404,7 @@
     \ 22, 2> fmpi2c1sel;\n      BitFieldModel<uint32_t, 26, 1> cecsel;\n      BitFieldModel<uint32_t,\
     \ 27, 1> ck48msel;\n      BitFieldModel<uint32_t, 28, 1> sdiosel;\n      BitFieldModel<uint32_t,\
     \ 29, 1> spdifsel;\n    };\n  };\n\npublic:\n  using dckcfgr2 = Dckcfgr2Reg<BaseAddress\
-    \ + 0x0094>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_RCC_H */\n"
+    \ + 0x0094>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_RCC_H */"
   name: RCC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -2649,8 +2649,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOH_H\
+    \ */"
   name: GPIOH
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -2895,8 +2895,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOG_H\
+    \ */"
   name: GPIOG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -3141,8 +3141,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOF_H\
+    \ */"
   name: GPIOF
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -3387,8 +3387,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOE_H\
+    \ */"
   name: GPIOE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -3633,8 +3633,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOD_H\
+    \ */"
   name: GPIOD
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -3879,8 +3879,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOC_H\
+    \ */"
   name: GPIOC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4125,8 +4125,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOB_H\
+    \ */"
   name: GPIOB
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4371,8 +4371,8 @@
     \ 20, 4> afrh13;\n      BitFieldModel<uint32_t, 16, 4> afrh12;\n      BitFieldModel<uint32_t,\
     \ 12, 4> afrh11;\n      BitFieldModel<uint32_t, 8, 4> afrh10;\n      BitFieldModel<uint32_t,\
     \ 4, 4> afrh9;\n      BitFieldModel<uint32_t, 0, 4> afrh8;\n    };\n  };\n\npublic:\n\
-    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H\
-    \ */\n"
+    \  using afrh = AfrhReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_GPIOA_H\
+    \ */"
   name: GPIOA
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4446,8 +4446,8 @@
     \ cmp_pd = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union reg\n\
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 1> ready;\n  \
     \    BitFieldModel<uint32_t, 0, 1> cmp_pd;\n    };\n  };\n\npublic:\n  using cmpcr\
-    \ = CmpcrReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
-    \ */\n"
+    \ = CmpcrReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SYSCFG_H\
+    \ */"
   name: SYSCFG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4550,8 +4550,8 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI1_H\
-    \ */\n"
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI1_H\
+    \ */"
   name: SPI1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4654,8 +4654,8 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI2_H\
-    \ */\n"
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI2_H\
+    \ */"
   name: SPI2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4758,8 +4758,8 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI3_H\
-    \ */\n"
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI3_H\
+    \ */"
   name: SPI3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -4862,8 +4862,8 @@
     \ address, 0, 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 9, 1> mckoe;\n      BitFieldModel<uint32_t, 8,\
     \ 1> odd;\n      BitFieldModel<uint32_t, 0, 8> i2sdiv;\n    };\n  };\n\npublic:\n\
-    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI4_H\
-    \ */\n"
+    \  using i2spr = I2sprReg<BaseAddress + 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPI4_H\
+    \ */"
   name: SPI4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5037,8 +5037,8 @@
     \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
     \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
-    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_ADC1_H */\n"
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC1_H */"
   name: ADC1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5212,8 +5212,8 @@
     \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
     \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
-    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_ADC2_H */\n"
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC2_H */"
   name: ADC2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5387,8 +5387,8 @@
     \ address, bankOffset>\n  {\n  public:\n    using jdata = FieldModel<uint32_t,\
     \ address, 0, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t\
     \ value;\n      BitFieldModel<uint32_t, 0, 16> jdata;\n    };\n  };\n\npublic:\n\
-    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_ADC3_H */\n"
+    \  using jdrx = JdrxBankReg<BaseAddress + 0x003C, 0x0004>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_ADC3_H */"
   name: ADC3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5491,8 +5491,8 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H\
-    \ */\n"
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART6_H\
+    \ */"
   name: USART6
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5595,8 +5595,8 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H\
-    \ */\n"
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART1_H\
+    \ */"
   name: USART1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5699,8 +5699,8 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H\
-    \ */\n"
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART2_H\
+    \ */"
   name: USART2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5803,8 +5803,8 @@
     \    using psc = FieldModel<uint32_t, address, 0, 8>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 8, 8> gt;\n\
     \      BitFieldModel<uint32_t, 0, 8> psc;\n    };\n  };\n\npublic:\n  using gtpr\
-    \ = GtprReg<BaseAddress + 0x0018>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H\
-    \ */\n"
+    \ = GtprReg<BaseAddress + 0x0018>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_USART3_H\
+    \ */"
   name: USART3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -5913,7 +5913,7 @@
     \ address, 13, 1>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 29, 1> dmaudr2;\n      BitFieldModel<uint32_t,\
     \ 13, 1> dmaudr1;\n    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0034>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_DAC_H */"
   name: DAC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6065,7 +6065,7 @@
     \ address>\n  {\n  public:\n    using txdata = FieldModel<uint32_t, address, 0,\
     \ 8>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 8> txdata;\n    };\n  };\n\npublic:\n  using txdr = TxdrReg<BaseAddress +\
-    \ 0x0028>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */\n"
+    \ 0x0028>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FMPI2C_H */"
   name: FMPI2C
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6183,8 +6183,8 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H\
-    \ */\n"
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C3_H\
+    \ */"
   name: I2C3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6302,8 +6302,8 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H\
-    \ */\n"
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C2_H\
+    \ */"
   name: I2C2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6421,8 +6421,8 @@
     \    using anoff = FieldModel<uint32_t, address, 4, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 4> dnf;\n\
     \      BitFieldModel<uint32_t, 4, 1> anoff;\n    };\n  };\n\npublic:\n  using\
-    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H\
-    \ */\n"
+    \ fltr = FltrReg<BaseAddress + 0x0024>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_I2C1_H\
+    \ */"
   name: I2C1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6460,8 +6460,8 @@
     \    using pvu = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 1, 1> rvu;\n\
     \      BitFieldModel<uint32_t, 0, 1> pvu;\n    };\n  };\n\npublic:\n  using sr\
-    \ = SrReg<BaseAddress + 0x000C>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H\
-    \ */\n"
+    \ = SrReg<BaseAddress + 0x000C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_IWDG_H\
+    \ */"
   name: IWDG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6499,8 +6499,8 @@
     \ address>\n  class SrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
     \    using ewif = FieldModel<uint32_t, address, 0, 1>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> ewif;\n\
-    \    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0008>;\n\n\n};\n\n\
-    }\n\n#endif /* DRAL_STM32F446_WWDG_H */\n"
+    \    };\n  };\n\npublic:\n  using sr = SrReg<BaseAddress + 0x0008>;\n\n};\n\n\
+    }\n\n#endif /* DRAL_STM32F446_WWDG_H */"
   name: WWDG
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6844,7 +6844,7 @@
     \    using bkp = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 32> bkp;\n    };\n  };\n\npublic:\n  using bkpxr = BkpxrBankReg<BaseAddress\
-    \ + 0x0050, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_RTC_H */\n"
+    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_RTC_H */"
   name: RTC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -6934,7 +6934,7 @@
     \ 6, 1> dmar;\n      BitFieldModel<uint32_t, 3, 1> hdsel;\n      BitFieldModel<uint32_t,\
     \ 2, 1> irlp;\n      BitFieldModel<uint32_t, 1, 1> iren;\n      BitFieldModel<uint32_t,\
     \ 0, 1> eie;\n    };\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART4_H */"
   name: UART4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7024,7 +7024,7 @@
     \ 6, 1> dmar;\n      BitFieldModel<uint32_t, 3, 1> hdsel;\n      BitFieldModel<uint32_t,\
     \ 2, 1> irlp;\n      BitFieldModel<uint32_t, 1, 1> iren;\n      BitFieldModel<uint32_t,\
     \ 0, 1> eie;\n    };\n  };\n\npublic:\n  using cr3 = Cr3Reg<BaseAddress + 0x0014>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_UART5_H */"
   name: UART5
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7086,8 +7086,8 @@
     \ 16>;\n    using data1 = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 16,\
     \ 16> data2;\n      BitFieldModel<uint32_t, 0, 16> data1;\n    };\n  };\n\npublic:\n\
-    \  using cdr = CdrReg<BaseAddress + 0x0008>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H\
-    \ */\n"
+    \  using cdr = CdrReg<BaseAddress + 0x0008>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_C_ADC_H\
+    \ */"
   name: C_ADC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7328,8 +7328,8 @@
     \ 13, 1> bkp;\n      BitFieldModel<uint32_t, 12, 1> bke;\n      BitFieldModel<uint32_t,\
     \ 11, 1> ossr;\n      BitFieldModel<uint32_t, 10, 1> ossi;\n      BitFieldModel<uint32_t,\
     \ 8, 2> lock;\n      BitFieldModel<uint32_t, 0, 8> dtg;\n    };\n  };\n\npublic:\n\
-    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM1_H\
-    \ */\n"
+    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM1_H\
+    \ */"
   name: TIM1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7570,8 +7570,8 @@
     \ 13, 1> bkp;\n      BitFieldModel<uint32_t, 12, 1> bke;\n      BitFieldModel<uint32_t,\
     \ 11, 1> ossr;\n      BitFieldModel<uint32_t, 10, 1> ossi;\n      BitFieldModel<uint32_t,\
     \ 8, 2> lock;\n      BitFieldModel<uint32_t, 0, 8> dtg;\n    };\n  };\n\npublic:\n\
-    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM8_H\
-    \ */\n"
+    \  using bdtr = BdtrReg<BaseAddress + 0x0044>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM8_H\
+    \ */"
   name: TIM8
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -7788,7 +7788,7 @@
     \ address>\n  {\n  public:\n    using itr1_rmp = FieldModel<uint32_t, address,\
     \ 10, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 10, 2> itr1_rmp;\n    };\n  };\n\npublic:\n  using _or = _orReg<BaseAddress\
-    \ + 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM2_H */\n"
+    \ + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM2_H */"
   name: TIM2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8001,7 +8001,7 @@
     \  public:\n    using dmab = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 16> dmab;\n    };\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM3_H */"
   name: TIM3
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8214,7 +8214,7 @@
     \  public:\n    using dmab = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 16> dmab;\n    };\n  };\n\npublic:\n  using dmar = DmarReg<BaseAddress + 0x004C>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM4_H */"
   name: TIM4
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8431,7 +8431,7 @@
     \ address>\n  {\n  public:\n    using it4_rmp = FieldModel<uint32_t, address,\
     \ 6, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 6, 2> it4_rmp;\n    };\n  };\n\npublic:\n  using _or = _orReg<BaseAddress +\
-    \ 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H */\n"
+    \ 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM5_H */"
   name: TIM5
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8552,8 +8552,8 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using ccr2 = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ccr2;\n    };\n  };\n\npublic:\n  using\
-    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H\
-    \ */\n"
+    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM9_H\
+    \ */"
   name: TIM9
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8674,8 +8674,8 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using ccr2 = FieldModel<uint32_t,\
     \ address, 0, 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ccr2;\n    };\n  };\n\npublic:\n  using\
-    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H\
-    \ */\n"
+    \ ccr2 = Ccr2Reg<BaseAddress + 0x0038>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM12_H\
+    \ */"
   name: TIM12
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8761,7 +8761,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H */\n"
+    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM10_H */"
   name: TIM10
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8847,7 +8847,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H */\n"
+    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM13_H */"
   name: TIM13
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -8933,7 +8933,7 @@
     \ address>\n  {\n  public:\n    using ccr1 = FieldModel<uint32_t, address, 0,\
     \ 16>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> ccr1;\n    };\n  };\n\npublic:\n  using ccr1 = Ccr1Reg<BaseAddress +\
-    \ 0x0034>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H */\n"
+    \ 0x0034>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM14_H */"
   name: TIM14
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9023,8 +9023,8 @@
     \ RegisterModel<uint32_t, address>\n  {\n  public:\n    using rmp = FieldModel<uint32_t,\
     \ address, 0, 2>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 2> rmp;\n    };\n  };\n\npublic:\n  using or_\
-    \ = OrReg<BaseAddress + 0x0050>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H\
-    \ */\n"
+    \ = OrReg<BaseAddress + 0x0050>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM11_H\
+    \ */"
   name: TIM11
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9084,7 +9084,7 @@
     \ address>\n  {\n  public:\n    using arr = FieldModel<uint32_t, address, 0, 16>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> arr;\n    };\n  };\n\npublic:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM6_H */"
   name: TIM6
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9144,7 +9144,7 @@
     \ address>\n  {\n  public:\n    using arr = FieldModel<uint32_t, address, 0, 16>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 16> arr;\n    };\n  };\n\npublic:\n  using arr = ArrReg<BaseAddress + 0x002C>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_TIM7_H */"
   name: TIM7
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9177,7 +9177,7 @@
     \ address>\n  {\n  public:\n    using cr = FieldModel<uint32_t, address, 0, 1>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 1> cr;\n    };\n  };\n\npublic:\n  using cr = CrReg<BaseAddress + 0x0008>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_CRC_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_CRC_H */"
   name: CRC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -9457,7 +9457,7 @@
     \ 16, 16, bankOffset>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
     \      BitFieldModel<uint32_t, 0, 16> ineptxsa;\n      BitFieldModel<uint32_t,\
     \ 16, 16> ineptxfd;\n    };\n  };\n\npublic:\n  using fs_dieptxfx = Fs_dieptxfxBankReg<BaseAddress\
-    \ + 0x0104, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_GLOBAL_H */\n"
+    \ + 0x0104, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_GLOBAL_H */"
   name: OTG_FS_GLOBAL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -10005,7 +10005,7 @@
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 19> xfrsiz;\n\
     \      BitFieldModel<uint32_t, 19, 10> pktcnt;\n      BitFieldModel<uint32_t,\
     \ 29, 2> dpid;\n    };\n  };\n\npublic:\n  using fs_hctsizx = Fs_hctsizxBankReg<BaseAddress\
-    \ + 0x0110, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_HOST_H */\n"
+    \ + 0x0110, 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_HOST_H */"
   name: OTG_FS_HOST
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -10493,7 +10493,7 @@
     \   BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n      BitFieldModel<uint32_t,\
     \ 19, 10> pktcnt;\n      BitFieldModel<uint32_t, 0, 19> xfrsiz;\n    };\n  };\n\
     \npublic:\n  using doeptsizx = DoeptsizxBankReg<BaseAddress + 0x0330, 0x0020>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_DEVICE_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_DEVICE_H */"
   name: OTG_FS_DEVICE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -10521,7 +10521,7 @@
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> stppclk;\n\
     \      BitFieldModel<uint32_t, 1, 1> gatehclk;\n      BitFieldModel<uint32_t,\
     \ 4, 1> physusp;\n    };\n  };\n\npublic:\n  using fs_pcgcctl = Fs_pcgcctlReg<BaseAddress\
-    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_FS_PWRCLK_H */"
   name: OTG_FS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -13360,8 +13360,8 @@
     \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
     \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
     \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
-    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_CAN1_H */\n"
+    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_CAN1_H */"
   name: CAN1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16200,8 +16200,8 @@
     \ 26, 1> fb26;\n      BitFieldModel<uint32_t, 27, 1> fb27;\n      BitFieldModel<uint32_t,\
     \ 28, 1> fb28;\n      BitFieldModel<uint32_t, 29, 1> fb29;\n      BitFieldModel<uint32_t,\
     \ 30, 1> fb30;\n      BitFieldModel<uint32_t, 31, 1> fb31;\n    };\n  };\n\npublic:\n\
-    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_CAN2_H */\n"
+    \  using fxr2 = Fxr2BankReg<BaseAddress + 0x024C, 0x0008>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_CAN2_H */"
   name: CAN2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16459,24 +16459,23 @@
     \ 16, 8> ipr_n2;\n      BitFieldModel<uint32_t, 24, 8> ipr_n3;\n    };\n  };\n\
     \npublic:\n  using ipr20 = Ipr20Reg<BaseAddress + 0x0350>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Ipr21Reg : public RegisterModel<uint32_t, address>\n \
-    \ {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using ipr21 = Ipr21Reg<BaseAddress + 0x0354>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Ipr22Reg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      \n    };\n  };\n\npublic:\n  using ipr22 = Ipr22Reg<BaseAddress\
-    \ + 0x0358>;\n\nprivate:\n  template<unsigned int address>\n  class Ipr23Reg :\
-    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n    \n\n  public:\n\
-    \    union reg\n    {\n      uint32_t value;\n      \n    };\n  };\n\npublic:\n\
-    \  using ipr23 = Ipr23Reg<BaseAddress + 0x035C>;\n\nprivate:\n  template<unsigned\
-    \ int address>\n  class Ipr24Reg : public RegisterModel<uint32_t, address>\n \
-    \ {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n\
-    \      \n    };\n  };\n\npublic:\n  using ipr24 = Ipr24Reg<BaseAddress + 0x0360>;\n\
+    \ {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n   \
+    \ };\n  };\n\npublic:\n  using ipr21 = Ipr21Reg<BaseAddress + 0x0354>;\n\nprivate:\n\
+    \  template<unsigned int address>\n  class Ipr22Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using ipr22 = Ipr22Reg<BaseAddress + 0x0358>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Ipr23Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using ipr23 = Ipr23Reg<BaseAddress + 0x035C>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Ipr24Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using ipr24 = Ipr24Reg<BaseAddress + 0x0360>;\n\
     \nprivate:\n  template<unsigned int address>\n  class Ipr25Reg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    \n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n      \n    };\n  };\n\npublic:\n  using ipr25 = Ipr25Reg<BaseAddress\
-    \ + 0x0364>;\n\nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n\
-    \  class IserxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n\
-    \  {\n  public:\n    using setena = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
+    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
+    \ value;\n    };\n  };\n\npublic:\n  using ipr25 = Ipr25Reg<BaseAddress + 0x0364>;\n\
+    \nprivate:\n  template<unsigned int address, unsigned int bankOffset>\n  class\
+    \ IserxBankReg : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n\
+    \  public:\n    using setena = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> setena;\n    };\n  };\n\npublic:\n  using iserx = IserxBankReg<BaseAddress\
     \ + 0x0000, 0x0004>;\n\nprivate:\n  template<unsigned int address, unsigned int\
@@ -16510,10 +16509,10 @@
     \ 16, 8> ipr_n2;\n      BitFieldModel<uint32_t, 24, 8> ipr_n3;\n    };\n  };\n\
     \npublic:\n  using iprx = IprxBankReg<BaseAddress + 0x0300, 0x0004>;\n\nprivate:\n\
     \  template<unsigned int address, unsigned int bankOffset>\n  class Ipr2xBankReg\
-    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\
-    \    \n\n  public:\n    union reg\n    {\n      uint32_t value;\n      \n    };\n\
-    \  };\n\npublic:\n  using ipr2x = Ipr2xBankReg<BaseAddress + 0x0354, 0x0004>;\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_H */\n"
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\n\
+    \  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  using ipr2x = Ipr2xBankReg<BaseAddress + 0x0354, 0x0004>;\n\n};\n\n}\n\n#endif\
+    \ /* DRAL_STM32F446_NVIC_H */"
   name: NVIC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16593,7 +16592,7 @@
     \ 6, 1> nrst_stop;\n      BitFieldModel<uint32_t, 7, 1> nrst_stdby;\n      BitFieldModel<uint32_t,\
     \ 8, 8> rdp;\n      BitFieldModel<uint32_t, 16, 8> nwrp;\n      BitFieldModel<uint32_t,\
     \ 31, 1> sprmod;\n    };\n  };\n\npublic:\n  using optcr = OptcrReg<BaseAddress\
-    \ + 0x0014>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H */\n"
+    \ + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FLASH_H */"
   name: FLASH
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -16863,7 +16862,7 @@
     \ 18, 1> tr18;\n      BitFieldModel<uint32_t, 19, 1> tr19;\n      BitFieldModel<uint32_t,\
     \ 20, 1> tr20;\n      BitFieldModel<uint32_t, 21, 1> tr21;\n      BitFieldModel<uint32_t,\
     \ 22, 1> tr22;\n    };\n  };\n\npublic:\n  using xtsr = XtsrBankReg<BaseAddress\
-    \ + 0x0008, 0x0004>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H */\n"
+    \ + 0x0008, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_EXTI_H */"
   name: EXTI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -17184,8 +17183,8 @@
     \ epnum;\n      BitFieldModel<uint32_t, 4, 11> bcnt;\n      BitFieldModel<uint32_t,\
     \ 15, 2> dpid;\n      BitFieldModel<uint32_t, 17, 4> pktsts;\n      BitFieldModel<uint32_t,\
     \ 21, 4> frmnum;\n    };\n  };\n\npublic:\n  using otg_hs_grxstsx_peripheral =\
-    \ Otg_hs_grxstsx_peripheralBankReg<BaseAddress + 0x001C, 0x0004>;\n};\n\n}\n\n\
-    #endif /* DRAL_STM32F446_OTG_HS_GLOBAL_H */\n"
+    \ Otg_hs_grxstsx_peripheralBankReg<BaseAddress + 0x001C, 0x0004>;\n\n};\n\n}\n\
+    \n#endif /* DRAL_STM32F446_OTG_HS_GLOBAL_H */"
   name: OTG_HS_GLOBAL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -18180,7 +18179,7 @@
     \  {\n  public:\n    using dmaaddr = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> dmaaddr;\n    };\n  };\n\npublic:\n  using otg_hs_hcdmax = Otg_hs_hcdmaxBankReg<BaseAddress\
-    \ + 0x0114, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_HOST_H */\n"
+    \ + 0x0114, 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_HOST_H */"
   name: OTG_HS_HOST
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19025,7 +19024,7 @@
     \   BitFieldModel<uint32_t, 0, 19> xfrsiz;\n      BitFieldModel<uint32_t, 19,\
     \ 10> pktcnt;\n      BitFieldModel<uint32_t, 29, 2> rxdpid_stupcnt;\n    };\n\
     \  };\n\npublic:\n  using otg_hs_doeptsizx = Otg_hs_doeptsizxBankReg<BaseAddress\
-    \ + 0x0330, 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_DEVICE_H */\n"
+    \ + 0x0330, 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_DEVICE_H */"
   name: OTG_HS_DEVICE
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19053,7 +19052,7 @@
     \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> stppclk;\n\
     \      BitFieldModel<uint32_t, 1, 1> gatehclk;\n      BitFieldModel<uint32_t,\
     \ 4, 1> physusp;\n    };\n  };\n\npublic:\n  using otg_hs_pcgcr = Otg_hs_pcgcrReg<BaseAddress\
-    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */\n"
+    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_OTG_HS_PWRCLK_H */"
   name: OTG_HS_PWRCLK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19321,7 +19320,7 @@
     \    using data = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 32> data;\n    };\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress + 0x0020,\
-    \ 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI1_H */\n"
+    \ 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI1_H */"
   name: SAI1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19589,7 +19588,7 @@
     \    using data = FieldModel<uint32_t, address, 0, 32, bankOffset>;\n\n  public:\n\
     \    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0,\
     \ 32> data;\n    };\n  };\n\npublic:\n  using xdr = XdrBankReg<BaseAddress + 0x0020,\
-    \ 0x0020>;\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI2_H */\n"
+    \ 0x0020>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SAI2_H */"
   name: SAI2
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19649,7 +19648,7 @@
     \ 9, 1> bre;\n      BitFieldModel<uint32_t, 14, 1> vosrdy;\n      BitFieldModel<uint32_t,\
     \ 16, 1> odrdy;\n      BitFieldModel<uint32_t, 17, 1> odswrdy;\n      BitFieldModel<uint32_t,\
     \ 18, 2> udrdy;\n    };\n  };\n\npublic:\n  using csr = CsrReg<BaseAddress + 0x0004>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_PWR_H */"
   name: PWR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19769,8 +19768,8 @@
     \  class LptrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n \
     \   using timeout = FieldModel<uint32_t, address, 0, 16>;\n\n  public:\n    union\
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 16> timeout;\n\
-    \    };\n  };\n\npublic:\n  using lptr = LptrReg<BaseAddress + 0x0030>;\n\n\n\
-    };\n\n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */\n"
+    \    };\n  };\n\npublic:\n  using lptr = LptrReg<BaseAddress + 0x0030>;\n\n};\n\
+    \n}\n\n#endif /* DRAL_STM32F446_QUADSPI_H */"
   name: QUADSPI
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19866,7 +19865,7 @@
     \ = FieldModel<uint32_t, address, 16, 13>;\n\n  public:\n    union reg\n    {\n\
     \      uint32_t value;\n      BitFieldModel<uint32_t, 0, 13> thi;\n      BitFieldModel<uint32_t,\
     \ 16, 13> tlo;\n    };\n  };\n\npublic:\n  using dir = DirReg<BaseAddress + 0x0018>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_SPDIF_RX_H */"
   name: SPDIF_RX
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -19955,7 +19954,7 @@
     \ 4, 1> sbpeie;\n      BitFieldModel<uint32_t, 3, 1> breie;\n      BitFieldModel<uint32_t,\
     \ 2, 1> rxovrie;\n      BitFieldModel<uint32_t, 1, 1> rxendie;\n      BitFieldModel<uint32_t,\
     \ 0, 1> rxbrie;\n    };\n  };\n\npublic:\n  using cec_ier = Cec_ierReg<BaseAddress\
-    \ + 0x0014>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H */\n"
+    \ + 0x0014>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_HDMI_CEC_H */"
   name: HDMI_CEC
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20014,7 +20013,7 @@
     \ 26, 1> ahp;\n      BitFieldModel<uint32_t, 28, 1> v;\n      BitFieldModel<uint32_t,\
     \ 29, 1> c;\n      BitFieldModel<uint32_t, 30, 1> z;\n      BitFieldModel<uint32_t,\
     \ 31, 1> n;\n    };\n  };\n\npublic:\n  using fpscr = FpscrReg<BaseAddress + 0x0008>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_H */"
   name: FPU
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20074,8 +20073,8 @@
     \ 16, 1> b;\n      BitFieldModel<uint32_t, 17, 1> c;\n      BitFieldModel<uint32_t,\
     \ 18, 1> s;\n      BitFieldModel<uint32_t, 19, 3> tex;\n      BitFieldModel<uint32_t,\
     \ 24, 3> ap;\n      BitFieldModel<uint32_t, 28, 1> xn;\n    };\n  };\n\npublic:\n\
-    \  using mpu_rasr = Mpu_rasrReg<BaseAddress + 0x0010>;\n\n\n};\n\n}\n\n#endif\
-    \ /* DRAL_STM32F446_MPU_H */\n"
+    \  using mpu_rasr = Mpu_rasrReg<BaseAddress + 0x0010>;\n\n};\n\n}\n\n#endif /*\
+    \ DRAL_STM32F446_MPU_H */"
   name: MPU
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20120,7 +20119,7 @@
     \ reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 24> tenms;\n\
     \      BitFieldModel<uint32_t, 30, 1> skew;\n      BitFieldModel<uint32_t, 31,\
     \ 1> noref;\n    };\n  };\n\npublic:\n  using calib = CalibReg<BaseAddress + 0x000C>;\n\
-    \n\n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H */\n"
+    \n};\n\n}\n\n#endif /* DRAL_STM32F446_STK_H */"
   name: STK
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20286,7 +20285,7 @@
     \ address>\n  {\n  public:\n    using impdef = FieldModel<uint32_t, address, 0,\
     \ 32>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> impdef;\n    };\n  };\n\npublic:\n  using afsr = AfsrReg<BaseAddress\
-    \ + 0x003C>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */\n"
+    \ + 0x003C>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_H */"
   name: SCB
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20311,7 +20310,7 @@
     \ address>\n  {\n  public:\n    using intid = FieldModel<uint32_t, address, 0,\
     \ 9>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 9> intid;\n    };\n  };\n\npublic:\n  using stir = StirReg<BaseAddress +\
-    \ 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_STIR_H */\n"
+    \ 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_NVIC_STIR_H */"
   name: NVIC_STIR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20336,7 +20335,7 @@
     \ address>\n  {\n  public:\n    using cp = FieldModel<uint32_t, address, 20, 4>;\n\
     \n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 20, 4> cp;\n    };\n  };\n\npublic:\n  using cpacr = CpacrReg<BaseAddress +\
-    \ 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_CPACR_H */\n"
+    \ 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_FPU_CPACR_H */"
   name: FPU_CPACR
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20366,7 +20365,7 @@
     \ 0, 1> dismcycint;\n      BitFieldModel<uint32_t, 1, 1> disdefwbuf;\n      BitFieldModel<uint32_t,\
     \ 2, 1> disfold;\n      BitFieldModel<uint32_t, 8, 1> disfpca;\n      BitFieldModel<uint32_t,\
     \ 9, 1> disoofp;\n    };\n  };\n\npublic:\n  using actrl = ActrlReg<BaseAddress\
-    \ + 0x0000>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_ACTRL_H */\n"
+    \ + 0x0000>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SCB_ACTRL_H */"
   name: SCB_ACTRL
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -20568,5 +20567,5 @@
     \ address>\n  {\n  public:\n    using fifodata = FieldModel<uint32_t, address,\
     \ 0, 32>;\n\n  public:\n    union reg\n    {\n      uint32_t value;\n      BitFieldModel<uint32_t,\
     \ 0, 32> fifodata;\n    };\n  };\n\npublic:\n  using fifo = FifoReg<BaseAddress\
-    \ + 0x0080>;\n\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SDIO_H */\n"
+    \ + 0x0080>;\n\n};\n\n}\n\n#endif /* DRAL_STM32F446_SDIO_H */"
   name: SDIO
