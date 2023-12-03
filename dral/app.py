@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Type
+from typing import Any, Type, Optional
 
 import click
 from rich.console import Console
@@ -23,7 +23,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     DRAL_CUSTOM_ADAPTER = adapter  # type: ignore[assignment]
 
 
-@click.command()  # type: ignore[arg-type] # noqa
+@click.command()
 @click.argument("input", type=click.Path(resolve_path=True, path_type=Path))
 @click.argument("output", type=click.Path(resolve_path=True, path_type=Path))
 @click.option(
@@ -73,7 +73,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(input, output, language, template_type, template_path, mapping, skip_banks, white_list, black_list):  # type: ignore[no-untyped-def] # noqa: C901
+def cli(input: Path, output: Path, language: str, template_type: str, template_path: Optional[Path], mapping: Path, skip_banks: bool, white_list: Optional[Path], black_list: Optional[Path]) -> None:  # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from INPUT.
@@ -89,15 +89,15 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
 
     if white_list:
         white_list_adapter = WhiteBlackListAdapter(white_list)
-        white_list = white_list_adapter.convert()
+        white_list_objects = white_list_adapter.convert()
     else:
-        white_list = None
+        white_list_objects = None
 
     if black_list:
         black_list_adapter = WhiteBlackListAdapter(black_list)
-        black_list = black_list_adapter.convert()
+        black_list_objects = black_list_adapter.convert()
     else:
-        black_list = None
+        black_list_objects = None
 
     template_dir_list = [Utils.get_template_dir(language, template_type)]
     if template_path:
@@ -112,10 +112,10 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
 
         # Apply filters
         filters: Any = []
-        if black_list is not None:
-            filters.append(BlackListFilter(black_list))
-        if white_list is not None:
-            filters.append(WhiteListFilter(white_list))
+        if black_list_objects is not None:
+            filters.append(BlackListFilter(black_list_objects))
+        if white_list_objects is not None:
+            filters.append(WhiteListFilter(white_list_objects))
         if not skip_banks:
             filters.append(BanksFilter())
         for item in filters:
@@ -144,7 +144,7 @@ def cli(input, output, language, template_type, template_path, mapping, skip_ban
 
 
 def main() -> None:
-    cli()  # type: ignore[misc] # noqa
+    cli()  # noqa: E1120
 
 
 if __name__ == "__main__":

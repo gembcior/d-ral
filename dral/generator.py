@@ -34,7 +34,7 @@ class DralGenerator:
         }
         return output
 
-    def _generate(self, template_name: str, template_dir: Union[Path, List[Path]], variables: Dict[str, Any]):
+    def _generate(self, template_name: str, template_dir: Union[Path, List[Path]], variables: Dict[str, Any]) -> str:
         loader = FileSystemLoader(template_dir)
         env = Environment(loader=loader)
         env.filters["isforbidden"] = lambda x: x + "_" if x.lower() in self._forbidden_words else x
