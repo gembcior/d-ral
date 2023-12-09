@@ -68,6 +68,7 @@ class Register(DralBaseType):
         description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
+        **custom_data,
     ):
         super().__init__(name, description)
         self._offset = offset
@@ -78,6 +79,7 @@ class Register(DralBaseType):
         if fields is None:
             fields = []
         self._fields = fields
+        self._custom_data = custom_data
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -87,6 +89,7 @@ class Register(DralBaseType):
             "size": self._size,
             "reset_value": self._reset_value,
             "fields": [field.asdict() for field in self._fields],
+            **self._custom_data,
         }
 
     @property
