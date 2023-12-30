@@ -143,7 +143,7 @@ class Peripheral(DralBaseType):
     def __init__(
         self,
         name: str,
-        address: int,
+        address: int = 0,
         description: str = "",
         registers: Optional[List[Register]] = None,
         banks: Optional[List[Bank]] = None,
