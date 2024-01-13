@@ -8,7 +8,7 @@ class DralBaseType(ABC):
     def __init__(self, name: str, description: str = ""):
         self._name = name
         self._description = description
-        self._extra_properties = None
+        self._extra_properties: Dict[str, Any] = {}
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, DralBaseType):
@@ -27,7 +27,7 @@ class DralBaseType(ABC):
         return self._description
 
     @property
-    def extra(self) -> Optional[Dict[str, Any]]:
+    def extra(self) -> Dict[str, Any]:
         return self._extra_properties
 
     @abstractmethod
@@ -36,7 +36,7 @@ class DralBaseType(ABC):
 
 
 class Field(DralBaseType):
-    def __init__(self, name: str, position: int, width: int, description: str = "", **kwargs) -> None:
+    def __init__(self, name: str, position: int, width: int, description: str = "", **kwargs: Dict[str, Any]) -> None:
         super().__init__(name, description)
         self._position = position
         self._width = width
@@ -75,7 +75,7 @@ class Register(DralBaseType):
         description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
-        **kwargs,
+        **kwargs: Dict[str, Any],
     ):
         super().__init__(name, description)
         self._offset = offset
@@ -126,7 +126,7 @@ class Bank(Register):
         description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
-        **kwargs,
+        **kwargs: Dict[str, Any],
     ):
         super().__init__(name, offset, size, description, reset_value, fields)
         self._bank_offset = bank_offset
@@ -157,7 +157,7 @@ class Peripheral(DralBaseType):
         description: str = "",
         registers: Optional[List[Register]] = None,
         banks: Optional[List[Bank]] = None,
-        **kwargs,
+        **kwargs: Dict[str, Any],
     ):
         super().__init__(name, description)
         self._address = address
@@ -193,7 +193,7 @@ class Peripheral(DralBaseType):
 
 
 class Device(DralBaseType):
-    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None, **kwargs):
+    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None, **kwargs: Dict[str, Any]):
         super().__init__(name, description)
         if peripherals is None:
             peripherals = []
