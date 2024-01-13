@@ -15,71 +15,171 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER0_H\n#define DRAL_ARM_EXAMPLE_TIMER0_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer0\n\
-    {\npublic:\n  static constexpr unsigned int BaseAddress = 0x40010000;\n\nprivate:\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\n/**\n *\
+    \ @brief TIMER0 peripheral\n *\n * 32 Timer / Counter, counting up or down from\
+    \ different sources\n */\nclass timer0\n{\npublic:\n  static constexpr unsigned\
+    \ int BaseAddress = 0x40010000; /**< Peripheral base address */\n\nprivate:\n\
     \  template<unsigned int address>\n  class CrReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    using en = FieldModel<uint32_t, address, 0, 1>;\n\
-    \    using rst = FieldModel<uint32_t, address, 1, 1>;\n    using cnt = FieldModel<uint32_t,\
-    \ address, 2, 2>;\n    using mode = FieldModel<uint32_t, address, 4, 3>;\n   \
-    \ using psc = FieldModel<uint32_t, address, 7, 1>;\n    using cntsrc = FieldModel<uint32_t,\
-    \ address, 8, 4>;\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
-    \    using capedge = FieldModel<uint32_t, address, 16, 2>;\n    using trgext =\
-    \ FieldModel<uint32_t, address, 20, 2>;\n    using reload = FieldModel<uint32_t,\
-    \ address, 24, 2>;\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n  \
-    \  using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> en;\n     \
-    \ BitFieldModel<uint32_t, 1, 1> rst;\n      BitFieldModel<uint32_t, 2, 2> cnt;\n\
-    \      BitFieldModel<uint32_t, 4, 3> mode;\n      BitFieldModel<uint32_t, 7, 1>\
-    \ psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
-    \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
-    \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n\
-    \  using cr = CrReg<BaseAddress + 0x0000>;\n\nprivate:\n  template<unsigned int\
-    \ address>\n  class SrReg : public RegisterModel<uint16_t, address>\n  {\n  public:\n\
-    \    using run = FieldModel<uint16_t, address, 0, 1>;\n    using match = FieldModel<uint16_t,\
-    \ address, 8, 1>;\n    using un = FieldModel<uint16_t, address, 9, 1>;\n    using\
-    \ ov = FieldModel<uint16_t, address, 10, 1>;\n    using rst = FieldModel<uint16_t,\
-    \ address, 12, 1>;\n    using reload = FieldModel<uint16_t, address, 14, 2>;\n\
-    \n  public:\n    union reg\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t,\
-    \ 0, 1> run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
-    \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
-    public:\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ address>\n  {\n  public:\n    /**\n     * @brief EN field\n     *\n     * Enable\n\
+    \     */\n    using en = FieldModel<uint32_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief RST field\n     *\n     * Reset Timer\n     */\n    using rst = FieldModel<uint32_t,\
+    \ address, 1, 1>;\n    /**\n     * @brief CNT field\n     *\n     * Counting direction\n\
+    \     */\n    using cnt = FieldModel<uint32_t, address, 2, 2>;\n    /**\n    \
+    \ * @brief MODE field\n     *\n     * Operation Mode\n     */\n    using mode\
+    \ = FieldModel<uint32_t, address, 4, 3>;\n    /**\n     * @brief PSC field\n \
+    \    *\n     * Use Prescaler\n     */\n    using psc = FieldModel<uint32_t, address,\
+    \ 7, 1>;\n    /**\n     * @brief CNTSRC field\n     *\n     * Timer / Counter\
+    \ Source Divider\n     */\n    using cntsrc = FieldModel<uint32_t, address, 8,\
+    \ 4>;\n    /**\n     * @brief CAPSRC field\n     *\n     * Timer / Counter Capture\
+    \ Source\n     */\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
+    \    /**\n     * @brief CAPEDGE field\n     *\n     * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n     */\n    using capedge\
+    \ = FieldModel<uint32_t, address, 16, 2>;\n    /**\n     * @brief TRGEXT field\n\
+    \     *\n     * Triggers an other Peripheral\n     */\n    using trgext = FieldModel<uint32_t,\
+    \ address, 20, 2>;\n    /**\n     * @brief RELOAD field\n     *\n     * Select\
+    \ RELOAD Register n to reload Timer on condition\n     */\n    using reload =\
+    \ FieldModel<uint32_t, address, 24, 2>;\n    /**\n     * @brief IDR field\n  \
+    \   *\n     * Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n     */\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n\
+    \    /**\n     * @brief S field\n     *\n     * Starts and Stops the Timer / Counter\n\
+    \     */\n    using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n \
+    \   /**\n     * @brief Register union\n     *\n     * Can be used to create a\
+    \ local register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n      /**\n\
+    \       * @brief EN field\n       *\n       * Enable\n       */\n      BitFieldModel<uint32_t,\
+    \ 0, 1> en;\n      /**\n       * @brief RST field\n       *\n       * Reset Timer\n\
+    \       */\n      BitFieldModel<uint32_t, 1, 1> rst;\n      /**\n       * @brief\
+    \ CNT field\n       *\n       * Counting direction\n       */\n      BitFieldModel<uint32_t,\
+    \ 2, 2> cnt;\n      /**\n       * @brief MODE field\n       *\n       * Operation\
+    \ Mode\n       */\n      BitFieldModel<uint32_t, 4, 3> mode;\n      /**\n    \
+    \   * @brief PSC field\n       *\n       * Use Prescaler\n       */\n      BitFieldModel<uint32_t,\
+    \ 7, 1> psc;\n      /**\n       * @brief CNTSRC field\n       *\n       * Timer\
+    \ / Counter Source Divider\n       */\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n\
+    \      /**\n       * @brief CAPSRC field\n       *\n       * Timer / Counter Capture\
+    \ Source\n       */\n      BitFieldModel<uint32_t, 12, 4> capsrc;\n      /**\n\
+    \       * @brief CAPEDGE field\n       *\n       * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n       */\n      BitFieldModel<uint32_t,\
+    \ 16, 2> capedge;\n      /**\n       * @brief TRGEXT field\n       *\n       *\
+    \ Triggers an other Peripheral\n       */\n      BitFieldModel<uint32_t, 20, 2>\
+    \ trgext;\n      /**\n       * @brief RELOAD field\n       *\n       * Select\
+    \ RELOAD Register n to reload Timer on condition\n       */\n      BitFieldModel<uint32_t,\
+    \ 24, 2> reload;\n      /**\n       * @brief IDR field\n       *\n       * Selects,\
+    \ if Reload Register number is incremented, decremented or not modified\n    \
+    \   */\n      BitFieldModel<uint32_t, 26, 2> idr;\n      /**\n       * @brief\
+    \ S field\n       *\n       * Starts and Stops the Timer / Counter\n       */\n\
+    \      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n  /**\n   *\
+    \ @brief CR register\n   *\n   * Control Register\n   */\n  using cr = CrReg<BaseAddress\
+    \ + 0x0000>;\n\nprivate:\n  template<unsigned int address>\n  class SrReg : public\
+    \ RegisterModel<uint16_t, address>\n  {\n  public:\n    /**\n     * @brief RUN\
+    \ field\n     *\n     * Shows if Timer is running or not\n     */\n    using run\
+    \ = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     * @brief MATCH field\n\
+    \     *\n     * Shows if the MATCH was hit\n     */\n    using match = FieldModel<uint16_t,\
+    \ address, 8, 1>;\n    /**\n     * @brief UN field\n     *\n     * Shows if an\
+    \ underflow occured. This flag is sticky\n     */\n    using un = FieldModel<uint16_t,\
+    \ address, 9, 1>;\n    /**\n     * @brief OV field\n     *\n     * Shows if an\
+    \ overflow occured. This flag is sticky\n     */\n    using ov = FieldModel<uint16_t,\
+    \ address, 10, 1>;\n    /**\n     * @brief RST field\n     *\n     * Shows if\
+    \ Timer is in RESET state\n     */\n    using rst = FieldModel<uint16_t, address,\
+    \ 12, 1>;\n    /**\n     * @brief RELOAD field\n     *\n     * Shows the currently\
+    \ active RELOAD Register\n     */\n    using reload = FieldModel<uint16_t, address,\
+    \ 14, 2>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n     *\
+    \ Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief RUN field\n       *\n \
+    \      * Shows if Timer is running or not\n       */\n      BitFieldModel<uint16_t,\
+    \ 0, 1> run;\n      /**\n       * @brief MATCH field\n       *\n       * Shows\
+    \ if the MATCH was hit\n       */\n      BitFieldModel<uint16_t, 8, 1> match;\n\
+    \      /**\n       * @brief UN field\n       *\n       * Shows if an underflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 9, 1>\
+    \ un;\n      /**\n       * @brief OV field\n       *\n       * Shows if an overflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 10, 1>\
+    \ ov;\n      /**\n       * @brief RST field\n       *\n       * Shows if Timer\
+    \ is in RESET state\n       */\n      BitFieldModel<uint16_t, 12, 1> rst;\n  \
+    \    /**\n       * @brief RELOAD field\n       *\n       * Shows the currently\
+    \ active RELOAD Register\n       */\n      BitFieldModel<uint16_t, 14, 2> reload;\n\
+    \    };\n  };\n\npublic:\n  /**\n   * @brief SR register\n   *\n   * Status Register\n\
+    \   */\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class IntReg : public RegisterModel<uint16_t, address>\n  {\n\
-    \  public:\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    using mode\
-    \ = FieldModel<uint16_t, address, 4, 3>;\n\n  public:\n    union reg\n    {\n\
-    \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
-    \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
-    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
-    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  public:\n    /**\n     * @brief EN field\n     *\n     * Interrupt Enable\n\
+    \     */\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief MODE field\n     *\n     * Interrupt Mode, selects on which condition\
+    \ the Timer should generate an Interrupt\n     */\n    using mode = FieldModel<uint16_t,\
+    \ address, 4, 3>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief EN field\n       *\n  \
+    \     * Interrupt Enable\n       */\n      BitFieldModel<uint16_t, 0, 1> en;\n\
+    \      /**\n       * @brief MODE field\n       *\n       * Interrupt Mode, selects\
+    \ on which condition the Timer should generate an Interrupt\n       */\n     \
+    \ BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\npublic:\n  /**\n   * @brief\
+    \ INT register\n   *\n   * Interrupt Register\n   */\n  using int_ = IntReg<BaseAddress\
+    \ + 0x0010>;\n\nprivate:\n  template<unsigned int address>\n  class CountReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief COUNT register\n   *\n   * The Counter Register reflects the\
+    \ actual Value of the Timer/Counter\n   */\n  using count = CountReg<BaseAddress\
+    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief MATCH register\n   *\n   * The Match Register stores the compare\
+    \ Value for the MATCH condition\n   */\n  using match = MatchReg<BaseAddress +\
+    \ 0x0024>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief PRESCALE_RD register\n   *\n   * The Prescale\
+    \ Register stores the Value for the prescaler. The cont event gets divided by\
+    \ this value\n   */\n  using prescale_rd = Prescale_rdReg<BaseAddress + 0x0028>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n   \
+    \  * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief PRESCALE_WR register\n   *\n   * The Prescale Register stores\
+    \ the Value for the prescaler. The cont event gets divided by this value\n   */\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
-    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
-    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[0]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[0] = Reload[0]Reg<BaseAddress\
+    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
-    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
-    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
-    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
-    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H */"
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[1] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\n\
+    private:\n  template<unsigned int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n\
+    \     *\n     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[2]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[2] = Reload[2]Reg<BaseAddress\
+    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[3] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\n\
+    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Reload[X]BankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\n\
+    \  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief RELOAD[X] register bank\n   *\n   * The Reload Register stores\
+    \ the Value the COUNT Register gets reloaded on a when a condition was met.\n\
+    \   */\n  using reload[x] = Reload[X]BankReg<BaseAddress + 0x0050, 0x0004>;\n\n\
+    };\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER0_H */"
   name: TIMER0
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -98,71 +198,171 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER1_H\n#define DRAL_ARM_EXAMPLE_TIMER1_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer1\n\
-    {\npublic:\n  static constexpr unsigned int BaseAddress = 0x40010100;\n\nprivate:\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\n/**\n *\
+    \ @brief TIMER1 peripheral\n *\n * 32 Timer / Counter, counting up or down from\
+    \ different sources\n */\nclass timer1\n{\npublic:\n  static constexpr unsigned\
+    \ int BaseAddress = 0x40010100; /**< Peripheral base address */\n\nprivate:\n\
     \  template<unsigned int address>\n  class CrReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    using en = FieldModel<uint32_t, address, 0, 1>;\n\
-    \    using rst = FieldModel<uint32_t, address, 1, 1>;\n    using cnt = FieldModel<uint32_t,\
-    \ address, 2, 2>;\n    using mode = FieldModel<uint32_t, address, 4, 3>;\n   \
-    \ using psc = FieldModel<uint32_t, address, 7, 1>;\n    using cntsrc = FieldModel<uint32_t,\
-    \ address, 8, 4>;\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
-    \    using capedge = FieldModel<uint32_t, address, 16, 2>;\n    using trgext =\
-    \ FieldModel<uint32_t, address, 20, 2>;\n    using reload = FieldModel<uint32_t,\
-    \ address, 24, 2>;\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n  \
-    \  using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> en;\n     \
-    \ BitFieldModel<uint32_t, 1, 1> rst;\n      BitFieldModel<uint32_t, 2, 2> cnt;\n\
-    \      BitFieldModel<uint32_t, 4, 3> mode;\n      BitFieldModel<uint32_t, 7, 1>\
-    \ psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
-    \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
-    \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n\
-    \  using cr = CrReg<BaseAddress + 0x0000>;\n\nprivate:\n  template<unsigned int\
-    \ address>\n  class SrReg : public RegisterModel<uint16_t, address>\n  {\n  public:\n\
-    \    using run = FieldModel<uint16_t, address, 0, 1>;\n    using match = FieldModel<uint16_t,\
-    \ address, 8, 1>;\n    using un = FieldModel<uint16_t, address, 9, 1>;\n    using\
-    \ ov = FieldModel<uint16_t, address, 10, 1>;\n    using rst = FieldModel<uint16_t,\
-    \ address, 12, 1>;\n    using reload = FieldModel<uint16_t, address, 14, 2>;\n\
-    \n  public:\n    union reg\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t,\
-    \ 0, 1> run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
-    \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
-    public:\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ address>\n  {\n  public:\n    /**\n     * @brief EN field\n     *\n     * Enable\n\
+    \     */\n    using en = FieldModel<uint32_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief RST field\n     *\n     * Reset Timer\n     */\n    using rst = FieldModel<uint32_t,\
+    \ address, 1, 1>;\n    /**\n     * @brief CNT field\n     *\n     * Counting direction\n\
+    \     */\n    using cnt = FieldModel<uint32_t, address, 2, 2>;\n    /**\n    \
+    \ * @brief MODE field\n     *\n     * Operation Mode\n     */\n    using mode\
+    \ = FieldModel<uint32_t, address, 4, 3>;\n    /**\n     * @brief PSC field\n \
+    \    *\n     * Use Prescaler\n     */\n    using psc = FieldModel<uint32_t, address,\
+    \ 7, 1>;\n    /**\n     * @brief CNTSRC field\n     *\n     * Timer / Counter\
+    \ Source Divider\n     */\n    using cntsrc = FieldModel<uint32_t, address, 8,\
+    \ 4>;\n    /**\n     * @brief CAPSRC field\n     *\n     * Timer / Counter Capture\
+    \ Source\n     */\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
+    \    /**\n     * @brief CAPEDGE field\n     *\n     * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n     */\n    using capedge\
+    \ = FieldModel<uint32_t, address, 16, 2>;\n    /**\n     * @brief TRGEXT field\n\
+    \     *\n     * Triggers an other Peripheral\n     */\n    using trgext = FieldModel<uint32_t,\
+    \ address, 20, 2>;\n    /**\n     * @brief RELOAD field\n     *\n     * Select\
+    \ RELOAD Register n to reload Timer on condition\n     */\n    using reload =\
+    \ FieldModel<uint32_t, address, 24, 2>;\n    /**\n     * @brief IDR field\n  \
+    \   *\n     * Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n     */\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n\
+    \    /**\n     * @brief S field\n     *\n     * Starts and Stops the Timer / Counter\n\
+    \     */\n    using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n \
+    \   /**\n     * @brief Register union\n     *\n     * Can be used to create a\
+    \ local register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n      /**\n\
+    \       * @brief EN field\n       *\n       * Enable\n       */\n      BitFieldModel<uint32_t,\
+    \ 0, 1> en;\n      /**\n       * @brief RST field\n       *\n       * Reset Timer\n\
+    \       */\n      BitFieldModel<uint32_t, 1, 1> rst;\n      /**\n       * @brief\
+    \ CNT field\n       *\n       * Counting direction\n       */\n      BitFieldModel<uint32_t,\
+    \ 2, 2> cnt;\n      /**\n       * @brief MODE field\n       *\n       * Operation\
+    \ Mode\n       */\n      BitFieldModel<uint32_t, 4, 3> mode;\n      /**\n    \
+    \   * @brief PSC field\n       *\n       * Use Prescaler\n       */\n      BitFieldModel<uint32_t,\
+    \ 7, 1> psc;\n      /**\n       * @brief CNTSRC field\n       *\n       * Timer\
+    \ / Counter Source Divider\n       */\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n\
+    \      /**\n       * @brief CAPSRC field\n       *\n       * Timer / Counter Capture\
+    \ Source\n       */\n      BitFieldModel<uint32_t, 12, 4> capsrc;\n      /**\n\
+    \       * @brief CAPEDGE field\n       *\n       * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n       */\n      BitFieldModel<uint32_t,\
+    \ 16, 2> capedge;\n      /**\n       * @brief TRGEXT field\n       *\n       *\
+    \ Triggers an other Peripheral\n       */\n      BitFieldModel<uint32_t, 20, 2>\
+    \ trgext;\n      /**\n       * @brief RELOAD field\n       *\n       * Select\
+    \ RELOAD Register n to reload Timer on condition\n       */\n      BitFieldModel<uint32_t,\
+    \ 24, 2> reload;\n      /**\n       * @brief IDR field\n       *\n       * Selects,\
+    \ if Reload Register number is incremented, decremented or not modified\n    \
+    \   */\n      BitFieldModel<uint32_t, 26, 2> idr;\n      /**\n       * @brief\
+    \ S field\n       *\n       * Starts and Stops the Timer / Counter\n       */\n\
+    \      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n  /**\n   *\
+    \ @brief CR register\n   *\n   * Control Register\n   */\n  using cr = CrReg<BaseAddress\
+    \ + 0x0000>;\n\nprivate:\n  template<unsigned int address>\n  class SrReg : public\
+    \ RegisterModel<uint16_t, address>\n  {\n  public:\n    /**\n     * @brief RUN\
+    \ field\n     *\n     * Shows if Timer is running or not\n     */\n    using run\
+    \ = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     * @brief MATCH field\n\
+    \     *\n     * Shows if the MATCH was hit\n     */\n    using match = FieldModel<uint16_t,\
+    \ address, 8, 1>;\n    /**\n     * @brief UN field\n     *\n     * Shows if an\
+    \ underflow occured. This flag is sticky\n     */\n    using un = FieldModel<uint16_t,\
+    \ address, 9, 1>;\n    /**\n     * @brief OV field\n     *\n     * Shows if an\
+    \ overflow occured. This flag is sticky\n     */\n    using ov = FieldModel<uint16_t,\
+    \ address, 10, 1>;\n    /**\n     * @brief RST field\n     *\n     * Shows if\
+    \ Timer is in RESET state\n     */\n    using rst = FieldModel<uint16_t, address,\
+    \ 12, 1>;\n    /**\n     * @brief RELOAD field\n     *\n     * Shows the currently\
+    \ active RELOAD Register\n     */\n    using reload = FieldModel<uint16_t, address,\
+    \ 14, 2>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n     *\
+    \ Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief RUN field\n       *\n \
+    \      * Shows if Timer is running or not\n       */\n      BitFieldModel<uint16_t,\
+    \ 0, 1> run;\n      /**\n       * @brief MATCH field\n       *\n       * Shows\
+    \ if the MATCH was hit\n       */\n      BitFieldModel<uint16_t, 8, 1> match;\n\
+    \      /**\n       * @brief UN field\n       *\n       * Shows if an underflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 9, 1>\
+    \ un;\n      /**\n       * @brief OV field\n       *\n       * Shows if an overflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 10, 1>\
+    \ ov;\n      /**\n       * @brief RST field\n       *\n       * Shows if Timer\
+    \ is in RESET state\n       */\n      BitFieldModel<uint16_t, 12, 1> rst;\n  \
+    \    /**\n       * @brief RELOAD field\n       *\n       * Shows the currently\
+    \ active RELOAD Register\n       */\n      BitFieldModel<uint16_t, 14, 2> reload;\n\
+    \    };\n  };\n\npublic:\n  /**\n   * @brief SR register\n   *\n   * Status Register\n\
+    \   */\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class IntReg : public RegisterModel<uint16_t, address>\n  {\n\
-    \  public:\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    using mode\
-    \ = FieldModel<uint16_t, address, 4, 3>;\n\n  public:\n    union reg\n    {\n\
-    \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
-    \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
-    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
-    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  public:\n    /**\n     * @brief EN field\n     *\n     * Interrupt Enable\n\
+    \     */\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief MODE field\n     *\n     * Interrupt Mode, selects on which condition\
+    \ the Timer should generate an Interrupt\n     */\n    using mode = FieldModel<uint16_t,\
+    \ address, 4, 3>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief EN field\n       *\n  \
+    \     * Interrupt Enable\n       */\n      BitFieldModel<uint16_t, 0, 1> en;\n\
+    \      /**\n       * @brief MODE field\n       *\n       * Interrupt Mode, selects\
+    \ on which condition the Timer should generate an Interrupt\n       */\n     \
+    \ BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\npublic:\n  /**\n   * @brief\
+    \ INT register\n   *\n   * Interrupt Register\n   */\n  using int_ = IntReg<BaseAddress\
+    \ + 0x0010>;\n\nprivate:\n  template<unsigned int address>\n  class CountReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief COUNT register\n   *\n   * The Counter Register reflects the\
+    \ actual Value of the Timer/Counter\n   */\n  using count = CountReg<BaseAddress\
+    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief MATCH register\n   *\n   * The Match Register stores the compare\
+    \ Value for the MATCH condition\n   */\n  using match = MatchReg<BaseAddress +\
+    \ 0x0024>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief PRESCALE_RD register\n   *\n   * The Prescale\
+    \ Register stores the Value for the prescaler. The cont event gets divided by\
+    \ this value\n   */\n  using prescale_rd = Prescale_rdReg<BaseAddress + 0x0028>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n   \
+    \  * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief PRESCALE_WR register\n   *\n   * The Prescale Register stores\
+    \ the Value for the prescaler. The cont event gets divided by this value\n   */\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
-    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
-    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[0]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[0] = Reload[0]Reg<BaseAddress\
+    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
-    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
-    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
-    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
-    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H */"
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[1] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\n\
+    private:\n  template<unsigned int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n\
+    \     *\n     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[2]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[2] = Reload[2]Reg<BaseAddress\
+    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[3] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\n\
+    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Reload[X]BankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\n\
+    \  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief RELOAD[X] register bank\n   *\n   * The Reload Register stores\
+    \ the Value the COUNT Register gets reloaded on a when a condition was met.\n\
+    \   */\n  using reload[x] = Reload[X]BankReg<BaseAddress + 0x0050, 0x0004>;\n\n\
+    };\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER1_H */"
   name: TIMER1
 - content: "/*\n * D-RAL - Device Register Access Layer\n * https://github.com/gembcior/d-ral\n\
     \ *\n * MIT License\n *\n * Copyright (c) 2023 Gembcior\n *\n * Permission is\
@@ -181,69 +381,169 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_ARM_EXAMPLE_TIMER2_H\n#define DRAL_ARM_EXAMPLE_TIMER2_H\n\
-    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\nclass timer2\n\
-    {\npublic:\n  static constexpr unsigned int BaseAddress = 0x40010200;\n\nprivate:\n\
+    \n#include \"../register_model.h\"\n\nnamespace dral::arm_example {\n\n/**\n *\
+    \ @brief TIMER2 peripheral\n *\n * 32 Timer / Counter, counting up or down from\
+    \ different sources\n */\nclass timer2\n{\npublic:\n  static constexpr unsigned\
+    \ int BaseAddress = 0x40010200; /**< Peripheral base address */\n\nprivate:\n\
     \  template<unsigned int address>\n  class CrReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n    using en = FieldModel<uint32_t, address, 0, 1>;\n\
-    \    using rst = FieldModel<uint32_t, address, 1, 1>;\n    using cnt = FieldModel<uint32_t,\
-    \ address, 2, 2>;\n    using mode = FieldModel<uint32_t, address, 4, 3>;\n   \
-    \ using psc = FieldModel<uint32_t, address, 7, 1>;\n    using cntsrc = FieldModel<uint32_t,\
-    \ address, 8, 4>;\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
-    \    using capedge = FieldModel<uint32_t, address, 16, 2>;\n    using trgext =\
-    \ FieldModel<uint32_t, address, 20, 2>;\n    using reload = FieldModel<uint32_t,\
-    \ address, 24, 2>;\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n  \
-    \  using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n      BitFieldModel<uint32_t, 0, 1> en;\n     \
-    \ BitFieldModel<uint32_t, 1, 1> rst;\n      BitFieldModel<uint32_t, 2, 2> cnt;\n\
-    \      BitFieldModel<uint32_t, 4, 3> mode;\n      BitFieldModel<uint32_t, 7, 1>\
-    \ psc;\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n      BitFieldModel<uint32_t,\
-    \ 12, 4> capsrc;\n      BitFieldModel<uint32_t, 16, 2> capedge;\n      BitFieldModel<uint32_t,\
-    \ 20, 2> trgext;\n      BitFieldModel<uint32_t, 24, 2> reload;\n      BitFieldModel<uint32_t,\
-    \ 26, 2> idr;\n      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n\
-    \  using cr = CrReg<BaseAddress + 0x0000>;\n\nprivate:\n  template<unsigned int\
-    \ address>\n  class SrReg : public RegisterModel<uint16_t, address>\n  {\n  public:\n\
-    \    using run = FieldModel<uint16_t, address, 0, 1>;\n    using match = FieldModel<uint16_t,\
-    \ address, 8, 1>;\n    using un = FieldModel<uint16_t, address, 9, 1>;\n    using\
-    \ ov = FieldModel<uint16_t, address, 10, 1>;\n    using rst = FieldModel<uint16_t,\
-    \ address, 12, 1>;\n    using reload = FieldModel<uint16_t, address, 14, 2>;\n\
-    \n  public:\n    union reg\n    {\n      uint16_t value;\n      BitFieldModel<uint16_t,\
-    \ 0, 1> run;\n      BitFieldModel<uint16_t, 8, 1> match;\n      BitFieldModel<uint16_t,\
-    \ 9, 1> un;\n      BitFieldModel<uint16_t, 10, 1> ov;\n      BitFieldModel<uint16_t,\
-    \ 12, 1> rst;\n      BitFieldModel<uint16_t, 14, 2> reload;\n    };\n  };\n\n\
-    public:\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
+    \ address>\n  {\n  public:\n    /**\n     * @brief EN field\n     *\n     * Enable\n\
+    \     */\n    using en = FieldModel<uint32_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief RST field\n     *\n     * Reset Timer\n     */\n    using rst = FieldModel<uint32_t,\
+    \ address, 1, 1>;\n    /**\n     * @brief CNT field\n     *\n     * Counting direction\n\
+    \     */\n    using cnt = FieldModel<uint32_t, address, 2, 2>;\n    /**\n    \
+    \ * @brief MODE field\n     *\n     * Operation Mode\n     */\n    using mode\
+    \ = FieldModel<uint32_t, address, 4, 3>;\n    /**\n     * @brief PSC field\n \
+    \    *\n     * Use Prescaler\n     */\n    using psc = FieldModel<uint32_t, address,\
+    \ 7, 1>;\n    /**\n     * @brief CNTSRC field\n     *\n     * Timer / Counter\
+    \ Source Divider\n     */\n    using cntsrc = FieldModel<uint32_t, address, 8,\
+    \ 4>;\n    /**\n     * @brief CAPSRC field\n     *\n     * Timer / Counter Capture\
+    \ Source\n     */\n    using capsrc = FieldModel<uint32_t, address, 12, 4>;\n\
+    \    /**\n     * @brief CAPEDGE field\n     *\n     * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n     */\n    using capedge\
+    \ = FieldModel<uint32_t, address, 16, 2>;\n    /**\n     * @brief TRGEXT field\n\
+    \     *\n     * Triggers an other Peripheral\n     */\n    using trgext = FieldModel<uint32_t,\
+    \ address, 20, 2>;\n    /**\n     * @brief RELOAD field\n     *\n     * Select\
+    \ RELOAD Register n to reload Timer on condition\n     */\n    using reload =\
+    \ FieldModel<uint32_t, address, 24, 2>;\n    /**\n     * @brief IDR field\n  \
+    \   *\n     * Selects, if Reload Register number is incremented, decremented or\
+    \ not modified\n     */\n    using idr = FieldModel<uint32_t, address, 26, 2>;\n\
+    \    /**\n     * @brief S field\n     *\n     * Starts and Stops the Timer / Counter\n\
+    \     */\n    using s = FieldModel<uint32_t, address, 31, 1>;\n\n  public:\n \
+    \   /**\n     * @brief Register union\n     *\n     * Can be used to create a\
+    \ local register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n      /**\n\
+    \       * @brief EN field\n       *\n       * Enable\n       */\n      BitFieldModel<uint32_t,\
+    \ 0, 1> en;\n      /**\n       * @brief RST field\n       *\n       * Reset Timer\n\
+    \       */\n      BitFieldModel<uint32_t, 1, 1> rst;\n      /**\n       * @brief\
+    \ CNT field\n       *\n       * Counting direction\n       */\n      BitFieldModel<uint32_t,\
+    \ 2, 2> cnt;\n      /**\n       * @brief MODE field\n       *\n       * Operation\
+    \ Mode\n       */\n      BitFieldModel<uint32_t, 4, 3> mode;\n      /**\n    \
+    \   * @brief PSC field\n       *\n       * Use Prescaler\n       */\n      BitFieldModel<uint32_t,\
+    \ 7, 1> psc;\n      /**\n       * @brief CNTSRC field\n       *\n       * Timer\
+    \ / Counter Source Divider\n       */\n      BitFieldModel<uint32_t, 8, 4> cntsrc;\n\
+    \      /**\n       * @brief CAPSRC field\n       *\n       * Timer / Counter Capture\
+    \ Source\n       */\n      BitFieldModel<uint32_t, 12, 4> capsrc;\n      /**\n\
+    \       * @brief CAPEDGE field\n       *\n       * Capture Edge, select which\
+    \ Edge should result in a counter increment or decrement\n       */\n      BitFieldModel<uint32_t,\
+    \ 16, 2> capedge;\n      /**\n       * @brief TRGEXT field\n       *\n       *\
+    \ Triggers an other Peripheral\n       */\n      BitFieldModel<uint32_t, 20, 2>\
+    \ trgext;\n      /**\n       * @brief RELOAD field\n       *\n       * Select\
+    \ RELOAD Register n to reload Timer on condition\n       */\n      BitFieldModel<uint32_t,\
+    \ 24, 2> reload;\n      /**\n       * @brief IDR field\n       *\n       * Selects,\
+    \ if Reload Register number is incremented, decremented or not modified\n    \
+    \   */\n      BitFieldModel<uint32_t, 26, 2> idr;\n      /**\n       * @brief\
+    \ S field\n       *\n       * Starts and Stops the Timer / Counter\n       */\n\
+    \      BitFieldModel<uint32_t, 31, 1> s;\n    };\n  };\n\npublic:\n  /**\n   *\
+    \ @brief CR register\n   *\n   * Control Register\n   */\n  using cr = CrReg<BaseAddress\
+    \ + 0x0000>;\n\nprivate:\n  template<unsigned int address>\n  class SrReg : public\
+    \ RegisterModel<uint16_t, address>\n  {\n  public:\n    /**\n     * @brief RUN\
+    \ field\n     *\n     * Shows if Timer is running or not\n     */\n    using run\
+    \ = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     * @brief MATCH field\n\
+    \     *\n     * Shows if the MATCH was hit\n     */\n    using match = FieldModel<uint16_t,\
+    \ address, 8, 1>;\n    /**\n     * @brief UN field\n     *\n     * Shows if an\
+    \ underflow occured. This flag is sticky\n     */\n    using un = FieldModel<uint16_t,\
+    \ address, 9, 1>;\n    /**\n     * @brief OV field\n     *\n     * Shows if an\
+    \ overflow occured. This flag is sticky\n     */\n    using ov = FieldModel<uint16_t,\
+    \ address, 10, 1>;\n    /**\n     * @brief RST field\n     *\n     * Shows if\
+    \ Timer is in RESET state\n     */\n    using rst = FieldModel<uint16_t, address,\
+    \ 12, 1>;\n    /**\n     * @brief RELOAD field\n     *\n     * Shows the currently\
+    \ active RELOAD Register\n     */\n    using reload = FieldModel<uint16_t, address,\
+    \ 14, 2>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n     *\
+    \ Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief RUN field\n       *\n \
+    \      * Shows if Timer is running or not\n       */\n      BitFieldModel<uint16_t,\
+    \ 0, 1> run;\n      /**\n       * @brief MATCH field\n       *\n       * Shows\
+    \ if the MATCH was hit\n       */\n      BitFieldModel<uint16_t, 8, 1> match;\n\
+    \      /**\n       * @brief UN field\n       *\n       * Shows if an underflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 9, 1>\
+    \ un;\n      /**\n       * @brief OV field\n       *\n       * Shows if an overflow\
+    \ occured. This flag is sticky\n       */\n      BitFieldModel<uint16_t, 10, 1>\
+    \ ov;\n      /**\n       * @brief RST field\n       *\n       * Shows if Timer\
+    \ is in RESET state\n       */\n      BitFieldModel<uint16_t, 12, 1> rst;\n  \
+    \    /**\n       * @brief RELOAD field\n       *\n       * Shows the currently\
+    \ active RELOAD Register\n       */\n      BitFieldModel<uint16_t, 14, 2> reload;\n\
+    \    };\n  };\n\npublic:\n  /**\n   * @brief SR register\n   *\n   * Status Register\n\
+    \   */\n  using sr = SrReg<BaseAddress + 0x0004>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class IntReg : public RegisterModel<uint16_t, address>\n  {\n\
-    \  public:\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    using mode\
-    \ = FieldModel<uint16_t, address, 4, 3>;\n\n  public:\n    union reg\n    {\n\
-    \      uint16_t value;\n      BitFieldModel<uint16_t, 0, 1> en;\n      BitFieldModel<uint16_t,\
-    \ 4, 3> mode;\n    };\n  };\n\npublic:\n  using int = IntReg<BaseAddress + 0x0010>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class CountReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using count = CountReg<BaseAddress + 0x0020>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class MatchReg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using match = MatchReg<BaseAddress + 0x0024>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg : public\
-    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    union reg\n\
-    \    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using prescale_rd =\
-    \ Prescale_rdReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Prescale_wrReg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  public:\n    /**\n     * @brief EN field\n     *\n     * Interrupt Enable\n\
+    \     */\n    using en = FieldModel<uint16_t, address, 0, 1>;\n    /**\n     *\
+    \ @brief MODE field\n     *\n     * Interrupt Mode, selects on which condition\
+    \ the Timer should generate an Interrupt\n     */\n    using mode = FieldModel<uint16_t,\
+    \ address, 4, 3>;\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint16_t value;\n      /**\n       * @brief EN field\n       *\n  \
+    \     * Interrupt Enable\n       */\n      BitFieldModel<uint16_t, 0, 1> en;\n\
+    \      /**\n       * @brief MODE field\n       *\n       * Interrupt Mode, selects\
+    \ on which condition the Timer should generate an Interrupt\n       */\n     \
+    \ BitFieldModel<uint16_t, 4, 3> mode;\n    };\n  };\n\npublic:\n  /**\n   * @brief\
+    \ INT register\n   *\n   * Interrupt Register\n   */\n  using int_ = IntReg<BaseAddress\
+    \ + 0x0010>;\n\nprivate:\n  template<unsigned int address>\n  class CountReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief COUNT register\n   *\n   * The Counter Register reflects the\
+    \ actual Value of the Timer/Counter\n   */\n  using count = CountReg<BaseAddress\
+    \ + 0x0020>;\n\nprivate:\n  template<unsigned int address>\n  class MatchReg :\
+    \ public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n\
+    \     * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief MATCH register\n   *\n   * The Match Register stores the compare\
+    \ Value for the MATCH condition\n   */\n  using match = MatchReg<BaseAddress +\
+    \ 0x0024>;\n\nprivate:\n  template<unsigned int address>\n  class Prescale_rdReg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief PRESCALE_RD register\n   *\n   * The Prescale\
+    \ Register stores the Value for the prescaler. The cont event gets divided by\
+    \ this value\n   */\n  using prescale_rd = Prescale_rdReg<BaseAddress + 0x0028>;\n\
+    \nprivate:\n  template<unsigned int address>\n  class Prescale_wrReg : public\
+    \ RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n    /**\n   \
+    \  * @brief Register union\n     *\n     * Can be used to create a local register\
+    \ variable for easy bit manipulation.\n     * Useful for read-modify-write operations.\n\
+    \     */\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief PRESCALE_WR register\n   *\n   * The Prescale Register stores\
+    \ the Value for the prescaler. The cont event gets divided by this value\n   */\n\
     \  using prescale_wr = Prescale_wrReg<BaseAddress + 0x0028>;\n\nprivate:\n  template<unsigned\
     \ int address>\n  class Reload[0]Reg : public RegisterModel<uint32_t, address>\n\
-    \  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t value;\n  \
-    \  };\n  };\n\npublic:\n  using reload[0] = Reload[0]Reg<BaseAddress + 0x0050>;\n\
-    \nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg : public RegisterModel<uint32_t,\
-    \ address>\n  {\n  public:\n\n  public:\n    union reg\n    {\n      uint32_t\
-    \ value;\n    };\n  };\n\npublic:\n  using reload[1] = Reload[1]Reg<BaseAddress\
-    \ + 0x0054>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[2]Reg\
+    \  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n     *\n\
+    \     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[0]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[0] = Reload[0]Reg<BaseAddress\
+    \ + 0x0050>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[1]Reg\
     \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
-    \ union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n  using reload[2]\
-    \ = Reload[2]Reg<BaseAddress + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n\
-    \  class Reload[3]Reg : public RegisterModel<uint32_t, address>\n  {\n  public:\n\
-    \n  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
-    \  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\nprivate:\n  template<unsigned\
-    \ int address, unsigned int bankOffset>\n  class Reload[X]BankReg : public RegisterBankModel<uint32_t,\
-    \ address, bankOffset>\n  {\n  public:\n\n  public:\n    union reg\n    {\n  \
-    \    uint32_t value;\n    };\n  };\n\npublic:\n  using reload[x] = Reload[X]BankReg<BaseAddress\
-    \ + 0x0050, 0x0004>;\n\n};\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H */"
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[1] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[1] = Reload[1]Reg<BaseAddress + 0x0054>;\n\n\
+    private:\n  template<unsigned int address>\n  class Reload[2]Reg : public RegisterModel<uint32_t,\
+    \ address>\n  {\n  public:\n\n  public:\n    /**\n     * @brief Register union\n\
+    \     *\n     * Can be used to create a local register variable for easy bit manipulation.\n\
+    \     * Useful for read-modify-write operations.\n     */\n    union reg\n   \
+    \ {\n      uint32_t value;\n    };\n  };\n\npublic:\n  /**\n   * @brief RELOAD[2]\
+    \ register\n   *\n   * The Reload Register stores the Value the COUNT Register\
+    \ gets reloaded on a when a condition was met.\n   */\n  using reload[2] = Reload[2]Reg<BaseAddress\
+    \ + 0x0058>;\n\nprivate:\n  template<unsigned int address>\n  class Reload[3]Reg\
+    \ : public RegisterModel<uint32_t, address>\n  {\n  public:\n\n  public:\n   \
+    \ /**\n     * @brief Register union\n     *\n     * Can be used to create a local\
+    \ register variable for easy bit manipulation.\n     * Useful for read-modify-write\
+    \ operations.\n     */\n    union reg\n    {\n      uint32_t value;\n    };\n\
+    \  };\n\npublic:\n  /**\n   * @brief RELOAD[3] register\n   *\n   * The Reload\
+    \ Register stores the Value the COUNT Register gets reloaded on a when a condition\
+    \ was met.\n   */\n  using reload[3] = Reload[3]Reg<BaseAddress + 0x005C>;\n\n\
+    private:\n  template<unsigned int address, unsigned int bankOffset>\n  class Reload[X]BankReg\
+    \ : public RegisterBankModel<uint32_t, address, bankOffset>\n  {\n  public:\n\n\
+    \  public:\n    union reg\n    {\n      uint32_t value;\n    };\n  };\n\npublic:\n\
+    \  /**\n   * @brief RELOAD[X] register bank\n   *\n   * The Reload Register stores\
+    \ the Value the COUNT Register gets reloaded on a when a condition was met.\n\
+    \   */\n  using reload[x] = Reload[X]BankReg<BaseAddress + 0x0050, 0x0004>;\n\n\
+    };\n\n}\n\n#endif /* DRAL_ARM_EXAMPLE_TIMER2_H */"
   name: TIMER2

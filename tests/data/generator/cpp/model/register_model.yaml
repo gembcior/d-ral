@@ -15,50 +15,69 @@
     \ ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\
     \ DEALINGS IN THE\n * SOFTWARE.\n *\n * This is an auto generated file. Do not\
     \ modify!\n */\n\n#ifndef DRAL_REGISTER_MODEL_H\n#define DRAL_REGISTER_MODEL_H\n\
-    \n#include <cstdint>\n#include <type_traits>\n\nnamespace dral {\n\ntemplate<typename\
-    \ SizeType, unsigned int address>\nclass RegisterModel\n{\npublic:\n  static constexpr\
-    \ unsigned int Address = address;\n\npublic:\n  static SizeType read()\n  {\n\
-    \    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n\
-    \    return *reg;\n  }\n\n  static void write(SizeType value)\n  {\n    volatile\
-    \ SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n    *reg = value;\n\
-    \  }\n};\n\ntemplate<typename SizeType, unsigned int address, unsigned int bankOffset>\n\
-    class RegisterBankModel\n{\npublic:\n  static constexpr unsigned int Address =\
-    \ address;\n  static constexpr unsigned int BankOffset = bankOffset;\n\npublic:\n\
-    \  static SizeType read(unsigned int bank)\n  {\n    volatile SizeType* reg =\
-    \ reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));\n    return\
-    \ *reg;\n  }\n\n  static void write(unsigned int bank, SizeType value)\n  {\n\
-    \    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset\
-    \ * bank));\n    *reg = value;\n  }\n};\n\ntemplate<typename SizeType, unsigned\
-    \ int address, unsigned int position, unsigned int width, unsigned int bankOffset\
-    \ = 0>\nclass FieldModel\n{\npublic:\n  static constexpr unsigned int Width =\
-    \ width;\n  static constexpr unsigned int Mask = (1U << width) - 1U;\n  static\
-    \ constexpr unsigned int Position = position;\n\npublic:\n  static void write(unsigned\
+    \n#include <cstdint>\n#include <type_traits>\n\nnamespace dral {\n\n/**\n * Register\
+    \ Model Template\n */\ntemplate<typename SizeType, unsigned int address>\nclass\
+    \ RegisterModel\n{\npublic:\n  static constexpr unsigned int Address = address;\
+    \ /**< Register address */\n\npublic:\n  /**\n   * Read value from the register\n\
+    \   *\n   * @return Register value\n   */\n  static SizeType read()\n  {\n   \
+    \ volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n  \
+    \  return *reg;\n  }\n\n  /**\n   * @brief Write value to the register\n   *\n\
+    \   * @param value Value to be written\n   */\n  static void write(SizeType value)\n\
+    \  {\n    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n\
+    \    *reg = value;\n  }\n};\n\n/**\n * Register Bank Model Template\n */\ntemplate<typename\
+    \ SizeType, unsigned int address, unsigned int bankOffset>\nclass RegisterBankModel\n\
+    {\npublic:\n  static constexpr unsigned int Address = address /**< Register address\
+    \ */;\n  static constexpr unsigned int BankOffset = bankOffset; /**< Bank offset\
+    \ */\n\npublic:\n  /**\n   * @brief Read value from the register\n   *\n   * @param\
+    \ bank Bank number\n   *\n   * @return Register value\n   */\n  static SizeType\
+    \ read(unsigned int bank)\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile\
+    \ SizeType*>(address + (bankOffset * bank));\n    return *reg;\n  }\n\n  /**\n\
+    \   * @brief Write value to the register\n   *\n   * @param bank Bank number\n\
+    \   * @param value Value to be written\n   */\n  static void write(unsigned int\
+    \ bank, SizeType value)\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile\
+    \ SizeType*>(address + (bankOffset * bank));\n    *reg = value;\n  }\n};\n\n/**\n\
+    \ * Field Model Template specialization for Register Bank\n */\ntemplate<typename\
+    \ SizeType, unsigned int address, unsigned int position, unsigned int width, unsigned\
+    \ int bankOffset = 0>\nclass FieldModel\n{\npublic:\n  static constexpr unsigned\
+    \ int Width = width; /**< Field width */\n  static constexpr unsigned int Mask\
+    \ = (1U << width) - 1U; /**< Field mask relative to position */\n  static constexpr\
+    \ unsigned int Position = position; /**< Field position */\n\npublic:\n  /**\n\
+    \   * @brief Write value to the register's field\n   *\n   * @param bank Bank\
+    \ number\n   * @param value Value to be written\n   */\n  static void write(unsigned\
     \ int bank, SizeType value)\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile\
     \ SizeType*>(address + (bankOffset * bank));\n    *reg = (*reg & ~(Mask << position))\
-    \ | ((value & Mask) << position);\n  }\n\n  static SizeType read(unsigned int\
-    \ bank)\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address\
-    \ + (bankOffset * bank));\n    return (*reg >> position) & Mask;\n  }\n\n  static_assert(position\
-    \ >= 0 && position <= (sizeof(SizeType) * 8 - 1), \"The position of the field\
-    \ can't exceed the register size or be less than 0.\");\n  static_assert(width\
-    \ >= 1 && width <= ((sizeof(SizeType) * 8) - position), \"The width of the field\
-    \ starting from the position can't exceed the register size or be less than 1.\"\
-    );\n};\n\ntemplate<typename SizeType, unsigned int address, unsigned int position,\
-    \ unsigned int width>\nclass FieldModel<SizeType, address, position, width>\n\
-    {\npublic:\n  static constexpr unsigned int Width = width;\n  static constexpr\
-    \ unsigned int Mask = (1U << width) - 1U;\n  static constexpr unsigned int Position\
-    \ = position;\n\npublic:\n  static void write(SizeType value)\n  {\n    volatile\
-    \ SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n    *reg = (*reg\
-    \ & ~(Mask << position)) | ((value & Mask) << position);\n  }\n\n  static SizeType\
-    \ read()\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);\n\
+    \ | ((value & Mask) << position);\n  }\n\n  /**\n   * @brief Read the field value\
+    \ from the register\n   *\n   * @param bank Bank number\n   *\n   * @return Field\
+    \ value\n   */\n  static SizeType read(unsigned int bank)\n  {\n    volatile SizeType*\
+    \ reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));\n\
     \    return (*reg >> position) & Mask;\n  }\n\n  static_assert(position >= 0 &&\
     \ position <= (sizeof(SizeType) * 8 - 1), \"The position of the field can't exceed\
     \ the register size or be less than 0.\");\n  static_assert(width >= 1 && width\
     \ <= ((sizeof(SizeType) * 8) - position), \"The width of the field starting from\
-    \ the position can't exceed the register size or be less than 1.\");\n};\n\ntemplate<typename\
-    \ SizeType, unsigned int position, unsigned int width = 1>\nclass BitFieldModel\n\
-    {\npublic:\n  static constexpr unsigned int Width = width;\n  static constexpr\
-    \ unsigned int Mask = (1U << width) - 1U;\n  static constexpr unsigned int Position\
-    \ = position;\n\npublic:\n  template<typename T>\n  BitFieldModel& operator=(T\
+    \ the position can't exceed the register size or be less than 1.\");\n};\n\n\n\
+    /**\n * Field Model Template\n */\ntemplate<typename SizeType, unsigned int address,\
+    \ unsigned int position, unsigned int width>\nclass FieldModel<SizeType, address,\
+    \ position, width>\n{\npublic:\n  static constexpr unsigned int Width = width;\
+    \ /**< Field width */\n  static constexpr unsigned int Mask = (1U << width) -\
+    \ 1U; /**< Field mask relative to position */\n  static constexpr unsigned int\
+    \ Position = position; /**< Field position */\n\npublic:\n  /**\n   * @brief Write\
+    \ value to the register's field\n   *\n   * @param value Value to be written\n\
+    \   */\n  static void write(SizeType value)\n  {\n    volatile SizeType* reg =\
+    \ reinterpret_cast<volatile SizeType*>(address);\n    *reg = (*reg & ~(Mask <<\
+    \ position)) | ((value & Mask) << position);\n  }\n\n  /**\n   * @brief Read the\
+    \ field value from the register\n   *\n   * @return Field value\n   */\n  static\
+    \ SizeType read()\n  {\n    volatile SizeType* reg = reinterpret_cast<volatile\
+    \ SizeType*>(address);\n    return (*reg >> position) & Mask;\n  }\n\n  static_assert(position\
+    \ >= 0 && position <= (sizeof(SizeType) * 8 - 1), \"The position of the field\
+    \ can't exceed the register size or be less than 0.\");\n  static_assert(width\
+    \ >= 1 && width <= ((sizeof(SizeType) * 8) - position), \"The width of the field\
+    \ starting from the position can't exceed the register size or be less than 1.\"\
+    );\n};\n\n\n/**\n * Bit Field Mode Template\n */\ntemplate<typename SizeType,\
+    \ unsigned int position, unsigned int width = 1>\nclass BitFieldModel\n{\npublic:\n\
+    \  static constexpr unsigned int Width = width; /**< Field width */\n  static\
+    \ constexpr unsigned int Mask = (1U << width) - 1U; /**< Field mask relative to\
+    \ position */\n  static constexpr unsigned int Position = position; /**< Field\
+    \ position */\n\npublic:\n  template<typename T>\n  BitFieldModel& operator=(T\
     \ value)\n  {\n    m_value = (m_value & ~(Mask << position)) | ((value & Mask)\
     \ << position);\n    return *this;\n  }\n\n  operator SizeType() const\n  {\n\
     \    return (m_value >> position) & Mask;\n  }\n\n  explicit operator bool() const\n\
@@ -72,10 +91,12 @@
     \ can't exceed the register size or be less than 0.\");\n  static_assert(width\
     \ >= 1 && width <= ((sizeof(SizeType) * 8) - position), \"The width of the field\
     \ starting from the position can't exceed the register size or be less than 1.\"\
-    );\n};\n\ntemplate<typename SizeType, unsigned int position>\nclass BitFieldModel<SizeType,\
-    \ position>\n{\npublic:\n  static constexpr unsigned int Width = 1U;\n  static\
-    \ constexpr unsigned int Mask = (1U << Width) - 1U;\n  static constexpr unsigned\
-    \ int Position = position;\n\npublic:\n  BitFieldModel& operator=(bool value)\n\
+    );\n};\n\n/**\n * Bit Field Mode Template specialization for 1 bit field\n */\n\
+    template<typename SizeType, unsigned int position>\nclass BitFieldModel<SizeType,\
+    \ position>\n{\npublic:\n  static constexpr unsigned int Width = 1U; /**< Field\
+    \ width */\n  static constexpr unsigned int Mask = (1U << Width) - 1U; /**< Field\
+    \ mask relative to position */\n  static constexpr unsigned int Position = position;\
+    \ /**< Field position */\n\npublic:\n  BitFieldModel& operator=(bool value)\n\
     \  {\n    m_value = (m_value & ~(Mask << position)) | (value << position);\n \
     \   return *this;\n  }\n\n  explicit operator bool() const\n  {\n    return m_value\
     \ & (Mask << position);\n  }\n\nprivate:\n  SizeType m_value;\n\n  static_assert(position\
