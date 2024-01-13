@@ -8,6 +8,7 @@ class DralBaseType(ABC):
     def __init__(self, name: str, description: str = ""):
         self._name = name
         self._description = description
+        self._extra_properties = None
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, DralBaseType):
@@ -25,17 +26,22 @@ class DralBaseType(ABC):
     def description(self) -> str:
         return self._description
 
+    @property
+    def extra(self) -> Optional[Dict[str, Any]]:
+        return self._extra_properties
+
     @abstractmethod
     def asdict(self) -> Dict[str, Any]:
         pass
 
 
 class Field(DralBaseType):
-    def __init__(self, name: str, position: int, width: int, description: str = "") -> None:
+    def __init__(self, name: str, position: int, width: int, description: str = "", **kwargs) -> None:
         super().__init__(name, description)
         self._position = position
         self._width = width
         self._mask = (1 << width) - 1
+        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -44,6 +50,7 @@ class Field(DralBaseType):
             "position": self._position,
             "width": self._width,
             "mask": self._mask,
+            **self._extra_properties,
         }
 
     @property
@@ -68,6 +75,7 @@ class Register(DralBaseType):
         description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
+        **kwargs,
     ):
         super().__init__(name, description)
         self._offset = offset
@@ -78,6 +86,7 @@ class Register(DralBaseType):
         if fields is None:
             fields = []
         self._fields = fields
+        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -87,6 +96,7 @@ class Register(DralBaseType):
             "size": self._size,
             "reset_value": self._reset_value,
             "fields": [field.asdict() for field in self._fields],
+            **self._extra_properties,
         }
 
     @property
@@ -116,9 +126,11 @@ class Bank(Register):
         description: str = "",
         reset_value: Optional[int] = None,
         fields: Optional[List[Field]] = None,
+        **kwargs,
     ):
         super().__init__(name, offset, size, description, reset_value, fields)
         self._bank_offset = bank_offset
+        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -129,6 +141,7 @@ class Bank(Register):
             "reset_value": self._reset_value,
             "bank_offset": self._bank_offset,
             "fields": [field.asdict() for field in self._fields],
+            **self._extra_properties,
         }
 
     @property
@@ -144,6 +157,7 @@ class Peripheral(DralBaseType):
         description: str = "",
         registers: Optional[List[Register]] = None,
         banks: Optional[List[Bank]] = None,
+        **kwargs,
     ):
         super().__init__(name, description)
         self._address = address
@@ -153,6 +167,7 @@ class Peripheral(DralBaseType):
         if banks is None:
             banks = []
         self._banks = banks
+        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -161,6 +176,7 @@ class Peripheral(DralBaseType):
             "address": self._address,
             "registers": [register.asdict() for register in self._registers],
             "banks": [bank.asdict() for bank in self._banks],
+            **self._extra_properties,
         }
 
     @property
@@ -177,11 +193,12 @@ class Peripheral(DralBaseType):
 
 
 class Device(DralBaseType):
-    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None):
+    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None, **kwargs):
         super().__init__(name, description)
         if peripherals is None:
             peripherals = []
         self._peripherals = peripherals
+        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -189,6 +206,7 @@ class Device(DralBaseType):
                 "name": self._name,
                 "description": self._description,
                 "peripherals": [peripheral.asdict() for peripheral in self._peripherals],
+                **self._extra_properties,
             }
         }
 
