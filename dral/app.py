@@ -100,8 +100,12 @@ def cli(input: Path, output: Path, language: str, template_type: str, template_p
         black_list_objects = None
 
     template_dir_list = [Utils.get_template_dir(language, template_type)]
+    model_template_dir_list = [Utils.get_model_template_dir(language)]
     if template_path:
         template_dir_list.insert(0, template_path)
+        template_dir_list.insert(0, template_path / language)
+        model_template_dir_list.insert(0, template_path)
+        model_template_dir_list.insert(0, template_path / "model" / language)
     forbidden_words = Utils.get_forbidden_words(language)
 
     info = "[bold green]Generating D-Ral files..."
@@ -125,9 +129,8 @@ def cli(input: Path, output: Path, language: str, template_type: str, template_p
         generator = DralGenerator(forbidden_words, mapping)
         peripherals_object = generator.get_peripherals(device, template_dir_list)
 
-        # Get D-RAL register model file
-        model_dir = Utils.get_model_dir(language)
-        model_object = generator.get_model(model_dir)
+        # Generate D-RAL register model file
+        model_object = generator.get_model(model_template_dir_list)
 
         # Make output
         output = output / "dralOutput"

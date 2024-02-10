@@ -37,7 +37,7 @@ class Utils:
         return svd.stem, "", ""
 
     @staticmethod
-    def get_model_dir(language: str) -> Path:
+    def get_model_template_dir(language: str) -> Path:
         model_path = Path(__file__).parent / "templates" / "model" / language
         return model_path
 
