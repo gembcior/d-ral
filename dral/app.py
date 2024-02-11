@@ -127,7 +127,7 @@ def cli(input: Path, output: Path, language: str, template_type: str, template_p
 
         # Generate D-RAL data
         generator = DralGenerator(forbidden_words, mapping)
-        peripherals_object = generator.get_peripherals(device, template_dir_list)
+        peripherals_object = generator.get_output(device, template_dir_list)
 
         # Generate D-RAL register model file
         model_object = generator.get_model(model_template_dir_list)

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from difflib import SequenceMatcher
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
-from ..types import Bank, Device, Field, Register
+from ..types import Bank, Field, MultiPeripheralDevice, Register, SinglePeripheralDevice
 from .base import BaseFilter
 
 
@@ -135,7 +135,12 @@ class BanksFilter(BaseFilter):
             register_banks = self._merge_register_banks(banks)
         return register_banks
 
-    def apply(self, device: Device) -> Device:
-        for i, item in enumerate(device.peripherals):
-            device.peripherals[i]._banks = self._get_register_banks(item.registers)  # noqa: W0212
+    def apply(self, device: Union[MultiPeripheralDevice, SinglePeripheralDevice]) -> Union[MultiPeripheralDevice, SinglePeripheralDevice]:
+        if isinstance(device, MultiPeripheralDevice):
+            for i, item in enumerate(device.peripherals):
+                device.peripherals[i]._banks += self._get_register_banks(item.registers)  # noqa: W0212
+        elif isinstance(device, SinglePeripheralDevice):
+            device._banks += self._get_register_banks(device.registers)  # noqa: W0212
+        else:
+            raise TypeError("Invalid device type")
         return device

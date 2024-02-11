@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 
 import svd2py
 
-from ..types import Device, Field, Peripheral, Register
+from ..types import Device, Field, MultiPeripheralDevice, Peripheral, Register
 from .base import BaseAdapter
 
 
@@ -75,16 +75,16 @@ class SvdAdapter(BaseAdapter):
             peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _svd_to_dral(self, svd: Dict[str, Any]) -> Device:
+    def _svd_to_dral(self, svd: Dict[str, Any]) -> MultiPeripheralDevice:
         svd_device = svd["device"]
-        device = Device(
+        device = MultiPeripheralDevice(
             name=svd_device["name"],
             description=svd_device["description"],
             peripherals=self._get_peripherals(svd_device["peripherals"]),
         )
         return device
 
-    def convert(self) -> Device:
+    def convert(self) -> MultiPeripheralDevice:
         svd = svd2py.SvdParser(self._svd_file)
         svd = svd.convert()
         return self._svd_to_dral(svd)

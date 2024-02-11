@@ -5,7 +5,7 @@ from typing import Any, Dict, List
 
 import yaml
 
-from ..types import Device, Field, Peripheral, Register
+from ..types import Field, MultiPeripheralDevice, Peripheral, Register
 from .base import BaseAdapter
 
 
@@ -38,12 +38,12 @@ class WhiteBlackListAdapter(BaseAdapter):
             peripherals_list.append(new_peripheral)
         return peripherals_list
 
-    def _list_to_dral(self, _list: Dict[str, Any]) -> Device:
+    def _list_to_dral(self, _list: Dict[str, Any]) -> MultiPeripheralDevice:
         if "peripherals" in _list:
             _list.update({"peripherals": self._get_peripherals(_list["peripherals"])})
-        return Device(name="WhiteList", **_list)
+        return MultiPeripheralDevice(name="WhiteList", **_list)
 
-    def convert(self) -> Device:
+    def convert(self) -> MultiPeripheralDevice:
         with open(self._list_file, "r", encoding="UTF-8") as list_file:
             _list = yaml.load(list_file, Loader=yaml.FullLoader)
         return self._list_to_dral(_list)

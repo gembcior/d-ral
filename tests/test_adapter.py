@@ -8,7 +8,7 @@ import pytest
 import yaml
 
 from dral.adapter import SvdAdapter
-from dral.types import Device, Field, Peripheral, Register
+from dral.types import MultiPeripheralDevice, Field, Peripheral, Register
 
 
 class TestDralAdapter:
@@ -16,8 +16,8 @@ class TestDralAdapter:
         with resources.path("dral.devices.%s" % brand, "%s.svd" % chip) as svd:
             return Path(svd)
 
-    def create_device_object(self, data: Dict) -> Device:
-        return Device(
+    def create_device_object(self, data: Dict) -> MultiPeripheralDevice:
+        return MultiPeripheralDevice(
             name=data["name"],
             description=data["description"],
             peripherals=[self.create_peripheral_object(peripheral["peripheral"]) for peripheral in data["peripherals"]],

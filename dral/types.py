@@ -193,12 +193,26 @@ class Peripheral(DralBaseType):
 
 
 class Device(DralBaseType):
-    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None, **kwargs: Dict[str, Any]):
+    def __init__(self, name: str, description: str = "", **kwargs: Dict[str, Any]):
         super().__init__(name, description)
+        self._extra_properties = kwargs
+
+    def asdict(self) -> Dict[str, Any]:
+        return {
+            "device": {
+                "name": self._name,
+                "description": self._description,
+                **self._extra_properties,
+            }
+        }
+
+
+class MultiPeripheralDevice(Device):
+    def __init__(self, name: str, description: str = "", peripherals: Optional[List[Peripheral]] = None, **kwargs: Dict[str, Any]):
+        super().__init__(name, description, **kwargs)
         if peripherals is None:
             peripherals = []
         self._peripherals = peripherals
-        self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
         return {
@@ -213,3 +227,40 @@ class Device(DralBaseType):
     @property
     def peripherals(self) -> List[Peripheral]:
         return self._peripherals
+
+
+class SinglePeripheralDevice(Device):
+    def __init__(
+        self,
+        name: str,
+        description: str = "",
+        registers: Optional[List[Register]] = None,
+        banks: Optional[List[Bank]] = None,
+        **kwargs: Dict[str, Any],
+    ):
+        super().__init__(name, description, **kwargs)
+        if registers is None:
+            registers = []
+        self._registers = registers
+        if banks is None:
+            banks = []
+        self._banks = banks
+
+    def asdict(self) -> Dict[str, Any]:
+        return {
+            "device": {
+                "name": self._name,
+                "description": self._description,
+                "registers": [register.asdict() for register in self._registers],
+                "banks": [bank.asdict() for bank in self._banks],
+                **self._extra_properties,
+            }
+        }
+
+    @property
+    def registers(self) -> List[Register]:
+        return self._registers
+
+    @property
+    def banks(self) -> List[Bank]:
+        return self._banks

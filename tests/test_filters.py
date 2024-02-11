@@ -9,7 +9,7 @@ import yaml
 
 from dral.adapter import SvdAdapter, WhiteBlackListAdapter
 from dral.filter import WhiteListFilter
-from dral.types import Device, Field, Peripheral, Register
+from dral.types import Field, MultiPeripheralDevice, Peripheral, Register
 
 
 class TestDralFilters:
@@ -21,8 +21,8 @@ class TestDralFilters:
     def wldir(self, datadir):
         return datadir / "filters" / "white_list"
 
-    def create_device_object(self, data: Dict) -> Device:
-        return Device(
+    def create_device_object(self, data: Dict) -> MultiPeripheralDevice:
+        return MultiPeripheralDevice(
             name=data["name"],
             description=data["description"],
             peripherals=[self.create_peripheral_object(peripheral) for peripheral in data["peripherals"]],

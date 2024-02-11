@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Union
 import yaml
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
-from .types import Device
+from .types import Device, MultiPeripheralDevice, Peripheral, SinglePeripheralDevice
 
 
 @dataclass
@@ -41,6 +41,36 @@ class DralGenerator:
         template = env.get_template(template_name)
         return template.render(**variables)
 
+    def _get_peripherals(self, peripherals: List[Peripheral], template_dir: Union[Path, List[Path]], variables: Dict[str, Any]) -> List[DralOutputFile]:
+        output = []
+        for peripheral in peripherals:
+            variables["peripheral"] = peripheral.asdict()
+            if self._mapping is not None:
+                variables.update(self._mapping)
+            content = self._generate("peripheral.dral", template_dir, variables)
+            del variables["peripheral"]
+            output.append(DralOutputFile(peripheral.name, content))
+        return output
+
+    def _get_device(self, device: Device, template_dir: Union[Path, List[Path]], variables: Dict[str, Any]) -> DralOutputFile:
+        content = self._generate("device.dral", template_dir, variables)
+        return DralOutputFile(device.name, content)
+
+    def _get_multi_peripheral_output(self, device: MultiPeripheralDevice, template_dir: Union[Path, List[Path]]) -> List[DralOutputFile]:
+        variables = {
+            **device.asdict(),
+            "system": self._get_system_mapping(),
+        }
+        output = self._get_peripherals(device.peripherals, template_dir, variables)
+        try:
+            output.append(self._get_device(device, template_dir, variables))
+        except TemplateNotFound:
+            pass
+        return output
+
+    def _get_single_peripheral_output(self, device: SinglePeripheralDevice, template_dir: Union[Path, List[Path]]) -> list[DralOutputFile]:
+        raise NotImplementedError
+
     def get_model(self, template_dir: Union[Path, List[Path]]) -> DralOutputFile:
         variables = {
             "system": self._get_system_mapping(),
@@ -54,27 +84,10 @@ class DralGenerator:
         )
         return DralOutputFile("register_model", model_content)
 
-    def get_peripherals(self, device: Device, template_dir: Union[Path, List[Path]]) -> List[DralOutputFile]:
-        device_mapping = device.asdict()
-        variables = {
-            **device_mapping,
-            "system": self._get_system_mapping(),
-            "peripheral": {},
-        }
-        output = []
-        for peripheral in device.peripherals:
-            variables["peripheral"] = peripheral.asdict()
-            if self._mapping is not None:
-                variables.update(self._mapping)
-
-            content = self._generate("peripheral.dral", template_dir, variables)
-            dral_output_file = DralOutputFile(peripheral.name, content)
-            output.append(dral_output_file)
-        try:
-            del variables["peripheral"]
-            content = self._generate("device.dral", template_dir, variables)
-        except TemplateNotFound:
-            return output
-        dral_output_file = DralOutputFile(device.name, content)
-        output.append(dral_output_file)
-        return output
+    def get_output(self, device: Union[MultiPeripheralDevice, SinglePeripheralDevice], template_dir: Union[Path, List[Path]]) -> List[DralOutputFile]:
+        if isinstance(device, MultiPeripheralDevice):
+            return self._get_multi_peripheral_output(device, template_dir)
+        elif isinstance(device, SinglePeripheralDevice):
+            return self._get_single_peripheral_output(device, template_dir)
+        else:
+            raise TypeError("Invalid device type")

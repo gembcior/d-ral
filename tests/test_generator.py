@@ -66,7 +66,7 @@ class TestDralGenerator:
         forbidden_words = self.get_forbidden_words(language)
         mapping = datadir / "generator" / language / template / "mapping.yaml"
         generator = dral.DralGenerator(forbidden_words, mapping)
-        peripherals_object = generator.get_peripherals(device_data, template_dir)
+        peripherals_object = generator.get_output(device_data, template_dir)
 
         with open(datadir / "generator" / language / template / f"{device}.yaml") as data:
             expected_output = []
