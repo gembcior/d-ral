@@ -21,9 +21,15 @@ public:
 
 {% for register in peripheral.registers -%}
 private:
+  template <unsigned int address>
+  using {{ register.name | title }}RegAddressPolicy = GroupAddressPolicy<address>;
+
   template<unsigned int address>
-  class {{ register.name | title }}Reg : public RegisterModel<uint{{ register.size }}_t, address>
+  class {{ register.name | title }}Reg : public RegisterModel<uint{{ register.size }}_t, {{ register.name | title }}RegAddressPolicy<address>>
   {
+  public:
+    static constexpr unsigned int Address = address;
+
   public:
     {%- for field in register.fields %}
     /**
@@ -33,7 +39,7 @@ private:
      * {{ field.description | trim(" \n\r") | wordwrap(160, wrapstring="\n     * ") }}
     {%- endif %}
      */
-    using {{ field.name | lower | isforbidden }} = FieldModel<uint{{ register.size }}_t, address, {{ field.position }}, {{ field.width }}>;
+    using {{ field.name | lower | isforbidden }} = FieldModel<uint{{ register.size }}_t, {{ register.name | title }}RegAddressPolicy<address>, {{ field.position }}, {{ field.width }}>;
     {%- endfor %}
 
   public:
@@ -73,8 +79,11 @@ public:
 
 {% for bank in peripheral.banks -%}
 private:
-  template<unsigned int address, unsigned int bankOffset>
-  class {{ bank.name | title }}BankReg : public RegisterBankModel<uint{{ bank.size }}_t, address, bankOffset>
+  template <unsigned int address>
+  using {{ bank.name | title }}RegAddressPolicy = GroupAddressPolicy<address, {{ "0x{:04X}".format(bank.bank_offset) }}>;
+
+  template<unsigned int address>
+  class {{ bank.name | title }}BankReg : public RegisterModel<uint{{ bank.size }}_t, {{ bank.name | title }}RegAddressPolicy<address>>
   {
   public:
     {%- for field in bank.fields %}
@@ -85,7 +94,7 @@ private:
      * {{ field.description | trim(" \n\r") | wordwrap(160, wrapstring="\n     * ") }}
     {%- endif %}
      */
-    using {{ field.name | lower | isforbidden }} = FieldModel<uint{{ bank.size }}_t, address, {{ field.position }}, {{ field.width }}, bankOffset>;
+    using {{ field.name | lower | isforbidden }} = FieldModel<uint{{ bank.size }}_t, {{ bank.name | title }}RegAddressPolicy<address>, {{ field.position }}, {{ field.width }}>;
     {%- endfor %}
 
   public:
@@ -113,7 +122,7 @@ public:
    * {{ bank.description | trim(" \n\r") | wordwrap(160, wrapstring="\n   * ") }}
 {%- endif %}
    */
-  using {{ bank.name | lower | isforbidden }} = {{ bank.name | title }}BankReg<BaseAddress + {{ "0x{:04X}".format(bank.offset) }}, {{ "0x{:04X}".format(bank.bank_offset) }}>;
+  using {{ bank.name | lower | isforbidden }} = {{ bank.name | title }}BankReg<BaseAddress + {{ "0x{:04X}".format(bank.offset) }}>;
 
 {% endfor -%}
 };

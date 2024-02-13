@@ -5,27 +5,97 @@
 
 #include <cstdint>
 #include <type_traits>
+#include <tuple>
+#include <utility>
 
 namespace dral {
 
 /**
- * Register Model Template
+ * Group description
  */
-template<typename SizeType, unsigned int address>
-class RegisterModel
+template<std::uintptr_t offset, std::size_t groupsCount>
+struct GroupDescription
+{
+  static_assert(offset > 0);
+  static_assert(groupsCount > 1);
+
+  static constexpr std::uintptr_t Offset = offset;
+  static constexpr std::size_t GroupsCount = groupsCount;
+
+  template<std::size_t GroupId>
+  [[nodiscard]] constexpr static std::uintptr_t GetOffset()
+  {
+    static_assert(GroupId < GroupsCount);
+    return Offset * GroupId;
+  }
+
+  [[nodiscard]] static std::uintptr_t GetOffset(std::size_t GroupId)
+  {
+    static_assert(GroupId < GroupsCount);
+    return Offset * GroupId;
+  }
+
+  [[nodiscard]] constexpr static std::uintptr_t AddressesRange()
+  {
+    return Offset * GroupsCount;
+  }
+
+  [[nodiscard]] constexpr static std::uintptr_t MinOffset()
+  {
+    return Offset;
+  }
+};
+
+
+/**
+ * Group Address Policy
+ */
+template <std::uintptr_t BaseAddress, unsigned int GroupOffset = 0>
+class GroupAddressPolicy
 {
 public:
-  static constexpr unsigned int Address = address; /**< Register address */
+  template <unsigned int Index>
+  using StaticIndexValue = std::integer_sequence<unsigned int, Index>;
 
+  [[nodiscard]] static std::uintptr_t GetAddress(const unsigned int &index)
+  {
+    return BaseAddress + (static_cast<std::size_t>(index) * GroupOffset);
+  }
+
+  template <unsigned int Index>
+  [[nodiscard]] static constexpr std::uintptr_t GetAddress(StaticIndexValue<Index> = {})
+  {
+    return BaseAddress + (static_cast<std::size_t>(Index) * GroupOffset);
+  }
+};
+
+template <std::uintptr_t BaseAddress>
+class GroupAddressPolicy<BaseAddress>
+{
+public:
+  [[nodiscard]] static constexpr std::uintptr_t GetAddress()
+  {
+    return BaseAddress;
+  }
+};
+
+
+/**
+ * Register Model Template
+ */
+template<typename SizeType, typename IndexPolicy>
+class RegisterModel
+{
 public:
   /**
    * Read value from the register
    *
    * @return Register value
    */
-  static SizeType read()
+  template <typename ...Index>
+  static SizeType read(Index&&... index)
   {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
+    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
     return *reg;
   }
 
@@ -34,54 +104,19 @@ public:
    *
    * @param value Value to be written
    */
-  static void write(SizeType value)
+  template <typename ...Index>
+  static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
+    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
     *reg = value;
   }
 };
 
-/**
- * Register Bank Model Template
- */
-template<typename SizeType, unsigned int address, unsigned int bankOffset>
-class RegisterBankModel
-{
-public:
-  static constexpr unsigned int Address = address /**< Register address */;
-  static constexpr unsigned int BankOffset = bankOffset; /**< Bank offset */
-
-public:
-  /**
-   * @brief Read value from the register
-   *
-   * @param bank Bank number
-   *
-   * @return Register value
-   */
-  static SizeType read(unsigned int bank)
-  {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
-    return *reg;
-  }
-
-  /**
-   * @brief Write value to the register
-   *
-   * @param bank Bank number
-   * @param value Value to be written
-   */
-  static void write(unsigned int bank, SizeType value)
-  {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
-    *reg = value;
-  }
-};
 
 /**
- * Field Model Template specialization for Register Bank
+ * Field Model Template
  */
-template<typename SizeType, unsigned int address, unsigned int position, unsigned int width, unsigned int bankOffset = 0>
+template<typename SizeType, typename IndexPolicy, unsigned int position, unsigned int width>
 class FieldModel
 {
 public:
@@ -91,67 +126,27 @@ public:
 
 public:
   /**
-   * @brief Write value to the register's field
-   *
-   * @param bank Bank number
-   * @param value Value to be written
-   */
-  static void write(unsigned int bank, SizeType value)
-  {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
-    *reg = (*reg & ~(Mask << position)) | ((value & Mask) << position);
-  }
-
-  /**
    * @brief Read the field value from the register
-   *
-   * @param bank Bank number
    *
    * @return Field value
    */
-  static SizeType read(unsigned int bank)
+  template <typename ...Index>
+  static SizeType read(Index&&...index)
   {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address + (bankOffset * bank));
+    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
     return (*reg >> position) & Mask;
   }
 
-  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
-  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
-};
-
-
-/**
- * Field Model Template
- */
-template<typename SizeType, unsigned int address, unsigned int position, unsigned int width>
-class FieldModel<SizeType, address, position, width>
-{
-public:
-  static constexpr unsigned int Width = width; /**< Field width */
-  static constexpr unsigned int Mask = (1U << width) - 1U; /**< Field mask relative to position */
-  static constexpr unsigned int Position = position; /**< Field position */
-
-public:
   /**
    * @brief Write value to the register's field
    *
    * @param value Value to be written
    */
-  static void write(SizeType value)
+  template <typename ...Index>
+  static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
+    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
     *reg = (*reg & ~(Mask << position)) | ((value & Mask) << position);
-  }
-
-  /**
-   * @brief Read the field value from the register
-   *
-   * @return Field value
-   */
-  static SizeType read()
-  {
-    volatile SizeType* reg = reinterpret_cast<volatile SizeType*>(address);
-    return (*reg >> position) & Mask;
   }
 
   static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");

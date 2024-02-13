@@ -91,6 +91,9 @@ class BanksFilter(BaseFilter):
                 banks.append(same)
         return banks
 
+    def _get_register_banks_count(self, registers: List[Register]):
+        return len(registers)
+
     def _get_register_banks_offsets(self, registers: List[Register]) -> Tuple[int, int]:
         registers.sort(key=lambda x: x.offset)
         offsets = []
@@ -111,6 +114,7 @@ class BanksFilter(BaseFilter):
         register_banks = []
         for bank in registers:
             try:
+                bank_count = self._get_register_banks_count(bank)
                 first_offset, bank_offset = self._get_register_banks_offsets(bank)
                 name = self._get_register_bank_name(bank)
             except (BankOffsetError, BankNameError):
@@ -123,6 +127,7 @@ class BanksFilter(BaseFilter):
                     size=bank[0].size,
                     reset_value=bank[0].reset_value,
                     bank_offset=bank_offset,
+                    bank_count=bank_count,
                     fields=bank[0].fields,
                 )
             )
