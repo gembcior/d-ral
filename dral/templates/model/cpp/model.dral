@@ -4,81 +4,31 @@
 #define DRAL_REGISTER_MODEL_H
 
 #include <cstdint>
-#include <type_traits>
-#include <tuple>
-#include <utility>
 
 namespace dral {
 
 /**
- * Group description
- */
-template<std::uintptr_t offset, std::size_t groupsCount>
-struct GroupDescription
-{
-  static_assert(offset > 0);
-  static_assert(groupsCount > 1);
-
-  static constexpr std::uintptr_t Offset = offset;
-  static constexpr std::size_t GroupsCount = groupsCount;
-
-  template<std::size_t GroupId>
-  [[nodiscard]] constexpr static std::uintptr_t GetOffset()
-  {
-    static_assert(GroupId < GroupsCount);
-    return Offset * GroupId;
-  }
-
-  [[nodiscard]] static std::uintptr_t GetOffset(std::size_t GroupId)
-  {
-    static_assert(GroupId < GroupsCount);
-    return Offset * GroupId;
-  }
-
-  [[nodiscard]] constexpr static std::uintptr_t AddressesRange()
-  {
-    return Offset * GroupsCount;
-  }
-
-  [[nodiscard]] constexpr static std::uintptr_t MinOffset()
-  {
-    return Offset;
-  }
-};
-
-
-/**
  * Group Address Policy
  */
-template <std::uintptr_t BaseAddress, unsigned int GroupOffset = 0>
+template<std::uintptr_t Address, unsigned int GroupOffset = 0>
 class GroupAddressPolicy
 {
 public:
-  template <unsigned int Index>
-  using StaticIndexValue = std::integer_sequence<unsigned int, Index>;
-
-  [[nodiscard]] static std::uintptr_t GetAddress(const unsigned int &index)
+  static uintptr_t getAddress(const unsigned int& index)
   {
-    return BaseAddress + (static_cast<std::size_t>(index) * GroupOffset);
-  }
-
-  template <unsigned int Index>
-  [[nodiscard]] static constexpr std::uintptr_t GetAddress(StaticIndexValue<Index> = {})
-  {
-    return BaseAddress + (static_cast<std::size_t>(Index) * GroupOffset);
+    return Address + (index * GroupOffset);
   }
 };
 
-template <std::uintptr_t BaseAddress>
-class GroupAddressPolicy<BaseAddress>
+template<uintptr_t Address>
+class GroupAddressPolicy<Address>
 {
 public:
-  [[nodiscard]] static constexpr std::uintptr_t GetAddress()
+  static constexpr uintptr_t getAddress()
   {
-    return BaseAddress;
+    return Address;
   }
 };
-
 
 /**
  * Register Model Template
@@ -92,10 +42,10 @@ public:
    *
    * @return Register value
    */
-  template <typename ...Index>
+  template<typename... Index>
   static SizeType read(Index&&... index)
   {
-    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
+    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
     return *reg;
   }
 
@@ -104,37 +54,42 @@ public:
    *
    * @param value Value to be written
    */
-  template <typename ...Index>
+  template<typename... Index>
   static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
+    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
     *reg = value;
   }
-};
 
+  /**
+   * @brief Get register address
+   *
+   * @param index
+   */
+  template<typename... Index>
+  static constexpr std::uintptr_t getAddress(Index&&... index)
+  {
+    return IndexPolicy::getAddress(index...);
+  }
+};
 
 /**
  * Field Model Template
  */
-template<typename SizeType, typename IndexPolicy, unsigned int position, unsigned int width>
+template<typename SizeType, typename IndexPolicy, unsigned int Position, unsigned int Width>
 class FieldModel
 {
-public:
-  static constexpr unsigned int Width = width; /**< Field width */
-  static constexpr unsigned int Mask = (1U << width) - 1U; /**< Field mask relative to position */
-  static constexpr unsigned int Position = position; /**< Field position */
-
 public:
   /**
    * @brief Read the field value from the register
    *
    * @return Field value
    */
-  template <typename ...Index>
-  static SizeType read(Index&&...index)
+  template<typename... Index>
+  static SizeType read(Index&&... index)
   {
-    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
-    return (*reg >> position) & Mask;
+    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
+    return (*reg >> Position) & getMask();
   }
 
   /**
@@ -142,45 +97,101 @@ public:
    *
    * @param value Value to be written
    */
-  template <typename ...Index>
+  template<typename... Index>
   static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::GetAddress(std::forward<Index>(index)...));
-    *reg = (*reg & ~(Mask << position)) | ((value & Mask) << position);
+    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
+    *reg = (*reg & ~(getMask() << Position)) | ((value & getMask()) << Position);
   }
 
-  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
-  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
-};
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
+  static constexpr unsigned int getWidth()
+  {
+    return Width;
+  }
 
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
+  static constexpr unsigned int getPosition()
+  {
+    return Position;
+  }
+
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
+  static constexpr unsigned int getMask()
+  {
+    return (1U << getWidth()) - 1U;
+  }
+
+  static_assert(Position >= 0 && Position <= (sizeof(SizeType) * 8 - 1),
+                "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(Width >= 1 && Width <= ((sizeof(SizeType) * 8) - Position),
+                "The width of the field starting from the position can't exceed the register size or be less than 1.");
+};
 
 /**
  * Bit Field Mode Template
  */
-template<typename SizeType, unsigned int position, unsigned int width = 1>
+template<typename SizeType, unsigned int Position, unsigned int Width = 1>
 class BitFieldModel
 {
 public:
-  static constexpr unsigned int Width = width; /**< Field width */
-  static constexpr unsigned int Mask = (1U << width) - 1U; /**< Field mask relative to position */
-  static constexpr unsigned int Position = position; /**< Field position */
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
+  static constexpr unsigned int getWidth()
+  {
+    return Width;
+  }
 
-public:
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
+  static constexpr unsigned int getPosition()
+  {
+    return Position;
+  }
+
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
+  static constexpr unsigned int getMask()
+  {
+    return (1U << getWidth()) - 1U;
+  }
+
   template<typename T>
   BitFieldModel& operator=(T value)
   {
-    m_value = (m_value & ~(Mask << position)) | ((value & Mask) << position);
+    m_value = (m_value & ~(getMask() << Position)) | ((value & getMask()) << Position);
     return *this;
   }
 
   operator SizeType() const
   {
-    return (m_value >> position) & Mask;
+    return (m_value >> Position) & getMask();
   }
 
   explicit operator bool() const
   {
-    return m_value & (Mask << position);
+    return m_value & (getMask() << Position);
   }
 
   BitFieldModel& operator++()
@@ -210,39 +221,67 @@ public:
 private:
   SizeType m_value;
 
-  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
-  static_assert(width >= 1 && width <= ((sizeof(SizeType) * 8) - position), "The width of the field starting from the position can't exceed the register size or be less than 1.");
+  static_assert(Position >= 0 && Position <= (sizeof(SizeType) * 8 - 1),
+                "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(Width >= 1 && Width <= ((sizeof(SizeType) * 8) - Position),
+                "The width of the field starting from the position can't exceed the register size or be less than 1.");
 };
 
 /**
  * Bit Field Mode Template specialization for 1 bit field
  */
-template<typename SizeType, unsigned int position>
-class BitFieldModel<SizeType, position>
+template<typename SizeType, unsigned int Position>
+class BitFieldModel<SizeType, Position>
 {
 public:
-  static constexpr unsigned int Width = 1U; /**< Field width */
-  static constexpr unsigned int Mask = (1U << Width) - 1U; /**< Field mask relative to position */
-  static constexpr unsigned int Position = position; /**< Field position */
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
+  static constexpr unsigned int getWidth()
+  {
+    return 1U;
+  }
 
-public:
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
+  static constexpr unsigned int getPosition()
+  {
+    return Position;
+  }
+
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
+  static constexpr unsigned int getMask()
+  {
+    return 1U;
+  }
+
   BitFieldModel& operator=(bool value)
   {
-    m_value = (m_value & ~(Mask << position)) | (value << position);
+    m_value = (m_value & ~(getMask() << Position)) | (value << Position);
     return *this;
   }
 
   explicit operator bool() const
   {
-    return m_value & (Mask << position);
+    return m_value & (getMask() << Position);
   }
 
 private:
   SizeType m_value;
 
-  static_assert(position >= 0 && position <= (sizeof(SizeType) * 8 - 1), "The position of the field can't exceed the register size or be less than 0.");
+  static_assert(Position >= 0 && Position <= (sizeof(SizeType) * 8 - 1),
+                "The position of the field can't exceed the register size or be less than 0.");
 };
 
-}  // namespace
+}
 
 #endif /* DRAL_REGISTER_MODEL_H */
