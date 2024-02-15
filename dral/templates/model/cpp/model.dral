@@ -33,9 +33,12 @@ public:
 /**
  * Register Model Template
  */
-template<typename SizeType, typename IndexPolicy>
+template<typename RegType, typename IndexPolicy>
 class RegisterModel
 {
+private:
+  using SizeType = decltype(RegType::value);
+
 public:
   /**
    * Read value from the register
@@ -43,10 +46,10 @@ public:
    * @return Register value
    */
   template<typename... Index>
-  static SizeType read(Index&&... index)
+  static RegType read(Index&&... index)
   {
-    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
-    return *reg;
+    volatile const SizeType* const regptr = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
+    return RegType{ *regptr };
   }
 
   /**
@@ -55,10 +58,17 @@ public:
    * @param value Value to be written
    */
   template<typename... Index>
+  static void write(const RegType& reg, Index&&... index)
+  {
+    volatile SizeType* const regptr = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
+    *regptr = reg.value;
+  }
+
+  template<typename... Index>
   static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
-    *reg = value;
+    volatile SizeType* const regptr = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
+    *regptr = value;
   }
 
   /**
@@ -88,8 +98,8 @@ public:
   template<typename... Index>
   static SizeType read(Index&&... index)
   {
-    volatile const SizeType* const reg = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
-    return (*reg >> Position) & getMask();
+    volatile const SizeType* const regptr = reinterpret_cast<volatile const SizeType*>(IndexPolicy::getAddress(index...));
+    return (*regptr >> Position) & getMask();
   }
 
   /**
@@ -100,8 +110,8 @@ public:
   template<typename... Index>
   static void write(SizeType value, Index&&... index)
   {
-    volatile SizeType* const reg = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
-    *reg = (*reg & ~(getMask() << Position)) | ((value & getMask()) << Position);
+    volatile SizeType* const regptr = reinterpret_cast<volatile SizeType*>(IndexPolicy::getAddress(index...));
+    *regptr = (*regptr & ~(getMask() << Position)) | ((value & getMask()) << Position);
   }
 
   /**
