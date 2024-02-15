@@ -1,0 +1,77 @@
+{%- macro getModel(register) %}
+  template<typename SizeType, unsigned int Address>
+  class {{ register.name | title }}RegModel : public RegisterModel<{{ register.name | title }}RegUnion<SizeType>, {{ register.name | title }}RegAddressPolicy<Address>>
+  {
+  public:
+    {%- for field in register.fields %}
+    using {{ field.name | lower | isforbidden }} = FieldModel<SizeType, {{ register.name | title }}RegAddressPolicy<Address>, {{ field.position }}, {{ field.width }}>;
+    {%- endfor %}
+
+  public:
+     using reg = {{ register.name | title }}RegUnion<SizeType>;
+{%- endmacro -%}
+
+{%- macro getUnion(register) %}
+  template<typename SizeType>
+  class {{ register.name | title }}RegUnion
+  {
+  public:
+    union
+    {
+      SizeType value;
+      {%- for field in register.fields %}
+      BitFieldModel<SizeType, {{ field.position }}, {{ field.width }}> {{ field.name | lower | isforbidden }};
+      {%- endfor %}
+    };
+  };
+{%- endmacro -%}
+
+{% include 'header.dral' %}
+
+#ifndef DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
+#define DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H
+
+{% include 'model.import.dral' %}
+
+namespace dral::{{ device.name | lower }} {
+
+class {{ peripheral.name | lower }}
+{
+public:
+  static constexpr unsigned int BaseAddress = {{ "0x{:08X}".format(peripheral.address) }};
+
+{% for register in peripheral.registers -%}
+
+private:
+{{- getUnion(register) }}
+
+private:
+  template <unsigned int Address>
+  using {{ register.name | title }}RegAddressPolicy = GroupAddressPolicy<Address>;
+{{ getModel(register) }}
+  };
+
+public:
+  using {{ register.name | lower | isforbidden }} = {{ register.name | title }}RegModel<uint{{ register.size }}_t, BaseAddress + {{ "0x{:04X}".format(register.offset) }}>;
+
+{% endfor -%}
+
+{% for bank in peripheral.banks -%}
+private:
+{{- getUnion(bank) }}
+
+private:
+  template <unsigned int Address>
+  using {{ bank.name | title }}RegAddressPolicy = GroupAddressPolicy<Address, {{ "0x{:04X}".format(bank.bank_offset) }}>;
+{{ getModel(bank) }}
+  };
+
+public:
+  using {{ bank.name | lower | isforbidden }} = {{ bank.name | title }}RegModel<uint{{ bank.size }}_t, BaseAddress + {{ "0x{:04X}".format(bank.offset) }}>;
+
+{% endfor -%}
+};
+
+}
+
+#endif /* DRAL_{{ device.name | upper }}_{{ peripheral.name | upper }}_H */
