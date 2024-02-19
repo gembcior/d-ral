@@ -74,8 +74,8 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(
-    input: Path,
+def cli(  # noqa: C901
+    input: Path,  # noqa: W0622
     output: Path,
     language: str,
     template_type: str,
@@ -84,7 +84,7 @@ def cli(
     skip_banks: bool,
     white_list: Optional[Path],
     black_list: Optional[Path],
-) -> None:  # noqa: C901
+) -> None:
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from INPUT.
