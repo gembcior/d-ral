@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from ..generator import DralOutputFile
 from .base import BaseFormat
@@ -22,7 +22,7 @@ class AsmFormat(BaseFormat):
         Path.mkdir(directory_path, parents=True, exist_ok=True)
         return directory_path
 
-    def _make_default(self, objects: List[DralOutputFile], _=None) -> None:
+    def _make_default(self, objects: List[DralOutputFile], _: Optional[DralOutputFile] = None) -> None:
         directory = self._create_output_directory(self._directory)
         for item in objects:
             self._create_file(f"{item.name.lower()}.S", directory, item.content)

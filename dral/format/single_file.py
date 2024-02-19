@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from dral.format.base import BaseFormat
 
@@ -30,7 +30,7 @@ class SingleFileFormat(BaseFormat):
             output.content += item.content
         return output
 
-    def _make_default(self, objects: List[DralOutputFile], _=None) -> None:
+    def _make_default(self, objects: List[DralOutputFile], _: Optional[DralOutputFile] = None) -> None:
         directory = self._create_output_directory(self._directory)
         item = self._merge_content(objects)
         self._create_file(f"{item.name.lower()}", directory, item.content)

@@ -8,6 +8,7 @@ from rich.console import Console
 from rich.traceback import install as traceback
 
 from dral.format import AsmFormat, CppFormat, PythonFormat
+from dral.format.base import BaseFormat
 
 from .adapter.base import BaseAdapter
 from .adapter.svd import SvdAdapter
@@ -151,7 +152,7 @@ def cli(  # noqa: C901
 
         chip = Utils.get_device_info(input)[0]
         if language == "cpp":
-            output_format = CppFormat(output, "dral", chip)
+            output_format: BaseFormat = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
         elif language == "asm":
