@@ -13,13 +13,13 @@ class WhiteListFilter(BaseFilter):
 
     def can_remove(self, item: Union[Peripheral, Register], _list: Union[List[Peripheral], List[Register]]) -> bool:
         for x in _list:
-            if item.name == x.name:
+            if item.name.lower() == x.name.lower():
                 return False
         return True
 
     def find_peripheral(self, item: Peripheral, _list: List[Peripheral]) -> Optional[Peripheral]:
         for x in _list:
-            if item.name == x.name:
+            if item.name.lower() == x.name.lower():
                 return x
         return None
 

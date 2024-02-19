@@ -1,17 +1,18 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Type, Optional
+from typing import Any, Optional, Type
 
 import click
 from rich.console import Console
 from rich.traceback import install as traceback
 
+from dral.format import AsmFormat, CppFormat, PythonFormat
+
 from .adapter.base import BaseAdapter
 from .adapter.svd import SvdAdapter
 from .adapter.white_black_list import WhiteBlackListAdapter
 from .filter import BanksFilter, BlackListFilter, WhiteListFilter
-from .format import CppFormat, PythonFormat
 from .generator import DralGenerator
 from .utils import Utils
 
@@ -31,7 +32,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     "--language",
     default="cpp",
     show_default=True,
-    type=click.Choice(["c", "cpp", "python"], case_sensitive=False),
+    type=click.Choice(["c", "cpp", "python", "asm"], case_sensitive=False),
     help="Specify the programming language for which you want to generate files.",
 )
 @click.option(
@@ -73,7 +74,17 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(input: Path, output: Path, language: str, template_type: str, template_path: Optional[Path], mapping: Path, skip_banks: bool, white_list: Optional[Path], black_list: Optional[Path]) -> None:  # noqa: C901
+def cli(
+    input: Path,
+    output: Path,
+    language: str,
+    template_type: str,
+    template_path: Optional[Path],
+    mapping: Path,
+    skip_banks: bool,
+    white_list: Optional[Path],
+    black_list: Optional[Path],
+) -> None:  # noqa: C901
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files in the OUTPUT from INPUT.
@@ -130,17 +141,23 @@ def cli(input: Path, output: Path, language: str, template_type: str, template_p
         peripherals_object = generator.get_peripherals(device, template_dir_list)
 
         # Generate D-RAL register model file
-        model_object = generator.get_model(model_template_dir_list)
+        if language in ["asm"]:
+            model_object = None
+        else:
+            model_object = generator.get_model(model_template_dir_list)
 
         # Make output
         output = output / "dralOutput"
 
         chip = Utils.get_device_info(input)[0]
-        output_format: Any = CppFormat(output, "dral", chip)
         if language == "cpp":
             output_format = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
+        elif language == "asm":
+            output_format = AsmFormat(output, chip)
+        else:
+            raise ValueError(f"Language {language} not supported")
         output_format.make(peripherals_object, model=model_object)
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")

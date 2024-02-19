@@ -1,16 +1,18 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, Optional
+
+from dral.format.base import BaseFormat
 
 from ..generator import DralOutputFile
 
 
-class SingleFileFormat:
-    def __init__(self, directory: Path, name: str, includeRegModel: bool = False):
+class SingleFileFormat(BaseFormat):
+    def __init__(self, directory: Path, device: str, name: str):
         self._directory = directory
+        self._device = device
         self._name = name
-        self._includeRegModel = includeRegModel
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
         file_path = directory / name
@@ -18,19 +20,17 @@ class SingleFileFormat:
             new_file.writelines(content)
 
     def _create_output_directory(self, output: Path) -> Path:
-        output.mkdir(parents=True, exist_ok=True)
-        return self._directory
+        directory_path = output / f"{self._device}"
+        directory_path.mkdir(parents=True, exist_ok=True)
+        return directory_path
 
-    def make(self, objects: List[DralOutputFile]) -> None:
+    def _merge_content(self, objects: List[DralOutputFile]) -> DralOutputFile:
+        output = DralOutputFile(name=self._name, content="")
+        for item in objects:
+            output.content += item.content
+        return output
+
+    def _make_default(self, objects: List[DralOutputFile], _=None) -> None:
         directory = self._create_output_directory(self._directory)
-        file_path = self._directory / f"{self._name}"
-        self._create_file(file_path.name, directory, "")
-
-        for i, item in enumerate(objects):
-            if item.name == "register_model" and not self._includeRegModel:
-                self._create_file(f"{item.name.lower()}.h", directory, item.content)
-            else:
-                with open(file_path, "a", encoding="UTF-8") as new_file:
-                    if i > 0:
-                        new_file.write("\n\n")
-                    new_file.writelines(item.content)
+        item = self._merge_content(objects)
+        self._create_file(f"{item.name.lower()}", directory, item.content)
