@@ -4,10 +4,23 @@
   {
   public:
     {%- for field in register.fields %}
+    /**
+     * @brief {{ field.name | upper}} field
+    {%- if field.description | length %}
+     *
+     * {{ field.description | trim(" \n\r") | wordwrap(160, wrapstring="\n     * ") }}
+    {%- endif %}
+     */
     using {{ field.name | lower | isforbidden }} = FieldModel<SizeType, {{ register.name | title }}RegAddressPolicy<Address>, {{ field.position }}, {{ field.width }}>;
     {%- endfor %}
 
   public:
+    /**
+     * @brief Register union
+     *
+     * Can be used to create a local register variable for easy bit manipulation.
+     * Useful for read-modify-write operations.
+     */
      using reg = {{ register.name | title }}RegUnion<SizeType>;
 {%- endmacro -%}
 
@@ -20,6 +33,13 @@
     {
       SizeType value;
       {%- for field in register.fields %}
+      /**
+       * @brief {{ field.name | upper}} field
+      {%- if field.description | length %}
+       *
+       * {{ field.description | trim(" \n\r") | wordwrap(160, wrapstring="\n       * ") }}
+      {%- endif %}
+       */
       BitFieldModel<SizeType, {{ field.position }}, {{ field.width }}> {{ field.name | lower | isforbidden }};
       {%- endfor %}
     };
@@ -35,10 +55,17 @@
 
 namespace dral::{{ device.name | lower }} {
 
+/**
+ * @brief {{ peripheral.name | upper}} peripheral
+{%- if peripheral.description | length %}
+ *
+ * {{ peripheral.description | trim(" \n\r") | wordwrap(160, wrapstring="\n * ") }}
+{%- endif %}
+ */
 class {{ peripheral.name | lower }}
 {
 public:
-  static constexpr unsigned int BaseAddress = {{ "0x{:08X}".format(peripheral.address) }};
+  static constexpr unsigned int BaseAddress = {{ "0x{:08X}".format(peripheral.address) }}; /**< Peripheral base address */
 
 {% for register in peripheral.registers -%}
 
@@ -52,6 +79,13 @@ private:
   };
 
 public:
+  /**
+   * @brief {{ register.name | upper}} register
+{%- if register.description | length %}
+   *
+   * {{ register.description | trim(" \n\r") | wordwrap(160, wrapstring="\n   * ") }}
+{%- endif %}
+   */
   using {{ register.name | lower | isforbidden }} = {{ register.name | title }}RegModel<uint{{ register.size }}_t, BaseAddress + {{ "0x{:04X}".format(register.offset) }}>;
 
 {% endfor -%}
@@ -67,6 +101,13 @@ private:
   };
 
 public:
+  /**
+   * @brief {{ bank.name | upper}} register bank
+{%- if bank.description | length %}
+   *
+   * {{ bank.description | trim(" \n\r") | wordwrap(160, wrapstring="\n   * ") }}
+{%- endif %}
+   */
   using {{ bank.name | lower | isforbidden }} = {{ bank.name | title }}RegModel<uint{{ bank.size }}_t, BaseAddress + {{ "0x{:04X}".format(bank.offset) }}>;
 
 {% endfor -%}

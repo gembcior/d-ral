@@ -1,0 +1,29 @@
+---
+test1:
+  - crc:
+    - dr
+    - idr
+    - cr
+  - timX:
+    - tim1:
+      - cr
+      - cnt
+    - tim2:
+      - cr
+      - cnt
+  - dmaX:
+    - dma1:
+      - sXcr:
+        - s1cr
+        - s2cr
+        - s3cr
+    - dma2:
+      - sXcr:
+        - s1cr
+        - s2cr
+        - s3cr
+    - dma3:
+      - sXcr:
+        - s1cr
+        - s2cr
+        - s3cr
