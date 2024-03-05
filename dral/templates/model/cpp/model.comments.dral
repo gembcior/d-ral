@@ -40,6 +40,11 @@ private:
   using SizeType = decltype(RegType::value);
 
 public:
+  /**
+   * Read value from the register
+   *
+   * @return Register value
+   */
   template<typename... Index>
   static RegType read(Index&&... index)
   {
@@ -47,6 +52,11 @@ public:
     return RegType{ *regptr };
   }
 
+  /**
+   * @brief Write value to the register
+   *
+   * @param value Value to be written
+   */
   template<typename... Index>
   static void write(const RegType& reg, Index&&... index)
   {
@@ -61,6 +71,11 @@ public:
     *regptr = value;
   }
 
+  /**
+   * @brief Get register address
+   *
+   * @param index
+   */
   template<typename... Index>
   static constexpr std::uintptr_t getAddress(Index&&... index)
   {
@@ -75,6 +90,11 @@ template<typename SizeType, typename IndexPolicy, unsigned int Position, unsigne
 class FieldModel
 {
 public:
+  /**
+   * @brief Read the field value from the register
+   *
+   * @return Field value
+   */
   template<typename... Index>
   static SizeType read(Index&&... index)
   {
@@ -82,6 +102,11 @@ public:
     return (*regptr >> Position) & getMask();
   }
 
+  /**
+   * @brief Write value to the register's field
+   *
+   * @param value Value to be written
+   */
   template<typename... Index>
   static void write(SizeType value, Index&&... index)
   {
@@ -89,16 +114,31 @@ public:
     *regptr = (*regptr & ~(getMask() << Position)) | ((value & getMask()) << Position);
   }
 
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
   static constexpr unsigned int getWidth()
   {
     return Width;
   }
 
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
   static constexpr unsigned int getPosition()
   {
     return Position;
   }
 
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
   static constexpr unsigned int getMask()
   {
     return (1U << getWidth()) - 1U;
@@ -117,16 +157,31 @@ template<typename SizeType, unsigned int Position, unsigned int Width = 1>
 class BitFieldModel
 {
 public:
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
   static constexpr unsigned int getWidth()
   {
     return Width;
   }
 
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
   static constexpr unsigned int getPosition()
   {
     return Position;
   }
 
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
   static constexpr unsigned int getMask()
   {
     return (1U << getWidth()) - 1U;
@@ -189,16 +244,31 @@ template<typename SizeType, unsigned int Position>
 class BitFieldModel<SizeType, Position>
 {
 public:
+  /**
+   * @brief Get field width
+   *
+   * @return Field width
+   */
   static constexpr unsigned int getWidth()
   {
     return 1U;
   }
 
+  /**
+   * @brief Get field position
+   *
+   * @return Field position
+   */
   static constexpr unsigned int getPosition()
   {
     return Position;
   }
 
+  /**
+   * @brief Get field mask calculated as (1 << width) - 1
+   *
+   * @return Field mask
+   */
   static constexpr unsigned int getMask()
   {
     return 1U;

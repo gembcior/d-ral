@@ -122,6 +122,7 @@ class Bank(Register):
         name: str,
         offset: int,
         bank_offset: int,
+        bank_count: int,
         size: int = 32,
         description: str = "",
         reset_value: Optional[int] = None,
@@ -130,6 +131,7 @@ class Bank(Register):
     ):
         super().__init__(name, offset, size, description, reset_value, fields)
         self._bank_offset = bank_offset
+        self._bank_count = bank_count
         self._extra_properties = kwargs
 
     def asdict(self) -> Dict[str, Any]:
@@ -140,6 +142,7 @@ class Bank(Register):
             "size": self._size,
             "reset_value": self._reset_value,
             "bank_offset": self._bank_offset,
+            "bank_count": self._bank_count,
             "fields": [field.asdict() for field in self._fields],
             **self._extra_properties,
         }
@@ -147,6 +150,10 @@ class Bank(Register):
     @property
     def bank_offset(self) -> int:
         return self._bank_offset
+
+    @property
+    def bank_count(self) -> int:
+        return self._bank_count
 
 
 class Peripheral(DralBaseType):
