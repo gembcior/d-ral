@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Union
 import yaml
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
-from .types import Device
+from dral.objects import DralDevice
 
 
 @dataclass
@@ -54,7 +54,7 @@ class DralGenerator:
         )
         return DralOutputFile("register_model", model_content)
 
-    def get_peripherals(self, device: Device, template_dir: Union[Path, List[Path]]) -> List[DralOutputFile]:
+    def get_peripherals(self, device: DralDevice, template_dir: Union[Path, List[Path]]) -> List[DralOutputFile]:
         device_mapping = device.asdict()
         variables = {
             **device_mapping,

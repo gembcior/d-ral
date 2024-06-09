@@ -11,11 +11,12 @@ from dral.format import AsmFormat, CppFormat, PythonFormat
 from dral.format.base import BaseFormat
 
 from .adapter.base import BaseAdapter
-from .adapter.svd import SvdAdapter
-from .adapter.white_black_list import WhiteBlackListAdapter
-from .filter import BanksFilter, BlackListFilter, WhiteListFilter
+from .adapter.group import SvdAdapter
+# from .adapter.white_black_list import WhiteBlackListAdapter
+# from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .generator import DralGenerator
 from .utils import Utils
+from rich import print, inspect
 
 DRAL_CUSTOM_ADAPTER = SvdAdapter
 
@@ -123,8 +124,13 @@ def cli(  # noqa: C901
     info = "[bold green]Generating D-Ral files..."
     with console.status(info):
         # Convert data using adapter
-        adapter = DRAL_CUSTOM_ADAPTER(input)
-        device = adapter.convert()
+        # adapter = DRAL_CUSTOM_ADAPTER(input)
+        adapter = SvdAdapter()
+        device = adapter.convert(input)
+        inspect(device)
+        print(device.asdict())
+
+        return
 
         # Apply filters
         filters: Any = []
@@ -155,6 +161,7 @@ def cli(  # noqa: C901
             output_format: BaseFormat = CppFormat(output, "dral", chip)
         elif language == "python":
             output_format = PythonFormat(output, chip)
+
         elif language == "asm":
             output_format = AsmFormat(output, chip)
         else:
