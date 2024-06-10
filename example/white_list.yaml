@@ -1,4 +1,4 @@
-peripherals:
+groups:
   - name: sample_name
     address: 0
     registers:

@@ -41,8 +41,8 @@ class DralGroupInstance(DralObject):
 @dataclass
 class DralGroup(DralObject):
     address: int
-    offset: int
-    instances: list[str] = dataclasses.field(default_factory=list)
+    offset: list[int] | int
+    instances: list[DralGroupInstance] = dataclasses.field(default_factory=list)
     groups: list[DralGroup] = dataclasses.field(default_factory=list)
     registers: list[DralRegister] = dataclasses.field(default_factory=list)
 

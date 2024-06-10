@@ -4,19 +4,19 @@ from pathlib import Path
 from typing import Any, Optional, Type
 
 import click
+from rich import inspect, print
 from rich.console import Console
 from rich.traceback import install as traceback
 
+from dral.adapter.svd import SvdAdapter
+from dral.adapter.white_black_list import WhiteBlackListAdapter
+from dral.filter import BlackListFilter, GroupsFilter, WhiteListFilter
 from dral.format import AsmFormat, CppFormat, PythonFormat
 from dral.format.base import BaseFormat
 
 from .adapter.base import BaseAdapter
-from .adapter.group import SvdAdapter
-# from .adapter.white_black_list import WhiteBlackListAdapter
-# from .filter import BanksFilter, BlackListFilter, WhiteListFilter
 from .generator import DralGenerator
 from .utils import Utils
-from rich import print, inspect
 
 DRAL_CUSTOM_ADAPTER = SvdAdapter
 
@@ -39,7 +39,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
 )
 @click.option(
     "-t",
-    "--template_type",
+    "--template-type",
     default="mcu",
     show_default=True,
     type=click.Choice(["mcu", "serial"], case_sensitive=False),
@@ -47,7 +47,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
 )
 @click.option(
     "-T",
-    "--template_path",
+    "--template-path",
     type=click.Path(exists=True, resolve_path=True, path_type=Path),
     help="Specify path to template files used to generate files.",
 )
@@ -59,9 +59,9 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
 )
 @click.option(
     "-s",
-    "--skip_banks",
+    "--skip-groups-detection",
     is_flag=True,
-    help="Skip automatic registers banks detection.",
+    help="Skip automatic registers groups detection.",
 )
 @click.option(
     "-w",
@@ -83,7 +83,7 @@ def cli(  # noqa: C901
     template_type: str,
     template_path: Optional[Path],
     mapping: Path,
-    skip_banks: bool,
+    skip_groups_detection: bool,
     white_list: Optional[Path],
     black_list: Optional[Path],
 ) -> None:
@@ -101,14 +101,14 @@ def cli(  # noqa: C901
     console = Console()
 
     if white_list:
-        white_list_adapter = WhiteBlackListAdapter(white_list)
-        white_list_objects = white_list_adapter.convert()
+        white_list_adapter = WhiteBlackListAdapter()
+        white_list_objects = white_list_adapter.convert(white_list)
     else:
         white_list_objects = None
 
     if black_list:
-        black_list_adapter = WhiteBlackListAdapter(black_list)
-        black_list_objects = black_list_adapter.convert()
+        black_list_adapter = WhiteBlackListAdapter()
+        black_list_objects = black_list_adapter.convert(black_list)
     else:
         black_list_objects = None
 
@@ -122,53 +122,55 @@ def cli(  # noqa: C901
     forbidden_words = Utils.get_forbidden_words(language)
 
     info = "[bold green]Generating D-Ral files..."
-    with console.status(info):
-        # Convert data using adapter
-        # adapter = DRAL_CUSTOM_ADAPTER(input)
-        adapter = SvdAdapter()
-        device = adapter.convert(input)
-        inspect(device)
-        print(device.asdict())
+    # with console.status(info):
+    # Convert data using adapter
+    # adapter = DRAL_CUSTOM_ADAPTER(input)
+    adapter = SvdAdapter()
+    device = adapter.convert(input)
 
-        return
+    # Apply filters
+    filters: Any = []
+    if black_list_objects is not None:
+        filters.append(BlackListFilter(black_list_objects))
+    if white_list_objects is not None:
+        filters.append(WhiteListFilter(white_list_objects))
+    if not skip_groups_detection:
+        filters.append(GroupsFilter())
+    for item in filters:
+        device = item.apply(device)
 
-        # Apply filters
-        filters: Any = []
-        if black_list_objects is not None:
-            filters.append(BlackListFilter(black_list_objects))
-        if white_list_objects is not None:
-            filters.append(WhiteListFilter(white_list_objects))
-        if not skip_banks:
-            filters.append(BanksFilter())
-        for item in filters:
-            device = item.apply(device)
+    # inspect(device)
+    print("===== Result =====")
+    print(device)
 
-        # Generate D-RAL data
-        generator = DralGenerator(forbidden_words, mapping)
-        peripherals_object = generator.get_peripherals(device, template_dir_list)
+    return
 
-        # Generate D-RAL register model file
-        if language in ["asm"]:
-            model_object = None
-        else:
-            model_object = generator.get_model(model_template_dir_list)
-
-        # Make output
-        output = output / "dralOutput"
-
-        chip = Utils.get_device_info(input)[0]
-        if language == "cpp":
-            output_format: BaseFormat = CppFormat(output, "dral", chip)
-        elif language == "python":
-            output_format = PythonFormat(output, chip)
-
-        elif language == "asm":
-            output_format = AsmFormat(output, chip)
-        else:
-            raise ValueError(f"Language {language} not supported")
-        output_format.make(peripherals_object, model=model_object)
-
-    console.print(f"Successfully generated D-Ral files to {output}", style="green")
+    #     # Generate D-RAL data
+    #     generator = DralGenerator(forbidden_words, mapping)
+    #     peripherals_object = generator.get_peripherals(device, template_dir_list)
+    #
+    #     # Generate D-RAL register model file
+    #     if language in ["asm"]:
+    #         model_object = None
+    #     else:
+    #         model_object = generator.get_model(model_template_dir_list)
+    #
+    #     # Make output
+    #     output = output / "dralOutput"
+    #
+    #     chip = Utils.get_device_info(input)[0]
+    #     if language == "cpp":
+    #         output_format: BaseFormat = CppFormat(output, "dral", chip)
+    #     elif language == "python":
+    #         output_format = PythonFormat(output, chip)
+    #
+    #     elif language == "asm":
+    #         output_format = AsmFormat(output, chip)
+    #     else:
+    #         raise ValueError(f"Language {language} not supported")
+    #     output_format.make(peripherals_object, model=model_object)
+    #
+    # console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
 def main() -> None:

@@ -72,8 +72,8 @@ class SvdAdapter(BaseAdapter):
                 description=cluster["description"] if "description" in cluster else "",
                 address=cluster["addressOffset"],
                 offset=0x0,
-                groups=self._parse_clusters(cluster["clusters"]["cluster"]) if "clusters" in cluster else [],
-                registers=self._parse_registers(cluster["registers"]["register"]) if "registers" in cluster else [],
+                groups=self._parse_clusters(cluster["cluster"]) if "cluster" in cluster else [],
+                registers=self._parse_registers(cluster["register"]) if "register" in cluster else [],
             )
             groups.append(group)
         return groups
@@ -108,7 +108,7 @@ class SvdAdapter(BaseAdapter):
                 description=peripheral["description"] if "description" in peripheral else "",
                 address=peripheral["baseAddress"],
                 offset=0x0,
-                groups=self._parse_clusters(peripheral["clusters"]["cluster"]) if "clusters" in peripheral else [],
+                groups=self._parse_clusters(peripheral["registers"]["cluster"]) if "registers" in peripheral and "cluster" in peripheral["registers"] else [],
                 registers=self._parse_registers(peripheral["registers"]["register"]) if "registers" in peripheral else [],
             )
             groups.append(group)
