@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from rich import inspect, print
-
 from dral.filter.base import BaseFilter
 from dral.name import get_common_name, is_similar_name
 from dral.objects import (
@@ -117,10 +115,35 @@ class GroupsFilter(BaseFilter):
                     groups.remove(item)
         return groups + self._merge_groups(merged)
 
-    def _get_merged_registers(self, registers: list[DralRegister]) -> list[DralRegister]:
-        return registers
+    def _merge_registers(self, list_of_registers: list[list[DralRegister]]) -> list[DralGroup]:
+        output = []
+        for registers in list_of_registers:
+            registers.sort(key=lambda x: x.address)
+            instances = [DralGroupInstance(register.name, register.address) for register in registers]
+            offset = self._get_group_offset([register.address for register in registers])
+            new_name = get_common_name([register.name for register in registers])
+            new = DralGroup(
+                name=new_name,
+                description=registers[0].description,
+                address=registers[0].address,
+                offset=offset,
+                instances=instances,
+                registers=[registers[0]],
+            )
+            output.append(new)
+        return output
 
-    def _merge_all(self, groups: list[DralGroup]) -> list[DralGroup]:
+    def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
+        merged = []
+        for origin in registers:
+            same = [register for register in reversed(registers) if self._compare_registers(origin, register)]
+            if len(same) > 1:
+                merged.append(same)
+                for item in same:
+                    registers.remove(item)
+        return (registers, self._merge_registers(merged))
+
+    def _merge_all_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
         groups = self._get_merged_groups(groups)
         to_update = [groups]
         to_update_next = []
@@ -135,10 +158,14 @@ class GroupsFilter(BaseFilter):
                 break
         return groups
 
+    def _merge_all_registers(self, groups: list[DralGroup]) -> list[DralGroup]:
+        for group in groups:
+            group.registers, merged = self._get_merged_registers(group.registers)
+            group.groups = self._merge_all_registers(group.groups)
+            group.groups = merged + group.groups
+        return groups
+
     def apply(self, device: DralDevice) -> DralDevice:
-        device.groups = self._merge_all(device.groups)
-
-        # for i, group in enumerate(device.groups):
-        #     device.groups[i].registers = self._get_merged_registers(group.registers)
-
+        device.groups = self._merge_all_groups(device.groups)
+        device.groups = self._merge_all_registers(device.groups)
         return device
