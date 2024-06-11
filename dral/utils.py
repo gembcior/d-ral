@@ -42,8 +42,15 @@ class Utils:
         return model_path
 
     @staticmethod
-    def get_forbidden_words(language: str) -> Optional[Path]:
-        forbidden_words_path = Path(__file__).parent / "templates" / language / "forbidden.yaml"
-        if forbidden_words_path.exists():
-            return forbidden_words_path
-        return None
+    def get_forbidden_words(language: str) -> list[str]:
+        forbidden_words_path = Path(__file__).parent / "forbidden"
+        if not forbidden_words_path.exists():
+            raise FileNotFoundError(f"Forbidden words files directory not found at {forbidden_words_path}")
+        output = []
+        for words_file in forbidden_words_path.glob("model.txt"):
+            with open(words_file, "r", encoding="UTF-8") as f:
+                output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
+        for words_file in forbidden_words_path.glob(f"{language}.txt"):
+            with open(words_file, "r", encoding="UTF-8") as f:
+                output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
+        return output

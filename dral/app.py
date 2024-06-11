@@ -52,12 +52,6 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     help="Specify path to template files used to generate files.",
 )
 @click.option(
-    "-m",
-    "--mapping",
-    type=click.Path(exists=True, resolve_path=True, path_type=Path),
-    help="Specify mapping file to overwrite values with constants.",
-)
-@click.option(
     "-s",
     "--skip-groups-detection",
     is_flag=True,
@@ -82,7 +76,6 @@ def cli(  # noqa: C901
     language: str,
     template_type: str,
     template_path: Optional[Path],
-    mapping: Path,
     skip_groups_detection: bool,
     white_list: Optional[Path],
     black_list: Optional[Path],
@@ -113,12 +106,9 @@ def cli(  # noqa: C901
         black_list_objects = None
 
     template_dir_list = [Utils.get_template_dir(language, template_type)]
-    model_template_dir_list = [Utils.get_model_template_dir(language)]
     if template_path:
         template_dir_list.insert(0, template_path)
         template_dir_list.insert(0, template_path / language)
-        model_template_dir_list.insert(0, template_path)
-        model_template_dir_list.insert(0, template_path / "model" / language)
     forbidden_words = Utils.get_forbidden_words(language)
 
     info = "[bold green]Generating D-Ral files..."
@@ -139,15 +129,10 @@ def cli(  # noqa: C901
     for item in filters:
         device = item.apply(device)
 
-    # inspect(device)
-    print("===== Result =====")
-    print(device)
-
-    return
-
-    #     # Generate D-RAL data
-    #     generator = DralGenerator(forbidden_words, mapping)
-    #     peripherals_object = generator.get_peripherals(device, template_dir_list)
+        # Generate D-RAL data
+    generator = DralGenerator(template_dir_list, forbidden_words)
+    dral_output_files = generator.generate("main.jinja", device)
+    print(dral_output_files)
     #
     #     # Generate D-RAL register model file
     #     if language in ["asm"]:
@@ -156,11 +141,11 @@ def cli(  # noqa: C901
     #         model_object = generator.get_model(model_template_dir_list)
     #
     #     # Make output
-    #     output = output / "dralOutput"
+    output = output / "dralOutput"
     #
-    #     chip = Utils.get_device_info(input)[0]
-    #     if language == "cpp":
-    #         output_format: BaseFormat = CppFormat(output, "dral", chip)
+    chip = Utils.get_device_info(input)[0]
+    if language == "cpp":
+        output_format: BaseFormat = CppFormat(output, "dral", chip)
     #     elif language == "python":
     #         output_format = PythonFormat(output, chip)
     #
@@ -168,7 +153,7 @@ def cli(  # noqa: C901
     #         output_format = AsmFormat(output, chip)
     #     else:
     #         raise ValueError(f"Language {language} not supported")
-    #     output_format.make(peripherals_object, model=model_object)
+    output_format.make(dral_output_files)
     #
     # console.print(f"Successfully generated D-Ral files to {output}", style="green")
 

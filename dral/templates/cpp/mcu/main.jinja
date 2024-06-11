@@ -1,0 +1,125 @@
+{%- macro getGroupEnum(group) %}
+private:
+  enum class {{ group.name | uppercamelcase }}Index
+  {
+    {% for element in group.elements %}
+    {{ element | uppercamelcase }},
+    {% endfor %}
+  };
+
+public:
+  using Index = {{ group.name | uppercamelcase }}Index;
+  static constexpr std::array All = {{ '{' }}{% for element in group.elements %}{{ group.name | uppercamelcase}}Index::{{element | uppercamelcase}}, {% endfor %}{{ '}' }};
+{%- endmacro -%}
+
+{%- macro getGroupPolicy(group, isRootGroup) %}
+private:
+  using {{ group.name | uppercamelcase }}LayerOffsetPolicy = LayerOffsetPolicy<{{ "0x{:08X}".format(group.offset) }}, {{ group.name | uppercamelcase }}Index>;
+
+  template<std::uintptr_t Address>
+  {% if isRootGroup %}
+  using {{ group.name | uppercamelcase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[1:] %}{{ x | uppercamelcase }}LayerOffsetPolicy, {% endfor %}{{ group.name | uppercamelcase}}LayerOffsetPolicy>>;
+  {% else %}
+  using {{ group.name | uppercamelcase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[2:] %}{{ x | uppercamelcase }}LayerOffsetPolicy, {% endfor %}{{ group.name | uppercamelcase}}LayerOffsetPolicy>>;
+  {% endif %}
+{%- endmacro -%}
+
+{%- macro getGroup(group, groupIndent, isRootGroup) %}
+/**
+ * GROUP {{ group.name | upper }}
+ */
+public:
+  class {{ group.name | uppercamelcase }}
+  {
+{% filter indent(groupIndent + 2, True) %}
+{{ getGroupEnum(group) }}
+
+{{ getGroupPolicy(group, isRootGroup) }}
+{% endfilter -%}
+
+    {% for group in group.children recursive %}
+    {{- getChild(group, groupIndent + 2) }}
+    {% endfor %}
+  };
+{%- endmacro -%}
+
+{%- macro getRegister(register, registerIndent) %}
+/**
+ * REGISTER {{ register.name | upper }}
+ */
+private:
+  template<typename SizeType>
+  class {{ register.name | uppercamelcase }}RegisterUnion
+  {
+  public:
+    union
+    {
+      SizeType value;
+      {% for field in register.fields %}
+      BitFieldModel<SizeType, {{ field.position }}, {{ field.width }}> {{ field.name | lowercamelcase | isforbidden }};
+      {% endfor %}
+    };
+  };
+
+private:
+  template<typename SizeType, std::uintptr_t Address>
+  class {{ register.name | uppercamelcase }}RegisterModel : public RegisterModel<{{ register.name | uppercamelcase }}RegisterUnion<SizeType>, {{ register.parent[-1] | uppercamelcase }}AddressPolicy<Address>>
+  {
+  public:
+    using reg = {{ register.name | uppercamelcase }}RegisterUnion<SizeType>;
+
+  public:
+    {% for field in register.fields %}
+    using {{ field.name | lowercamelcase | isforbidden }} = FieldModel<reg, {{ register.parent[-1] | uppercamelcase }}AddressPolicy<Address>, {{ field.position }}, {{ field.width }}>;
+    {% endfor %}
+  };
+
+public:
+  using {{ register.name | lowercamelcase | isforbidden }} = {{ register.name | uppercamelcase }}RegisterModel<uint32_t, {{ "0x{:08X}".format(register.address) }}>;
+{%- endmacro -%}
+
+{%- macro getChild(child, childIndent, isRootGroup) %}
+{% if child.class == "Register" %}
+  {% filter indent(childIndent, True) %}
+  {{- getRegister(child, childIndent) }}
+  {% endfilter %}
+{% elif child.class == "MultiGroup" %}
+  {% filter indent(childIndent, True) %}
+  {{- getGroup(child, childIndent, isRootGroup) }}
+  {% endfilter %}
+{% endif %}
+{%- endmacro -%}
+
+{% include 'header.jinja' +%}
+
+#ifndef DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+#define DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+
+{% include 'model.import.jinja' +%}
+
+namespace dral::{{ device | lower }} {
+
+class {{ root.name | uppercamelcase }}
+{
+{% if root.class == "SingleGroup" %}
+private:
+  template<std::uintptr_t Address>
+  using {{ root.name | uppercamelcase }}AddressPolicy = GroupAddressPolicy<Address>;
+{% elif root.class == "MultiGroup" %}
+{{ getGroupEnum(root) }}
+
+{{ getGroupPolicy(root, True) -}}
+{% endif %}
+
+{% for child in root.children recursive %}
+{% if root.class == "MultiGroup" %}
+{{ getChild(child, 0, True) }}
+{% else %}
+{{ getChild(child, 0, False) }}
+{% endif %}
+{% endfor %}
+};
+
+}
+
+#endif /* DRAL_{{ device | upper }}_{{ root.name | upper }}_H */
