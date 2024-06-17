@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from rich import print, inspect
+
 from dral.filter.base import BaseFilter
 from dral.name import get_common_name, is_similar_name
 from dral.objects import (
@@ -159,13 +161,14 @@ class GroupsFilter(BaseFilter):
         return groups
 
     def _merge_all_registers(self, groups: list[DralGroup]) -> list[DralGroup]:
-        for group in groups:
-            group.registers, merged = self._get_merged_registers(group.registers)
-            group.groups = self._merge_all_registers(group.groups)
-            group.groups = merged + group.groups
+        for i, group in enumerate(groups):
+            groups[i].registers, merged = self._get_merged_registers(group.registers)
+            merged_groups = self._merge_all_registers(group.groups)
+            groups[i].groups = merged + merged_groups
         return groups
 
     def apply(self, device: DralDevice) -> DralDevice:
         device.groups = self._merge_all_groups(device.groups)
         device.groups = self._merge_all_registers(device.groups)
+        device.link_parent()
         return device

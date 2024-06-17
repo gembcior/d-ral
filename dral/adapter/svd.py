@@ -6,7 +6,13 @@ from typing import Any
 
 import svd2py
 
-from dral.objects import DralDevice, DralField, DralGroup, DralRegister
+from dral.objects import (
+    DralDevice,
+    DralField,
+    DralGroup,
+    DralGroupInstance,
+    DralRegister,
+)
 
 from .base import BaseAdapter
 
@@ -74,6 +80,7 @@ class SvdAdapter(BaseAdapter):
                 offset=0x0,
                 groups=self._parse_clusters(cluster["cluster"]) if "cluster" in cluster else [],
                 registers=self._parse_registers(cluster["register"]) if "register" in cluster else [],
+                instances=[DralGroupInstance(cluster["name"], cluster["addressOffset"])],
             )
             groups.append(group)
         return groups
@@ -110,6 +117,7 @@ class SvdAdapter(BaseAdapter):
                 offset=0x0,
                 groups=self._parse_clusters(peripheral["registers"]["cluster"]) if "registers" in peripheral and "cluster" in peripheral["registers"] else [],
                 registers=self._parse_registers(peripheral["registers"]["register"]) if "registers" in peripheral else [],
+                instances=[DralGroupInstance(peripheral["name"], peripheral["baseAddress"])],
             )
             groups.append(group)
         return groups

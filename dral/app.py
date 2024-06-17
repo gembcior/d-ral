@@ -132,7 +132,7 @@ def cli(  # noqa: C901
         # Generate D-RAL data
     generator = DralGenerator(template_dir_list, forbidden_words)
     dral_output_files = generator.generate("main.jinja", device)
-    print(dral_output_files)
+    # print(dral_output_files)
     #
     #     # Generate D-RAL register model file
     #     if language in ["asm"]:
