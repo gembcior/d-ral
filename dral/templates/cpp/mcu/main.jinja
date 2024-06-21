@@ -1,6 +1,6 @@
 {%- macro getGroupBaseAddress(group) %}
 public:
-  constexpr uintptr_t {{ group.name | upperCamelCase }}BaseAddress = {{ "0x{:08X}".format(group.address) }};
+  static constexpr uintptr_t {{ group.name | upperCamelCase }}BaseAddress = {{ "0x{:08X}".format(group.address) }};
 {%- endmacro -%}
 
 {%- macro getGroupEnum(group) %}
@@ -13,8 +13,11 @@ private:
   };
 
 public:
-  using Index = {{ group.name | upperCamelCase }}Index;
-  static constexpr std::array All = {{ '{' }}{% for instance in group.instances[:-1] %}{{ group.name | upperCamelCase}}Index::{{instance.name | upperCamelCase}}, {% endfor %}{{ group.name | upperCamelCase}}Index::{{group.instances[-1].name | upperCamelCase}}{{ '}' }};
+  struct Index
+  {
+    using enum {{ group.name | upperCamelCase }}Index;
+    static constexpr std::array All = {{ '{ ' }}{% for instance in group.instances[:-1] %}{{ group.name | upperCamelCase}}Index::{{instance.name | upperCamelCase}}, {% endfor %}{{ group.name | upperCamelCase}}Index::{{group.instances[-1].name | upperCamelCase}}{{ ' }' }};
+  };
 {%- endmacro -%}
 
 {%- macro getGroupPolicy(group) %}
@@ -26,7 +29,11 @@ private:
 {% endif %}
 
   template<std::uintptr_t Address>
+  {% if group is topLevelGroup %}
   using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[1:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
+  {% else %}
+  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[2:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
+  {% endif %}
 {%- endmacro -%}
 
 {%- macro getSimpleGroupPolicy(group) %}

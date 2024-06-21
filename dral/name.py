@@ -1,6 +1,8 @@
 import re
 from difflib import SequenceMatcher
 
+from natsort import natsorted
+
 
 class NameError(Exception):
     pass
@@ -32,6 +34,12 @@ def _get_name_difference(name_a: str, name_b: str) -> tuple[str, int, int]:
         replace_sequence = name_a[i1:i2] + name_b[j1:j2]
         if replace_sequence.isdigit() or ((i2 - i1) == 1 and (j2 - j1) == 1) or re.match(pattern, replace_sequence):
             return "replace", i1, i2
+    if opcodes_len["insert"] == 1 and opcodes_len["delete"] == 1 and opcodes_len["replace"] == 0:
+        _, i1, i2, _, _ = delete_opcodes[0]
+        _, _, _, j1, j2 = insert_opcodes[0]
+        replace_sequence = name_a[i1:i2] + name_b[j1:j2]
+        if replace_sequence.isdigit():
+            return "replace", i1 if i1 < j1 else j1, j2 if j2 > i2 else i2
     return "none", 0, 0
 
 
@@ -53,17 +61,18 @@ def is_similar_name(name_a: str, name_b: str) -> bool:
 
 def get_common_name(namelist: list[str]) -> str:
     similar = 0
+    namelist = natsorted(namelist)
     for name in namelist:
         if is_similar_name(name, namelist[0]):
             similar += 1
     if similar != len(namelist):
-        raise NameError("Could not get a common name - names are not similar")
+        raise NameError("Could not get a common name - names are not similar", namelist)
     name = namelist[0]
     difference, i1, i2 = _get_name_difference(namelist[0], namelist[1])
     if difference in ["insert", "delete", "replace"]:
         marker = _get_group_marker(name[:i1], name[i2:])
         return name[:i1] + marker + name[i2:]
-    raise NameError("Could not get a common name")
+    raise NameError("Could not get a common name", namelist)
 
 
 def upper_camel_case(string: str) -> str:

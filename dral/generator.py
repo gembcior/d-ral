@@ -6,10 +6,9 @@ from pathlib import Path
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader
-from rich import inspect, print
 
 from dral.name import lower_camel_case, upper_camel_case
-from dral.objects import DralDevice, DralGroup
+from dral.objects import DralDevice
 
 
 @dataclass

@@ -111,7 +111,7 @@ def cli(  # noqa: C901
         template_dir_list.insert(0, template_path / language)
     forbidden_words = Utils.get_forbidden_words(language)
 
-    info = "[bold green]Generating D-Ral files..."
+    # info = "[bold green]Generating D-Ral files..."
     # with console.status(info):
     # Convert data using adapter
     # adapter = DRAL_CUSTOM_ADAPTER(input)
@@ -129,33 +129,26 @@ def cli(  # noqa: C901
     for item in filters:
         device = item.apply(device)
 
-        # Generate D-RAL data
+    # Generate D-RAL data
     generator = DralGenerator(template_dir_list, forbidden_words)
     dral_output_files = generator.generate("main.jinja", device)
-    # print(dral_output_files)
-    #
-    #     # Generate D-RAL register model file
-    #     if language in ["asm"]:
-    #         model_object = None
-    #     else:
-    #         model_object = generator.get_model(model_template_dir_list)
-    #
-    #     # Make output
+
+    # Make output
     output = output / "dralOutput"
-    #
+
     chip = Utils.get_device_info(input)[0]
     if language == "cpp":
         output_format: BaseFormat = CppFormat(output, "dral", chip)
-    #     elif language == "python":
-    #         output_format = PythonFormat(output, chip)
-    #
-    #     elif language == "asm":
-    #         output_format = AsmFormat(output, chip)
-    #     else:
-    #         raise ValueError(f"Language {language} not supported")
+    elif language == "python":
+        output_format = PythonFormat(output, chip)
+    elif language == "asm":
+        output_format = AsmFormat(output, chip)
+    else:
+        raise ValueError(f"Language {language} not supported")
+
     output_format.make(dral_output_files)
-    #
-    # console.print(f"Successfully generated D-Ral files to {output}", style="green")
+
+    console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
 def main() -> None:

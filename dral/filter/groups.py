@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from rich import print, inspect
+from collections.abc import Sequence
+
+from natsort import natsorted
+from rich import inspect, print
 
 from dral.filter.base import BaseFilter
-from dral.name import get_common_name, is_similar_name
+from dral.name import _get_name_difference, get_common_name, is_similar_name
 from dral.objects import (
     DralDevice,
     DralField,
@@ -108,13 +111,16 @@ class GroupsFilter(BaseFilter):
         return output
 
     def _get_merged_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
+        i = 0
         merged = []
-        for origin in groups:
-            same = [group for group in reversed(groups) if self._compare_groups(origin, group)]
-            if len(same) > 1:
-                merged.append(same)
-                for item in same:
-                    groups.remove(item)
+        while i < len(groups):
+            same = [group for group in reversed(groups) if self._compare_groups(groups[i], group)]
+            if len(same) < 2:
+                i = i + 1
+                continue
+            for item in same:
+                groups.remove(item)
+            merged.append(same)
         return groups + self._merge_groups(merged)
 
     def _merge_registers(self, list_of_registers: list[list[DralRegister]]) -> list[DralGroup]:
@@ -130,19 +136,57 @@ class GroupsFilter(BaseFilter):
                 address=registers[0].address,
                 offset=offset,
                 instances=instances,
-                registers=[registers[0]],
+                registers=[
+                    DralRegister(
+                        name=new_name,
+                        description=registers[0].description,
+                        address=0,
+                        size=registers[0].size,
+                        default=registers[0].default,
+                        fields=registers[0].fields,
+                    )
+                ],
             )
             output.append(new)
         return output
 
+    # TODO: Draft. Try to think of a better way to implement this
+    def remove_false_match(self, same: Sequence[DralObject]) -> Sequence[DralObject]:
+        same = natsorted(same, key=lambda x: x.name)
+        reference = []
+        for i_item in same:
+            if all([is_similar_name(j_item.name, i_item.name) for j_item in same]):
+                reference.append(i_item)
+        if len(reference) == len(same):
+            return same
+        if not reference or len(reference) > 1:
+            raise ValueError("Could not find a reference item", [item.name for item in reference])
+        reference = reference[0]
+        backets = []
+        for i_item in same:
+            backet = [j_item for j_item in same if is_similar_name(i_item.name, j_item.name)]
+            if backet not in backets and backet != same:
+                backets.append(backet)
+        if not backets or len(backets) == 1:
+            return same
+        print("Choose bucket")
+        for i, backet in enumerate(backets):
+            print(f"{i} - {[[(x.name, hex(x.address)) for x in backet]]}")
+        choice = int(input("Enter the number of the bucket: "))
+        return backets[choice]
+
     def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
+        i = 0
         merged = []
-        for origin in registers:
-            same = [register for register in reversed(registers) if self._compare_registers(origin, register)]
-            if len(same) > 1:
-                merged.append(same)
-                for item in same:
-                    registers.remove(item)
+        while i < len(registers):
+            same = [register for register in reversed(registers) if self._compare_registers(registers[i], register)]
+            same = self.remove_false_match(same)
+            if len(same) < 2:
+                i = i + 1
+                continue
+            for item in same:
+                registers.remove(item)
+            merged.append(same)
         return (registers, self._merge_registers(merged))
 
     def _merge_all_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
@@ -167,8 +211,20 @@ class GroupsFilter(BaseFilter):
             groups[i].groups = merged + merged_groups
         return groups
 
+    # TODO: Implement this
+    def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
+        duplicated = {}
+        for group in groups:
+            if group.name in duplicated:
+                duplicated[group.name].append(group.name)
+            else:
+                duplicated[group.name] = [group.name]
+        print(duplicated)
+        return groups
+
     def apply(self, device: DralDevice) -> DralDevice:
         device.groups = self._merge_all_groups(device.groups)
         device.groups = self._merge_all_registers(device.groups)
+        device.groups = self._resolve_duplicated_groups(device.groups)
         device.link_parent()
         return device
