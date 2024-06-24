@@ -6,7 +6,7 @@ from natsort import natsorted
 from rich import inspect, print
 
 from dral.filter.base import BaseFilter
-from dral.name import _get_name_difference, get_common_name, is_similar_name
+from dral.name import get_common_name, get_name_difference, is_similar_name
 from dral.objects import (
     DralDevice,
     DralField,
@@ -115,7 +115,7 @@ class GroupsFilter(BaseFilter):
         merged = []
         while i < len(groups):
             same = [group for group in reversed(groups) if self._compare_groups(groups[i], group)]
-            if len(same) < 2:
+            if len(same) < 2 or not self._can_merge(same):
                 i = i + 1
                 continue
             for item in same:
@@ -150,38 +150,23 @@ class GroupsFilter(BaseFilter):
             output.append(new)
         return output
 
-    # TODO: Draft. Try to think of a better way to implement this
-    def remove_false_match(self, same: Sequence[DralObject]) -> Sequence[DralObject]:
+    def _can_merge(self, same: Sequence[DralObject]) -> bool:
         same = natsorted(same, key=lambda x: x.name)
-        reference = []
-        for i_item in same:
-            if all([is_similar_name(j_item.name, i_item.name) for j_item in same]):
-                reference.append(i_item)
-        if len(reference) == len(same):
-            return same
-        if not reference or len(reference) > 1:
-            raise ValueError("Could not find a reference item", [item.name for item in reference])
-        reference = reference[0]
         backets = []
         for i_item in same:
-            backet = [j_item for j_item in same if is_similar_name(i_item.name, j_item.name)]
+            backet = [j_item for j_item in same if self._is_similar_name(i_item, j_item)]
             if backet not in backets and backet != same:
                 backets.append(backet)
-        if not backets or len(backets) == 1:
-            return same
-        print("Choose bucket")
-        for i, backet in enumerate(backets):
-            print(f"{i} - {[[(x.name, hex(x.address)) for x in backet]]}")
-        choice = int(input("Enter the number of the bucket: "))
-        return backets[choice]
+        if len(backets) < 2:
+            return True
+        return False
 
     def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
         i = 0
         merged = []
         while i < len(registers):
             same = [register for register in reversed(registers) if self._compare_registers(registers[i], register)]
-            same = self.remove_false_match(same)
-            if len(same) < 2:
+            if len(same) < 2 or not self._can_merge(same):
                 i = i + 1
                 continue
             for item in same:
@@ -211,20 +196,41 @@ class GroupsFilter(BaseFilter):
             groups[i].groups = merged + merged_groups
         return groups
 
-    # TODO: Implement this
+    def _rename_group(self, group: DralGroup) -> str:
+        instances = [instance.name for instance in group.instances]
+        _, i1, i2 = get_name_difference(instances[0], instances[1])
+        add = sorted([name[i1:i2] for name in instances])
+        return f"{group.name[:i1]}_{'_'.join(add)}{group.name[i1:]}"
+
     def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
+        if not groups:
+            return groups
         duplicated = {}
         for group in groups:
             if group.name in duplicated:
                 duplicated[group.name].append(group.name)
             else:
                 duplicated[group.name] = [group.name]
-        print(duplicated)
+        buckets = []
+        for bucket in duplicated.values():
+            if len(bucket) < 2:
+                continue
+            buckets.append(bucket)
+        for bucket in buckets:
+            for i, group in enumerate(groups):
+                if group.name in bucket:
+                    groups[i].name = self._rename_group(group)
+        return groups
+
+    def _rename_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
+        groups = self._resolve_duplicated_groups(groups)
+        for i, group in enumerate(groups):
+            groups[i].groups = self._rename_duplicated_groups(group.groups)
         return groups
 
     def apply(self, device: DralDevice) -> DralDevice:
         device.groups = self._merge_all_groups(device.groups)
         device.groups = self._merge_all_registers(device.groups)
-        device.groups = self._resolve_duplicated_groups(device.groups)
+        device.groups = self._rename_duplicated_groups(device.groups)
         device.link_parent()
         return device

@@ -43,6 +43,12 @@ def _get_name_difference(name_a: str, name_b: str) -> tuple[str, int, int]:
     return "none", 0, 0
 
 
+def get_name_difference(name_a: str, name_b: str) -> tuple[str, int, int]:
+    difference, i1, i2 = _get_name_difference(name_a, name_b)
+    i1, i2 = _expand_digits(name_a, i1, i2)
+    return difference, i1, i2
+
+
 def _get_group_marker(left: str, right: str) -> str:
     marker = "x"
     if left and left[-1] != "_":
@@ -50,6 +56,14 @@ def _get_group_marker(left: str, right: str) -> str:
     if right and right[0] != "_":
         marker = marker + "_"
     return marker
+
+
+def _expand_digits(name: str, i1: int, i2: int) -> tuple[int, int]:
+    while i1 > 0 and name[i1 - 1].isdigit():
+        i1 -= 1
+    while i2 < len(name) and name[i2].isdigit():
+        i2 += 1
+    return i1, i2
 
 
 def is_similar_name(name_a: str, name_b: str) -> bool:
@@ -70,6 +84,7 @@ def get_common_name(namelist: list[str]) -> str:
     name = namelist[0]
     difference, i1, i2 = _get_name_difference(namelist[0], namelist[1])
     if difference in ["insert", "delete", "replace"]:
+        i1, i2 = _expand_digits(name, i1, i2)
         marker = _get_group_marker(name[:i1], name[i2:])
         return name[:i1] + marker + name[i2:]
     raise NameError("Could not get a common name", namelist)
