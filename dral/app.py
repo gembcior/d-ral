@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 from typing import Any, Optional, Type
 
 import click
-from rich import inspect, print
 from rich.console import Console
 from rich.traceback import install as traceback
 
@@ -34,7 +34,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     "--language",
     default="cpp",
     show_default=True,
-    type=click.Choice(["c", "cpp", "python", "asm"], case_sensitive=False),
+    type=click.Choice(["cpp"], case_sensitive=False),
     help="Specify the programming language for which you want to generate files.",
 )
 @click.option(
@@ -42,7 +42,7 @@ def override_adapter(adapter: Type[BaseAdapter]) -> None:
     "--template-type",
     default="mcu",
     show_default=True,
-    type=click.Choice(["mcu", "serial"], case_sensitive=False),
+    type=click.Choice(["mcu"], case_sensitive=False),
     help="Specify the template type used to generate files.",
 )
 @click.option(
@@ -111,42 +111,44 @@ def cli(  # noqa: C901
         template_dir_list.insert(0, template_path / language)
     forbidden_words = Utils.get_forbidden_words(language)
 
-    # info = "[bold green]Generating D-Ral files..."
-    # with console.status(info):
-    # Convert data using adapter
-    # adapter = DRAL_CUSTOM_ADAPTER(input)
-    adapter = SvdAdapter()
-    device = adapter.convert(input)
+    info = "[bold green]Generating D-Ral files..."
+    with console.status(info):
+        # Convert data using adapter
+        adapter = DRAL_CUSTOM_ADAPTER()
+        # adapter = SvdAdapter()
+        device = adapter.convert(input)
 
-    # Apply filters
-    filters: Any = []
-    if black_list_objects is not None:
-        filters.append(BlackListFilter(black_list_objects))
-    if white_list_objects is not None:
-        filters.append(WhiteListFilter(white_list_objects))
-    if not skip_groups_detection:
-        filters.append(GroupsFilter())
-    for item in filters:
-        device = item.apply(device)
+        # Apply filters
+        filters: Any = []
+        if black_list_objects is not None:
+            filters.append(BlackListFilter(black_list_objects))
+        if white_list_objects is not None:
+            filters.append(WhiteListFilter(white_list_objects))
+        if not skip_groups_detection:
+            filters.append(GroupsFilter())
+        for item in filters:
+            device = item.apply(device)
 
-    # Generate D-RAL data
-    generator = DralGenerator(template_dir_list, forbidden_words)
-    dral_output_files = generator.generate("main.jinja", device)
+        # Generate D-RAL data
+        generator = DralGenerator(template_dir_list, forbidden_words)
+        dral_output_files = generator.generate("main.jinja", device)
 
-    # Make output
-    output = output / "dralOutput"
+        # Make output
+        output = output / "dralOutput"
 
-    chip = Utils.get_device_info(input)[0]
-    if language == "cpp":
-        output_format: BaseFormat = CppFormat(output, "dral", chip)
-    elif language == "python":
-        output_format = PythonFormat(output, chip)
-    elif language == "asm":
-        output_format = AsmFormat(output, chip)
-    else:
-        raise ValueError(f"Language {language} not supported")
+        chip = device.name.lower()
+        if language == "cpp":
+            output_format: BaseFormat = CppFormat(output, "dral", chip)
+        else:
+            raise ValueError(f"Language {language} not supported")
 
-    output_format.make(dral_output_files)
+        output_format.make(dral_output_files)
+
+        # Copy model files
+        model_dir = Utils.get_model_dir(language)
+        Path.mkdir(output / "model", parents=True, exist_ok=True)
+        for model_file in model_dir.glob("*.h"):
+            shutil.copy(model_file, output / "model")
 
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 

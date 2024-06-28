@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -15,6 +16,9 @@ from dral.objects import DralDevice
 class DralOutputFile:
     name: str
     content: str
+
+    def asdict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
 
 
 class DralGenerator:

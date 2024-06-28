@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 from natsort import natsorted
-from rich import inspect, print
 
 from dral.filter.base import BaseFilter
 from dral.name import get_common_name, get_name_difference, is_similar_name

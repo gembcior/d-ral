@@ -1,1 +1,0 @@
-using [dral]field.name%lowercase[#dral] = FieldModel<address, 65, 0x1234>;

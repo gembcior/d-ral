@@ -11,7 +11,7 @@ from dral.objects import DralDevice
 
 class WhiteBlackListAdapter(BaseAdapter):
     def _list_to_dral(self, _list: dict[str, Any]) -> DralDevice:
-        device = DralDevice(name="WhiteList", **_list)
+        device = DralDevice(name="WhiteBlackList", **_list)
         return device
 
     def convert(self, input_file: Path) -> DralDevice:
