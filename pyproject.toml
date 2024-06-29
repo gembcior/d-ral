@@ -30,7 +30,8 @@ pytest = "^8.2"
 pytest-sugar = "^1.0"
 pytest-cov = "^5.0"
 pytest-clarity = "^1.0"
-pyyaml = "^6.0"
+pylama = "^8.4"
+mypy = "^1.10"
 
 [tool.poetry.scripts]
 dral = "dral.app:cli"
