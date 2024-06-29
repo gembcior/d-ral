@@ -34,6 +34,9 @@ jobs:
         virtualenvs-in-project: true
     - name: Install dependencies
       run: poetry install --with dev --no-interaction
+    - name: Install setuptools
+      if: ${{ matrix.python-version == '3.12' }}
+      run: poetry run pip install setuptools
     - name: Test with pytest
       run: poetry run pytest
 
