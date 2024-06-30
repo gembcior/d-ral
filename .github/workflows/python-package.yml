@@ -2,22 +2,28 @@ name: Python package
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  tests:
+    name: Tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
-
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out the repository
+      uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x64
@@ -27,17 +33,40 @@ jobs:
         virtualenvs-create: true
         virtualenvs-in-project: true
     - name: Install dependencies
-      run: poetry install --no-interaction
-    - name: Lint with pylama
-      run: |
-        source .venv/bin/activate
-        pylama dral
-    - name: Lint with mypy
-      run: |
-        source .venv/bin/activate
-        mypy --install-types --non-interactive
-        mypy -p dral
+      run: poetry install --with dev --no-interaction
+    - name: Install setuptools
+      if: ${{ matrix.python-version == '3.12' }}
+      run: poetry run pip install setuptools
     - name: Test with pytest
-      run: |
-        source .venv/bin/activate
-        pytest
+      run: poetry run pytest
+
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.11"
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: x64
+    - name: Install and configure Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+    - name: Install dependencies
+      run: poetry install --with dev --no-interaction
+    - name: Lint with pylama
+      if: ${{ success() }}
+      run: poetry run pylama dral
+    - name: Lint with mypy
+      if: ${{ success() || failure() }}
+      run: poetry run mypy --install-types --non-interactive -p dral

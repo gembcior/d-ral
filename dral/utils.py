@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import glob
-from importlib import resources
 from pathlib import Path
-from typing import Optional, Tuple, Union
 
 
 class Utils:
@@ -11,39 +8,25 @@ class Utils:
         pass
 
     @staticmethod
-    def get_template(template: Union[str, Path], name: str) -> Path:
-        if isinstance(template, Path):
-            return template / name
-        else:
-            with resources.path(f"dral.templates.{template}", name) as item:
-                return Path(item)
-
-    @staticmethod
     def get_template_dir(language: str, name: str) -> Path:
         templates_path = Path(__file__).parent / "templates" / language
         return templates_path / name
 
     @staticmethod
-    def get_svd_file(device: str) -> Optional[Path]:
-        devices_path = Path(__file__).parent / "devices"
-        svd = glob.glob(f"{devices_path}/**/{device}.svd", recursive=True)
-        if svd:
-            return devices_path / Path(svd[0])
-        return None
+    def get_forbidden_words(language: str) -> list[str]:
+        forbidden_words_path = Path(__file__).parent / "forbidden"
+        if not forbidden_words_path.exists():
+            raise FileNotFoundError(f"Forbidden words files directory not found at {forbidden_words_path}")
+        output = []
+        for words_file in forbidden_words_path.glob("model.txt"):
+            with open(words_file, "r", encoding="UTF-8") as f:
+                output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
+        for words_file in forbidden_words_path.glob(f"{language}.txt"):
+            with open(words_file, "r", encoding="UTF-8") as f:
+                output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
+        return output
 
     @staticmethod
-    def get_device_info(svd: Path) -> Tuple[str, str, str]:
-        svd = svd.resolve()
-        return svd.stem, "", ""
-
-    @staticmethod
-    def get_model_template_dir(language: str) -> Path:
-        model_path = Path(__file__).parent / "templates" / "model" / language
+    def get_model_dir(language: str) -> Path:
+        model_path = Path(__file__).parent / "model" / language
         return model_path
-
-    @staticmethod
-    def get_forbidden_words(language: str) -> Optional[Path]:
-        forbidden_words_path = Path(__file__).parent / "templates" / language / "forbidden.yaml"
-        if forbidden_words_path.exists():
-            return forbidden_words_path
-        return None

@@ -1,0 +1,178 @@
+{%- macro getGroupBaseAddress(group) %}
+public:
+  static constexpr uintptr_t {{ group.name | upperCamelCase }}BaseAddress = {{ "0x{:08X}".format(group.address) }};
+{%- endmacro -%}
+
+{%- macro getGroupEnum(group) %}
+private:
+  enum class {{ group.name | upperCamelCase }}Index
+  {
+    {% for instance in group.instances %}
+    {{ instance.name | upperCamelCase }},
+    {% endfor %}
+  };
+
+public:
+  struct Index
+  {
+    using enum {{ group.name | upperCamelCase }}Index;
+    static constexpr std::array All = {{ '{ ' }}{% for instance in group.instances[:-1] %}{{ group.name | upperCamelCase}}Index::{{instance.name | upperCamelCase}}, {% endfor %}{{ group.name | upperCamelCase}}Index::{{group.instances[-1].name | upperCamelCase}}{{ ' }' }};
+  };
+{%- endmacro -%}
+
+{%- macro getGroupPolicy(group) %}
+private:
+{% if group is nonUniformOffset %}
+  using {{ group.name | upperCamelCase }}LayerOffsetPolicy = NonUniformLayerOffsetPolicy<{{ group.name | upperCamelCase }}Index, std::integer_sequence<std::uintptr_t, {% for x in group.offset[:-1] %}{{ "0x{:08X}".format(x) }}, {% endfor %}{{ "0x{:08X}".format(group.offset[-1]) }}>>;
+{% else %}
+  using {{ group.name | upperCamelCase }}LayerOffsetPolicy = LayerOffsetPolicy<{{ group.name | upperCamelCase }}Index, {{ "0x{:08X}".format(group.offset) }}>;
+{% endif %}
+
+  template<std::uintptr_t Address>
+  {% if group is topLevelGroup %}
+  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[1:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
+  {% else %}
+  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[2:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
+  {% endif %}
+{%- endmacro -%}
+
+{%- macro getSimpleGroupPolicy(group) %}
+private:
+  template<std::uintptr_t Address>
+  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address>;
+{%- endmacro -%}
+
+{%- macro getGroup(group, groupIndent) %}
+/**
+ * GROUP {{ group.name | upper }}
+ */
+public:
+  class {{ group.name | upperCamelCase }}
+  {
+{% filter indent(groupIndent + 2, True) %}
+{{ getGroupBaseAddress(group) }}
+
+{{ getGroupEnum(group) }}
+
+{{ getGroupPolicy(group) }}
+{% endfilter -%}
+
+    {% for child in group.registers recursive %}
+    {{- getChild(child, groupIndent + 2) }}
+    {% endfor %}
+
+    {% for child in group.groups recursive %}
+    {{- getChild(child, groupIndent + 2) }}
+    {% endfor %}
+  };
+{%- endmacro -%}
+
+{%- macro getSimpleGroup(group, groupIndent) %}
+/**
+ * SIMPLE GROUP {{ group.name | upper }}
+ */
+public:
+  class {{ group.name | upperCamelCase }}
+  {
+{% filter indent(groupIndent + 2, True) %}
+{{ getGroupBaseAddress(group) }}
+
+{{ getSimpleGroupPolicy(group) }}
+{% endfilter -%}
+
+    {% for child in group.registers recursive %}
+    {{- getChild(child, groupIndent + 2) }}
+    {% endfor %}
+
+    {% for child in group.groups recursive %}
+    {{- getChild(child, groupIndent + 2) }}
+    {% endfor %}
+  };
+{%- endmacro -%}
+
+{%- macro getRegister(register, registerIndent) %}
+/**
+ * REGISTER {{ register.name | upper }}
+ */
+private:
+  template<typename SizeType>
+  class {{ register.name | upperCamelCase }}RegisterUnion
+  {
+  public:
+    union
+    {
+      SizeType value;
+      {% for field in register.fields %}
+      BitFieldModel<SizeType, {{ field.position }}, {{ field.width }}> {{ field.name | lowerCamelCase | isForbidden }};
+      {% endfor %}
+    };
+  };
+
+private:
+  template<typename SizeType, std::uintptr_t Address>
+  class {{ register.name | upperCamelCase }}RegisterModel : public RegisterModel<{{ register.name | upperCamelCase }}RegisterUnion<SizeType>, {{ register.parent[-1] | upperCamelCase }}AddressPolicy<Address>>
+  {
+  public:
+    using reg = {{ register.name | upperCamelCase }}RegisterUnion<SizeType>;
+
+  public:
+    {% for field in register.fields %}
+    using {{ field.name | lowerCamelCase | isForbidden }} = FieldModel<reg, {{ register.parent[-1] | upperCamelCase }}AddressPolicy<Address>, {{ field.position }}, {{ field.width }}>;
+    {% endfor %}
+  };
+
+public:
+  using {{ register.name | lowerCamelCase | isForbidden }} = {{ register.name | upperCamelCase }}RegisterModel<uint32_t, {% for x in register.parent[1:] %}{{ x | upperCamelCase}}BaseAddress + {% endfor %}{{ "0x{:08X}".format(register.address) }}>;
+{%- endmacro -%}
+
+{%- macro getChild(child, childIndent) %}
+{% if child is dralRegister %}
+  {% filter indent(childIndent, True) %}
+  {{- getRegister(child, childIndent) }}
+  {% endfilter %}
+{% elif child is dralGroup %}
+  {% filter indent(childIndent, True) %}
+{% if child is multiInstance %}
+  {{- getGroup(child, childIndent) }}
+{% else %}
+  {{- getSimpleGroup(child, childIndent) }}
+{% endif %}
+  {% endfilter %}
+{% endif %}
+{%- endmacro -%}
+
+{% include 'header.jinja' +%}
+
+#ifndef DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+#define DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+
+{% include 'model.import.jinja' +%}
+
+namespace dral::{{ device | lower }} {
+
+class {{ root.name | upperCamelCase }}
+{
+{% if root is multiInstance %}
+{{ getGroupBaseAddress(root) }}
+
+{{ getGroupEnum(root) }}
+
+{{ getGroupPolicy(root) -}}
+{% else %}
+{{ getGroupBaseAddress(root) }}
+
+{{ getSimpleGroupPolicy(root) }}
+{% endif %}
+
+{% for register in root.registers %}
+  {{- getChild(register, 0) }}
+{% endfor %}
+
+{% for group in root.groups recursive %}
+  {{- getChild(group, 0) }}
+{% endfor %}
+};
+
+}
+
+#endif /* DRAL_{{ device | upper }}_{{ root.name | upper }}_H */

@@ -7,3 +7,7 @@
 .coverage
 **/dralOutput
 **/.tox
+**/.mypy_cache
+**/.pytest_cache
+.venv
+venv

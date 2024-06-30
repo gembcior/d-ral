@@ -1,0 +1,1145 @@
+{
+    "name": "ARM_Example",
+    "description": "ARM 32-bit Cortex-M3 Microcontroller based device, CPU clock up to 80MHz, etc. ",
+    "dral_object": "DralDevice",
+    "parent": [],
+    "groups": [
+        {
+            "name": "TIMER0",
+            "description": "32 Timer / Counter, counting up or down from different sources",
+            "dral_object": "DralGroup",
+            "parent": [
+                "ARM_Example"
+            ],
+            "address": 1073807360,
+            "offset": 0,
+            "instances": [
+                {
+                    "name": "TIMER0",
+                    "description": "",
+                    "dral_object": "DralGroupInstance",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 1073807360
+                }
+            ],
+            "groups": [],
+            "registers": [
+                {
+                    "name": "CR",
+                    "description": "Control Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 0,
+                    "size": 32,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Reset Timer",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 1,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNT",
+                            "description": "Counting direction",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 2,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Operation Mode",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        },
+                        {
+                            "name": "PSC",
+                            "description": "Use Prescaler",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 7,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNTSRC",
+                            "description": "Timer / Counter Source Divider",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 8,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPSRC",
+                            "description": "Timer / Counter Capture Source",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 12,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPEDGE",
+                            "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 16,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "TRGEXT",
+                            "description": "Triggers an other Peripheral",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 20,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Select RELOAD Register n to reload Timer on condition",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 24,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "IDR",
+                            "description": "Selects, if Reload Register number is incremented, decremented or not modified",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 26,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "S",
+                            "description": "Starts and Stops the Timer / Counter",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "CR"
+                            ],
+                            "position": 31,
+                            "mask": 1,
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "SR",
+                    "description": "Status Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 4,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "RUN",
+                            "description": "Shows if Timer is running or not",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MATCH",
+                            "description": "Shows if the MATCH was hit",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 8,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "UN",
+                            "description": "Shows if an underflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 9,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "OV",
+                            "description": "Shows if an overflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 10,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Shows if Timer is in RESET state",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 12,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Shows the currently active RELOAD Register",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "SR"
+                            ],
+                            "position": 14,
+                            "mask": 3,
+                            "width": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "INT",
+                    "description": "Interrupt Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 16,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Interrupt Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "INT"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER0",
+                                "INT"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "COUNT",
+                    "description": "The Counter Register reflects the actual Value of the Timer/Counter",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 32,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "MATCH",
+                    "description": "The Match Register stores the compare Value for the MATCH condition",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 36,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_RD",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_WR",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER0"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "name": "TIMER1",
+            "description": "32 Timer / Counter, counting up or down from different sources",
+            "dral_object": "DralGroup",
+            "parent": [
+                "ARM_Example"
+            ],
+            "address": 1073807616,
+            "offset": 0,
+            "instances": [
+                {
+                    "name": "TIMER1",
+                    "description": "",
+                    "dral_object": "DralGroupInstance",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 1073807616
+                }
+            ],
+            "groups": [],
+            "registers": [
+                {
+                    "name": "CR",
+                    "description": "Control Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 0,
+                    "size": 32,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Reset Timer",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 1,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNT",
+                            "description": "Counting direction",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 2,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Operation Mode",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        },
+                        {
+                            "name": "PSC",
+                            "description": "Use Prescaler",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 7,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNTSRC",
+                            "description": "Timer / Counter Source Divider",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 8,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPSRC",
+                            "description": "Timer / Counter Capture Source",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 12,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPEDGE",
+                            "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 16,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "TRGEXT",
+                            "description": "Triggers an other Peripheral",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 20,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Select RELOAD Register n to reload Timer on condition",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 24,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "IDR",
+                            "description": "Selects, if Reload Register number is incremented, decremented or not modified",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 26,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "S",
+                            "description": "Starts and Stops the Timer / Counter",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "CR"
+                            ],
+                            "position": 31,
+                            "mask": 1,
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "SR",
+                    "description": "Status Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 4,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "RUN",
+                            "description": "Shows if Timer is running or not",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MATCH",
+                            "description": "Shows if the MATCH was hit",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 8,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "UN",
+                            "description": "Shows if an underflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 9,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "OV",
+                            "description": "Shows if an overflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 10,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Shows if Timer is in RESET state",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 12,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Shows the currently active RELOAD Register",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "SR"
+                            ],
+                            "position": 14,
+                            "mask": 3,
+                            "width": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "INT",
+                    "description": "Interrupt Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 16,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Interrupt Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "INT"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER1",
+                                "INT"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "COUNT",
+                    "description": "The Counter Register reflects the actual Value of the Timer/Counter",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 32,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "MATCH",
+                    "description": "The Match Register stores the compare Value for the MATCH condition",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 36,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_RD",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_WR",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER1"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "name": "TIMER2",
+            "description": "32 Timer / Counter, counting up or down from different sources",
+            "dral_object": "DralGroup",
+            "parent": [
+                "ARM_Example"
+            ],
+            "address": 1073807872,
+            "offset": 0,
+            "instances": [
+                {
+                    "name": "TIMER2",
+                    "description": "",
+                    "dral_object": "DralGroupInstance",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 1073807872
+                }
+            ],
+            "groups": [],
+            "registers": [
+                {
+                    "name": "CR",
+                    "description": "Control Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 0,
+                    "size": 32,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Reset Timer",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 1,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNT",
+                            "description": "Counting direction",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 2,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Operation Mode",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        },
+                        {
+                            "name": "PSC",
+                            "description": "Use Prescaler",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 7,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "CNTSRC",
+                            "description": "Timer / Counter Source Divider",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 8,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPSRC",
+                            "description": "Timer / Counter Capture Source",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 12,
+                            "mask": 15,
+                            "width": 4
+                        },
+                        {
+                            "name": "CAPEDGE",
+                            "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 16,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "TRGEXT",
+                            "description": "Triggers an other Peripheral",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 20,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Select RELOAD Register n to reload Timer on condition",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 24,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "IDR",
+                            "description": "Selects, if Reload Register number is incremented, decremented or not modified",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 26,
+                            "mask": 3,
+                            "width": 2
+                        },
+                        {
+                            "name": "S",
+                            "description": "Starts and Stops the Timer / Counter",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "CR"
+                            ],
+                            "position": 31,
+                            "mask": 1,
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "SR",
+                    "description": "Status Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 4,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "RUN",
+                            "description": "Shows if Timer is running or not",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MATCH",
+                            "description": "Shows if the MATCH was hit",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 8,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "UN",
+                            "description": "Shows if an underflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 9,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "OV",
+                            "description": "Shows if an overflow occured. This flag is sticky",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 10,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RST",
+                            "description": "Shows if Timer is in RESET state",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 12,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "RELOAD",
+                            "description": "Shows the currently active RELOAD Register",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "SR"
+                            ],
+                            "position": 14,
+                            "mask": 3,
+                            "width": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "INT",
+                    "description": "Interrupt Register",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 16,
+                    "size": 16,
+                    "default": 0,
+                    "fields": [
+                        {
+                            "name": "EN",
+                            "description": "Interrupt Enable",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "INT"
+                            ],
+                            "position": 0,
+                            "mask": 1,
+                            "width": 1
+                        },
+                        {
+                            "name": "MODE",
+                            "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
+                            "dral_object": "DralField",
+                            "parent": [
+                                "ARM_Example",
+                                "TIMER2",
+                                "INT"
+                            ],
+                            "position": 4,
+                            "mask": 7,
+                            "width": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "COUNT",
+                    "description": "The Counter Register reflects the actual Value of the Timer/Counter",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 32,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "MATCH",
+                    "description": "The Match Register stores the compare Value for the MATCH condition",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 36,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_RD",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                },
+                {
+                    "name": "PRESCALE_WR",
+                    "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
+                    "dral_object": "DralRegister",
+                    "parent": [
+                        "ARM_Example",
+                        "TIMER2"
+                    ],
+                    "address": 40,
+                    "size": 32,
+                    "default": 0,
+                    "fields": []
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Registers</title>
+
+  <style>
+    table {
+      border: 1px solid black;
+      border-spacing: 0px;
+    }
+
+    th {
+      border-spacing: 0px;
+      border: 1px solid black;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    td {
+      border: 1px solid black;
+      border-spacing: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      width: 25px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+
+  </header>
+
+
+  <main>
+    <table>
+      <tr>
+          <td colspan="16">Register</td>
+      </tr>
+      <tr>
+        <td style="border-right: 0">15</td>
+        <td style="border-left: 0">14</td>
+        <td>13</td>
+        <td>12</td>
+        <td>11</td>
+        <td>10</td>
+        <td>9</td>
+        <td>8</td>
+        <td>7</td>
+        <td>6</td>
+        <td>5</td>
+        <td>4</td>
+        <td>3</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="">EN</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </main>
+
+</body>
+
+</html>

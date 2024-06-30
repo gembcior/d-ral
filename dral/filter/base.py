@@ -2,13 +2,10 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from ..types import Device
+from dral.objects import DralDevice
 
 
 class BaseFilter(ABC):
-    def __init__(self) -> None:
-        pass
-
     @abstractmethod
-    def apply(self, device: Device) -> Device:
+    def apply(self, device: DralDevice) -> DralDevice:
         pass

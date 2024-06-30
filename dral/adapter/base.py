@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from ..types import Device
+from dral.objects import DralDevice
 
 
 class BaseAdapter(ABC):
@@ -21,9 +21,6 @@ class BaseAdapter(ABC):
         Returns data structure used by d-ral generator
     """
 
-    def __init__(self, _=Path) -> None:  # type: ignore[no-untyped-def]
-        pass
-
     @abstractmethod
-    def convert(self) -> Device:
+    def convert(self, input_file: Path) -> DralDevice:
         pass
