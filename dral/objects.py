@@ -12,7 +12,7 @@ class DralObject:
     dral_object: str = dataclasses.field(kw_only=True, default="DralObject")
     parent: list[str] = dataclasses.field(kw_only=True, default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.dral_object = self.__class__.__name__
 
     def asdict(self) -> dict[str, Any]:
@@ -68,7 +68,7 @@ class DralGroup(DralObject):
 class DralDevice(DralObject):
     groups: list[DralGroup] = dataclasses.field(default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         super().__post_init__()
         self.link_parent()
 

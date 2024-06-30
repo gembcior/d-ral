@@ -11,7 +11,7 @@ from rich.traceback import install as traceback
 from dral.adapter.svd import SvdAdapter
 from dral.adapter.white_black_list import WhiteBlackListAdapter
 from dral.filter import BlackListFilter, GroupsFilter, WhiteListFilter
-from dral.format import AsmFormat, CppFormat, PythonFormat
+from dral.format import CppFormat
 from dral.format.base import BaseFormat
 
 from .adapter.base import BaseAdapter
@@ -153,9 +153,5 @@ def cli(  # noqa: C901
     console.print(f"Successfully generated D-Ral files to {output}", style="green")
 
 
-def main() -> None:
-    cli()  # noqa: E1120
-
-
 if __name__ == "__main__":
-    main()
+    cli()  # noqa: E1120

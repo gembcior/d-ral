@@ -176,7 +176,7 @@ class GroupsFilter(BaseFilter):
     def _merge_all_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
         groups = self._get_merged_groups(groups)
         to_update = [groups]
-        to_update_next = []
+        to_update_next: list[list[DralGroup]] = []
         while True:
             for next in to_update:
                 to_update_next = []
@@ -204,7 +204,7 @@ class GroupsFilter(BaseFilter):
     def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
         if not groups:
             return groups
-        duplicated = {}
+        duplicated: dict[str, list[str]] = {}
         for group in groups:
             if group.name in duplicated:
                 duplicated[group.name].append(group.name)

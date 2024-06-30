@@ -18,7 +18,7 @@ from .base import BaseAdapter
 
 
 class IncorrectSvdError(Exception):
-    def __init__(self, message: str, dral_object: dict = {}):
+    def __init__(self, message: str, dral_object: dict[str, Any] = {}):
         self.message = message
         self.dral_object = dral_object
         super().__init__(message, dral_object)
@@ -48,7 +48,7 @@ class SvdAdapter(BaseAdapter):
                     raise IncorrectSvdError("Determining the position and width of the field is impossible.", field)
                 position = int(result.group(2))
                 width = (int(result.group(1)) + 1) - position
-            elif "lsb" in svd_fields and "msb" in svd_fields:
+            elif "lsb" in field and "msb" in field:
                 position = field["lsb"]
                 width = (field["msb"] + 1) - position
             elif "bitOffset" in field and "bitWidth" in field:
@@ -56,14 +56,14 @@ class SvdAdapter(BaseAdapter):
                 width = field["bitWidth"]
             else:
                 raise IncorrectSvdError("Determining the position and width of the field is impossible.", field)
-            field = DralField(
+            new_field = DralField(
                 name=field["name"],
                 description=field["description"],
                 position=position,
                 width=width,
                 mask=(1 << width) - 1,
             )
-            fields.append(field)
+            fields.append(new_field)
         return fields
 
     def _parse_clusters(self, svd_clusters: list[dict[str, Any]]) -> list[DralGroup]:
@@ -92,7 +92,7 @@ class SvdAdapter(BaseAdapter):
                 self._resolve_dim_groups(register)
             if "attributes" in register and "derivedFrom" in register["attributes"]:
                 register = self._get_the_origin(svd_registers, register, register["attributes"]["derivedFrom"])
-            register = DralRegister(
+            new_register = DralRegister(
                 name=register["name"],
                 description=register["description"],
                 address=register["addressOffset"],
@@ -100,7 +100,7 @@ class SvdAdapter(BaseAdapter):
                 default=register["resetValue"],
                 fields=self._parse_fields(register["fields"]["field"]) if "fields" in register else [],
             )
-            registers.append(register)
+            registers.append(new_register)
         return registers
 
     def _parse_peripherals(self, svd_peripherals: list[dict[str, Any]]) -> list[DralGroup]:

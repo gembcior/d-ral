@@ -30,10 +30,10 @@ class DralGenerator:
         return len(group["instances"]) > 1
 
     def _is_dral_register(self, dral_object: dict[str, Any]) -> bool:
-        return dral_object["dral_object"] == "DralRegister"
+        return bool(dral_object["dral_object"] == "DralRegister")
 
     def _is_dral_group(self, dral_object: dict[str, Any]) -> bool:
-        return dral_object["dral_object"] == "DralGroup"
+        return bool(dral_object["dral_object"] == "DralGroup")
 
     def _is_top_level_group(self, group: dict[str, Any]) -> bool:
         return len(group["parent"]) == 1
