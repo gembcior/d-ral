@@ -139,9 +139,10 @@ class GroupsFilter(BaseFilter):
                     DralRegister(
                         name=new_name,
                         description=registers[0].description,
+                        access=registers[0].access,
+                        value_type=registers[0].value_type,
                         address=0,
                         size=registers[0].size,
-                        default=registers[0].default,
                         fields=registers[0].fields,
                     )
                 ],

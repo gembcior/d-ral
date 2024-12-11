@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import tarfile
+import urllib.request
 from pathlib import Path
 
 
@@ -27,6 +29,13 @@ class Utils:
         return output
 
     @staticmethod
-    def get_model_dir(language: str) -> Path:
-        model_path = Path(__file__).parent / "model" / language
-        return model_path
+    def get_model_release(output: Path) -> None:
+        version = "v0.2.0"
+        url = f"https://github.com/gembcior/d-ral-model/releases/download/{version}/d-ral-model.tar.gz"
+        response = urllib.request.urlopen(url)
+        package = output / "d-ral-model.tar.gz"
+        with open(package, "wb") as f:
+            f.write(response.read())
+        with tarfile.open(package, "r") as tar:
+            tar.extractall(output)
+        package.unlink()

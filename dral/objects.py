@@ -2,7 +2,36 @@ from __future__ import annotations
 
 import dataclasses
 from dataclasses import dataclass
+from enum import Enum
 from typing import Any
+
+
+class DralAccessType(Enum):
+    ReadOnly = 0
+    WriteOnly = 1
+    ReadWrite = 2
+
+
+@dataclass
+class DralSuffix:
+    group: str = "group"
+    register: str = "register"
+    field: str = "field"
+
+    def asdict(self) -> dict[str, str]:
+        return dataclasses.asdict(self)
+
+
+@dataclass
+class DralParentObject:
+    name: str
+    instances: list[DralGroupInstance] = dataclasses.field(default_factory=list)
+
+
+@dataclass
+class DralGroupInstance:
+    name: str
+    address: int
 
 
 @dataclass
@@ -10,7 +39,7 @@ class DralObject:
     name: str
     description: str = dataclasses.field(kw_only=True, default="")
     dral_object: str = dataclasses.field(kw_only=True, default="DralObject")
-    parent: list[str] = dataclasses.field(kw_only=True, default_factory=list)
+    parent: list[DralParentObject] = dataclasses.field(kw_only=True, default_factory=list)
 
     def __post_init__(self) -> None:
         self.dral_object = self.__class__.__name__
@@ -20,34 +49,30 @@ class DralObject:
 
 
 @dataclass
-class DralField(DralObject):
+class DralConcreteObject(DralObject):
+    access: DralAccessType
+    value_type: str
+
+
+@dataclass
+class DralField(DralConcreteObject):
     position: int
-    mask: int
     width: int
 
-    def link_parent(self, parent: list[str] | None = None) -> None:
+    def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
 
 
 @dataclass
-class DralRegister(DralObject):
+class DralRegister(DralConcreteObject):
     address: int
     size: int
-    default: int
     fields: list[DralField] = dataclasses.field(default_factory=list)
 
-    def link_parent(self, parent: list[str] | None = None) -> None:
+    def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
         for child in self.fields:
-            child.link_parent(self.parent + [self.name])
-
-
-@dataclass
-class DralGroupInstance(DralObject):
-    address: int
-
-    def link_parent(self, parent: list[str] | None = None) -> None:
-        self.parent = parent if parent is not None else []
+            child.link_parent(self.parent + [DralParentObject(self.name, [])])
 
 
 @dataclass
@@ -58,10 +83,10 @@ class DralGroup(DralObject):
     groups: list[DralGroup] = dataclasses.field(default_factory=list)
     registers: list[DralRegister] = dataclasses.field(default_factory=list)
 
-    def link_parent(self, parent: list[str] | None = None) -> None:
+    def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
-        for child in self.registers + self.groups + self.instances:
-            child.link_parent(self.parent + [self.name])
+        for child in self.registers + self.groups:
+            child.link_parent(self.parent + [DralParentObject(self.name, self.instances)])
 
 
 @dataclass
@@ -72,7 +97,7 @@ class DralDevice(DralObject):
         super().__post_init__()
         self.link_parent()
 
-    def link_parent(self, parent: list[str] | None = None) -> None:
+    def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
         for child in self.groups:
-            child.link_parent(self.parent + [self.name])
+            child.link_parent(self.parent + [DralParentObject(self.name, [])])

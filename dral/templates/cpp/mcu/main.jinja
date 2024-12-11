@@ -1,54 +1,76 @@
+{% macro getName(name, suffix) -%}
+{{ name ~ '_' ~ suffix }}
+{%- endmacro -%}
+
+{% macro getGroupName(name) -%}
+{{ getName(name, suffix.group) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getRegisterName(name) -%}
+{{ getName(name, suffix.register) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getFieldName(name) -%}
+{{ getName(name, suffix.field) | lowerCamelCase | isForbidden }}
+{%- endmacro -%}
+
+{% macro getFieldEnumName(name) -%}
+{{ name | lowerCamelCase | isForbidden }}
+{%- endmacro %}
+
+{% macro getAccessType(access) -%}
+{% set mapping = ["AccessType::ReadOnly", "AccessType::WriteOnly", "AccessType::ReadWrite"] %}
+{{ mapping[access.value] }}
+{%- endmacro -%}
+
 {%- macro getGroupBaseAddress(group) %}
-public:
-  static constexpr uintptr_t {{ group.name | upperCamelCase }}BaseAddress = {{ "0x{:08X}".format(group.address) }};
+  static constexpr uintptr_t BaseAddress {{ '{' }}{{ "0x{:08X}".format(group.address) }}{{ '}' }};
 {%- endmacro -%}
 
 {%- macro getGroupEnum(group) %}
-private:
-  enum class {{ group.name | upperCamelCase }}Index
+public:
+  enum class IndexType
   {
     {% for instance in group.instances %}
     {{ instance.name | upperCamelCase }},
     {% endfor %}
   };
 
-public:
-  struct Index
+  struct Index final
   {
-    using enum {{ group.name | upperCamelCase }}Index;
-    static constexpr std::array All = {{ '{ ' }}{% for instance in group.instances[:-1] %}{{ group.name | upperCamelCase}}Index::{{instance.name | upperCamelCase}}, {% endfor %}{{ group.name | upperCamelCase}}Index::{{group.instances[-1].name | upperCamelCase}}{{ ' }' }};
+    using enum IndexType;
+    static constexpr std::array All {{ '{ ' }}{% for instance in group.instances[:-1] %}{{ instance.name | upperCamelCase }}, {% endfor %}{{ group.instances[-1].name | upperCamelCase }}{{ ' }' }};
   };
 {%- endmacro -%}
 
 {%- macro getGroupPolicy(group) %}
 private:
 {% if group is nonUniformOffset %}
-  using {{ group.name | upperCamelCase }}LayerOffsetPolicy = NonUniformLayerOffsetPolicy<{{ group.name | upperCamelCase }}Index, std::integer_sequence<std::uintptr_t, {% for x in group.offset[:-1] %}{{ "0x{:08X}".format(x) }}, {% endfor %}{{ "0x{:08X}".format(group.offset[-1]) }}>>;
+  using OffsetPolicy = NonUniformLayerOffsetPolicy<IndexType, std::integer_sequence<std::uintptr_t, {% for x in group.offset[:-1] %}{{ "0x{:08X}".format(x) }}, {% endfor %}{{ "0x{:08X}".format(group.offset[-1]) }}>>;
 {% else %}
-  using {{ group.name | upperCamelCase }}LayerOffsetPolicy = LayerOffsetPolicy<{{ group.name | upperCamelCase }}Index, {{ "0x{:08X}".format(group.offset) }}>;
+  using OffsetPolicy = LayerOffsetPolicy<IndexType, {{ "0x{:08X}".format(group.offset) }}>;
 {% endif %}
 
   template<std::uintptr_t Address>
-  {% if group is topLevelGroup %}
-  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[1:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
-  {% else %}
-  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address, std::tuple<{% for x in group.parent[2:] %}{{ x | upperCamelCase }}LayerOffsetPolicy, {% endfor %}{{ group.name | upperCamelCase}}LayerOffsetPolicy>>;
-  {% endif %}
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address, std::tuple<{% for x in group.parent[1:] if x is multiInstance %}{{ getGroupName(x.name) }}::OffsetPolicy, {% endfor %}OffsetPolicy>>;
 {%- endmacro -%}
 
 {%- macro getSimpleGroupPolicy(group) %}
-private:
   template<std::uintptr_t Address>
-  using {{ group.name | upperCamelCase }}AddressPolicy = GroupAddressPolicy<Address>;
+  {% if group is inMultiInstanceScope %}
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address, std::tuple<{% for x in group.parent[1:] if x is multiInstance %}{{ getGroupName(x.name) }}::OffsetPolicy, {% endfor %}>>;
+  {% else %}
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address>;
+  {%- endif %}
 {%- endmacro -%}
 
 {%- macro getGroup(group, groupIndent) %}
 /**
  * GROUP {{ group.name | upper }}
  */
-public:
-  class {{ group.name | upperCamelCase }}
+  class {{ getGroupName(group.name) }} final
   {
+  private:
 {% filter indent(groupIndent + 2, True) %}
 {{ getGroupBaseAddress(group) }}
 
@@ -56,7 +78,6 @@ public:
 
 {{ getGroupPolicy(group) }}
 {% endfilter -%}
-
     {% for child in group.registers recursive %}
     {{- getChild(child, groupIndent + 2) }}
     {% endfor %}
@@ -69,17 +90,17 @@ public:
 
 {%- macro getSimpleGroup(group, groupIndent) %}
 /**
- * SIMPLE GROUP {{ group.name | upper }}
+ * GROUP {{ group.name | upper }}
  */
-public:
-  class {{ group.name | upperCamelCase }}
+  class {{ getGroupName(group.name) }} final
   {
+  private:
 {% filter indent(groupIndent + 2, True) %}
 {{ getGroupBaseAddress(group) }}
 
 {{ getSimpleGroupPolicy(group) }}
-{% endfilter -%}
 
+{% endfilter -%}
     {% for child in group.registers recursive %}
     {{- getChild(child, groupIndent + 2) }}
     {% endfor %}
@@ -91,38 +112,41 @@ public:
 {%- endmacro -%}
 
 {%- macro getRegister(register, registerIndent) %}
+private:
+    {% if register.fields %}
+    enum class {{register.name | upperCamelCase}}Fields { {{ getFieldEnumName(register.fields[0].name) }} {% for x in register.fields[1:] %}, {{ getFieldEnumName(x.name) }} {% endfor %} };
+
+    using {{register.name | upperCamelCase}}AllMasks = std::tuple<MaskPolicy<{{register.value_type}}, {{ register.fields[0].position }}, {{ register.fields[0].width }}> {% for x in register.fields[1:] %}, MaskPolicy<{{register.value_type}}, {{ x.position }}, {{ x.width }}> {% endfor %}>;
+    {% else %}
+    enum class {{register.name | upperCamelCase}}Fields {};
+
+    using {{register.name | upperCamelCase}}AllMasks = std::tuple<>;
+    {% endif %}
+public:
 /**
  * REGISTER {{ register.name | upper }}
  */
-private:
-  template<typename SizeType>
-  class {{ register.name | upperCamelCase }}RegisterUnion
+  class {{ register.name | upperCamelCase }}Type : public RegisterValue<{{ register.value_type }}, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>
   {
   public:
-    union
-    {
-      SizeType value;
-      {% for field in register.fields %}
-      BitFieldModel<SizeType, {{ field.position }}, {{ field.width }}> {{ field.name | lowerCamelCase | isForbidden }};
-      {% endfor %}
-    };
+    using RegisterValue<{{ register.value_type }}, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>::RegisterValue;
+    using enum {{register.name | upperCamelCase}}Fields;
   };
 
-private:
-  template<typename SizeType, std::uintptr_t Address>
-  class {{ register.name | upperCamelCase }}RegisterModel : public RegisterModel<{{ register.name | upperCamelCase }}RegisterUnion<SizeType>, {{ register.parent[-1] | upperCamelCase }}AddressPolicy<Address>>
+  class {{ getRegisterName(register.name) }} final: public RegisterModel<{{ register.name | upperCamelCase }}Type, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{ getAccessType(register.access) }}>
   {
   public:
-    using reg = {{ register.name | upperCamelCase }}RegisterUnion<SizeType>;
-
-  public:
+    using reg = RegisterModel<{{ register.name | upperCamelCase }}Type, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{ getAccessType(register.access) }}>;
+  {% if register.fields %}
     {% for field in register.fields %}
-    using {{ field.name | lowerCamelCase | isForbidden }} = FieldModel<reg, {{ register.parent[-1] | upperCamelCase }}AddressPolicy<Address>, {{ field.position }}, {{ field.width }}>;
+    using {{ getFieldName(field.name) }} = FieldModel<reg, {{ field.position }}, {{ field.width }}>;
     {% endfor %}
-  };
 
-public:
-  using {{ register.name | lowerCamelCase | isForbidden }} = {{ register.name | upperCamelCase }}RegisterModel<uint32_t, {% for x in register.parent[1:] %}{{ x | upperCamelCase}}BaseAddress + {% endfor %}{{ "0x{:08X}".format(register.address) }}>;
+    using AllFields = std::tuple<{{ getFieldName(register.fields[0].name) }} {% for x in register.fields[1:] %}, {{ getFieldName(x.name) }} {% endfor %}>;
+  {% else %}
+  using AllFields = std::tuple<>;
+  {% endif %}
+  };
 {%- endmacro -%}
 
 {%- macro getChild(child, childIndent) %}
@@ -141,7 +165,7 @@ public:
 {% endif %}
 {%- endmacro -%}
 
-{% include 'header.jinja' +%}
+{%- include 'header.jinja' +%}
 
 #ifndef DRAL_{{ device | upper }}_{{ root.name | upper }}_H
 #define DRAL_{{ device | upper }}_{{ root.name | upper }}_H
@@ -150,20 +174,22 @@ public:
 
 namespace dral::{{ device | lower }} {
 
-class {{ root.name | upperCamelCase }}
+class {{ getGroupName(root.name) }} final
 {
+private:
 {% if root is multiInstance %}
 {{ getGroupBaseAddress(root) }}
 
 {{ getGroupEnum(root) }}
 
-{{ getGroupPolicy(root) -}}
+{{ getGroupPolicy(root) }}
 {% else %}
 {{ getGroupBaseAddress(root) }}
 
 {{ getSimpleGroupPolicy(root) }}
 {% endif %}
 
+public:
 {% for register in root.registers %}
   {{- getChild(register, 0) }}
 {% endfor %}

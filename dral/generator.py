@@ -9,7 +9,7 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader
 
 from dral.name import lower_camel_case, upper_camel_case
-from dral.objects import DralDevice
+from dral.objects import DralDevice, DralSuffix
 
 
 @dataclass
@@ -22,8 +22,9 @@ class DralOutputFile:
 
 
 class DralGenerator:
-    def __init__(self, template_dir: list[Path], forbidden_words: list[str] | None = None):
+    def __init__(self, template_dir: list[Path], suffix: DralSuffix = DralSuffix(), forbidden_words: list[str] | None = None):
         self._template_dir = template_dir
+        self._suffix = suffix
         self._forbidden_words = forbidden_words if forbidden_words else []
 
     def _is_multi_instance_group(self, group: dict[str, Any]) -> bool:
@@ -40,6 +41,12 @@ class DralGenerator:
 
     def _has_non_uniform_offset(self, group: dict[str, Any]) -> bool:
         return isinstance(group["offset"], list)
+
+    def _in_multi_instance_scope(self, group: dict[str, Any]) -> bool:
+        for parent in group["parent"]:
+            if len(parent["instances"]) > 1:
+                return True
+        return False
 
     def _get_system_mapping(self) -> dict[str, Any]:
         output = {
@@ -58,6 +65,7 @@ class DralGenerator:
         env.tests["dralGroup"] = self._is_dral_group
         env.tests["topLevelGroup"] = self._is_top_level_group
         env.tests["nonUniformOffset"] = self._has_non_uniform_offset
+        env.tests["inMultiInstanceScope"] = self._in_multi_instance_scope
         return env
 
     def generate(self, template: str, device: DralDevice) -> list[DralOutputFile]:
@@ -65,6 +73,11 @@ class DralGenerator:
         jinja_template = env.get_template(template)
         output = []
         for group in device.groups:
-            variables = {"system": self._get_system_mapping(), "device": device.name, "root": group.asdict()}
+            variables = {
+                "system": self._get_system_mapping(),
+                "device": device.name,
+                "root": group.asdict(),
+                "suffix": self._suffix.asdict(),
+            }
             output.append(DralOutputFile(group.name, jinja_template.render(**variables)))
         return output

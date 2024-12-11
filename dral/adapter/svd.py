@@ -12,6 +12,7 @@ from dral.objects import (
     DralGroup,
     DralGroupInstance,
     DralRegister,
+    DralAccessType,
 )
 
 from .base import BaseAdapter
@@ -59,9 +60,10 @@ class SvdAdapter(BaseAdapter):
             new_field = DralField(
                 name=field["name"],
                 description=field["description"],
+                access=DralAccessType.ReadWrite,
+                value_type="uint32_t",
                 position=position,
                 width=width,
-                mask=(1 << width) - 1,
             )
             fields.append(new_field)
         return fields
@@ -95,9 +97,10 @@ class SvdAdapter(BaseAdapter):
             new_register = DralRegister(
                 name=register["name"],
                 description=register["description"],
+                access=DralAccessType.ReadWrite,
+                value_type="uint32_t",
                 address=register["addressOffset"],
                 size=register["size"],
-                default=register["resetValue"],
                 fields=self._parse_fields(register["fields"]["field"]) if "fields" in register else [],
             )
             registers.append(new_register)

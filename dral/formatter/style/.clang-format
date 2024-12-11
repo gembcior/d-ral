@@ -1,0 +1,41 @@
+---
+Language: Cpp
+BasedOnStyle: Mozilla
+
+AlignEscapedNewlines: Left
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+BraceWrapping:
+  AfterCaseLabel:        false
+  AfterClass:            true
+  AfterControlStatement: Never
+  AfterEnum:             true
+  AfterFunction:         true
+  AfterNamespace:        false
+  AfterObjCDeclaration:  false
+  AfterStruct:           true
+  AfterUnion:            true
+  AfterExternBlock:      true
+  BeforeCatch:           false
+  BeforeElse:            false
+  BeforeLambdaBody:      false
+  BeforeWhile:           false
+  IndentBraces:          false
+  SplitEmptyFunction:    true
+  SplitEmptyRecord:      true
+  SplitEmptyNamespace:   true
+BreakBeforeBraces: Custom
+ColumnLimit: 140
+IncludeBlocks: Regroup
+IntegerLiteralSeparator:
+  Binary: 8
+  BinaryMinDigits: 0
+  Hex: 4
+  HexMinDigits: 2
+KeepEmptyLinesAtEOF: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+PenaltyReturnTypeOnItsOwnLine: 1000000
+SpacesBeforeTrailingComments: 2
+TabWidth: 2

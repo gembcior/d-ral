@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional
 
 from ..generator import DralOutputFile
-from .base import BaseFormat
+from .base import DralLayout
 
 
-class HtmlFormat(BaseFormat):
-    def __init__(self, directory: Path, device: str):
-        self._directory = directory / "html"
+class CppLayout(DralLayout):
+    def __init__(self, directory: Path, name: str, device: str):
+        self._directory = directory / "cpp"
+        self._name = name
         self._device = device
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:
@@ -22,7 +22,7 @@ class HtmlFormat(BaseFormat):
         Path.mkdir(directory_path, parents=True, exist_ok=True)
         return directory_path
 
-    def _make_default(self, objects: List[DralOutputFile], _: Optional[DralOutputFile] = None) -> None:
+    def make(self, objects: list[DralOutputFile]) -> None:
         directory = self._create_output_directory(self._directory)
         for item in objects:
-            self._create_file(f"{item.name.lower()}.S", directory, item.content)
+            self._create_file(f"{item.name.lower()}.h", directory, item.content)
