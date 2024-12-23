@@ -14,6 +14,14 @@
 {{ getName(name, suffix.field) | lowerCamelCase | isForbidden }}
 {%- endmacro -%}
 
+{% macro getIncludeGuard(device, root) -%}
+{% if device == root.name %}
+DRAL_{{ device | upper }}_H
+{%- else -%}
+DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+{% endif %}
+{%- endmacro -%}
+
 {% macro getFieldEnumName(name) -%}
 {{ name | lowerCamelCase | isForbidden }}
 {%- endmacro %}
@@ -167,8 +175,8 @@ public:
 
 {%- include 'header.jinja' +%}
 
-#ifndef DRAL_{{ device | upper }}_{{ root.name | upper }}_H
-#define DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+#ifndef {{ getIncludeGuard(device, root) }}
+#define {{ getIncludeGuard(device, root) }}
 
 {% include 'model.import.jinja' +%}
 
@@ -201,4 +209,4 @@ public:
 
 }
 
-#endif /* DRAL_{{ device | upper }}_{{ root.name | upper }}_H */
+#endif /* {{ getIncludeGuard(device, root) }} */

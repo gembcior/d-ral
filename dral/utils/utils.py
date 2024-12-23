@@ -10,13 +10,13 @@ class Utils:
         pass
 
     @staticmethod
-    def get_template_dir(language: str, name: str) -> Path:
-        templates_path = Path(__file__).parent / "templates" / language
-        return templates_path / name
+    def get_template_dir(language: str) -> Path:
+        templates_path = Path(__file__).parent.parent / "templates" / language
+        return templates_path
 
     @staticmethod
     def get_forbidden_words(language: str) -> list[str]:
-        forbidden_words_path = Path(__file__).parent / "forbidden"
+        forbidden_words_path = Path(__file__).parent.parent / "forbidden"
         if not forbidden_words_path.exists():
             raise FileNotFoundError(f"Forbidden words files directory not found at {forbidden_words_path}")
         output = []

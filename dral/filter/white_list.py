@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from dral.core.objects import DralDevice
 from dral.filter.base import BaseFilter
-from dral.objects import DralDevice
 
 
 class WhiteListFilter(BaseFilter):

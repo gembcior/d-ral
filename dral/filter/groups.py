@@ -5,8 +5,8 @@ from collections.abc import Sequence
 from natsort import natsorted
 
 from dral.filter.base import BaseFilter
-from dral.name import get_common_name, get_name_difference, is_similar_name
-from dral.objects import (
+from dral.utils.name import get_common_name, get_name_difference, is_similar_name
+from dral.core.objects import (
     DralDevice,
     DralField,
     DralGroup,

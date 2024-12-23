@@ -1,0 +1,495 @@
+{% import 'utils.html' as utils with context %}
+
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock title %}
+
+{% block header %}
+<div class="container-fluid ps-5 pe-5 mt-3">
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+    <div class="col">
+      <div class="d-flex justify-content-start align-items-center flex-wrap">
+        <span class="fs-4">Register</span>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="d-flex justify-content-end align-items-center flex-wrap">
+        <button type="button" class="btn btn-primary mx-2" onclick="expandAll()">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="me-2">Show All</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708m0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708"/>
+            </svg>
+          </div>
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" onclick="collapseAll()">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="me-2">Hide All</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708m0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock header %}
+
+{% block main %}
+<div class="container-fluid p-5">
+
+  <!-- Group Name -->
+  <div class="row mb-5 bg-body">
+    <div class="col">
+      <div class="row table-header">
+        <div class="col border table-header-border p-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="fw-bold text-center ms-2">
+              Group
+            </div>
+            <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#groupNameCollapse" aria-expanded="false" aria-controls="groupNameCollapse">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="me-2">Show/Hide</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
+                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11"/>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row border-start border-end border-2">
+        <div class="col-2 border border-top-0 text-end p-2">
+          <div class="fw-bold table-header-text">NAME</div>
+        </div>
+        <div class="col border border-top-0 text-start p-2">Register</div>
+      </div>
+      <div class="row border-start border-end border-2">
+        <div class="col-2 border text-end p-2">
+          <div class="fw-bold table-header-text">DESCRIPTION</div>
+        </div>
+        <div class="col border text-start p-2">Register Description</div>
+      </div>
+      <div class="row border-start border-end border-2">
+        <div class="col-2 border text-end p-2">
+          <div class="fw-bold table-header-text">ADDRESS</div>
+        </div>
+        <div class="col border text-start p-2">0x20000</div>
+      </div>
+      <div class="row border-start border-end border-2">
+        <div class="col-2 border text-end p-2">
+          <div class="fw-bold table-header-text">HIERARCHY</div>
+        </div>
+        <div class="col border text-start p-2">A::B::C::D</div>
+      </div>
+      <div class="row border-start border-end border-bottom border-2">
+        <div class="col-2 border text-end p-2">
+          <div class="fw-bold table-header-text">INSTANCES</div>
+        </div>
+        <div class="col text-start">
+          <div class="row">
+            <div class="col border p-2">Instance 1</div>
+            <div class="col-4 border p-2">0x000000</div>
+          </div>
+          <div class="row">
+            <div class="col border p-2">Instance 1</div>
+            <div class="col-4 border p-2">0x000000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row collapse" id="groupNameCollapse">
+    <div class="col mb-3">
+      <!-- Register Name -->
+      <div class="row mb-5 bg-body">
+        <div class="col">
+          <div class="row table-header">
+            <div class="col border table-header-border p-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="fw-bold text-center ms-2">Register</div>
+              </div>
+            </div>
+          </div>
+          <div class="row border-start border-end border-2">
+            <div class="col-2 border border-top-0 text-end p-2">
+              <div class="fw-bold table-header-text">NAME</div>
+            </div>
+            <div class="col border border-top-0 text-start p-2">Register</div>
+          </div>
+          <div class="row border-start border-end border-2">
+            <div class="col-2 border text-end p-2">
+              <div class="fw-bold table-header-text">DESCRIPTION</div>
+            </div>
+            <div class="col border text-start p-2">Register Description</div>
+          </div>
+          <div class="row border-start border-end border-2">
+            <div class="col-2 border text-end p-2">
+              <div class="fw-bold table-header-text">ADDRESS</div>
+            </div>
+            <div class="col border text-start p-2">0x20000</div>
+          </div>
+          <div class="row border-start border-end border-2">
+            <div class="col-2 border text-end p-2">
+              <div class="fw-bold table-header-text">HIERARCHY</div>
+            </div>
+            <div class="col border text-start p-2">A::B::C::D</div>
+          </div>
+          <div class="row border-start border-end border-2">
+            <div class="col-2 border border-bottom-0 text-end p-2">
+              <div class="fw-bold table-header-text">INSTANCES</div>
+            </div>
+            <div class="col text-start">
+              <div class="row">
+                <div class="col border p-2">Instance 1</div>
+                <div class="col-4 border p-2">0x000000</div>
+              </div>
+              <div class="row">
+                <div class="col border border-bottom-0 p-2">Instance 1</div>
+                <div class="col-4 border border-bottom-0 p-2">0x000000</div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center table-header">
+            <div class="col border table-header-border p-2">
+              <div class="fw-bold">BIT</div>
+            </div>
+            <div class="col border table-header-border p-2">
+              <div class="fw-bold">NAME</div>
+            </div>
+            <div class="col-6 border table-header-border p-2">
+              <div class="fw-bold">FUNCTION</div>
+            </div>
+            <div class="col border table-header-border p-2">
+              <div class="fw-bold">ACCESS</div>
+            </div>
+            <div class="col border table-header-border p-2">
+              <div class="fw-bold">RESET</div>
+            </div>
+          </div>
+          <div class="row border-start border-end border-2 text-center">
+            <div class="p-2 col border border-top-0">0:1</div>
+            <div class="p-2 col border border-top-0">enable</div>
+            <div class="p-2 col-6 border border-top-0 text-start">Enable function. Testing long description if it wraps or not!</div>
+            <div class="p-2 col border border-top-0">R/W</div>
+            <div class="p-2 col border border-top-0">0x00</div>
+          </div>
+          <div class="row border-start border-end border-2 text-center">
+            <div class="p-2 col border">2:8</div>
+            <div class="p-2 col border">enable</div>
+            <div class="p-2 col-6 border text-start">Enable function</div>
+            <div class="p-2 col border">R/W</div>
+            <div class="p-2 col border">0x00</div>
+          </div>
+          <div class="row border-start border-end border-bottom border-2 text-center">
+            <div class="p-2 col border">10:12</div>
+            <div class="p-2 col border">enable</div>
+            <div class="p-2 col-6 border text-start">Enable function</div>
+            <div class="p-2 col border">R/W</div>
+            <div class="p-2 col border">0x00</div>
+          </div>
+        </div>
+      </div>
+      <!-- End Register Name -->
+
+      <!-- Register Name -->
+      <div class="row mb-5 bg-body">
+        <div class="col border border-2">
+          <div class="row">
+            <div class="col border">
+              <div class="text-center">Register</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Name:</div>
+            </div>
+            <div class="col border text-start">Register</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Description:</div>
+            </div>
+            <div class="col border text-start">Register Description</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Address:</div>
+            </div>
+            <div class="col border text-start">0x20000</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Hierarchy:</div>
+            </div>
+            <div class="col border text-start">A::B::C::D</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Instances:</div>
+            </div>
+            <div class="col text-start">
+              <div class="row">
+                <div class="col border">Instance 1</div>
+                <div class="col-4 border">0x000000</div>
+              </div>
+              <div class="row">
+                <div class="col border">Instance 1</div>
+                <div class="col-4 border">0x000000</div>
+              </div>
+            </div>
+          </div>
+          <div class="row border-top border-5">
+            <div class="col border">
+              <div class="fw-bold text-primary">BIT</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">NAME</div>
+            </div>
+            <div class="col-6 border">
+              <div class="fw-bold text-primary">FUNCTION</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">ACCESS</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">RESET</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col border">0:1</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+          <div class="row">
+            <div class="col border">2:8</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+          <div class="row">
+            <div class="col border">10:12</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+        </div>
+      </div>
+      <!-- End Register Name -->
+
+      <!-- Sub Group Name -->
+      <div class="row mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#subGroupNameCollapse" aria-expanded="false" aria-controls="subGroupNameCollapse" >
+        <div class="col border border-2">
+          <div class="fw-bold text-primary">Sub Group Name</div>
+        </div>
+      </div>
+
+      <div class="row collapse" id="subGroupNameCollapse">
+        <div class="col mb-3">
+
+          <!-- Register Name -->
+          <div class="row mb-3">
+            <div class="col">
+              <div class="row">
+                <div class="col-2 border text-end">
+                  <div class="fw-bold text-primary">Name:</div>
+                </div>
+                <div class="col border text-start">Register</div>
+              </div>
+              <div class="row">
+                <div class="col-2 border text-end">
+                  <div class="fw-bold text-primary">Description:</div>
+                </div>
+                <div class="col border text-start">Register Description</div>
+              </div>
+              <div class="row">
+                <div class="col-2 border text-end">
+                  <div class="fw-bold text-primary">Address:</div>
+                </div>
+                <div class="col border text-start">0x20000</div>
+              </div>
+              <div class="row">
+                <div class="col-2 border text-end">
+                  <div class="fw-bold text-primary">Hierarchy:</div>
+                </div>
+                <div class="col border text-start">A::B::C::D</div>
+              </div>
+              <div class="row">
+                <div class="col-2 border text-end">
+                  <div class="fw-bold text-primary">Instances:</div>
+                </div>
+                <div class="col text-start">
+                  <div class="row">
+                    <div class="col border">Instance 1</div>
+                    <div class="col-4 border">0x000000</div>
+                  </div>
+                  <div class="row">
+                    <div class="col border">Instance 1</div>
+                    <div class="col-4 border">0x000000</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row border-top border-5">
+                <div class="col border">
+                  <div class="fw-bold text-primary">BIT</div>
+                </div>
+                <div class="col border">
+                  <div class="fw-bold text-primary">NAME</div>
+                </div>
+                <div class="col-6 border">
+                  <div class="fw-bold text-primary">FUNCTION</div>
+                </div>
+                <div class="col border">
+                  <div class="fw-bold text-primary">ACCESS</div>
+                </div>
+                <div class="col border">
+                  <div class="fw-bold text-primary">RESET</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col border">0:1</div>
+                <div class="col border">enable</div>
+                <div class="col-6 border text-start">Enable function</div>
+                <div class="col border">R/W</div>
+                <div class="col border">0x00</div>
+              </div>
+              <div class="row">
+                <div class="col border">2:8</div>
+                <div class="col border">enable</div>
+                <div class="col-6 border text-start">Enable function</div>
+                <div class="col border">R/W</div>
+                <div class="col border">0x00</div>
+              </div>
+              <div class="row">
+                <div class="col border">10:12</div>
+                <div class="col border">enable</div>
+                <div class="col-6 border text-start">Enable function</div>
+                <div class="col border">R/W</div>
+                <div class="col border">0x00</div>
+              </div>
+            </div>
+          </div>
+          <!-- End Register Name -->
+        </div>
+      </div>
+      <!-- End Sub Group Name -->
+
+    </div>
+  </div>
+  <!-- End Group Name -->
+
+
+  <!-- Group Name 2 -->
+  <div class="row mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#groupName2Collapse" aria-expanded="false" aria-controls="groupName2Collapse" >
+    <div class="col border border-2 ">
+      <div class="fw-bold text-primary">Group Name 2</div>
+    </div>
+  </div>
+
+  <div class="row collapse" id="groupName2Collapse">
+    <div class="col mb-3">
+
+      <!-- Register Name -->
+      <div class="row mb-3">
+        <div class="col">
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Name:</div>
+            </div>
+            <div class="col border text-start">Register</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Description:</div>
+            </div>
+            <div class="col border text-start">Register Description</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Address:</div>
+            </div>
+            <div class="col border text-start">0x20000</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Hierarchy:</div>
+            </div>
+            <div class="col border text-start">A::B::C::D</div>
+          </div>
+          <div class="row">
+            <div class="col-2 border text-end">
+              <div class="fw-bold text-primary">Instances:</div>
+            </div>
+            <div class="col text-start">
+              <div class="row">
+                <div class="col border">Instance 1</div>
+                <div class="col-4 border">0x000000</div>
+              </div>
+              <div class="row">
+                <div class="col border">Instance 1</div>
+                <div class="col-4 border">0x000000</div>
+              </div>
+            </div>
+          </div>
+          <div class="row border-top border-5">
+            <div class="col border">
+              <div class="fw-bold text-primary">BIT</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">NAME</div>
+            </div>
+            <div class="col-6 border">
+              <div class="fw-bold text-primary">FUNCTION</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">ACCESS</div>
+            </div>
+            <div class="col border">
+              <div class="fw-bold text-primary">RESET</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col border">0:1</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+          <div class="row">
+            <div class="col border">2:8</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+          <div class="row">
+            <div class="col border">10:12</div>
+            <div class="col border">enable</div>
+            <div class="col-6 border text-start">Enable function</div>
+            <div class="col border">R/W</div>
+            <div class="col border">0x00</div>
+          </div>
+        </div>
+      </div>
+      <!-- End Register Name -->
+
+    </div>
+  </div>
+  <!-- End Group Name 2 -->
+
+
+
+</div>
+{% endblock main %}

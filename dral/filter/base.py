@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from dral.objects import DralDevice
+from dral.core.objects import DralDevice
 
 
 class BaseFilter(ABC):

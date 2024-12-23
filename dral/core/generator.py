@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -8,8 +9,8 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader
 
-from dral.name import lower_camel_case, upper_camel_case
-from dral.objects import DralDevice, DralSuffix
+from dral.core.objects import DralDevice, DralSuffix
+from dral.utils.name import lower_camel_case, upper_camel_case
 
 
 @dataclass
@@ -21,13 +22,15 @@ class DralOutputFile:
         return dataclasses.asdict(self)
 
 
-class DralGenerator:
+class DralGenerator(ABC):
     def __init__(self, template_dir: list[Path], suffix: DralSuffix = DralSuffix(), forbidden_words: list[str] | None = None):
         self._template_dir = template_dir
         self._suffix = suffix
         self._forbidden_words = forbidden_words if forbidden_words else []
 
     def _is_multi_instance_group(self, group: dict[str, Any]) -> bool:
+        if "instances" not in group:
+            return False
         return len(group["instances"]) > 1
 
     def _is_dral_register(self, dral_object: dict[str, Any]) -> bool:
@@ -68,6 +71,25 @@ class DralGenerator:
         env.tests["inMultiInstanceScope"] = self._in_multi_instance_scope
         return env
 
+    @abstractmethod
+    def generate(self, template: str, device: DralDevice) -> Any:
+        pass
+
+
+class SingleOutputGenerator(DralGenerator):
+    def generate(self, template: str, device: DralDevice) -> DralOutputFile:
+        env = self._get_jinja_enviroment()
+        jinja_template = env.get_template(template)
+        variables = {
+            "system": self._get_system_mapping(),
+            "device": device.name,
+            "root": device.asdict(),
+            "suffix": self._suffix.asdict(),
+        }
+        return DralOutputFile(device.name, jinja_template.render(**variables))
+
+
+class MultiOutputGenerator(DralGenerator):
     def generate(self, template: str, device: DralDevice) -> list[DralOutputFile]:
         env = self._get_jinja_enviroment()
         jinja_template = env.get_template(template)

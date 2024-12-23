@@ -92,6 +92,7 @@ class DralGroup(DralObject):
 @dataclass
 class DralDevice(DralObject):
     groups: list[DralGroup] = dataclasses.field(default_factory=list)
+    address: int = 0
 
     def __post_init__(self) -> None:
         super().__post_init__()

@@ -6,7 +6,7 @@ from typing import Any
 import yaml
 
 from dral.adapter.base import BaseAdapter
-from dral.objects import DralDevice
+from dral.core.objects import DralDevice
 
 
 class WhiteBlackListAdapter(BaseAdapter):

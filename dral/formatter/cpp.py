@@ -3,12 +3,14 @@ from __future__ import annotations
 import subprocess
 import tempfile
 
+from dral.core.generator import DralOutputFile
 from dral.formatter.base import DralFormatter
-from dral.generator import DralOutputFile
 
 
 class CppFormatter(DralFormatter):
-    def format(self, objects: list[DralOutputFile]) -> list[DralOutputFile]:
+    def format(self, objects: DralOutputFile | list[DralOutputFile]) -> list[DralOutputFile]:
+        if isinstance(objects, DralOutputFile):
+            objects = [objects]
         for i, item in enumerate(objects):
             with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as temp:
                 temp.write(item.content)

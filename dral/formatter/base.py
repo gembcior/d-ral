@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from dral.generator import DralOutputFile
+from dral.core.generator import DralOutputFile
 
 
 class DralFormatter(ABC):

@@ -6,7 +6,7 @@ from typing import Any
 
 import svd2py
 
-from dral.objects import (
+from dral.core.objects import (
     DralDevice,
     DralField,
     DralGroup,

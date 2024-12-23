@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>D-RAL - {% block title %}{% endblock title %}</title>
+    {% include 'bootstrap.css.html' +%}
+    <style>
+    .border, .border-top {
+      border-color: var(--bs-border-color) !important;
+    }
+    .table-header {
+      background-color: var(--bs-primary-border-subtle) !important;
+    }
+    .table-header-border {
+      border-color: var(--bs-primary-border-subtle) !important;
+    }
+    .table-header-text {
+      color: var(--bs-primary-border-subtle) !important;
+    }
+    button[aria-expanded="true"] svg.bi-caret-down-square-fill {
+      display: none;
+    }
+    button[aria-expanded="false"] svg.bi-caret-up-square-fill {
+      display: none;
+    }
+    </style>
+  </head>
+
+  <body class="d-flex flex-column bg-body-tertiary">
+    <header>
+    {% block header %}{% endblock header %}</title>
+    </header>
+
+    <main>
+    {% block main %}{% endblock main %}</title>
+    </main>
+
+    {% include 'jquery.js.html' +%}
+    {% include 'bootstrap.js.html' +%}
+    <script>
+    function expandAll() {
+      $('.collapse').collapse('show');
+    }
+    function collapseAll() {
+      $('.collapse').collapse('hide');
+    }
+    </script>
+  </body>
+</html>

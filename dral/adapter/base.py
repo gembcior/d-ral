@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from dral.objects import DralDevice
+from dral.core.objects import DralDevice
 
 
 class BaseAdapter(ABC):
