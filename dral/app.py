@@ -112,7 +112,7 @@ def cli(  # noqa: C901
             console.print("Formatting D-RAL content...")
             dral_output_files = context.format(dral_output_files)
 
-        print("Saving D-RAL content to files...")
+        console.print("Saving D-RAL content to files...")
         context.save(dral_output_files, device.name)
 
     console.print(f"Successfully generated D-RAL files to {options.output_path}", style="green")

@@ -143,6 +143,7 @@ class GroupsFilter(BaseFilter):
                         value_type=registers[0].value_type,
                         address=0,
                         size=registers[0].size,
+                        reset_value=registers[0].reset_value,
                         fields=registers[0].fields,
                     )
                 ],

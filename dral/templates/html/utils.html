@@ -1,0 +1,167 @@
+{% macro getAccessType(access) %}
+{% set mapping = ["RO", "WO", "R/W"] %}
+{{ mapping[access.value] }}
+{% endmacro %}
+
+{% macro getGroup(group) %}
+<!-- Group {{ group.name | upper }} -->
+<div class="row mb-5 bg-body">
+  <div class="col">
+    <div class="row table-header">
+      <div class="col border table-header-border p-2">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="fw-bold text-center ms-2">
+            {{ group.name | upper }} Group
+          </div>
+          <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#group{{ group.name | upperCamelCase }}Collapse" aria-expanded="false" aria-controls="group{{ group.name | upperCamelCase }}Collapse">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="me-2">Show/Hide</div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border border-top-0 text-end p-2">
+        <div class="fw-bold table-header-text">NAME</div>
+      </div>
+      <div class="col border border-top-0 text-start p-2">{{ group.name }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">DESCRIPTION</div>
+      </div>
+      <div class="col border text-start p-2">{{ group.description }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">ADDRESS</div>
+      </div>
+      <div class="col border text-start p-2">{{ "0x{:08X}".format(group.address) }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">HIERARCHY</div>
+      </div>
+      <div class="col border text-start p-2">{{ group | hierarchy }}</div>
+    </div>
+    <div class="row border-start border-end border-bottom border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">INSTANCES</div>
+      </div>
+      <div class="col text-start">
+        {% for instance in group | instancesInfo %}
+        <div class="row">
+          <div class="col border p-2">{{ instance[0] }}</div>
+          <div class="col-4 border p-2">{{ "0x{:08X}".format(instance[1]) }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse" id="group{{ group.name | upperCamelCase }}Collapse">
+  <div class="col mb-3">
+  {% for register in group.registers %}
+  {{ getRegister(register) }}
+  {% endfor %}
+  {% for subGroup in group.groups recursive %}
+  {{ getGroup(subGroup) }}
+  {% endfor %}
+  </div>
+</div>
+<!-- End Group {{ group.name | upper }} -->
+{% endmacro %}
+
+{% macro getRegister(register) %}
+
+<!-- Register {{ register.name | upper }} -->
+<div class="row mb-5 bg-body">
+  <div class="col">
+    <div class="row table-header">
+      <div class="col border table-header-border p-2">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="fw-bold text-center ms-2">{{ register.name | upper }} Register</div>
+        </div>
+      </div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border border-top-0 text-end p-2">
+        <div class="fw-bold table-header-text">NAME</div>
+      </div>
+      <div class="col border border-top-0 text-start p-2">{{ register.name }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">DESCRIPTION</div>
+      </div>
+      <div class="col border text-start p-2">{{ register.description }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">ADDRESS</div>
+      </div>
+      <div class="col border text-start p-2">{{ "0x{:08X}".format(register.address) }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">RESET VALUE</div>
+      </div>
+      <div class="col border text-start p-2">{{ "0x{:08X}".format(register.reset_value) }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border text-end p-2">
+        <div class="fw-bold table-header-text">HIERARCHY</div>
+      </div>
+      <div class="col border text-start p-2">{{ register | hierarchy }}</div>
+    </div>
+    <div class="row border-start border-end border-2">
+      <div class="col-2 border border-bottom-0 text-end p-2">
+        <div class="fw-bold table-header-text">INSTANCES</div>
+      </div>
+      <div class="col text-start">
+        {% for instance in register | instancesInfo %}
+        <div class="row">
+          <div class="col border {% if loop.last %}border-bottom-0{% endif %} p-2">{{ instance[0] }}</div>
+          <div class="col-4 border {% if loop.last %}border-bottom-0{% endif %} p-2">{{ "0x{:08X}".format(instance[1]) }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row text-center table-header">
+      <div class="col border table-header-border p-2">
+        <div class="fw-bold">BIT</div>
+      </div>
+      <div class="col border table-header-border p-2">
+        <div class="fw-bold">NAME</div>
+      </div>
+      <div class="col-6 border table-header-border p-2">
+        <div class="fw-bold">FUNCTION</div>
+      </div>
+      <div class="col border table-header-border p-2">
+        <div class="fw-bold">ACCESS</div>
+      </div>
+      <div class="col border table-header-border p-2">
+        <div class="fw-bold">RESET</div>
+      </div>
+    </div>
+    {% for field in register.fields | sort(attribute="position", reverse=True)%}
+    <div class="row border-start border-end border-2 text-center">
+      <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ field.position }}{% if field.width > 1 %}:{{ field.position + field.width - 1}}{% endif %}</div>
+      <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ field.name }}</div>
+      <div class="p-2 col-6 border {% if loop.first %}border-top-0{% endif %} text-start">{{ field.description }}</div>
+      <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ getAccessType(register.access) }}</div>
+      <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ "0x{:02X}".format(field.reset_value) }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!-- End Register {{ register.name | upper }} -->
+{% endmacro %}

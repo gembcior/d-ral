@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader
+from natsort import natsorted
 
 from dral.core.objects import DralDevice, DralSuffix
 from dral.utils.name import lower_camel_case, upper_camel_case
@@ -51,6 +52,31 @@ class DralGenerator(ABC):
                 return True
         return False
 
+    def _get_hierarchy(self, dral_object: dict[str, Any]) -> str:
+        if len(dral_object["parent"]) <= 1:
+            return dral_object["name"]
+        hierarchy = ""
+        for parent in dral_object["parent"][1:]:
+            hierarchy += f"{parent['name']}::"
+        hierarchy += dral_object["name"]
+        return hierarchy
+
+    def _get_instances_info(self, dral_object: dict[str, Any]) -> list[tuple[str, str]]:
+        if dral_object["dral_object"] == "DralGroup":
+            output = [(instance["name"], instance["address"]) for instance in dral_object["instances"]]
+        else:
+            output = [(dral_object["name"], dral_object["address"])]
+        for parent in reversed(dral_object["parent"][1:]):
+            partial = []
+            for item in output:
+                for i, instance in enumerate(parent["instances"]):
+                    if isinstance(parent["offset"], list):
+                        partial.append((f"{instance['name']}::{item[0]}", item[1] + parent["offset"][i]))
+                    else:
+                        partial.append((f"{instance['name']}::{item[0]}", item[1] + i * parent["offset"]))
+            output = partial
+        return natsorted(output, key=lambda x: x[1])
+
     def _get_system_mapping(self) -> dict[str, Any]:
         output = {
             "year": str(datetime.now().year),
@@ -69,6 +95,8 @@ class DralGenerator(ABC):
         env.tests["topLevelGroup"] = self._is_top_level_group
         env.tests["nonUniformOffset"] = self._has_non_uniform_offset
         env.tests["inMultiInstanceScope"] = self._in_multi_instance_scope
+        env.filters["hierarchy"] = self._get_hierarchy
+        env.filters["instancesInfo"] = self._get_instances_info
         return env
 
     @abstractmethod

@@ -7,12 +7,12 @@ from typing import Any
 import svd2py
 
 from dral.core.objects import (
+    DralAccessType,
     DralDevice,
     DralField,
     DralGroup,
     DralGroupInstance,
     DralRegister,
-    DralAccessType,
 )
 
 from .base import BaseAdapter
@@ -101,6 +101,7 @@ class SvdAdapter(BaseAdapter):
                 value_type="uint32_t",
                 address=register["addressOffset"],
                 size=register["size"],
+                reset_value=register["resetValue"],
                 fields=self._parse_fields(register["fields"]["field"]) if "fields" in register else [],
             )
             registers.append(new_register)

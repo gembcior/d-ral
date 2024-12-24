@@ -26,6 +26,7 @@ class DralSuffix:
 class DralParentObject:
     name: str
     instances: list[DralGroupInstance] = dataclasses.field(default_factory=list)
+    offset: list[int] | int = 0
 
 
 @dataclass
@@ -52,6 +53,7 @@ class DralObject:
 class DralConcreteObject(DralObject):
     access: DralAccessType
     value_type: str
+    reset_value: int = dataclasses.field(kw_only=True, default=0)
 
 
 @dataclass
@@ -68,6 +70,11 @@ class DralRegister(DralConcreteObject):
     address: int
     size: int
     fields: list[DralField] = dataclasses.field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        for field in self.fields:
+            field.reset_value = (self.reset_value >> field.position) & ((1 << field.width) - 1)
 
     def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
@@ -86,7 +93,7 @@ class DralGroup(DralObject):
     def link_parent(self, parent: list[DralParentObject] | None = None) -> None:
         self.parent = parent if parent is not None else []
         for child in self.registers + self.groups:
-            child.link_parent(self.parent + [DralParentObject(self.name, self.instances)])
+            child.link_parent(self.parent + [DralParentObject(self.name, self.instances, self.offset)])
 
 
 @dataclass
