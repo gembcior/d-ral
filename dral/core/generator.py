@@ -71,11 +71,19 @@ class DralGenerator(ABC):
             for item in output:
                 for i, instance in enumerate(parent["instances"]):
                     if isinstance(parent["offset"], list):
-                        partial.append((f"{instance['name']}::{item[0]}", item[1] + parent["offset"][i]))
+                        partial.append((f"{instance['name']}::{item[0]}", item[1] + parent["address"] + parent["offset"][i]))
                     else:
-                        partial.append((f"{instance['name']}::{item[0]}", item[1] + i * parent["offset"]))
+                        partial.append((f"{instance['name']}::{item[0]}", item[1] + parent["address"] + i * parent["offset"]))
             output = partial
         return natsorted(output, key=lambda x: x[1])
+
+    def _get_absolute_address(self, dral_object: dict[str, Any]) -> int:
+        if len(dral_object["parent"]) <= 1:
+            return dral_object["address"]
+        address = dral_object["address"]
+        for parent in dral_object["parent"][1:]:
+            address += parent["address"]
+        return address
 
     def _get_system_mapping(self) -> dict[str, Any]:
         output = {
@@ -97,6 +105,7 @@ class DralGenerator(ABC):
         env.tests["inMultiInstanceScope"] = self._in_multi_instance_scope
         env.filters["hierarchy"] = self._get_hierarchy
         env.filters["instancesInfo"] = self._get_instances_info
+        env.filters["absoluteAddress"] = self._get_absolute_address
         return env
 
     @abstractmethod

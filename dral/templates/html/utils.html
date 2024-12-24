@@ -43,7 +43,7 @@
       <div class="col-2 border text-end p-2">
         <div class="fw-bold table-header-text">ADDRESS</div>
       </div>
-      <div class="col border text-start p-2">{{ "0x{:08X}".format(group.address) }}</div>
+      <div class="col border text-start p-2">{{ "0x{:08X}".format(group | absoluteAddress) }}</div>
     </div>
     <div class="row border-start border-end border-2">
       <div class="col-2 border text-end p-2">
@@ -69,10 +69,10 @@
 
 <div class="row collapse" id="group{{ group.name | upperCamelCase }}Collapse">
   <div class="col mb-3">
-  {% for register in group.registers %}
+  {% for register in group.registers | sort(attribute="address")%}
   {{ getRegister(register) }}
   {% endfor %}
-  {% for subGroup in group.groups recursive %}
+  {% for subGroup in group.groups | sort(attribute="address") recursive %}
   {{ getGroup(subGroup) }}
   {% endfor %}
   </div>
@@ -108,7 +108,7 @@
       <div class="col-2 border text-end p-2">
         <div class="fw-bold table-header-text">ADDRESS</div>
       </div>
-      <div class="col border text-start p-2">{{ "0x{:08X}".format(register.address) }}</div>
+      <div class="col border text-start p-2">{{ "0x{:08X}".format(register | absoluteAddress) }}</div>
     </div>
     <div class="row border-start border-end border-2">
       <div class="col-2 border text-end p-2">
@@ -152,7 +152,7 @@
         <div class="fw-bold">RESET</div>
       </div>
     </div>
-    {% for field in register.fields | sort(attribute="position", reverse=True)%}
+    {% for field in register.fields | sort(attribute="position", reverse=True) %}
     <div class="row border-start border-end border-2 text-center">
       <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ field.position }}{% if field.width > 1 %}:{{ field.position + field.width - 1}}{% endif %}</div>
       <div class="p-2 col border {% if loop.first %}border-top-0{% endif %}">{{ field.name }}</div>
