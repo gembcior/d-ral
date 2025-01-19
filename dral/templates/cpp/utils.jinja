@@ -1,0 +1,73 @@
+{% macro getName(name, suffix) -%}
+{{ name ~ '_' ~ suffix }}
+{%- endmacro -%}
+
+{% macro getGroupName(name) -%}
+{{ getName(name, suffix.group) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getRegisterName(name) -%}
+{{ getName(name, suffix.register) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getFieldName(name) -%}
+{{ getName(name, suffix.field) | lowerCamelCase | isForbidden }}
+{%- endmacro -%}
+
+{% macro getIncludeGuard(device, root) -%}
+{% if device == root.name %}
+DRAL_{{ device | upper }}_H
+{%- else -%}
+DRAL_{{ device | upper }}_{{ root.name | upper }}_H
+{% endif %}
+{%- endmacro -%}
+
+{% macro getFieldEnumName(name) -%}
+{{ name | lowerCamelCase | isForbidden }}
+{%- endmacro %}
+
+{% macro getAccessType(access) -%}
+{% set mapping = ["AccessType::ReadOnly", "AccessType::WriteOnly", "AccessType::ReadWrite"] %}
+{{ mapping[access.value] }}
+{%- endmacro -%}
+
+{%- macro getGroupBaseAddress(group) %}
+  static constexpr uintptr_t BaseAddress {{ '{' }}{{ "0x{:08X}".format(group.address) }}{{ '}' }};
+{%- endmacro -%}
+
+{%- macro getGroupEnum(group) %}
+public:
+  enum class IndexType
+  {
+    {% for instance in group.instances %}
+    {{ instance.name | upperCamelCase }},
+    {% endfor %}
+  };
+
+  struct Index final
+  {
+    using enum IndexType;
+    static constexpr std::array All {{ '{ ' }}{% for instance in group.instances[:-1] %}{{ instance.name | upperCamelCase }}, {% endfor %}{{ group.instances[-1].name | upperCamelCase }}{{ ' }' }};
+  };
+{%- endmacro -%}
+
+{%- macro getGroupPolicy(group) %}
+private:
+{% if group is nonUniformOffset %}
+  using OffsetPolicy = NonUniformLayerOffsetPolicy<IndexType, std::integer_sequence<std::uintptr_t, {% for x in group.offset[:-1] %}{{ "0x{:08X}".format(x) }}, {% endfor %}{{ "0x{:08X}".format(group.offset[-1]) }}>>;
+{% else %}
+  using OffsetPolicy = LayerOffsetPolicy<IndexType, {{ "0x{:08X}".format(group.offset) }}>;
+{% endif %}
+
+  template<std::uintptr_t Address>
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address, std::tuple<{% for x in group.parent[1:] if x is multiInstance %}{{ getGroupName(x.name) }}::OffsetPolicy, {% endfor %}OffsetPolicy>>;
+{%- endmacro -%}
+
+{%- macro getSimpleGroupPolicy(group) %}
+  template<std::uintptr_t Address>
+  {% if group is inMultiInstanceScope %}
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address, std::tuple<{% for x in group.parent[1:] if x is multiInstance %}{{ getGroupName(x.name) }}::OffsetPolicy, {% endfor %}>>;
+  {% else %}
+  using AddressPolicy = GroupAddressPolicy<BaseAddress + Address>;
+  {%- endif %}
+{%- endmacro -%}

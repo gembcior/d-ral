@@ -68,21 +68,6 @@ public:
     using RegisterValue<{{ register.value_type }}, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>::RegisterValue;
     using enum {{register.name | upperCamelCase}}Fields;
   };
-
-  class {{ utils.getRegisterName(register.name) }} final: public RegisterModel<{{ register.name | upperCamelCase }}Type, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{ utils.getAccessType(register.access) }}>
-  {
-  public:
-    using reg = RegisterModel<{{ register.name | upperCamelCase }}Type, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{ utils.getAccessType(register.access) }}>;
-  {% if register.fields %}
-    {% for field in register.fields %}
-    using {{ utils.getFieldName(field.name) }} = FieldModel<reg, {{ field.position }}, {{ field.width }}>;
-    {% endfor %}
-
-    using AllFields = std::tuple<{{ utils.getFieldName(register.fields[0].name) }} {% for x in register.fields[1:] %}, {{ utils.getFieldName(x.name) }} {% endfor %}>;
-  {% else %}
-  using AllFields = std::tuple<>;
-  {% endif %}
-  };
 {%- endmacro -%}
 
 {%- macro getChild(child, childIndent) %}

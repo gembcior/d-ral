@@ -5,6 +5,7 @@ from pathlib import Path
 import click
 from rich.console import Console
 from rich.traceback import install as traceback
+from typing_extensions import Any
 
 import dral.core.factory as factory
 
@@ -65,17 +66,7 @@ import dral.core.factory as factory
     help="Peripherals and Registers black list.",
 )
 @click.version_option()
-def cli(  # noqa: C901
-    input_file: Path,  # noqa: W0622
-    output_path: Path,
-    language: str,
-    access_type: str,
-    template_path: Path | None,
-    skip_groups_detection: bool,
-    skip_output_formatting: bool,
-    white_list: Path | None,
-    black_list: Path | None,
-) -> None:
+def cli(**kwargs: dict[str, Any]) -> None:
     """D-RAL - Device Register Access Layer
 
     Generate D-RAL files from INPUT-FILE.
@@ -85,17 +76,7 @@ def cli(  # noqa: C901
     """
     traceback()
     console = Console()
-    options = factory.DralAppOptions(
-        input_file=input_file,
-        output_path=output_path,
-        language=language,
-        access_type=access_type,
-        template_path=template_path,
-        skip_groups_detection=skip_groups_detection,
-        skip_output_formatting=skip_output_formatting,
-        white_list=white_list,
-        black_list=black_list,
-    )
+    options = factory.DralAppOptions(**kwargs) # type: ignore
 
     info = "[bold yellow]Working..."
     with console.status(info):
