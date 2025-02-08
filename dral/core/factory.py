@@ -21,6 +21,13 @@ from dral.utils.utils import Utils
 
 from .context import CppContext, DralContext, HtmlContext
 
+DRAL_ADAPTER = SvdAdapter
+
+
+def override_adapter(adapter: type[BaseAdapter]) -> None:
+    global DRAL_ADAPTER
+    DRAL_ADAPTER = adapter
+
 
 @dataclass
 class DralAppOptions:
@@ -75,7 +82,8 @@ def get_filter_supervisor(options: DralAppOptions) -> FilterSupervisor:
 
 
 def get_adapter() -> BaseAdapter:
-    return SvdAdapter()
+    global DRAL_ADAPTER
+    return DRAL_ADAPTER()
 
 
 def get_multi_output_generator(options: DralAppOptions) -> DralGenerator:

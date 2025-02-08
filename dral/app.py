@@ -8,6 +8,7 @@ from rich.traceback import install as traceback
 from typing_extensions import Any
 
 import dral.core.factory as factory
+from dral.adapter.base import BaseAdapter
 
 
 @click.command()
@@ -76,7 +77,7 @@ def cli(**kwargs: dict[str, Any]) -> None:
     """
     traceback()
     console = Console()
-    options = factory.DralAppOptions(**kwargs) # type: ignore
+    options = factory.DralAppOptions(**kwargs)  # type: ignore
 
     info = "[bold yellow]Working..."
     with console.status(info):
@@ -97,6 +98,11 @@ def cli(**kwargs: dict[str, Any]) -> None:
         context.save(dral_output_files, device.name)
 
     console.print(f"Successfully generated D-RAL files to {options.output_path}", style="green")
+
+
+def with_custom_adapter(adapter: type[BaseAdapter]) -> None:
+    factory.override_adapter(adapter)
+    cli()  # noqa: E1120
 
 
 if __name__ == "__main__":
