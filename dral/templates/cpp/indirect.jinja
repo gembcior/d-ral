@@ -62,10 +62,10 @@ public:
 /**
  * REGISTER {{ register.name | upper }}
  */
-  class {{ register.name | upperCamelCase }}Type : public RegisterValue<{{ register.value_type }}, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>
+  class {{ register.name | upperCamelCase }}Register : public IndirectRegisterValue<{{ register.value_type }}, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>
   {
   public:
-    using RegisterValue<{{ register.value_type }}, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>::RegisterValue;
+    using IndirectRegisterValue<{{ register.value_type }}, AddressPolicy<{{ "0x{:08X}".format(register.address) }}>, {{register.name | upperCamelCase}}Fields, {{register.name | upperCamelCase}}AllMasks>::IndirectRegisterValue;
     using enum {{register.name | upperCamelCase}}Fields;
   };
 {%- endmacro -%}
@@ -91,7 +91,7 @@ public:
 #ifndef {{ utils.getIncludeGuard(device, root) }}
 #define {{ utils.getIncludeGuard(device, root) }}
 
-{% include 'model.import.jinja' +%}
+{% include 'indirect.model.import.jinja' +%}
 
 namespace dral::{{ device | lower }} {
 

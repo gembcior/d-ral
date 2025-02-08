@@ -19,7 +19,7 @@
 DRAL_{{ device | upper }}_H
 {%- else -%}
 DRAL_{{ device | upper }}_{{ root.name | upper }}_H
-{% endif %}
+{%- endif -%}
 {%- endmacro -%}
 
 {% macro getFieldEnumName(name) -%}
@@ -32,7 +32,11 @@ DRAL_{{ device | upper }}_{{ root.name | upper }}_H
 {%- endmacro -%}
 
 {%- macro getGroupBaseAddress(group) %}
+{% if group.parent | length > 1 %}
+  static constexpr uintptr_t BaseAddress {{ '{' }}{{ getGroupName(group.parent[-1].name) }}::BaseAddress + {{ "0x{:08X}".format(group.address) }}{{ '}' }};
+{%- else -%}
   static constexpr uintptr_t BaseAddress {{ '{' }}{{ "0x{:08X}".format(group.address) }}{{ '}' }};
+{%- endif -%}
 {%- endmacro -%}
 
 {%- macro getGroupEnum(group) %}

@@ -106,7 +106,7 @@ public:
 #ifndef {{ utils.getIncludeGuard(device, root) }}
 #define {{ utils.getIncludeGuard(device, root) }}
 
-{% include 'model.import.jinja' +%}
+{% include 'direct.model.import.jinja' +%}
 
 namespace dral::{{ device | lower }} {
 
