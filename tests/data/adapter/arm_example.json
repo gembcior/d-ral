@@ -9,19 +9,18 @@
             "description": "32 Timer / Counter, counting up or down from different sources",
             "dral_object": "DralGroup",
             "parent": [
-                "ARM_Example"
+                {
+                    "name": "ARM_Example",
+                    "address": 0,
+                    "instances": [],
+                    "offset": 0
+                }
             ],
             "address": 1073807360,
             "offset": 0,
             "instances": [
                 {
                     "name": "TIMER0",
-                    "description": "",
-                    "dral_object": "DralGroupInstance",
-                    "parent": [
-                        "ARM_Example",
-                        "TIMER0"
-                    ],
                     "address": 1073807360
                 }
             ],
@@ -32,24 +31,63 @@
                     "description": "Control Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 0,
                     "size": 32,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -57,12 +95,34 @@
                             "description": "Reset Timer",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 1,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 1,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -70,12 +130,34 @@
                             "description": "Counting direction",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 2,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -83,12 +165,34 @@
                             "description": "Operation Mode",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         },
                         {
@@ -96,12 +200,34 @@
                             "description": "Use Prescaler",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 7,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -109,12 +235,34 @@
                             "description": "Timer / Counter Source Divider",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -122,12 +270,34 @@
                             "description": "Timer / Counter Capture Source",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -135,12 +305,34 @@
                             "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 16,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -148,12 +340,34 @@
                             "description": "Triggers an other Peripheral",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 20,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -161,12 +375,34 @@
                             "description": "Select RELOAD Register n to reload Timer on condition",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 24,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -174,12 +410,34 @@
                             "description": "Selects, if Reload Register number is incremented, decremented or not modified",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 26,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -187,12 +445,34 @@
                             "description": "Starts and Stops the Timer / Counter",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 31,
-                            "mask": 1,
                             "width": 1
                         }
                     ]
@@ -202,24 +482,63 @@
                     "description": "Status Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 4,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "RUN",
                             "description": "Shows if Timer is running or not",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -227,12 +546,34 @@
                             "description": "Shows if the MATCH was hit",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -240,12 +581,34 @@
                             "description": "Shows if an underflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 9,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -253,12 +616,34 @@
                             "description": "Shows if an overflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 10,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -266,12 +651,34 @@
                             "description": "Shows if Timer is in RESET state",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -279,12 +686,34 @@
                             "description": "Shows the currently active RELOAD Register",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 14,
-                            "mask": 3,
                             "width": 2
                         }
                     ]
@@ -294,24 +723,63 @@
                     "description": "Interrupt Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 16,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Interrupt Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -319,12 +787,34 @@
                             "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER0",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER0",
+                                            "address": 1073807360
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         }
                     ]
@@ -334,12 +824,29 @@
                     "description": "The Counter Register reflects the actual Value of the Timer/Counter",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 32,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -347,12 +854,29 @@
                     "description": "The Match Register stores the compare Value for the MATCH condition",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 36,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -360,12 +884,29 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 0,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -373,12 +914,29 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER0"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER0",
+                            "address": 1073807360,
+                            "instances": [
+                                {
+                                    "name": "TIMER0",
+                                    "address": 1073807360
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 1,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 }
             ]
@@ -388,19 +946,18 @@
             "description": "32 Timer / Counter, counting up or down from different sources",
             "dral_object": "DralGroup",
             "parent": [
-                "ARM_Example"
+                {
+                    "name": "ARM_Example",
+                    "address": 0,
+                    "instances": [],
+                    "offset": 0
+                }
             ],
             "address": 1073807616,
             "offset": 0,
             "instances": [
                 {
                     "name": "TIMER1",
-                    "description": "",
-                    "dral_object": "DralGroupInstance",
-                    "parent": [
-                        "ARM_Example",
-                        "TIMER1"
-                    ],
                     "address": 1073807616
                 }
             ],
@@ -411,24 +968,63 @@
                     "description": "Control Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 0,
                     "size": 32,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -436,12 +1032,34 @@
                             "description": "Reset Timer",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 1,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 1,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -449,12 +1067,34 @@
                             "description": "Counting direction",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 2,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -462,12 +1102,34 @@
                             "description": "Operation Mode",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         },
                         {
@@ -475,12 +1137,34 @@
                             "description": "Use Prescaler",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 7,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -488,12 +1172,34 @@
                             "description": "Timer / Counter Source Divider",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -501,12 +1207,34 @@
                             "description": "Timer / Counter Capture Source",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -514,12 +1242,34 @@
                             "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 16,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -527,12 +1277,34 @@
                             "description": "Triggers an other Peripheral",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 20,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -540,12 +1312,34 @@
                             "description": "Select RELOAD Register n to reload Timer on condition",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 24,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -553,12 +1347,34 @@
                             "description": "Selects, if Reload Register number is incremented, decremented or not modified",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 26,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -566,12 +1382,34 @@
                             "description": "Starts and Stops the Timer / Counter",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 31,
-                            "mask": 1,
                             "width": 1
                         }
                     ]
@@ -581,24 +1419,63 @@
                     "description": "Status Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 4,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "RUN",
                             "description": "Shows if Timer is running or not",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -606,12 +1483,34 @@
                             "description": "Shows if the MATCH was hit",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -619,12 +1518,34 @@
                             "description": "Shows if an underflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 9,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -632,12 +1553,34 @@
                             "description": "Shows if an overflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 10,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -645,12 +1588,34 @@
                             "description": "Shows if Timer is in RESET state",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -658,12 +1623,34 @@
                             "description": "Shows the currently active RELOAD Register",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 14,
-                            "mask": 3,
                             "width": 2
                         }
                     ]
@@ -673,24 +1660,63 @@
                     "description": "Interrupt Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 16,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Interrupt Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -698,12 +1724,34 @@
                             "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER1",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER1",
+                                            "address": 1073807616
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         }
                     ]
@@ -713,12 +1761,29 @@
                     "description": "The Counter Register reflects the actual Value of the Timer/Counter",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 32,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -726,12 +1791,29 @@
                     "description": "The Match Register stores the compare Value for the MATCH condition",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 36,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -739,12 +1821,29 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 0,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -752,12 +1851,29 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER1"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER1",
+                            "address": 1073807616,
+                            "instances": [
+                                {
+                                    "name": "TIMER1",
+                                    "address": 1073807616
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 1,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 }
             ]
@@ -767,19 +1883,18 @@
             "description": "32 Timer / Counter, counting up or down from different sources",
             "dral_object": "DralGroup",
             "parent": [
-                "ARM_Example"
+                {
+                    "name": "ARM_Example",
+                    "address": 0,
+                    "instances": [],
+                    "offset": 0
+                }
             ],
             "address": 1073807872,
             "offset": 0,
             "instances": [
                 {
                     "name": "TIMER2",
-                    "description": "",
-                    "dral_object": "DralGroupInstance",
-                    "parent": [
-                        "ARM_Example",
-                        "TIMER2"
-                    ],
                     "address": 1073807872
                 }
             ],
@@ -790,24 +1905,63 @@
                     "description": "Control Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 0,
                     "size": 32,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -815,12 +1969,34 @@
                             "description": "Reset Timer",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 1,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 1,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -828,12 +2004,34 @@
                             "description": "Counting direction",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 2,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -841,12 +2039,34 @@
                             "description": "Operation Mode",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         },
                         {
@@ -854,12 +2074,34 @@
                             "description": "Use Prescaler",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 7,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -867,12 +2109,34 @@
                             "description": "Timer / Counter Source Divider",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -880,12 +2144,34 @@
                             "description": "Timer / Counter Capture Source",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 15,
                             "width": 4
                         },
                         {
@@ -893,12 +2179,34 @@
                             "description": "Capture Edge, select which Edge should result in a counter increment or decrement",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 16,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -906,12 +2214,34 @@
                             "description": "Triggers an other Peripheral",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 20,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -919,12 +2249,34 @@
                             "description": "Select RELOAD Register n to reload Timer on condition",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 24,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -932,12 +2284,34 @@
                             "description": "Selects, if Reload Register number is incremented, decremented or not modified",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 26,
-                            "mask": 3,
                             "width": 2
                         },
                         {
@@ -945,12 +2319,34 @@
                             "description": "Starts and Stops the Timer / Counter",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "CR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "CR",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 31,
-                            "mask": 1,
                             "width": 1
                         }
                     ]
@@ -960,24 +2356,63 @@
                     "description": "Status Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 4,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "RUN",
                             "description": "Shows if Timer is running or not",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -985,12 +2420,34 @@
                             "description": "Shows if the MATCH was hit",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 8,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -998,12 +2455,34 @@
                             "description": "Shows if an underflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 9,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -1011,12 +2490,34 @@
                             "description": "Shows if an overflow occured. This flag is sticky",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 10,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -1024,12 +2525,34 @@
                             "description": "Shows if Timer is in RESET state",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 12,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -1037,12 +2560,34 @@
                             "description": "Shows the currently active RELOAD Register",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "SR"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "SR",
+                                    "address": 4,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 0,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 14,
-                            "mask": 3,
                             "width": 2
                         }
                     ]
@@ -1052,24 +2597,63 @@
                     "description": "Interrupt Register",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 16,
                     "size": 16,
-                    "default": 0,
                     "fields": [
                         {
                             "name": "EN",
                             "description": "Interrupt Enable",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 0,
-                            "mask": 1,
                             "width": 1
                         },
                         {
@@ -1077,12 +2661,34 @@
                             "description": "Interrupt Mode, selects on which condition the Timer should generate an Interrupt",
                             "dral_object": "DralField",
                             "parent": [
-                                "ARM_Example",
-                                "TIMER2",
-                                "INT"
+                                {
+                                    "name": "ARM_Example",
+                                    "address": 0,
+                                    "instances": [],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872,
+                                    "instances": [
+                                        {
+                                            "name": "TIMER2",
+                                            "address": 1073807872
+                                        }
+                                    ],
+                                    "offset": 0
+                                },
+                                {
+                                    "name": "INT",
+                                    "address": 16,
+                                    "instances": [],
+                                    "offset": 0
+                                }
                             ],
+                            "access": 2,
+                            "value_type": "uint32_t",
+                            "reset_value": 0,
                             "position": 4,
-                            "mask": 7,
                             "width": 3
                         }
                     ]
@@ -1092,12 +2698,29 @@
                     "description": "The Counter Register reflects the actual Value of the Timer/Counter",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 32,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -1105,12 +2728,29 @@
                     "description": "The Match Register stores the compare Value for the MATCH condition",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 2,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 36,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -1118,12 +2758,29 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 0,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 },
                 {
@@ -1131,15 +2788,33 @@
                     "description": "The Prescale Register stores the Value for the prescaler. The cont event gets divided by this value",
                     "dral_object": "DralRegister",
                     "parent": [
-                        "ARM_Example",
-                        "TIMER2"
+                        {
+                            "name": "ARM_Example",
+                            "address": 0,
+                            "instances": [],
+                            "offset": 0
+                        },
+                        {
+                            "name": "TIMER2",
+                            "address": 1073807872,
+                            "instances": [
+                                {
+                                    "name": "TIMER2",
+                                    "address": 1073807872
+                                }
+                            ],
+                            "offset": 0
+                        }
                     ],
+                    "access": 1,
+                    "value_type": "uint32_t",
+                    "reset_value": 0,
                     "address": 40,
                     "size": 32,
-                    "default": 0,
                     "fields": []
                 }
             ]
         }
-    ]
+    ],
+    "address": 0
 }

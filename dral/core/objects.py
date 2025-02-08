@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import dataclasses
 from dataclasses import dataclass
-from enum import Enum
+from enum import IntEnum
 from typing import Any
 
 
-class DralAccessType(Enum):
+class DralAccessType(IntEnum):
     ReadOnly = 0
     WriteOnly = 1
     ReadWrite = 2
