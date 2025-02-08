@@ -44,7 +44,9 @@ volatile uint32_t* Tim2Cr1Reg = reinterpret_cast<volatile uint32_t*>(Tim2Cr1Addr
 
 Or we can use D-RAL:
 ```c++
-dral::stm32f411::tim2::cr1::dir::write(1);
+using namespace dral::stm32f411;
+
+Tim2Group::Cr1Register::dirField::write(1);
 ```
 This is a brief example to demonstrate D-RAL's purpose. More information can be found on the Wiki page.
 
@@ -67,13 +69,34 @@ pip install dral
 Whichever method you use, you should have a `dral` command on your path.
 
 ## Usage
-D-RAL is a CLI tool that takes two positional arguments
 ```
-dral [OPTIONS] INPUT OUTPUT
-```
-- INPUT - path to external device description file
-- OUTPUT - a path where D-RAL files will be generated.
+Usage: dral [OPTIONS] INPUT_FILE
 
-## Extra functionality
+  D-RAL - Device Register Access Layer
+
+  Generate D-RAL files from INPUT-FILE.
+
+  INPUT-FILE  - path to device description file.
+
+Options:
+  -O, --output-path PATH          Output directory. Path where files will be
+                                  generated. Default is current directory.
+  -l, --language [cpp|html]       Specify the programming language for which
+                                  you want to generate files.  [default: cpp]
+  -t, --access-type [direct|indirect]
+                                  Specify the access template. Applys only for
+                                  C++ model.  [default: direct]
+  -T, --template-path PATH        Specify path to template files used to
+                                  generate files.
+  -s, --skip-groups-detection     Skip automatic registers groups detection.
+  -f, --skip-output-formatting    Skip output formatting with auto format
+                                  tools.
+  -w, --white-list PATH           Paripherals and Registers white list.
+  -b, --black-list PATH           Peripherals and Registers black list.
+  --version                       Show the version and exit.
+  --help                          Show this message and exit.
+```
+
+## Other Programming Languages
 The D-RAL generator is flexible enough to be easily adapted to generate register access layers for other programming languages or for other use cases.
 More about it on the Wiki page.
