@@ -4,8 +4,6 @@ from collections.abc import Sequence
 
 from natsort import natsorted
 
-from dral.filter.base import BaseFilter
-from dral.utils.name import get_common_name, get_name_difference, is_similar_name
 from dral.core.objects import (
     DralDevice,
     DralField,
@@ -14,6 +12,8 @@ from dral.core.objects import (
     DralObject,
     DralRegister,
 )
+from dral.filter.base import BaseFilter
+from dral.utils.name import get_common_name, get_name_difference, is_similar_name
 
 
 class GroupsFilter(BaseFilter):
@@ -25,15 +25,12 @@ class GroupsFilter(BaseFilter):
             return False
         if field_a.position != field_b.position:
             return False
-        if field_a.width != field_b.width:
+        if field_a.width != field_b.width:  # noqa: SIM103
             return False
         return True
 
     def _is_field_in_fields(self, field: DralField, fields: list[DralField]) -> bool:
-        for item in fields:
-            if self._compare_fields(field, item):
-                return True
-        return False
+        return any(self._compare_fields(field, item) for item in fields)
 
     def _has_the_same_fields(self, register_a: DralRegister, register_b: DralRegister) -> bool:
         diff = []
@@ -45,15 +42,12 @@ class GroupsFilter(BaseFilter):
     def _compare_registers(self, register_a: DralRegister, register_b: DralRegister) -> bool:
         if not self._has_the_same_fields(register_a, register_b):
             return False
-        if not self._is_similar_name(register_a, register_b):
+        if not self._is_similar_name(register_a, register_b):  # noqa: SIM103
             return False
         return True
 
     def _is_register_in_registers(self, register: DralRegister, registers: list[DralRegister]) -> bool:
-        for item in registers:
-            if self._compare_registers(register, item):
-                return True
-        return False
+        return any(self._compare_registers(register, item) for item in registers)
 
     def _has_the_same_registers(self, group_a: DralGroup, group_b: DralGroup) -> bool:
         diff = []
@@ -63,10 +57,7 @@ class GroupsFilter(BaseFilter):
         return len(diff) == 0
 
     def _is_group_in_groups(self, group: DralGroup, groups: list[DralGroup]) -> bool:
-        for item in groups:
-            if self._compare_groups(group, item):
-                return True
-        return False
+        return any(self._compare_groups(group, item) for item in groups)
 
     def _has_the_same_groups(self, group_a: DralGroup, group_b: DralGroup) -> bool:
         diff = []
@@ -80,7 +71,7 @@ class GroupsFilter(BaseFilter):
             return False
         if not self._has_the_same_registers(group_a, group_b):
             return False
-        if not self._has_the_same_groups(group_a, group_b):
+        if not self._has_the_same_groups(group_a, group_b):  # noqa: SIM103
             return False
         return True
 
@@ -158,9 +149,7 @@ class GroupsFilter(BaseFilter):
             backet = [j_item for j_item in same if self._is_similar_name(i_item, j_item)]
             if backet not in backets and backet != same:
                 backets.append(backet)
-        if len(backets) < 2:
-            return True
-        return False
+        return len(backets) < 2
 
     def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
         i = 0

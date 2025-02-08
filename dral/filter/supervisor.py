@@ -4,10 +4,12 @@ from .base import BaseFilter
 
 
 class FilterSupervisor:
-    def __init__(self, filters: list[BaseFilter] = []):
+    def __init__(self, filters: list[BaseFilter] | None = None):
+        if filters is None:
+            filters = []
         self._filters = filters
 
-    def add(self, filter: BaseFilter):
+    def add(self, filter: BaseFilter) -> None:
         self._filters.append(filter)
 
     def apply(self, device: DralDevice) -> DralDevice:

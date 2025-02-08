@@ -19,7 +19,9 @@ from .base import BaseAdapter
 
 
 class IncorrectSvdError(Exception):
-    def __init__(self, message: str, dral_object: dict[str, Any] = {}):
+    def __init__(self, message: str, dral_object: dict[str, Any] | None = None):
+        if dral_object is None:
+            dral_object = {}
         self.message = message
         self.dral_object = dral_object
         super().__init__(message, dral_object)
@@ -105,7 +107,7 @@ class SvdAdapter(BaseAdapter):
             cluster = self._get_missing_attributes_from_parent(cluster, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
                 name=cluster["name"],
-                description=cluster["description"] if "description" in cluster else "",
+                description=cluster.get("description", ""),
                 address=cluster["addressOffset"],
                 offset=0x0,
                 groups=self._parse_clusters(cluster["cluster"], cluster) if "cluster" in cluster else [],
@@ -132,7 +134,7 @@ class SvdAdapter(BaseAdapter):
                 value_type="uint32_t",
                 address=register["addressOffset"],
                 size=register["size"],
-                reset_value=register["resetValue"] if "resetValue" in register else 0,
+                reset_value=register.get("resetValue", 0),
                 fields=self._parse_fields(register["fields"]["field"], register) if "fields" in register else [],
             )
             registers.append(new_register)
@@ -148,7 +150,7 @@ class SvdAdapter(BaseAdapter):
             peripheral = self._get_missing_attributes_from_parent(peripheral, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
                 name=peripheral["name"],
-                description=peripheral["description"] if "description" in peripheral else "",
+                description=peripheral.get("description", ""),
                 address=peripheral["baseAddress"],
                 offset=0x0,
                 groups=(

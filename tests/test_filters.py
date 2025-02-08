@@ -22,7 +22,7 @@ class TestDralFilters:
         # with open(datadir / "filters" / "groups" / f"{svd}.json", "w", encoding="utf-8") as data:
         #     data.write(json.dumps(dral_device.asdict(), indent=4))
 
-        with open(datadir / "filters" / "groups" / f"{svd}.json", "r", encoding="utf-8") as data:
+        with open(datadir / "filters" / "groups" / f"{svd}.json", encoding="utf-8") as data:
             expected_dral_device = json.loads(data.read())
 
         assert dral_device.asdict() == expected_dral_device

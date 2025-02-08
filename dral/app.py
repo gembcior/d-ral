@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import click
 from rich.console import Console
 from rich.traceback import install as traceback
-from typing_extensions import Any
 
 import dral.core.factory as factory
 from dral.adapter.base import BaseAdapter
@@ -77,7 +77,7 @@ def cli(**kwargs: dict[str, Any]) -> None:
     """
     traceback()
     console = Console()
-    options = factory.DralAppOptions(**kwargs)  # type: ignore
+    options = factory.DralAppOptions(**kwargs)  # type: ignore[arg-type]
 
     info = "[bold yellow]Working..."
     with console.status(info):
@@ -89,6 +89,8 @@ def cli(**kwargs: dict[str, Any]) -> None:
 
         console.print("Generating D-RAL content...")
         dral_output_files = context.generate(device)
+        if not isinstance(dral_output_files, list):
+            dral_output_files = [dral_output_files]
 
         if not options.skip_output_formatting:
             console.print("Formatting D-RAL content...")
@@ -102,8 +104,8 @@ def cli(**kwargs: dict[str, Any]) -> None:
 
 def with_custom_adapter(adapter: type[BaseAdapter]) -> None:
     factory.override_adapter(adapter)
-    cli()  # noqa: E1120
+    cli()
 
 
 if __name__ == "__main__":
-    cli()  # noqa: E1120
+    cli()

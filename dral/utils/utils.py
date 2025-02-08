@@ -21,10 +21,10 @@ class Utils:
             raise FileNotFoundError(f"Forbidden words files directory not found at {forbidden_words_path}")
         output = []
         for words_file in forbidden_words_path.glob("model.txt"):
-            with open(words_file, "r", encoding="UTF-8") as f:
+            with open(words_file, encoding="UTF-8") as f:
                 output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
         for words_file in forbidden_words_path.glob(f"{language}.txt"):
-            with open(words_file, "r", encoding="UTF-8") as f:
+            with open(words_file, encoding="UTF-8") as f:
                 output.extend([word.strip().lower() for word in f.readlines() if not word.strip().startswith("#")])
         return output
 

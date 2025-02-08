@@ -11,3 +11,4 @@
 **/.pytest_cache
 .venv
 venv
+**/.ruff_cache

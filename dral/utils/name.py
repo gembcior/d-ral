@@ -68,9 +68,7 @@ def _expand_digits(name: str, i1: int, i2: int) -> tuple[int, int]:
 
 def is_similar_name(name_a: str, name_b: str) -> bool:
     difference, _, _ = _get_name_difference(name_a, name_b)
-    if difference in ["equal", "insert", "delete", "replace"]:
-        return True
-    return False
+    return difference in ["equal", "insert", "delete", "replace"]
 
 
 def get_common_name(namelist: list[str]) -> str:

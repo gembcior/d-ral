@@ -24,9 +24,9 @@ class DralOutputFile:
 
 
 class DralGenerator(ABC):
-    def __init__(self, template_dir: list[Path], suffix: DralSuffix = DralSuffix(), forbidden_words: list[str] | None = None):
+    def __init__(self, template_dir: list[Path], suffix: type[DralSuffix] = DralSuffix, forbidden_words: list[str] | None = None):
         self._template_dir = template_dir
-        self._suffix = suffix
+        self._suffix = suffix()
         self._forbidden_words = forbidden_words if forbidden_words else []
 
     def _is_multi_instance_group(self, group: dict[str, Any]) -> bool:
@@ -47,14 +47,11 @@ class DralGenerator(ABC):
         return isinstance(group["offset"], list)
 
     def _in_multi_instance_scope(self, group: dict[str, Any]) -> bool:
-        for parent in group["parent"]:
-            if len(parent["instances"]) > 1:
-                return True
-        return False
+        return any(len(parent["instances"]) > 1 for parent in group["parent"])
 
     def _get_hierarchy(self, dral_object: dict[str, Any]) -> str:
         if len(dral_object["parent"]) <= 1:
-            return dral_object["name"]
+            return str(dral_object["name"])
         hierarchy = ""
         for parent in dral_object["parent"][1:]:
             hierarchy += f"{parent['name']}::"
@@ -78,11 +75,11 @@ class DralGenerator(ABC):
         return natsorted(output, key=lambda x: x[1])
 
     def _get_absolute_address(self, dral_object: dict[str, Any]) -> int:
+        address = int(dral_object["address"])
         if len(dral_object["parent"]) <= 1:
-            return dral_object["address"]
-        address = dral_object["address"]
+            return address
         for parent in dral_object["parent"][1:]:
-            address += parent["address"]
+            address += int(parent["address"])
         return address
 
     def _get_system_mapping(self) -> dict[str, Any]:
@@ -109,7 +106,7 @@ class DralGenerator(ABC):
         return env
 
     @abstractmethod
-    def generate(self, template: str, device: DralDevice) -> Any:
+    def generate(self, template: str, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
         pass
 
 

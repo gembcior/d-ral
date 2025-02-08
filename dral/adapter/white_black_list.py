@@ -15,6 +15,6 @@ class WhiteBlackListAdapter(BaseAdapter):
         return device
 
     def convert(self, input_file: Path) -> DralDevice:
-        with open(input_file, "r", encoding="UTF-8") as f:
+        with open(input_file, encoding="UTF-8") as f:
             _list = yaml.load(f, Loader=yaml.FullLoader)
         return self._list_to_dral(_list)

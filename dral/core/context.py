@@ -17,7 +17,7 @@ class DralContext(ABC):
         pass
 
     @abstractmethod
-    def generate(self, device: DralDevice) -> list[DralOutputFile]:
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
         pass
 
     @abstractmethod
@@ -25,7 +25,7 @@ class DralContext(ABC):
         pass
 
     @abstractmethod
-    def save(self, files: list[DralOutputFile], device: str):
+    def save(self, files: list[DralOutputFile], device: str) -> None:
         pass
 
 
@@ -51,13 +51,13 @@ class CppContext(DralContext):
         device = self._filter.apply(device)
         return device
 
-    def generate(self, device: DralDevice) -> list[DralOutputFile]:
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
         return self._generator.generate(f"{self._access_type}.jinja", device)
 
     def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
         return self._formatter.format(files)
 
-    def save(self, files: list[DralOutputFile], device: str):
+    def save(self, files: list[DralOutputFile], device: str) -> None:
         self._layout.make(files, device)
 
     # def model(self):
@@ -79,11 +79,11 @@ class HtmlContext(DralContext):
         device = self._filter.apply(device)
         return device
 
-    def generate(self, device: DralDevice) -> list[DralOutputFile]:
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
         return self._generator.generate("index.html", device)
 
     def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
         return self._formatter.format(files)
 
-    def save(self, files: list[DralOutputFile], device: str):
+    def save(self, files: list[DralOutputFile], device: str) -> None:
         self._layout.make(files, device)

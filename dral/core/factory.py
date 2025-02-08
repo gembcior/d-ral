@@ -13,6 +13,7 @@ from dral.core.generator import (
 )
 from dral.core.objects import DralSuffix
 from dral.filter import BlackListFilter, FilterSupervisor, GroupsFilter, WhiteListFilter
+from dral.filter.base import BaseFilter
 from dral.formatter.cpp import CppFormatter
 from dral.formatter.html import HtmlFormatter
 from dral.layout.cpp import CppLayout
@@ -21,7 +22,7 @@ from dral.utils.utils import Utils
 
 from .context import CppContext, DralContext, HtmlContext
 
-DRAL_ADAPTER = SvdAdapter
+DRAL_ADAPTER: type[BaseAdapter] = SvdAdapter
 
 
 def override_adapter(adapter: type[BaseAdapter]) -> None:
@@ -71,7 +72,7 @@ def get_groups_filter() -> GroupsFilter:
 
 
 def get_filter_supervisor(options: DralAppOptions) -> FilterSupervisor:
-    filters = []
+    filters: list[BaseFilter] = []
     if options.black_list:
         filters.append(get_black_list_filter(options.black_list))
     if options.white_list:
@@ -88,14 +89,14 @@ def get_adapter() -> BaseAdapter:
 
 def get_multi_output_generator(options: DralAppOptions) -> DralGenerator:
     template_dir_list = get_template_dir_list(options)
-    suffix = DralSuffix()
+    suffix = DralSuffix
     forbidden_words = get_forbidden_words(options.language)
     return MultiOutputGenerator(template_dir_list, suffix, forbidden_words)
 
 
 def get_single_output_generator(options: DralAppOptions) -> DralGenerator:
     template_dir_list = get_template_dir_list(options)
-    suffix = DralSuffix()
+    suffix = DralSuffix
     forbidden_words = get_forbidden_words(options.language)
     return SingleOutputGenerator(template_dir_list, suffix, forbidden_words)
 
