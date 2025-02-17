@@ -13,12 +13,12 @@ from dral.core.objects import (
     DralRegister,
 )
 from dral.filter.base import BaseFilter
-from dral.utils.name import get_common_name, get_name_difference, is_similar_name
+from dral.utils.name import DralName
 
 
 class GroupsFilter(BaseFilter):
     def _is_similar_name(self, object_a: DralObject, object_b: DralObject) -> bool:
-        return is_similar_name(object_a.name, object_b.name)
+        return DralName.is_similar_name(object_a.name, object_b.name)
 
     def _compare_fields(self, field_a: DralField, field_b: DralField) -> bool:
         if field_a.name != field_b.name:
@@ -85,11 +85,11 @@ class GroupsFilter(BaseFilter):
         output = []
         for groups in list_of_groups:
             groups.sort(key=lambda x: x.address)
-            instances = [DralGroupInstance(group.name, group.address) for group in groups]
+            dral_name = DralName([group.name for group in groups])
+            instances = [DralGroupInstance(dral_name.get_instance_name(group.name), group.address) for group in groups]
             offset = self._get_group_offset([group.address for group in groups])
-            new_name = get_common_name([group.name for group in groups])
             new = DralGroup(
-                name=new_name,
+                name=dral_name.get_common_name(),
                 description=groups[0].description,
                 address=groups[0].address,
                 offset=offset,
@@ -117,9 +117,10 @@ class GroupsFilter(BaseFilter):
         output = []
         for registers in list_of_registers:
             registers.sort(key=lambda x: x.address)
-            instances = [DralGroupInstance(register.name, register.address) for register in registers]
+            dral_name = DralName([register.name for register in registers])
+            instances = [DralGroupInstance(dral_name.get_instance_name(register.name), register.address) for register in registers]
             offset = self._get_group_offset([register.address for register in registers])
-            new_name = get_common_name([register.name for register in registers])
+            new_name = dral_name.get_common_name()
             new = DralGroup(
                 name=new_name,
                 description=registers[0].description,
@@ -187,10 +188,13 @@ class GroupsFilter(BaseFilter):
         return groups
 
     def _rename_group(self, group: DralGroup) -> str:
-        instances = [instance.name for instance in group.instances]
-        _, i1, i2 = get_name_difference(instances[0], instances[1])
-        add = sorted([name[i1:i2] for name in instances])
-        return f"{group.name[:i1]}_{'_'.join(add)}{group.name[i1:]}"
+        dral_name = DralName([instance.name for instance in group.instances])
+        # TODO: If many elements/instances are in group, final name can be too long
+        if len(dral_name._namelist) > 3:
+            raise ValueError("Too many instances in group. Renaming duplicated groups is not possible.", dral_name._namelist)
+        add = dral_name.get_difference_names()
+        i1, _ = dral_name.get_difference_index()
+        return f"{group.name[:i1]}{'_'.join(add)}_{group.name[i1:]}"
 
     def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
         if not groups:
