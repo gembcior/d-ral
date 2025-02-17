@@ -17,7 +17,7 @@ class DralName:
         self._name = self._namelist[0]
         self._idx = self._calculate()
 
-    def _validate(self):
+    def _validate(self) -> None:
         similar = 0
         for name in self._namelist:
             if self.is_similar_name(name, self._namelist[0]):
@@ -66,7 +66,7 @@ class DralName:
                 return "replace", i1 if i1 < j1 else j1, j2 if j2 > i2 else i2
         return "none", 0, 0
 
-    def _get_name_marker(self, left: str, right: str, marker="x") -> str:
+    def _get_name_marker(self, left: str, right: str, marker: str = "x") -> str:
         if left and left[-1] != "_":
             marker = "_" + marker
         if right and right[0] != "_":

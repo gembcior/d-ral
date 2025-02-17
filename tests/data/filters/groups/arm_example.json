@@ -20,15 +20,15 @@
             "offset": 256,
             "instances": [
                 {
-                    "name": "TIMER0",
+                    "name": "TIMER_0",
                     "address": 1073807360
                 },
                 {
-                    "name": "TIMER1",
+                    "name": "TIMER_1",
                     "address": 1073807616
                 },
                 {
-                    "name": "TIMER2",
+                    "name": "TIMER_2",
                     "address": 1073807872
                 }
             ],
@@ -50,15 +50,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -87,15 +87,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -130,15 +130,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -173,15 +173,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -216,15 +216,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -259,15 +259,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -302,15 +302,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -345,15 +345,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -388,15 +388,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -431,15 +431,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -474,15 +474,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -517,15 +517,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -560,15 +560,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -605,15 +605,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -642,15 +642,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -685,15 +685,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -728,15 +728,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -771,15 +771,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -814,15 +814,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -857,15 +857,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -902,15 +902,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -939,15 +939,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -982,15 +982,15 @@
                                     "address": 1073807360,
                                     "instances": [
                                         {
-                                            "name": "TIMER0",
+                                            "name": "TIMER_0",
                                             "address": 1073807360
                                         },
                                         {
-                                            "name": "TIMER1",
+                                            "name": "TIMER_1",
                                             "address": 1073807616
                                         },
                                         {
-                                            "name": "TIMER2",
+                                            "name": "TIMER_2",
                                             "address": 1073807872
                                         }
                                     ],
@@ -1027,15 +1027,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -1065,15 +1065,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -1103,15 +1103,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
@@ -1141,15 +1141,15 @@
                             "address": 1073807360,
                             "instances": [
                                 {
-                                    "name": "TIMER0",
+                                    "name": "TIMER_0",
                                     "address": 1073807360
                                 },
                                 {
-                                    "name": "TIMER1",
+                                    "name": "TIMER_1",
                                     "address": 1073807616
                                 },
                                 {
-                                    "name": "TIMER2",
+                                    "name": "TIMER_2",
                                     "address": 1073807872
                                 }
                             ],
