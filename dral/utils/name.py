@@ -3,7 +3,6 @@ from collections.abc import Sequence
 from difflib import SequenceMatcher
 
 from natsort import natsorted
-from rich import print
 
 
 class DralNameError(Exception):
