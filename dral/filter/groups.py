@@ -192,9 +192,7 @@ class GroupsFilter(BaseFilter):
         # TODO: If many elements/instances are in group, final name can be too long
         if len(dral_name._namelist) > 3:
             raise ValueError("Too many instances in group. Renaming duplicated groups is not possible.", dral_name._namelist)
-        add = dral_name.get_difference_names()
-        i1, _ = dral_name.get_difference_index()
-        return f"{group.name[:i1]}{'_'.join(add)}_{group.name[i1:]}"
+        return dral_name.get_duplicated_group_name(group.name)
 
     def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
         if not groups:

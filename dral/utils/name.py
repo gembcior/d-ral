@@ -3,6 +3,7 @@ from collections.abc import Sequence
 from difflib import SequenceMatcher
 
 from natsort import natsorted
+from rich import print
 
 
 class DralNameError(Exception):
@@ -15,7 +16,7 @@ class DralName:
         if validate:
             self._validate()
         self._name = self._namelist[0]
-        self._idx = self._calculate()
+        self._difflist = self._calculate_difference()
 
     def _validate(self) -> None:
         similar = 0
@@ -25,11 +26,18 @@ class DralName:
         if similar != len(self._namelist):
             raise DralNameError("Could not get a common name. Names are not similar.", self._namelist)
 
-    def _calculate(self) -> tuple[int, int]:
-        difference, i1, i2 = self._get_name_difference(self._namelist[0], self._namelist[1])
+    def _calculate(self, name: str) -> tuple[int, int]:
+        difference, i1, i2 = self._get_name_difference(self._name, name)
         if difference in ["insert", "delete", "replace"]:
-            return self._expand_digits(self._name, i1, i2)
+            return self._expand_digits(name, i1, i2)
         raise DralNameError("Could not get a common name. The way names are different not supported.", self._namelist)
+
+    def _calculate_difference(self) -> dict[str, tuple[int, int]]:
+        output = {}
+        for name in self._namelist[1:]:
+            output[name] = self._calculate(name)
+        output[self._name] = output[self._namelist[1]]
+        return output
 
     @classmethod
     def _get_name_difference(cls, name_a: str, name_b: str) -> tuple[str, int, int]:
@@ -86,21 +94,25 @@ class DralName:
         return difference in ["equal", "insert", "delete", "replace"]
 
     def get_common_name(self) -> str:
-        i1, i2 = self._idx
+        i1, i2 = self._difflist[self._name]
         marker = self._get_name_marker(self._name[:i1], self._name[i2:])
         return self._name[:i1] + marker + self._name[i2:]
 
     def get_instance_name(self, instance: str) -> str:
-        i1, i2 = self._idx
+        if instance not in self._difflist:
+            raise DralNameError("Could not get a common name. Instance name not in the list.", self._namelist)
+        i1, i2 = self._difflist[instance]
         marker = self._get_name_marker(instance[:i1], instance[i2:], instance[i1:i2])
         return instance[:i1] + marker + instance[i2:]
 
-    def get_difference_index(self) -> tuple[int, int]:
-        return self._idx
-
-    def get_difference_names(self) -> list[str]:
-        i1, i2 = self._idx
-        return natsorted([name[i1:i2] for name in self._namelist])
+    def get_duplicated_group_name(self, group: str) -> str:
+        differing_elements = []
+        for name in self._namelist:
+            i1, i2 = self._difflist[name]
+            differing_elements.append(name[i1:i2])
+        i1, _ = self._difflist[self._name]
+        marker = self._get_name_marker(group[:i1], group[i1:], "_".join(differing_elements))
+        return group[:i1] + marker + group[i1:]
 
 
 def upper_camel_case(string: str) -> str:
