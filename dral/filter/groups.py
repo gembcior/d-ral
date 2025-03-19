@@ -120,16 +120,15 @@ class GroupsFilter(BaseFilter):
             dral_name = DralName([register.name for register in registers])
             instances = [DralGroupInstance(dral_name.get_instance_name(register.name), register.address) for register in registers]
             offset = self._get_group_offset([register.address for register in registers])
-            new_name = dral_name.get_common_name()
             new = DralGroup(
-                name=new_name,
+                name=dral_name.get_common_name(),
                 description=registers[0].description,
                 address=registers[0].address,
                 offset=offset,
                 instances=instances,
                 registers=[
                     DralRegister(
-                        name=new_name,
+                        name=dral_name.get_register_name(),
                         description=registers[0].description,
                         access=registers[0].access,
                         value_type=registers[0].value_type,
@@ -190,7 +189,7 @@ class GroupsFilter(BaseFilter):
     def _rename_group(self, group: DralGroup) -> str:
         dral_name = DralName([instance.name for instance in group.instances])
         # TODO: If many elements/instances are in group, final name can be too long
-        if len(dral_name._namelist) > 3:
+        if len(dral_name._namelist) > 4:
             raise ValueError("Too many instances in group. Renaming duplicated groups is not possible.", dral_name._namelist)
         return dral_name.get_duplicated_group_name(group.name)
 

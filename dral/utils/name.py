@@ -97,6 +97,11 @@ class DralName:
         marker = self._get_name_marker(self._name[:i1], self._name[i2:])
         return self._name[:i1] + marker + self._name[i2:]
 
+    def get_register_name(self) -> str:
+        i1, i2 = self._difflist[self._name]
+        name = self._name[:i1] + "_" + self._name[i2:]
+        return re.sub(r"_{2,}", "_", name).strip("_")
+
     def get_instance_name(self, instance: str) -> str:
         if instance not in self._difflist:
             raise DralNameError("Could not get a common name. Instance name not in the list.", self._namelist)
