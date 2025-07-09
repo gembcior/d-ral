@@ -11,7 +11,7 @@ homepage = "https://github.com/gembcior/d-ral"
 version = "0.5.3"
 description = "D-RAL - Device Register Access Layer"
 authors = [
-  {name="Gembcior", email= "gembcior@gmail.com"}
+  { name = "Gembcior", email = "gembcior@gmail.com" }
 ]
 license = "MIT"
 readme = "README.md"
