@@ -67,4 +67,4 @@ jobs:
       run: uv run ruff check
     - name: Lint with mypy
       if: ${{ success() || failure() }}
-      run: uv run mypy --non-interactive -p dral
+      run: uv run mypy -p dral
