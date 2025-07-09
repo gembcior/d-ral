@@ -56,7 +56,7 @@ class DralGenerator(ABC):
         for parent in dral_object["parent"][1:]:
             hierarchy += f"{parent['name']}::"
         hierarchy += dral_object["name"]
-        return hierarchy
+        return str(hierarchy)
 
     def _get_instances_info(self, dral_object: dict[str, Any]) -> list[tuple[str, str]]:
         if dral_object["dral_object"] == "DralGroup":
