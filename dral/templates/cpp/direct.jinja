@@ -1,15 +1,18 @@
 {% import 'utils.jinja' as utils with context %}
 
 {%- macro getGroup(group, groupIndent) %}
+public:
 /**
  * GROUP {{ group.name | upper }}
  */
   class {{ utils.getGroupName(group.name) }} final
   {
-  private:
+  public:
 {% filter indent(groupIndent + 2, True) %}
 {{ utils.getGroupBaseAddress(group) }}
+{% endfilter -%}
 
+{% filter indent(groupIndent + 2, True) %}
 {{ utils.getGroupEnum(group) }}
 
 {{ utils.getGroupPolicy(group) }}
@@ -25,14 +28,19 @@
 {%- endmacro -%}
 
 {%- macro getSimpleGroup(group, groupIndent) %}
+public:
 /**
  * GROUP {{ group.name | upper }}
  */
   class {{ utils.getGroupName(group.name) }} final
   {
-  private:
+  public:
 {% filter indent(groupIndent + 2, True) %}
 {{ utils.getGroupBaseAddress(group) }}
+{% endfilter -%}
+
+  private:
+{% filter indent(groupIndent + 2, True) %}
 
 {{ utils.getSimpleGroupPolicy(group) }}
 
@@ -112,20 +120,21 @@ namespace dral::{{ device | lower }} {
 
 class {{ utils.getGroupName(root.name) }} final
 {
-private:
 {% if root is multiInstance %}
+public:
 {{ utils.getGroupBaseAddress(root) }}
 
 {{ utils.getGroupEnum(root) }}
 
 {{ utils.getGroupPolicy(root) }}
 {% else %}
+public:
 {{ utils.getGroupBaseAddress(root) }}
 
+private:
 {{ utils.getSimpleGroupPolicy(root) }}
 {% endif %}
 
-public:
 {% for register in root.registers %}
   {{- getChild(register, 0) }}
 {% endfor %}
