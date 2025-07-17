@@ -60,11 +60,6 @@ class CppContext(DralContext):
     def save(self, files: list[DralOutputFile], device: str) -> None:
         self._layout.make(files, device)
 
-    # def model(self):
-    #     model_path = output / "cpp" / "model"
-    #     Path.mkdir(model_path, parents=True, exist_ok=True)
-    #     Utils.get_model_release(model_path)
-
 
 class HtmlContext(DralContext):
     def __init__(self, adapter: BaseAdapter, generator: DralGenerator, filter: FilterSupervisor, formatter: DralFormatter, layout: DralLayout):
@@ -81,6 +76,29 @@ class HtmlContext(DralContext):
 
     def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
         return self._generator.generate("index.html", device)
+
+    def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
+        return self._formatter.format(files)
+
+    def save(self, files: list[DralOutputFile], device: str) -> None:
+        self._layout.make(files, device)
+
+
+class PythonContext(DralContext):
+    def __init__(self, adapter: BaseAdapter, generator: DralGenerator, filter: FilterSupervisor, formatter: DralFormatter, layout: DralLayout):
+        self._adapter = adapter
+        self._generator = generator
+        self._filter = filter
+        self._formatter = formatter
+        self._layout = layout
+
+    def parse(self, input_file: Path) -> DralDevice:
+        device = self._adapter.convert(input_file)
+        device = self._filter.apply(device)
+        return device
+
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
+        return self._generator.generate("main.jinja", device)
 
     def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
         return self._formatter.format(files)

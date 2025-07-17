@@ -1,0 +1,20 @@
+{% macro getName(name, suffix) -%}
+{{ name ~ '_' ~ suffix }}
+{%- endmacro -%}
+
+{% macro getGroupName(name) -%}
+{{ getName(name, suffix.group) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getRegisterName(name) -%}
+{{ getName(name, suffix.register) | upperCamelCase }}
+{%- endmacro -%}
+
+{% macro getFieldName(name) -%}
+{{ getName(name, suffix.field) | lowerCamelCase | isForbidden }}
+{%- endmacro -%}
+
+{% macro getAccessType(access) -%}
+{% set mapping = ["dral.AccessType.ReadOnly", "dral.AccessType.WriteOnly", "dral.AccessType.ReadWrite"] %}
+{{ mapping[access.value] }}
+{%- endmacro -%}

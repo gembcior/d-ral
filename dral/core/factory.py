@@ -16,11 +16,13 @@ from dral.filter import BlackListFilter, FilterSupervisor, GroupsFilter, WhiteLi
 from dral.filter.base import BaseFilter
 from dral.formatter.cpp import CppFormatter
 from dral.formatter.html import HtmlFormatter
+from dral.formatter.python import PythonFormatter
 from dral.layout.cpp import CppLayout
 from dral.layout.html import HtmlLayout
+from dral.layout.python import PythonLayout
 from dral.utils.utils import Utils
 
-from .context import CppContext, DralContext, HtmlContext
+from .context import CppContext, DralContext, HtmlContext, PythonContext
 
 DRAL_ADAPTER: type[BaseAdapter] = SvdAdapter
 
@@ -119,9 +121,20 @@ def get_html_context(options: DralAppOptions) -> HtmlContext:
     return HtmlContext(adapter, generator, filter, formatter, layout)
 
 
+def get_python_context(options: DralAppOptions) -> PythonContext:
+    adapter = get_adapter()
+    generator = get_multi_output_generator(options)
+    filter = get_filter_supervisor(options)
+    formatter = PythonFormatter()
+    layout = PythonLayout(options.output_path)
+    return PythonContext(adapter, generator, filter, formatter, layout)
+
+
 def get_context(options: DralAppOptions) -> DralContext:
     if options.language == "cpp":
         return get_cpp_context(options)
     elif options.language == "html":
         return get_html_context(options)
+    elif options.language == "python":
+        return get_python_context(options)
     raise ValueError(f"Unsupported language: {options.language}")
