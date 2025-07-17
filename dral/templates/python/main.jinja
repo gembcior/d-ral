@@ -24,11 +24,11 @@ class {{ utils.getGroupName(group.name) }}(dral.Group):
     {% endfor -%}
 
     {% for child in group.registers %}
-    {{ utils.getRegisterName(child.name) }} = {{ utils.getRegisterName(child.name) }}()
+    {{ utils.getRegisterName(child.name) | decapitalize }} = {{ utils.getRegisterName(child.name) }}()
     {% endfor -%}
 
     {% for child in group.groups %}
-    {{ utils.getGroupName(child.name) }} = {{ utils.getGroupName(child.name) }}()
+    {{ utils.getGroupName(child.name) | decapitalize }} = {{ utils.getGroupName(child.name) }}()
     {% endfor -%}
 {%- endmacro -%}
 

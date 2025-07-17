@@ -125,3 +125,7 @@ def upper_camel_case(string: str) -> str:
 
 def lower_camel_case(string: str) -> str:
     return string[0].lower() + upper_camel_case(string)[1:]
+
+
+def decapitalize(string: str) -> str:
+    return string[0].lower() + string[1:] if len(string) > 1 else string.lower()
