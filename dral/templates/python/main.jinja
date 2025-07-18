@@ -46,6 +46,6 @@ class {{ utils.getGroupName(group.name) }}(dral.Group):
 
 {%- include 'header.jinja' +%}
 
-import dral
+import dral.model as dral
 
 {{ getGroup(root, 4) }}
