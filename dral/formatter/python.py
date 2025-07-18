@@ -6,13 +6,13 @@ from dral.core.generator import DralOutputFile
 from dral.formatter.base import DralFormatter
 
 
-class CppFormatter(DralFormatter):
+class PythonFormatter(DralFormatter):
     def format(self, objects: DralOutputFile | list[DralOutputFile]) -> list[DralOutputFile]:
         if isinstance(objects, DralOutputFile):
             objects = [objects]
         for i, item in enumerate(objects):
             result = subprocess.run(
-                ["clang-format", f"-style=file:{self._get_style_dir() / '.clang-format'}"], input=item.content, text=True, capture_output=True
+                ["ruff", "--config", str(self._get_style_dir() / "ruff.toml"), "format", "-"], input=item.content, text=True, capture_output=True
             )
             if result.returncode != 0:
                 raise RuntimeError(f"Formatting failed for {item.name}: {result.stderr}")

@@ -1,0 +1,51 @@
+{% import 'utils.jinja' as utils with context %}
+
+{%- macro getField(field) %}
+{{ utils.getFieldName(field.name) }} = dral.Field("{{ field.name | upperCamelCase }}", {{ field.position }}, {{ field.width }})
+{%- endmacro -%}
+
+{%- macro getRegister(register) %}
+@dral.register("{{ register.name | upperCamelCase }}", {{ "0x{:08X}".format(register.address) }}, {{ utils.getAccessType(register.access) }})
+class {{ utils.getRegisterName(register.name) }}(dral.Register):
+    {% for field in register.fields %}
+    {{ getField(field) }}
+    {% endfor -%}
+{%- endmacro -%}
+
+{%- macro getGroup(group, groupIndent) %}
+@dral.group("{{ group.name | upperCamelCase}}", {{ "0x{:08X}".format(group.address) }}, {{ "0x{:08X}".format(group.offset) }}, {{ group.instances | length }})
+class {{ utils.getGroupName(group.name) }}(dral.Group):
+    {% for child in group.registers recursive %}
+    {{- getChild(child, groupIndent) -}}
+    {% endfor -%}
+
+    {% for child in group.groups recursive %}
+    {{- getChild(child, groupIndent) -}}
+    {% endfor -%}
+
+    {% for child in group.registers %}
+    {{ utils.getRegisterName(child.name) | decapitalize }} = {{ utils.getRegisterName(child.name) }}()
+    {% endfor -%}
+
+    {% for child in group.groups %}
+    {{ utils.getGroupName(child.name) | decapitalize }} = {{ utils.getGroupName(child.name) }}()
+    {% endfor -%}
+{%- endmacro -%}
+
+{%- macro getChild(child, childIndent) %}
+{% if child is dralRegister %}
+  {% filter indent(childIndent, True) %}
+  {{- getRegister(child) }}
+  {% endfilter %}
+{% elif child is dralGroup %}
+  {% filter indent(childIndent, True) %}
+  {{- getGroup(child, childIndent) }}
+  {% endfilter %}
+{% endif %}
+{%- endmacro -%}
+
+{%- include 'header.jinja' +%}
+
+import dral.model as dral
+
+{{ getGroup(root, 4) }}

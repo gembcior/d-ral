@@ -25,7 +25,7 @@ from dral.adapter.base import BaseAdapter
     "--language",
     default="cpp",
     show_default=True,
-    type=click.Choice(["cpp", "html"], case_sensitive=False),
+    type=click.Choice(["cpp", "html", "python"], case_sensitive=False),
     help="Specify the programming language for which you want to generate files.",
 )
 @click.option(

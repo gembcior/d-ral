@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 from natsort import natsorted
 
 from dral.core.objects import DralDevice, DralSuffix
-from dral.utils.name import lower_camel_case, upper_camel_case
+from dral.utils.name import decapitalize, lower_camel_case, upper_camel_case
 
 
 @dataclass
@@ -94,6 +94,7 @@ class DralGenerator(ABC):
         env.filters["isForbidden"] = lambda x: x + "_" if x.lower() in self._forbidden_words else x
         env.filters["upperCamelCase"] = upper_camel_case
         env.filters["lowerCamelCase"] = lower_camel_case
+        env.filters["decapitalize"] = decapitalize
         env.tests["multiInstance"] = self._is_multi_instance_group
         env.tests["dralRegister"] = self._is_dral_register
         env.tests["dralGroup"] = self._is_dral_group
