@@ -10,7 +10,6 @@ from dral.filter.groups import GroupsFilter
 
 
 class TestDralFilters:
-
     @pytest.mark.parametrize("svd", ["arm_example"])
     def test_groups_filter(self, svd: str, datadir: Path):
         svd_path = datadir / "svd" / f"{svd}.svd"

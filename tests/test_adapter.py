@@ -9,7 +9,6 @@ from dral.adapter import SvdAdapter
 
 
 class TestDralAdapter:
-
     @pytest.mark.parametrize("svd", ["arm_example"])
     def test_svd_adapter(self, svd: str, datadir: Path):
         svd_path = datadir / "svd" / f"{svd}.svd"
