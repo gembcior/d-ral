@@ -40,6 +40,8 @@ class DralName:
 
     @classmethod
     def _get_name_difference(cls, name_a: str, name_b: str) -> tuple[str, int, int]:
+        name_a = name_a.lower()
+        name_b = name_b.lower()
         if name_a == name_b:
             return "equal", 0, len(name_a)
         matcher = SequenceMatcher()
@@ -120,11 +122,15 @@ class DralName:
 
 
 def upper_camel_case(string: str) -> str:
-    return "".join(x.capitalize() for x in string.lower().split("_"))
+    strlist = [x for x in re.split(r"(\d+)|[-_ ]|(?<=[a-z])(?=[A-Z])", string) if x]
+    return "".join(x.capitalize() for x in strlist)
 
 
 def lower_camel_case(string: str) -> str:
-    return string[0].lower() + upper_camel_case(string)[1:]
+    upper_camel = upper_camel_case(string)
+    first = upper_camel[0].lower() if upper_camel else ""
+    body = upper_camel[1:] if len(upper_camel) > 1 else ""
+    return first + body
 
 
 def decapitalize(string: str) -> str:
