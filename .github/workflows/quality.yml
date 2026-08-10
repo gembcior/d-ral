@@ -1,0 +1,109 @@
+name: Quality Checks
+
+on:
+  workflow_call:
+    inputs:
+      python-versions:
+        description: "List of Python versions to test against (JSON array)"
+        type: string
+        default: '["3.10", "3.11", "3.12", "3.13", "3.14"]'
+      default-python-version:
+        description: "Minimal supported Python version"
+        type: string
+        default: "3.10"
+      lint-command:
+        description: "Ruff lint command"
+        type: string
+        required: true
+      format-command:
+        description: "Ruff format command"
+        type: string
+        required: true
+      hooks-command:
+        description: "Pre-commit hooks command"
+        type: string
+        required: true
+
+jobs:
+  tests-linux:
+    name: Tests (Linux, Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ${{ fromJSON(inputs.python-versions) }}
+    container:
+      image: python:${{ matrix.python-version }}-trixie
+    steps:
+      - name: Configure Git safe directory
+        run: git config --global --add safe.directory '*'
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run tests
+        run: just tests
+
+
+  linters:
+    name: Linter
+    runs-on: ubuntu-latest
+    container:
+      image: python:${{ inputs.default-python-version }}-trixie
+    steps:
+      - name: Configure Git safe directory
+        run: git config --global --add safe.directory '*'
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ inputs.default-python-version }}
+      - name: Lint with ruff
+        run: ${{ inputs.lint-command }}
+
+  autoformat:
+    name: Autoformat
+    runs-on: ubuntu-latest
+    container:
+      image: python:${{ inputs.default-python-version }}-trixie
+    steps:
+      - name: Configure Git safe directory
+        run: git config --global --add safe.directory '*'
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ inputs.default-python-version }}
+      - name: Check autoformat with ruff
+        run: ${{ inputs.format-command }}
+
+  hooks:
+    name: Pre-commit Hooks
+    runs-on: ubuntu-latest
+    container:
+      image: python:${{ inputs.default-python-version }}-trixie
+    steps:
+      - name: Configure Git safe directory
+        run: git config --global --add safe.directory '*'
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ inputs.default-python-version }}
+      - name: Run pre-commit on changed files
+        run: ${{ inputs.hooks-command }}

@@ -1,0 +1,20 @@
+name: Quality Checks (PR)
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml
+    with:
+      python-versions: '["3.10", "3.11", "3.12", "3.13", "3.14"]'
+      default-python-version: "3.10"
+      lint-command: just lint
+      format-command: just format --check
+      hooks-command: just hooks

@@ -1,14 +1,73 @@
-**/*.egg-info
-**.pyc
-**/.eggs
-**/venv
-**/__pycache__
-/dist
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+.venv*/
+venv/
+venv*/
+.conda/
+.python-version
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+.installed.cfg
+
+# Testing and coverage
 .coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+junit*.xml
+coverage.xml
+test-reports/
+
+# Type checking and linting
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.dmypy.json
+dmypy.json
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.ropeproject
+.project
+.pydevproject
+.settings/
+tags
+
+# Documentation build files
+docs/_build/
+docs/_rst/
+docs/api/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.pot
+*.orig
+.tmp/
+.cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Project-specific
+# (add any project-specific ignores here)
 **/dralOutput
-**/.tox
-**/.mypy_cache
-**/.pytest_cache
-.venv
-venv
-**/.ruff_cache
