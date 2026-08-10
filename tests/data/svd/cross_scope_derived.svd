@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<device schemaVersion="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+  <name>CrossScopeDerivedTest</name>
+  <description>Minimal device exercising cross-scope derivedFrom through the full dral pipeline</description>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0</resetValue>
+  <resetMask>0xffffffff</resetMask>
+  <peripherals>
+    <peripheral>
+      <name>PeripheralA</name>
+      <description>Origin peripheral</description>
+      <baseAddress>0x40000000</baseAddress>
+      <registers>
+        <register>
+          <name>RegX</name>
+          <description>Origin register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <fields>
+            <field>
+              <name>FieldX</name>
+              <description>Origin field</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>PeripheralB</name>
+      <description>Peripheral with a register derived from a different peripheral's register</description>
+      <baseAddress>0x40001000</baseAddress>
+      <registers>
+        <!-- Previously impossible: dral's own resolver rejected any dotted,
+             cross-scope derivedFrom with NotImplementedError. Now resolved
+             upstream by svd2py before dral even sees the data. -->
+        <register derivedFrom="PeripheralA.RegX">
+          <name>RegY</name>
+          <description>Cross-scope derived register</description>
+          <addressOffset>0x4</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>

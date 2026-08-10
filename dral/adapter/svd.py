@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import svd2py
+from svd2py.derive import DerivedFromError
 
 from dral.core.objects import (
     DralAccessType,
@@ -42,14 +43,6 @@ class SvdAdapter(BaseAdapter):
                 svd_object[attribute] = self._get_missing_atribute(svd_object, svd_parent, attribute)
         return svd_object
 
-    def _get_the_origin(self, svd_scope: list[dict[str, Any]], svd_element: dict[str, Any], derived_from: str) -> dict[str, Any]:
-        if len(derived_from.split(".")) > 1:
-            raise NotImplementedError("Resolving derivedFrom attribute from another scope is not supported yet.")
-        for element in svd_scope:
-            if element["name"] == derived_from:
-                return element | svd_element
-        return svd_element
-
     def _resolve_dim_groups(self, _: dict[str, Any]) -> list[dict[str, Any]]:
         raise NotImplementedError("The dimElementGroup element is not supported yet.")
 
@@ -68,8 +61,6 @@ class SvdAdapter(BaseAdapter):
     def _parse_fields(self, svd_fields: list[dict[str, Any]], svd_parent: dict[str, Any]) -> list[DralField]:
         fields = []
         for field in svd_fields:
-            if "attributes" in field and "derivedFrom" in field["attributes"]:
-                field = self._get_the_origin(svd_fields, field, field["attributes"]["derivedFrom"])
             if "bitRange" in field:
                 pattern = re.compile(r"(\d+):(\d+)")
                 result = re.search(pattern, field["bitRange"])
@@ -102,8 +93,6 @@ class SvdAdapter(BaseAdapter):
         for cluster in svd_clusters:
             if "dim" in cluster:
                 self._resolve_dim_groups(cluster)
-            if "attributes" in cluster and "derivedFrom" in cluster["attributes"]:
-                cluster = self._get_the_origin(svd_clusters, cluster, cluster["attributes"]["derivedFrom"])
             cluster = self._get_missing_attributes_from_parent(cluster, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
                 name=cluster["name"],
@@ -124,8 +113,6 @@ class SvdAdapter(BaseAdapter):
         for register in svd_registers:
             if "dim" in register:
                 self._resolve_dim_groups(register)
-            if "attributes" in register and "derivedFrom" in register["attributes"]:
-                register = self._get_the_origin(svd_registers, register, register["attributes"]["derivedFrom"])
             register = self._get_missing_attributes_from_parent(register, svd_parent, ["size", "resetValue", "access"])
             new_register = DralRegister(
                 name=register["name"],
@@ -145,8 +132,6 @@ class SvdAdapter(BaseAdapter):
         for peripheral in svd_peripherals:
             if "dim" in peripheral:
                 self._resolve_dim_groups(peripheral)
-            if "attributes" in peripheral and "derivedFrom" in peripheral["attributes"]:
-                peripheral = self._get_the_origin(svd_peripherals, peripheral, peripheral["attributes"]["derivedFrom"])
             peripheral = self._get_missing_attributes_from_parent(peripheral, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
                 name=peripheral["name"],
@@ -175,5 +160,8 @@ class SvdAdapter(BaseAdapter):
 
     def convert(self, input_file: Path) -> DralDevice:
         svd = svd2py.SvdParser()
-        svd = svd.convert(input_file)
+        try:
+            svd = svd.convert(input_file)
+        except DerivedFromError as err:
+            raise IncorrectSvdError(str(err)) from err
         return self._svd_to_dral(svd)
