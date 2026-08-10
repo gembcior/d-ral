@@ -37,7 +37,7 @@ from dral.adapter.svd import IncorrectSvdError
 
 class TestDralAdapter:
     @pytest.mark.parametrize("svd", ["arm_example"])
-    def test_svd_adapter(self, svd: str, datadir: Path):
+    def test_svd_adapter(self, svd: str, datadir: Path) -> None:
         svd_path = datadir / "svd" / f"{svd}.svd"
         adapter = SvdAdapter()
         dral_device = adapter.convert(svd_path)
@@ -50,7 +50,7 @@ class TestDralAdapter:
 
         assert dral_device.asdict() == expected_dral_device
 
-    def test_svd_adapter_resolves_cross_scope_derived_from(self, datadir: Path):
+    def test_svd_adapter_resolves_cross_scope_derived_from(self, datadir: Path) -> None:
         # Previously impossible: dral's own resolver rejected any dotted,
         # cross-scope derivedFrom with NotImplementedError. Now resolved
         # upstream by svd2py before dral even sees the parsed data.
@@ -72,7 +72,7 @@ class TestDralAdapter:
         assert reg_y.description == "Cross-scope derived register"
         assert reg_y.address == 0x4
 
-    def test_svd_adapter_wraps_unresolvable_derived_from(self, tmp_path: Path):
+    def test_svd_adapter_wraps_unresolvable_derived_from(self, tmp_path: Path) -> None:
         bad_svd = tmp_path / "bad.svd"
         bad_svd.write_text("""
             <device schemaVersion="1.3">

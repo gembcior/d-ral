@@ -88,6 +88,10 @@ select = [
     "N",
 ]
 
+[tool.ruff.lint.per-file-ignores]
+# Assertions on literal expected values are the point of a test.
+"tests/*" = ["PLR2004"]
+
 [tool.coverage.run]
 omit = ["*/__init__.py"]
 

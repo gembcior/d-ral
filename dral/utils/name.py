@@ -36,7 +36,7 @@ class DralNameError(Exception):
 
 
 class DralName:
-    def __init__(self, namelist: Sequence[str], validate: bool = True):
+    def __init__(self, namelist: Sequence[str], validate: bool = True) -> None:
         self._namelist = natsorted(namelist)
         if validate:
             self._validate()

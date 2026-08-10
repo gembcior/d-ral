@@ -30,7 +30,7 @@ from .base import BaseFilter
 
 
 class FilterSupervisor:
-    def __init__(self, filters: list[BaseFilter] | None = None):
+    def __init__(self, filters: list[BaseFilter] | None = None) -> None:
         if filters is None:
             filters = []
         self._filters = filters

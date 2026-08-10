@@ -34,7 +34,7 @@ from .base import DralLayout
 
 
 class CppLayout(DralLayout):
-    def __init__(self, directory: Path):
+    def __init__(self, directory: Path) -> None:
         self._directory = directory / "dralOutput" / "cpp"
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:

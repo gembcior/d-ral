@@ -46,7 +46,7 @@ from .base import BaseAdapter
 
 
 class IncorrectSvdError(Exception):
-    def __init__(self, message: str, dral_object: dict[str, Any] | None = None):
+    def __init__(self, message: str, dral_object: dict[str, Any] | None = None) -> None:
         if dral_object is None:
             dral_object = {}
         self.message = message
@@ -55,7 +55,7 @@ class IncorrectSvdError(Exception):
 
 
 class SvdAdapter(BaseAdapter):
-    def _get_missing_atribute(self, svd_object: dict[str, Any], svd_parent: dict[str, Any], attribute: str) -> Any:
+    def _get_missing_atribute(self, svd_object: dict[str, Any], svd_parent: dict[str, Any], attribute: str) -> Any:  # noqa: ANN401
         if attribute in svd_object:
             return None
         if attribute not in svd_parent:
@@ -102,14 +102,14 @@ class SvdAdapter(BaseAdapter):
                 width = field["bitWidth"]
             else:
                 raise IncorrectSvdError("Determining the position and width of the field is impossible.", field)
-            field = self._get_missing_attributes_from_parent(field, svd_parent, ["access"])
+            merged_field = self._get_missing_attributes_from_parent(field, svd_parent, ["access"])
             new_field = DralField(
-                name=field["name"],
-                description=field["description"],
+                name=merged_field["name"],
+                description=merged_field["description"],
                 value_type="uint32_t",
                 position=position,
                 width=width,
-                access=self._get_access_type(field["access"]) if "access" in field else DralAccessType.ReadWrite,
+                access=self._get_access_type(merged_field["access"]) if "access" in merged_field else DralAccessType.ReadWrite,
             )
             fields.append(new_field)
         return fields
@@ -119,15 +119,15 @@ class SvdAdapter(BaseAdapter):
         for cluster in svd_clusters:
             if "dim" in cluster:
                 self._resolve_dim_groups(cluster)
-            cluster = self._get_missing_attributes_from_parent(cluster, svd_parent, ["size", "resetValue", "access"])
+            merged_cluster = self._get_missing_attributes_from_parent(cluster, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
-                name=cluster["name"],
-                description=cluster.get("description", ""),
-                address=cluster["addressOffset"],
+                name=merged_cluster["name"],
+                description=merged_cluster.get("description", ""),
+                address=merged_cluster["addressOffset"],
                 offset=0x0,
-                groups=self._parse_clusters(cluster["cluster"], cluster) if "cluster" in cluster else [],
-                registers=self._parse_registers(cluster["register"], cluster) if "register" in cluster else [],
-                instances=[DralGroupInstance(cluster["name"], cluster["addressOffset"])],
+                groups=self._parse_clusters(merged_cluster["cluster"], merged_cluster) if "cluster" in merged_cluster else [],
+                registers=self._parse_registers(merged_cluster["register"], merged_cluster) if "register" in merged_cluster else [],
+                instances=[DralGroupInstance(merged_cluster["name"], merged_cluster["addressOffset"])],
             )
             groups.append(group)
         return groups
@@ -139,16 +139,16 @@ class SvdAdapter(BaseAdapter):
         for register in svd_registers:
             if "dim" in register:
                 self._resolve_dim_groups(register)
-            register = self._get_missing_attributes_from_parent(register, svd_parent, ["size", "resetValue", "access"])
+            merged_register = self._get_missing_attributes_from_parent(register, svd_parent, ["size", "resetValue", "access"])
             new_register = DralRegister(
-                name=register["name"],
-                description=register["description"],
-                access=self._get_access_type(register["access"]) if "access" in register else DralAccessType.ReadWrite,
+                name=merged_register["name"],
+                description=merged_register["description"],
+                access=self._get_access_type(merged_register["access"]) if "access" in merged_register else DralAccessType.ReadWrite,
                 value_type="uint32_t",
-                address=register["addressOffset"],
-                size=register["size"],
-                reset_value=register.get("resetValue", 0),
-                fields=self._parse_fields(register["fields"]["field"], register) if "fields" in register else [],
+                address=merged_register["addressOffset"],
+                size=merged_register["size"],
+                reset_value=merged_register.get("resetValue", 0),
+                fields=self._parse_fields(merged_register["fields"]["field"], merged_register) if "fields" in merged_register else [],
             )
             registers.append(new_register)
         return registers
@@ -158,19 +158,19 @@ class SvdAdapter(BaseAdapter):
         for peripheral in svd_peripherals:
             if "dim" in peripheral:
                 self._resolve_dim_groups(peripheral)
-            peripheral = self._get_missing_attributes_from_parent(peripheral, svd_parent, ["size", "resetValue", "access"])
+            merged_peripheral = self._get_missing_attributes_from_parent(peripheral, svd_parent, ["size", "resetValue", "access"])
             group = DralGroup(
-                name=peripheral["name"],
-                description=peripheral.get("description", ""),
-                address=peripheral["baseAddress"],
+                name=merged_peripheral["name"],
+                description=merged_peripheral.get("description", ""),
+                address=merged_peripheral["baseAddress"],
                 offset=0x0,
                 groups=(
-                    self._parse_clusters(peripheral["registers"]["cluster"], peripheral)
-                    if "registers" in peripheral and "cluster" in peripheral["registers"]
+                    self._parse_clusters(merged_peripheral["registers"]["cluster"], merged_peripheral)
+                    if "registers" in merged_peripheral and "cluster" in merged_peripheral["registers"]
                     else []
                 ),
-                registers=self._parse_registers(peripheral["registers"]["register"], peripheral) if "registers" in peripheral else [],
-                instances=[DralGroupInstance(peripheral["name"], peripheral["baseAddress"])],
+                registers=(self._parse_registers(merged_peripheral["registers"]["register"], merged_peripheral) if "registers" in merged_peripheral else []),
+                instances=[DralGroupInstance(merged_peripheral["name"], merged_peripheral["baseAddress"])],
             )
             groups.append(group)
         return groups

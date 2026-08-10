@@ -38,5 +38,5 @@ def rootdir() -> Path:
 
 
 @pytest.fixture
-def datadir(rootdir) -> Path:
+def datadir(rootdir: Path) -> Path:
     return rootdir / "data"

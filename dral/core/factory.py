@@ -54,7 +54,7 @@ DRAL_ADAPTER: type[BaseAdapter] = SvdAdapter
 
 
 def override_adapter(adapter: type[BaseAdapter]) -> None:
-    global DRAL_ADAPTER
+    global DRAL_ADAPTER  # noqa: PLW0603
     DRAL_ADAPTER = adapter
 
 
@@ -111,7 +111,6 @@ def get_filter_supervisor(options: DralAppOptions) -> FilterSupervisor:
 
 
 def get_adapter() -> BaseAdapter:
-    global DRAL_ADAPTER
     return DRAL_ADAPTER()
 
 

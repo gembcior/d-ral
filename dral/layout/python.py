@@ -34,7 +34,7 @@ from .base import DralLayout
 
 
 class PythonLayout(DralLayout):
-    def __init__(self, directory: Path):
+    def __init__(self, directory: Path) -> None:
         self._directory = directory / "dralOutput" / "python"
 
     def _create_file(self, name: str, directory: Path, content: str) -> None:

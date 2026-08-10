@@ -50,7 +50,7 @@ class DralOutputFile:
 
 
 class DralGenerator(ABC):
-    def __init__(self, template_dir: list[Path], suffix: type[DralSuffix] = DralSuffix, forbidden_words: list[str] | None = None):
+    def __init__(self, template_dir: list[Path], suffix: type[DralSuffix] = DralSuffix, forbidden_words: list[str] | None = None) -> None:
         self._template_dir = template_dir
         self._suffix = suffix()
         self._forbidden_words = forbidden_words if forbidden_words else []

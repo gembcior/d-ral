@@ -37,7 +37,7 @@ from dral.filter.groups import GroupsFilter
 
 class TestDralFilters:
     @pytest.mark.parametrize("svd", ["arm_example"])
-    def test_groups_filter(self, svd: str, datadir: Path):
+    def test_groups_filter(self, svd: str, datadir: Path) -> None:
         svd_path = datadir / "svd" / f"{svd}.svd"
         adapter = SvdAdapter()
         dral_device = adapter.convert(svd_path)

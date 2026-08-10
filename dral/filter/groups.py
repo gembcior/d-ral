@@ -43,6 +43,9 @@ from dral.utils.name import DralName
 
 
 class GroupsFilter(BaseFilter):
+    _MIN_GROUP_SIZE = 2
+    _MAX_NAMELIST_LEN = 4
+
     def _is_similar_name(self, object_a: DralObject, object_b: DralObject) -> bool:
         return DralName.is_similar_name(object_a.name, object_b.name)
 
@@ -131,7 +134,7 @@ class GroupsFilter(BaseFilter):
         merged = []
         while i < len(groups):
             same = [group for group in reversed(groups) if self._compare_groups(groups[i], group)]
-            if len(same) < 2 or not self._can_merge(same):
+            if len(same) < self._MIN_GROUP_SIZE or not self._can_merge(same):
                 i = i + 1
                 continue
             for item in same:
@@ -175,14 +178,14 @@ class GroupsFilter(BaseFilter):
             backet = [j_item for j_item in same if self._is_similar_name(i_item, j_item)]
             if backet not in backets and backet != same:
                 backets.append(backet)
-        return len(backets) < 2
+        return len(backets) < self._MIN_GROUP_SIZE
 
     def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
         i = 0
         merged = []
         while i < len(registers):
             same = [register for register in reversed(registers) if self._compare_registers(registers[i], register)]
-            if len(same) < 2 or not self._can_merge(same):
+            if len(same) < self._MIN_GROUP_SIZE or not self._can_merge(same):
                 i = i + 1
                 continue
             for item in same:
@@ -215,7 +218,7 @@ class GroupsFilter(BaseFilter):
     def _rename_group(self, group: DralGroup) -> str:
         dral_name = DralName([instance.name for instance in group.instances])
         # TODO: If many elements/instances are in group, final name can be too long
-        if len(dral_name._namelist) > 4:
+        if len(dral_name._namelist) > self._MAX_NAMELIST_LEN:
             raise ValueError("Too many instances in group. Renaming duplicated groups is not possible.", dral_name._namelist)
         return dral_name.get_duplicated_group_name(group.name)
 
@@ -230,7 +233,7 @@ class GroupsFilter(BaseFilter):
                 duplicated[group.name] = [group.name]
         buckets = []
         for bucket in duplicated.values():
-            if len(bucket) < 2:
+            if len(bucket) < self._MIN_GROUP_SIZE:
                 continue
             buckets.append(bucket)
         for bucket in buckets:
