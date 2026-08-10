@@ -1,0 +1,15 @@
+{% import 'utils.jinja' as utils with context %}
+{%- include 'header.jinja' +%}
+
+{% for name in groups %}
+from .{{ name | snakeCaseAdvanced }} import {{ utils.getGroupName(name) }}
+{% endfor %}
+
+class {{ device | upperCamelCase }}Top:
+    """Aggregates all top-level register groups for the {{ device | upperCamelCase }} scope."""
+
+{% for name in groups %}
+    {{ utils.getGroupName(name) | snakeCaseAdvanced }} = {{ utils.getGroupName(name) }}()
+{% endfor %}
+
+__all__ = ["{{ device | upperCamelCase }}Top"]

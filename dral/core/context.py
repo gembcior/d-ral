@@ -30,7 +30,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 
 from dral.adapter import BaseAdapter
-from dral.core.generator import DralGenerator, DralOutputFile
+from dral.core.generator import DralGenerator, DralOutputFile, MultiOutputGenerator, SingleOutputGenerator
 from dral.core.objects import DralDevice
 from dral.filter import FilterSupervisor
 from dral.formatter.base import DralFormatter
@@ -111,9 +111,18 @@ class HtmlContext(DralContext):
 
 
 class PythonContext(DralContext):
-    def __init__(self, adapter: BaseAdapter, generator: DralGenerator, filter: FilterSupervisor, formatter: DralFormatter, layout: DralLayout) -> None:
+    def __init__(  # noqa: PLR0913
+        self,
+        adapter: BaseAdapter,
+        multi_generator: MultiOutputGenerator,
+        single_generator: SingleOutputGenerator,
+        filter: FilterSupervisor,
+        formatter: DralFormatter,
+        layout: DralLayout,
+    ) -> None:
         self._adapter = adapter
-        self._generator = generator
+        self._multi_generator = multi_generator
+        self._single_generator = single_generator
         self._filter = filter
         self._formatter = formatter
         self._layout = layout
@@ -123,8 +132,11 @@ class PythonContext(DralContext):
         device = self._filter.apply(device)
         return device
 
-    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
-        return self._generator.generate("main.jinja", device)
+    def generate(self, device: DralDevice) -> list[DralOutputFile]:
+        files = self._multi_generator.generate("main.jinja", device)
+        init_file = self._single_generator.generate("init.jinja", device, groups=[g.name for g in device.groups])
+        files.append(DralOutputFile("__init__", init_file.content))
+        return files
 
     def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
         return self._formatter.format(files)

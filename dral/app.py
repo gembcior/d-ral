@@ -26,6 +26,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +54,14 @@ from dral.core import factory
     show_default=True,
     type=click.Choice(["cpp", "html", "python"], case_sensitive=False),
     help="Specify the programming language for which you want to generate files.",
+)
+@click.option(
+    "-a",
+    "--adapter",
+    default="svd",
+    show_default=True,
+    type=click.Choice(["svd", "custom"], case_sensitive=False),
+    help="Specify the input adapter for parsing the device description file.",
 )
 @click.option(
     "-t",
@@ -130,7 +139,7 @@ def cli(**kwargs: dict[str, Any]) -> None:
 
 def with_custom_adapter(adapter: type[BaseAdapter]) -> None:
     factory.override_adapter(adapter)
-    cli()
+    cli(args=[*sys.argv[1:], "--adapter", "custom"])
 
 
 if __name__ == "__main__":

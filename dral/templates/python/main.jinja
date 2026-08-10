@@ -1,7 +1,7 @@
 {% import 'utils.jinja' as utils with context %}
 
 {%- macro getField(field) %}
-{{ utils.getFieldName(field.name) }} = dral.Field("{{ field.name | upperCamelCase }}", {{ field.position }}, {{ field.width }})
+{{ utils.getFieldName(field.name) }} = dral.Field("{{ field.name | snakeCaseAdvanced }}", {{ field.position }}, {{ field.width }})
 {%- endmacro -%}
 
 {%- macro getRegister(register) %}
@@ -15,6 +15,11 @@ class {{ utils.getRegisterName(register.name) }}(dral.Register):
 {%- macro getGroup(group, groupIndent) %}
 @dral.group("{{ group.name | upperCamelCase}}", {{ "0x{:08X}".format(group.address) }}, {{ "0x{:08X}".format(group.offset) }}, {{ group.instances | length }})
 class {{ utils.getGroupName(group.name) }}(dral.Group):
+    class Index(IntEnum):
+        {% for instance in group.instances %}
+        {{ instance.name | upperCamelCase }} = {{ loop.index0 }}
+        {% endfor %}
+
     {% for child in group.registers recursive %}
     {{- getChild(child, groupIndent) -}}
     {% endfor -%}
@@ -24,11 +29,11 @@ class {{ utils.getGroupName(group.name) }}(dral.Group):
     {% endfor -%}
 
     {% for child in group.registers %}
-    {{ utils.getRegisterName(child.name) | decapitalize }} = {{ utils.getRegisterName(child.name) }}()
+    {{ utils.getRegisterName(child.name) | snakeCaseAdvanced }} = {{ utils.getRegisterName(child.name) }}()
     {% endfor -%}
 
     {% for child in group.groups %}
-    {{ utils.getGroupName(child.name) | decapitalize }} = {{ utils.getGroupName(child.name) }}()
+    {{ utils.getGroupName(child.name) | snakeCaseAdvanced }} = {{ utils.getGroupName(child.name) }}()
     {% endfor -%}
 {%- endmacro -%}
 
@@ -46,6 +51,9 @@ class {{ utils.getGroupName(group.name) }}(dral.Group):
 
 {%- include 'header.jinja' +%}
 
+from enum import IntEnum
+
 import dral.model as dral
+
 
 {{ getGroup(root, 4) }}

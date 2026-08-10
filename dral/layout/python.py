@@ -29,6 +29,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from dral.core.generator import DralOutputFile
+from dral.utils.name import to_snake_case_advance
 
 from .base import DralLayout
 
@@ -37,17 +38,8 @@ class PythonLayout(DralLayout):
     def __init__(self, directory: Path) -> None:
         self._directory = directory / "dralOutput" / "python"
 
-    def _create_file(self, name: str, directory: Path, content: str) -> None:
-        file_path = directory / name
-        with open(file_path, "w", encoding="UTF-8") as new_file:
-            new_file.writelines(content)
-
-    def _create_output_directory(self, output: Path, device: str) -> Path:
-        directory_path = output / device
-        Path.mkdir(directory_path, parents=True, exist_ok=True)
-        return directory_path
-
     def make(self, objects: list[DralOutputFile], device: str) -> None:
         directory = self._create_output_directory(self._directory, device)
         for item in objects:
-            self._create_file(f"{item.name.lower()}.py", directory, item.content)
+            filename = f"{item.name.lower()}.py" if item.name == "__init__" else f"{to_snake_case_advance(item.name)}.py"
+            self._create_file(filename, directory, item.content)

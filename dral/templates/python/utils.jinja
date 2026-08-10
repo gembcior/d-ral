@@ -11,7 +11,7 @@
 {%- endmacro -%}
 
 {% macro getFieldName(name) -%}
-{{ getName(name, suffix.field) | lowerCamelCase | isForbidden }}
+{{ getName(name, suffix.field) | snakeCaseAdvanced | isForbidden }}
 {%- endmacro -%}
 
 {% macro getAccessType(access) -%}

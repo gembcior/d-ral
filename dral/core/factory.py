@@ -63,6 +63,7 @@ class DralAppOptions:
     input_file: Path
     output_path: Path
     language: str
+    adapter: str
     access_type: str
     template_path: Path | None
     skip_groups_detection: bool
@@ -110,7 +111,15 @@ def get_filter_supervisor(options: DralAppOptions) -> FilterSupervisor:
     return FilterSupervisor(filters)
 
 
-def get_adapter() -> BaseAdapter:
+def get_svd_adapter() -> SvdAdapter:
+    return SvdAdapter()
+
+
+def get_input_adapter(
+    options: DralAppOptions,
+) -> SvdAdapter | BaseAdapter:
+    if options.adapter == "svd":
+        return get_svd_adapter()
     return DRAL_ADAPTER()
 
 
@@ -129,7 +138,7 @@ def get_single_output_generator(options: DralAppOptions) -> DralGenerator:
 
 
 def get_cpp_context(options: DralAppOptions) -> CppContext:
-    adapter = get_adapter()
+    adapter = get_input_adapter(options)
     generator = get_multi_output_generator(options)
     filter = get_filter_supervisor(options)
     formatter = CppFormatter()
@@ -138,7 +147,7 @@ def get_cpp_context(options: DralAppOptions) -> CppContext:
 
 
 def get_html_context(options: DralAppOptions) -> HtmlContext:
-    adapter = get_adapter()
+    adapter = get_input_adapter(options)
     generator = get_single_output_generator(options)
     filter = get_filter_supervisor(options)
     formatter = HtmlFormatter()
@@ -147,12 +156,13 @@ def get_html_context(options: DralAppOptions) -> HtmlContext:
 
 
 def get_python_context(options: DralAppOptions) -> PythonContext:
-    adapter = get_adapter()
-    generator = get_multi_output_generator(options)
+    adapter = get_input_adapter(options)
+    multi_generator = get_multi_output_generator(options)
+    single_generator = get_single_output_generator(options)
     filter = get_filter_supervisor(options)
     formatter = PythonFormatter()
     layout = PythonLayout(options.output_path)
-    return PythonContext(adapter, generator, filter, formatter, layout)
+    return PythonContext(adapter, multi_generator, single_generator, filter, formatter, layout)
 
 
 def get_context(options: DralAppOptions) -> DralContext:

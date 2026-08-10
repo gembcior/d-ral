@@ -148,16 +148,47 @@ class DralName:
 
 
 def upper_camel_case(string: str) -> str:
-    strlist = [x for x in re.split(r"(\d+)|[-_ ]|(?<=[a-z])(?=[A-Z])", string) if x]
-    return "".join(x.capitalize() for x in strlist)
+    return "".join(x.capitalize() for x in string.lower().split("_"))
 
 
 def lower_camel_case(string: str) -> str:
-    upper_camel = upper_camel_case(string)
-    first = upper_camel[0].lower() if upper_camel else ""
-    body = upper_camel[1:] if len(upper_camel) > 1 else ""
-    return first + body
+    return string[0].lower() + upper_camel_case(string)[1:]
 
 
 def decapitalize(string: str) -> str:
     return string[0].lower() + string[1:] if len(string) > 1 else string.lower()
+
+
+def to_snake_case(text: str) -> str:
+    words = "".join(ch if ch.isalnum() else " " for ch in text).split()
+    return "_".join(word.lower() for word in words)
+
+
+def to_snake_case_advance(text: str) -> str:
+    if not text:
+        return ""
+
+    result = []
+    i = 0
+    while i < len(text):
+        ch = text[i]
+
+        if not ch.isalnum():
+            if result and result[-1] != "_":
+                result.append("_")
+            i += 1
+            continue
+
+        prev_is_lower_alpha = i > 0 and text[i - 1].isalpha() and not text[i - 1].isupper()
+        prev_is_digit_next_is_lower = i > 0 and text[i - 1].isdigit() and i + 1 < len(text) and text[i + 1].islower()
+        prev_is_upper_next_is_lower = i > 0 and i + 1 < len(text) and text[i - 1].isupper() and text[i + 1].islower()
+
+        if ch.isupper() and (prev_is_lower_alpha or prev_is_digit_next_is_lower or prev_is_upper_next_is_lower):
+            result.append("_")
+
+        result.append(ch.lower())
+        i += 1
+
+    snake = "".join(result)
+    snake = re.sub(r"_+", "_", snake)
+    return snake.strip("_")

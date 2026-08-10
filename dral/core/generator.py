@@ -37,7 +37,7 @@ from jinja2 import Environment, FileSystemLoader
 from natsort import natsorted
 
 from dral.core.objects import DralDevice, DralSuffix
-from dral.utils.name import decapitalize, lower_camel_case, upper_camel_case
+from dral.utils.name import decapitalize, lower_camel_case, to_snake_case, to_snake_case_advance, upper_camel_case
 
 
 @dataclass
@@ -120,6 +120,8 @@ class DralGenerator(ABC):
         env.filters["isForbidden"] = lambda x: x + "_" if x.lower() in self._forbidden_words else x
         env.filters["upperCamelCase"] = upper_camel_case
         env.filters["lowerCamelCase"] = lower_camel_case
+        env.filters["snakeCase"] = to_snake_case
+        env.filters["snakeCaseAdvanced"] = to_snake_case_advance
         env.filters["decapitalize"] = decapitalize
         env.tests["multiInstance"] = self._is_multi_instance_group
         env.tests["dralRegister"] = self._is_dral_register
@@ -138,7 +140,7 @@ class DralGenerator(ABC):
 
 
 class SingleOutputGenerator(DralGenerator):
-    def generate(self, template: str, device: DralDevice) -> DralOutputFile:
+    def generate(self, template: str, device: DralDevice, **kwargs: Any) -> DralOutputFile:  # noqa: ANN401
         env = self._get_jinja_enviroment()
         jinja_template = env.get_template(template)
         variables = {
@@ -146,12 +148,13 @@ class SingleOutputGenerator(DralGenerator):
             "device": device.name,
             "root": device.asdict(),
             "suffix": self._suffix.asdict(),
+            **kwargs,
         }
         return DralOutputFile(device.name, jinja_template.render(**variables))
 
 
 class MultiOutputGenerator(DralGenerator):
-    def generate(self, template: str, device: DralDevice) -> list[DralOutputFile]:
+    def generate(self, template: str, device: DralDevice, **kwargs: Any) -> list[DralOutputFile]:  # noqa: ANN401
         env = self._get_jinja_enviroment()
         jinja_template = env.get_template(template)
         output = []
@@ -161,6 +164,7 @@ class MultiOutputGenerator(DralGenerator):
                 "device": device.name,
                 "root": group.asdict(),
                 "suffix": self._suffix.asdict(),
+                **kwargs,
             }
             output.append(DralOutputFile(group.name, jinja_template.render(**variables)))
         return output
