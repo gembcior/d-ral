@@ -41,11 +41,10 @@ from dral.core.objects import (
 from dral.filter.base import BaseFilter
 from dral.utils.name import DralName
 
+MIN_MERGE_COUNT = 2
+
 
 class GroupsFilter(BaseFilter):
-    _MIN_GROUP_SIZE = 2
-    _MAX_NAMELIST_LEN = 4
-
     def _is_similar_name(self, object_a: DralObject, object_b: DralObject) -> bool:
         return DralName.is_similar_name(object_a.name, object_b.name)
 
@@ -54,7 +53,11 @@ class GroupsFilter(BaseFilter):
             return False
         if field_a.position != field_b.position:
             return False
-        if field_a.width != field_b.width:  # noqa: SIM103
+        if field_a.width != field_b.width:
+            return False
+        if field_a.access != field_b.access:
+            return False
+        if field_a.value_type != field_b.value_type:  # noqa: SIM103
             return False
         return True
 
@@ -68,7 +71,17 @@ class GroupsFilter(BaseFilter):
                 diff.append(field)
         return len(diff) == 0
 
+    def _has_the_same_access(self, register_a: DralRegister, register_b: DralRegister) -> bool:
+        return register_a.access == register_b.access
+
+    def _has_the_same_value_type(self, register_a: DralRegister, register_b: DralRegister) -> bool:
+        return register_a.value_type == register_b.value_type
+
     def _compare_registers(self, register_a: DralRegister, register_b: DralRegister) -> bool:
+        if not self._has_the_same_access(register_a, register_b):
+            return False
+        if not self._has_the_same_value_type(register_a, register_b):
+            return False
         if not self._has_the_same_fields(register_a, register_b):
             return False
         if not self._is_similar_name(register_a, register_b):  # noqa: SIM103
@@ -134,7 +147,7 @@ class GroupsFilter(BaseFilter):
         merged = []
         while i < len(groups):
             same = [group for group in reversed(groups) if self._compare_groups(groups[i], group)]
-            if len(same) < self._MIN_GROUP_SIZE or not self._can_merge(same):
+            if len(same) < MIN_MERGE_COUNT or not self._can_merge_groups(same):
                 i = i + 1
                 continue
             for item in same:
@@ -163,7 +176,6 @@ class GroupsFilter(BaseFilter):
                         value_type=registers[0].value_type,
                         address=0,
                         size=registers[0].size,
-                        reset_value=registers[0].reset_value,
                         fields=registers[0].fields,
                     )
                 ],
@@ -171,21 +183,37 @@ class GroupsFilter(BaseFilter):
             output.append(new)
         return output
 
-    def _can_merge(self, same: Sequence[DralObject]) -> bool:
+    def _all_have_similar_names(self, same: Sequence[DralObject]) -> bool:
         same = natsorted(same, key=lambda x: x.name)
         backets = []
         for i_item in same:
             backet = [j_item for j_item in same if self._is_similar_name(i_item, j_item)]
             if backet not in backets and backet != same:
                 backets.append(backet)
-        return len(backets) < self._MIN_GROUP_SIZE
+        return len(backets) < MIN_MERGE_COUNT
+
+    def _all_registers_have_children(self, same: Sequence[DralRegister]) -> bool:
+        return all([bool(item.fields) for item in same])
+
+    def _can_merge_registers(self, same: Sequence[DralRegister]) -> bool:
+        if not self._all_registers_have_children(same):
+            return False
+        return self._all_have_similar_names(same)
+
+    def _all_groups_have_children(self, same: Sequence[DralGroup]) -> bool:
+        return all([bool(item.groups) or bool(item.registers) for item in same])
+
+    def _can_merge_groups(self, same: Sequence[DralGroup]) -> bool:
+        if not self._all_groups_have_children(same):
+            return False
+        return self._all_have_similar_names(same)
 
     def _get_merged_registers(self, registers: list[DralRegister]) -> tuple[list[DralRegister], list[DralGroup]]:
         i = 0
         merged = []
         while i < len(registers):
             same = [register for register in reversed(registers) if self._compare_registers(registers[i], register)]
-            if len(same) < self._MIN_GROUP_SIZE or not self._can_merge(same):
+            if len(same) < MIN_MERGE_COUNT or not self._can_merge_registers(same):
                 i = i + 1
                 continue
             for item in same:
@@ -215,42 +243,27 @@ class GroupsFilter(BaseFilter):
             groups[i].groups = merged + merged_groups
         return groups
 
-    def _rename_group(self, group: DralGroup) -> str:
-        dral_name = DralName([instance.name for instance in group.instances])
-        # TODO: If many elements/instances are in group, final name can be too long
-        if len(dral_name._namelist) > self._MAX_NAMELIST_LEN:
-            raise ValueError("Too many instances in group. Renaming duplicated groups is not possible.", dral_name._namelist)
-        return dral_name.get_duplicated_group_name(group.name)
-
-    def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
+    def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> None:
         if not groups:
-            return groups
+            return
         duplicated: dict[str, list[str]] = {}
         for group in groups:
             if group.name in duplicated:
                 duplicated[group.name].append(group.name)
             else:
                 duplicated[group.name] = [group.name]
-        buckets = []
-        for bucket in duplicated.values():
-            if len(bucket) < self._MIN_GROUP_SIZE:
-                continue
-            buckets.append(bucket)
-        for bucket in buckets:
-            for i, group in enumerate(groups):
-                if group.name in bucket:
-                    groups[i].name = self._rename_group(group)
-        return groups
+        for _group, members in duplicated.items():
+            if len(members) > 1:
+                raise ValueError(f"Duplicated groups found after merging. Found {len(members)} groups with the same name: {members}")
 
-    def _rename_duplicated_groups(self, groups: list[DralGroup]) -> list[DralGroup]:
-        groups = self._resolve_duplicated_groups(groups)
-        for i, group in enumerate(groups):
-            groups[i].groups = self._rename_duplicated_groups(group.groups)
-        return groups
+    def _check_for_duplicated_groups(self, groups: list[DralGroup]) -> None:
+        self._resolve_duplicated_groups(groups)
+        for group in groups:
+            self._check_for_duplicated_groups(group.groups)
 
     def apply(self, device: DralDevice) -> DralDevice:
         device.groups = self._merge_all_groups(device.groups)
         device.groups = self._merge_all_registers(device.groups)
-        device.groups = self._rename_duplicated_groups(device.groups)
+        self._check_for_duplicated_groups(device.groups)
         device.link_parent()
         return device

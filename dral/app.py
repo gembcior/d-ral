@@ -52,7 +52,7 @@ from dral.core import factory
     "--language",
     default="cpp",
     show_default=True,
-    type=click.Choice(["cpp", "html", "python"], case_sensitive=False),
+    type=click.Choice(["cpp", "html", "python", "asm", "txt"], case_sensitive=False),
     help="Specify the programming language for which you want to generate files.",
 )
 @click.option(
@@ -60,7 +60,7 @@ from dral.core import factory
     "--adapter",
     default="svd",
     show_default=True,
-    type=click.Choice(["svd", "custom"], case_sensitive=False),
+    type=click.Choice(["svd", "dral", "custom"], case_sensitive=False),
     help="Specify the input adapter for parsing the device description file.",
 )
 @click.option(

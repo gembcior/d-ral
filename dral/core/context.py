@@ -143,3 +143,47 @@ class PythonContext(DralContext):
 
     def save(self, files: list[DralOutputFile], device: str) -> None:
         self._layout.make(files, device)
+
+
+class AssemblyContext(DralContext):
+    def __init__(self, adapter: BaseAdapter, generator: DralGenerator, filter: FilterSupervisor, layout: DralLayout) -> None:
+        self._adapter = adapter
+        self._generator = generator
+        self._filter = filter
+        self._layout = layout
+
+    def parse(self, input_file: Path) -> DralDevice:
+        device = self._adapter.convert(input_file)
+        device = self._filter.apply(device)
+        return device
+
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
+        return self._generator.generate("main.jinja", device)
+
+    def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
+        return files
+
+    def save(self, files: list[DralOutputFile], device: str) -> None:
+        self._layout.make(files, device)
+
+
+class TextContext(DralContext):
+    def __init__(self, adapter: BaseAdapter, generator: DralGenerator, filter: FilterSupervisor, layout: DralLayout) -> None:
+        self._adapter = adapter
+        self._generator = generator
+        self._filter = filter
+        self._layout = layout
+
+    def parse(self, input_file: Path) -> DralDevice:
+        device = self._adapter.convert(input_file)
+        device = self._filter.apply(device)
+        return device
+
+    def generate(self, device: DralDevice) -> list[DralOutputFile] | DralOutputFile:
+        return self._generator.generate("main.jinja", device)
+
+    def format(self, files: list[DralOutputFile]) -> list[DralOutputFile]:
+        return files
+
+    def save(self, files: list[DralOutputFile], device: str) -> None:
+        self._layout.make(files, device)

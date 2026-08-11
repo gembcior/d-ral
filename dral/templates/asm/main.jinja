@@ -1,0 +1,38 @@
+{%- macro getField(register, field) %}
+.set {{ register.name | upper }}_{{ field.name | upper }}_BITPOS, {{ field.position }}
+.set {{ register.name | upper }}_{{ field.name | upper }}_BITLEN, {{ field.width }}
+{%- endmacro -%}
+
+{%- macro getRegisterAddress(register) -%}
+{%- if register.address is mapping -%}
+{{ register.address.symbol }}{% if register.address.offset %} + 0x{{ "%X" | format(register.address.offset) }}{% endif %}
+{%- else -%}
+{{ "0x{:02X}".format(register.address) }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro getRegister(register) %}
+/*
+ * {{ register.name | upper }}
+ */
+.set {{ register.name | upper }}, {{ getRegisterAddress(register) }}
+{% for field in register.fields %}
+  {{- getField(register, field) }}
+{% endfor %}
+{%- endmacro -%}
+
+{%- macro generateGroup(group) %}
+{% for register in group.registers %}
+  {{- getRegister(register) }}
+{% endfor %}
+{%- endmacro -%}
+
+{% include 'header.jinja' +%}
+
+{% for inc in extra_includes %}
+#include {{ inc }}
+{% endfor %}
+
+{% for group in root.groups %}
+  {{- generateGroup(group) }}
+{% endfor %}

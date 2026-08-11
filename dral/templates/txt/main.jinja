@@ -1,0 +1,15 @@
+{%- macro getRegister(register) %}
+{{ register.name }} {{ "0x{:08X}".format(register.address) }}
+{%- endmacro -%}
+
+{%- macro generateGroup(group) %}
+{%- for register in group.registers %}
+{{- getRegister(register) }}
+{% endfor -%}
+{%- endmacro -%}
+
+{% include 'header.jinja' +%}
+
+{% for group in root.groups %}
+{{- generateGroup(group) }}
+{% endfor %}

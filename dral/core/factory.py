@@ -30,6 +30,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from dral.adapter.base import BaseAdapter
+from dral.adapter.dral import DralAdapter
 from dral.adapter.svd import SvdAdapter
 from dral.adapter.white_black_list import WhiteBlackListAdapter
 from dral.core.generator import (
@@ -40,15 +41,18 @@ from dral.core.generator import (
 from dral.core.objects import DralSuffix
 from dral.filter import BlackListFilter, FilterSupervisor, GroupsFilter, WhiteListFilter
 from dral.filter.base import BaseFilter
+from dral.filter.flat import FlatFilter
 from dral.formatter.cpp import CppFormatter
 from dral.formatter.html import HtmlFormatter
 from dral.formatter.python import PythonFormatter
+from dral.layout.asm import AssemblyLayout
 from dral.layout.cpp import CppLayout
 from dral.layout.html import HtmlLayout
 from dral.layout.python import PythonLayout
+from dral.layout.txt import TextLayout
 from dral.utils.utils import Utils
 
-from .context import CppContext, DralContext, HtmlContext, PythonContext
+from .context import AssemblyContext, CppContext, DralContext, HtmlContext, PythonContext, TextContext
 
 DRAL_ADAPTER: type[BaseAdapter] = SvdAdapter
 
@@ -108,7 +112,13 @@ def get_filter_supervisor(options: DralAppOptions) -> FilterSupervisor:
         filters.append(get_white_list_filter(options.white_list))
     if not options.skip_groups_detection:
         filters.append(get_groups_filter())
+    if options.adapter in ("dral", "svd") and options.language in ("asm", "txt"):
+        filters.append(FlatFilter())
     return FilterSupervisor(filters)
+
+
+def get_dral_adapter() -> DralAdapter:
+    return DralAdapter()
 
 
 def get_svd_adapter() -> SvdAdapter:
@@ -118,6 +128,8 @@ def get_svd_adapter() -> SvdAdapter:
 def get_input_adapter(
     options: DralAppOptions,
 ) -> SvdAdapter | BaseAdapter:
+    if options.adapter == "dral":
+        return get_dral_adapter()
     if options.adapter == "svd":
         return get_svd_adapter()
     return DRAL_ADAPTER()
@@ -165,6 +177,22 @@ def get_python_context(options: DralAppOptions) -> PythonContext:
     return PythonContext(adapter, multi_generator, single_generator, filter, formatter, layout)
 
 
+def get_assembly_context(options: DralAppOptions) -> DralContext:
+    adapter = get_input_adapter(options)
+    generator = get_single_output_generator(options)
+    filter = get_filter_supervisor(options)
+    layout = AssemblyLayout(options.output_path)
+    return AssemblyContext(adapter, generator, filter, layout)
+
+
+def get_text_context(options: DralAppOptions) -> DralContext:
+    adapter = get_input_adapter(options)
+    generator = get_single_output_generator(options)
+    filter = get_filter_supervisor(options)
+    layout = TextLayout(options.output_path)
+    return TextContext(adapter, generator, filter, layout)
+
+
 def get_context(options: DralAppOptions) -> DralContext:
     if options.language == "cpp":
         return get_cpp_context(options)
@@ -172,4 +200,8 @@ def get_context(options: DralAppOptions) -> DralContext:
         return get_html_context(options)
     elif options.language == "python":
         return get_python_context(options)
+    elif options.language == "asm":
+        return get_assembly_context(options)
+    elif options.language == "txt":
+        return get_text_context(options)
     raise ValueError(f"Unsupported language: {options.language}")
