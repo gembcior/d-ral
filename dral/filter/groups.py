@@ -246,15 +246,19 @@ class GroupsFilter(BaseFilter):
     def _resolve_duplicated_groups(self, groups: list[DralGroup]) -> None:
         if not groups:
             return
-        duplicated: dict[str, list[str]] = {}
+        duplicated: dict[str, list[DralGroup]] = {}
         for group in groups:
             if group.name in duplicated:
-                duplicated[group.name].append(group.name)
+                duplicated[group.name].append(group)
             else:
-                duplicated[group.name] = [group.name]
+                duplicated[group.name] = [group]
         for _group, members in duplicated.items():
             if len(members) > 1:
-                raise ValueError(f"Duplicated groups found after merging. Found {len(members)} groups with the same name: {members}")
+                members_instances = [group.instances for group in members]
+                instances = [[instance.name for instance in group_instances] for group_instances in members_instances]
+                raise ValueError(
+                    f"Duplicated groups found after merging. Found {len(members)} groups with the same name '{_group}'. Instances: {instances}. Please check the input data and consider renaming the groups to avoid conflicts."  # noqa: E501
+                )
 
     def _check_for_duplicated_groups(self, groups: list[DralGroup]) -> None:
         self._resolve_duplicated_groups(groups)

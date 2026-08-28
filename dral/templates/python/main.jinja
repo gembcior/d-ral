@@ -1,19 +1,29 @@
 {% import 'utils.jinja' as utils with context %}
 
 {%- macro getField(field) %}
-{{ utils.getFieldName(field.name) }} = dral.Field("{{ field.name | snakeCaseAdvanced }}", {{ field.position }}, {{ field.width }})
+{{ utils.getFieldName(field.name) }} = dral.Field("{{ field.name | snakeCaseAdvanced }}", {{ field.position }}, {{ field.width }}, description={{ field.description | pyString }})
 {%- endmacro -%}
 
 {%- macro getRegister(register) %}
-@dral.register("{{ register.name | upperCamelCase }}", {{ "0x{:08X}".format(register.address) }}, {{ utils.getAccessType(register.access) }})
+@dral.register("{{ register.name | upperCamelCase }}", {{ "0x{:08X}".format(register.address) }}, {{ utils.getAccessType(register.access) }}, description={{ register.description | pyString }})
 class {{ utils.getRegisterName(register.name) }}(dral.Register):
     {% for field in register.fields %}
     {{ getField(field) }}
+    {% else %}
+    pass
     {% endfor -%}
 {%- endmacro -%}
 
+{%- macro getGroupOffset(group) %}
+{%- if group is nonUniformOffset -%}
+[{% for x in group.offset %}{{ "0x{:08X}".format(x) }}{% if not loop.last %}, {% endif %}{% endfor %}]
+{%- else -%}
+{{ "0x{:08X}".format(group.offset) }}
+{%- endif -%}
+{%- endmacro -%}
+
 {%- macro getGroup(group, groupIndent) %}
-@dral.group("{{ group.name | upperCamelCase}}", {{ "0x{:08X}".format(group.address) }}, {{ "0x{:08X}".format(group.offset) }}, {{ group.instances | length }})
+@dral.group("{{ group.name | upperCamelCase}}", {{ "0x{:08X}".format(group.address) }}, {{ getGroupOffset(group) }}, {{ group.instances | length }}, description={{ group.description | pyString }})
 class {{ utils.getGroupName(group.name) }}(dral.Group):
     class Index(IntEnum):
         {% for instance in group.instances %}

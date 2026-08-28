@@ -27,6 +27,7 @@
 from __future__ import annotations
 
 import dataclasses
+import json
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
@@ -123,6 +124,7 @@ class DralGenerator(ABC):
         env.filters["snakeCase"] = to_snake_case
         env.filters["snakeCaseAdvanced"] = to_snake_case_advance
         env.filters["decapitalize"] = decapitalize
+        env.filters["pyString"] = json.dumps
         env.tests["multiInstance"] = self._is_multi_instance_group
         env.tests["dralRegister"] = self._is_dral_register
         env.tests["dralGroup"] = self._is_dral_group
